@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/05 15:56:40 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/09 14:36:57 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,23 @@ int	search(const char *s, const char *c)
  */
 int	main(int argc, char **argv, char **envp)
 {
-	t_env	env_list;
-	t_lst	input;
+	t_shell	shell;
+	int		i;
 
+	i = -1;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	(void)argv;
-	get_env(envp, &env_list);
+	get_env(envp, &shell);
 	while (1)
 	{
-		input.input = readline("minishell: ");
-		input.split = ft_split(input.input, ' ');
-		if (!input.input)
+		shell.lst.input = readline("minishell: ");
+		shell.lst.split = ft_split(shell.lst.input, '|');
+		i = -1;
+		if (!shell.lst.input)
 			exit(0);
+		while (shell.lst.split[++i])
+			printf("%s\n", shell.lst.split[i]);
 	}
 	return (0);
 }

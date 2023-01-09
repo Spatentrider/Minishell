@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/04 13:06:01 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/09 13:58:06 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,25 @@
 
 int	g_exit;
 
+/**
+ * @brief 
+ * 
+ */
 typedef struct s_env
 {
-	char			*current;
-	struct s_env	*prev;
-	struct s_env	*next;
+	char			**current;
 }					t_env;
 
 typedef struct s_lst
 {
 	char			*input;
 	char			**split;
-	struct s_lst	*prev;
-	struct s_lst	*next;
 }					t_lst;
+
+typedef struct s_shell
+{
+	t_lst	lst;
+	t_env	env;
+}				t_shell;
 
 #endif
