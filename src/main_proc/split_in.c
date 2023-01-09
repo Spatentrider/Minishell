@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 15:50:34 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/09 16:06:45 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,19 @@ void	write_word(char *dest, char *src)
 	i = 0;
 	if (is_separator(src[i]) == 2)
 	{
-		dest[i] = src[i];
-		i++;
+		if (is_separator(src[i]) == 2 && is_separator(src[i + 1] == 2))
+		{
+			while (is_separator(src[i]) == 2)
+			{	
+				dest[i] = src[i];
+				i++;
+			}
+		}
+		else
+		{
+			dest[i] = src[i];
+				i++;
+		}
 	}
 	else
 	{
@@ -73,7 +84,16 @@ int	write_split(char **split, char *str)
 	w = 0;
 	while (str[i] != '\0')
 	{
-		if (is_separator(str[i]) == 2)
+		if (is_separator(str[i]) == 2 && is_separator(str[i + 1] == 2))
+		{
+			split[w] = (char *)malloc(sizeof(char) * (3));
+			write_word(split[w], str + i);
+			w++;
+			i += 2;
+			while (str[i] == ' ')
+				i++;
+		}
+		else if (is_separator(str[i]) == 2)
 		{
 			split[w] = (char *)malloc(sizeof(char) * (2));
 			write_word(split[w], str + i);
