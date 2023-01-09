@@ -6,22 +6,24 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 10:06:47 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/09 15:50:34 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
 
-int	is_separator(char c, char cr)
+int	is_separator(char c)
 {
-	if (c == cr)
+	if (c == '|'
+		|| c == '>'
+		|| c == '<')
 		return (2);
-	if (c == '\0')
+	else if (c == '\0')
 		return (1);
 	return (0);
 }
 
-int	words(char *str, char c)
+int	words(char *str)
 {
 	int	i;
 	int	w;
@@ -30,42 +32,29 @@ int	words(char *str, char c)
 	w = 0;
 	while (str[i] != '\0')
 	{
-		if (is_separator(str[i], c) == 0
-			&& is_separator(str[i + 1], c) == 2)
+		if (is_separator(str[i] == 2))
 			w++;
-		else if (is_separator(str[i], c) == 2
-			&& is_separator(str[i + 1], c) == 0)
-			w++;
-		else if (is_separator(str[i], c) == 0
-			&& is_separator(str[i + 1], c) == 1)
-			w++;
-		else if (is_separator(str[i], c) == 2
-			&& is_separator(str[i + 1], c) == 1)
-			w++;
-		else if (is_separator(str[i], c) == 2
-			&& is_separator(str[i + 1], c) == 2)
+		if (is_separator(str[i]) == 0
+			&& is_separator(str[i + 1]) == 2)
 			w++;
 		i++;
 	}
 	return (w);
 }
 
-void	write_word(char *dest, char *src, char c, int n)
+void	write_word(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	if (n == 0)
+	if (is_separator(src[i]) == 2)
 	{
-		while (is_separator(src[i], c) == 0)
-		{
-			dest[i] = src[i];
-			i++;
-		}
+		dest[i] = src[i];
+		i++;
 	}
-	else if (n == 2)
+	else
 	{
-		if (is_separator(src[i], c) == 2)
+		while (is_separator(src[i]) == 0)
 		{
 			dest[i] = src[i];
 			i++;
@@ -74,65 +63,53 @@ void	write_word(char *dest, char *src, char c, int n)
 	dest[i] = '\0';
 }
 
-int	write_split(char **split, char *str, char c)
+int	write_split(char **split, char *str)
 {
 	int	i;
 	int	j;
-	int	co;
 	int	w;
 
 	i = 0;
 	w = 0;
-	co = 0;
 	while (str[i] != '\0')
 	{
-		if (is_separator(str[i], c) == 1)
+		if (is_separator(str[i]) == 2)
+		{
+			split[w] = (char *)malloc(sizeof(char) * (2));
+			write_word(split[w], str + i);
+			w++;
 			i++;
+			while (str[i] == ' ')
+				i++;
+		}
 		else
 		{
 			j = 0;
-			while (is_separator(str[i + co], c) == 0
-				|| is_separator(str[i + co], c) == 2)
-				co++;
-			while (is_separator(str[i + j], c) == 0)
+			while (is_separator(str[i + j]) == 0)
 				j++;
-			split[w] = (char *)malloc(sizeof(char) * (co + 1));
+			split[w] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!(split + w))
 				return (0);
-			while (str[i] == ' ')
-				i++;
-			if (is_separator(str[i], c) == 0)
-			{
-				write_word(split[w], str + i, c, 0);
-				i += j;
-			}
-			while (str[i] == ' ')
-				i++;
-			if (is_separator(str[i], c) == 2)
-			{
-				w++;
-				split[w] = (char *)malloc(sizeof(char) * (1));
-				write_word(split[w], str + i, c, 2);
-				i++;
-			}
+			write_word(split[w], str + i);
+			i += j;
 			w++;
 		}
 	}
 	return (1);
 }
 
-char	**split_cmd(char const *s, char c)
+char	**split_cmd(char const *s)
 {
 	int		w;
 	char	**rtn;
 
 	if (!s)
 		return (NULL);
-	w = words((char *)s, c);
+	w = words((char *)s);
 	rtn = (char **)malloc(sizeof(char *) * (w + 1));
 	if (!rtn)
 		return (NULL);
-	if (!(write_split(rtn, (char *) s, c)))
+	if (!(write_split(rtn, (char *) s)))
 	{
 		w = -1;
 		while (rtn + ++w)

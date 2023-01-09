@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 14:36:57 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/09 15:27:32 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		shell.lst.input = readline("minishell: ");
-		shell.lst.split = ft_split(shell.lst.input, '|');
+		shell.lst.split = split_cmd(shell.lst.input);
 		i = -1;
 		if (!shell.lst.input)
 			exit(0);
