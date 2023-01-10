@@ -6,16 +6,16 @@
 #    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/05 10:23:55 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/01/10 13:53:08 by mvolpi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minishell
 
 SRC_MAIN			=	src/main_proc/init_env.c \
-						src/main_proc/init_list.c \
 						src/main_proc/main.c \
-						src/main_proc/split_in.c
+						src/main_proc/split_utils.c \
+						src/main_proc/split.c
 
 LIBFT		=	libft/libft.a
 

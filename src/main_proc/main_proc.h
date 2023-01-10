@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:22:42 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 15:50:44 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/10 14:13:13 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@
 
 /*init_env.c*/
 void	get_env(char **envp, t_shell *env_list);
-/*split_in*/
-int		is_separator(char c);
-int		words(char *str);
-void	write_word(char *dest, char *src);
-int		write_split(char **split, char *str);
-char	**split_cmd(char const *s);
 /*main.c*/
 int		main(int argc, char **argv, char **envp);
+/*split_utils.c*/
+void	write_pipe(char *dest, char *src);
+void	write_red_r(char *dest, char *src);
+void	write_red_l(char *dest, char *src);
+int		control_sep(char *str, char *split, int i);
+/*split.c*/
+int		is_separator(char c);
+int		words(char *str);
+int		write_word(char *dest, char *src);
+int		write_split(char **split, char *str);
+char	**split_cmd(char const *s);
 
 #endif
