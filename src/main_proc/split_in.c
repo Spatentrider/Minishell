@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 16:06:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/10 10:32:17 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,25 @@ int	words(char *str)
 void	write_word(char *dest, char *src)
 {
 	int	i;
+	int	p;
 
 	i = 0;
+	p = 0;
 	if (is_separator(src[i]) == 2)
 	{
 		if (is_separator(src[i]) == 2 && is_separator(src[i + 1] == 2))
 		{
-			while (is_separator(src[i]) == 2)
+			while (p < 2)
 			{	
 				dest[i] = src[i];
 				i++;
+				p++;
 			}
 		}
 		else
 		{
 			dest[i] = src[i];
-				i++;
+			i++;
 		}
 	}
 	else
