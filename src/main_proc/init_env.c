@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 14:29:35 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/10 15:06:12 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@
 void	get_env(char **envp, t_shell *env_list)
 {
 	int	c;
+	int	i;
 
 	c = -1;
-	env_list->env.current = (char **)malloc(sizeof(char *) * 40000000);
+	i = -1;
+	while (envp[++i])
+		;
+	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
 	while (envp[++c])
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
