@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/10 14:27:46 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/11 10:19:32 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,42 @@
 void	write_pipe(char *dest, char *src)
 {
 	int	i;
+	int	j;
 	int	p;
 
 	i = 0;
+	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 2 && is_separator(src[i + 1] == 2))
+	if (is_separator(src[i]) == 2 && is_separator(src[j]) != 0)
 	{
 		while (p < 2)
 		{	
 			dest[i] = src[i];
 			i++;
+			j++;
 			p++;
 		}
 	}
 	else
 	{
-		dest[i] = src[i];
+		if (is_separator(src[i]) != 0)
+			dest[i] = src[i];
 		i++;
+		j++;
 	}
+	dest[i] = '\0';
 }
 
 void	write_red_r(char *dest, char *src)
 {
 	int	i;
+	int	j;
 	int	p;
 
 	i = 0;
+	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 3 && is_separator(src[i + 1] == 3))
+	if (is_separator(src[i]) == 3 && is_separator(src[j]) != 0)
 	{
 		while (p < 2)
 		{	
@@ -53,19 +61,23 @@ void	write_red_r(char *dest, char *src)
 	}
 	else
 	{
-		dest[i] = src[i];
+		if (is_separator(src[i]) != 0)
+			dest[i] = src[i];
 		i++;
 	}
+	dest[i] = '\0';
 }
 
 void	write_red_l(char *dest, char *src)
 {
 	int	i;
+	int	j;
 	int	p;
 
 	i = 0;
+	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 4 && is_separator(src[i + 1] == 4))
+	if (is_separator(src[i]) == 4 && is_separator(src[j]) != 0)
 	{
 		while (p < 2)
 		{	
@@ -76,9 +88,11 @@ void	write_red_l(char *dest, char *src)
 	}
 	else
 	{
-		dest[i] = src[i];
+		if (is_separator(src[i]) == 4)
+			dest[i] = src[i];
 		i++;
 	}
+	dest[i] = '\0';
 }
 
 int	control_sep(char *str, char *split, int i)
