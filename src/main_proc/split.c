@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/11 14:03:38 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:09:15 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	words(char *str)
 	w = 0;
 	while (str[i] != '\0')
 	{
+		if (is_separator(str[i] == -1))
+			w++;
 		if (is_separator(str[i] == 2))
 			w++;
 		if (is_separator(str[i] == 3))
@@ -56,14 +58,80 @@ int	write_word(char *dest, char *src)
 {
 	int	i;
 	int	c;
+	int	p;
 
 	i = 0;
+	p = 0;
 	c = 0;
-	while (src[i])
+	// printf("entrata funzione\n");
+	// printf("src = %c\n", src[i]);
+	if (is_separator(src[i]) == 0)
+	{
+		while (is_separator(src[i]) == 0)
+		{
+			dest[i] = src[i];
+			i++;
+			c++;
+		}
+		if (is_separator(src[i]) == -1)
+		{
+			dest[i] = src[i];
+			i++;
+			if (is_separator(src[i]) == -1)
+			{
+				dest[i] = src[i];
+				i++;
+			}
+			while (is_separator(src[i]) != -1)
+			{
+				dest[i] = src[i];
+				i++;
+				c++;
+			}
+			dest[i] = src[i];
+			i++;
+			if (is_separator(src[i]) == -1)
+			{
+				dest[i] = src[i];
+				i++;
+			}
+			c += 2;
+		}
+	}
+	else if (is_separator(src[i]) == -1)
 	{
 		dest[i] = src[i];
 		i++;
-		c++;
+		if (is_separator(src[i]) == -1)
+		{
+			dest[i] = src[i];
+			i++;
+			c++;
+		}
+		while (is_separator(src[i]) != -1)
+		{
+			dest[i] = src[i];
+			i++;
+			c++;
+		}
+		dest[i] = src[i];
+		i++;
+		if (is_separator(src[i]) == -1)
+		{
+			dest[i] = src[i];
+			i++;
+			c++;
+		}
+		c += 2;
+		if (is_separator(src[i]) == 0)
+		{
+			while (is_separator(src[i]) == 0)
+			{
+				dest[i] = src[i];
+				i++;
+				c++;
+			}
+		}
 	}
 	dest[i] = '\0';
 	return (c);

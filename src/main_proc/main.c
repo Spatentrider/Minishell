@@ -6,35 +6,11 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 15:27:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/12 11:09:19 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
-
-int	search(const char *s, const char *c)
-{
-	int	i;
-	int	cnt;
-
-	i = -1;
-	cnt = 0;
-	printf ("%c\n", c[0]);
-	while (s[++i])
-		cnt++;
-	i = 0;
-	while (cnt != 0)
-	{
-		if (s[i] == c[0])
-		{
-			c = 0;
-			return (0);
-		}
-		i++;
-		cnt--;
-	}
-	return (1);
-}
 
 /**
  * @brief the start of the program that checks for errors,
