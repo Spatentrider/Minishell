@@ -6,11 +6,26 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/12 11:09:19 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:13:56 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
+
+void	free_struct(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (shell->env.current[++i])
+		free(shell->env.current[i]);
+	free(shell->env.current);
+	free(shell->lst.input);
+	i = -1;
+	while (shell->lst.split[++i])
+		free(shell->lst.split[i]);
+	free(shell->lst.split);
+}
 
 /**
  * @brief the start of the program that checks for errors,
@@ -43,7 +58,10 @@ int	main(int argc, char **argv, char **envp)
 		shell.lst.split = split_cmd(shell.lst.input);
 		i = -1;
 		if (!shell.lst.input)
+		{
+			free_struct(&shell);
 			exit(0);
+		}
 		while (shell.lst.split[++i])
 			printf("%s\n", shell.lst.split[i]);
 	}

@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/11 10:19:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/16 11:20:50 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,35 @@ void	write_red_l(char *dest, char *src)
 		i++;
 	}
 	dest[i] = '\0';
+}
+
+int	control_quote(char *str, int i)
+{
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (is_separator(str[i]) <= 0)
+	{
+		while (is_separator(str[i]) == 0)
+		{
+			j++;
+			i++;
+		}
+		if (is_separator(str[i]) == -1)
+		{
+			i++;
+			j++;
+			while (is_separator(str[i]) != -1)
+			{
+				j++;
+				i++;
+			}
+			j++;
+			i++;
+		}
+	}
+	return (j);
 }
 
 int	control_sep(char *str, char *split, int i)
