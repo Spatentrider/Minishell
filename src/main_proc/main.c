@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/12 14:13:56 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:26:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
 
+/**
+ * @brief function that takes the structure of structures to be freed,
+ * iterates cell by cell to be free and then does a general free of the
+ * array
+ * 
+ * @param shell the structure of structures
+ */
 void	free_struct(t_shell *shell)
 {
 	int	i;
