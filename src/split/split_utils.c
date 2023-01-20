@@ -6,11 +6,11 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/18 10:50:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:48 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main_proc.h"
+#include "split.h"
 
 /**
  * @brief saves the pipe or double pipe in the string array cell

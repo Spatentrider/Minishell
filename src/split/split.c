@@ -6,11 +6,11 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/18 10:50:38 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:40 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main_proc.h"
+#include "split.h"
 
 /**
  * @brief Takes a single character and checks if it is the one of the

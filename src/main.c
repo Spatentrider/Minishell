@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/16 18:26:15 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:29 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main_proc.h"
+#include "src.h"
 
 /**
  * @brief function that takes the structure of structures to be freed,

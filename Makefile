@@ -6,20 +6,24 @@
 #    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/18 11:13:14 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/01/20 10:44:57 by mvolpi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-SRC            =    src/main_proc/init_env.c \
-                        src/main_proc/main.c \
-                        src/main_proc/split_utils.c \
-                        src/main_proc/split.c
+SRC				=	src/main.c
+
+SRC_ENV				=	src/get_env/init_env.c
+
+SRC_SPLIT			=	src/split/split_utils.c \
+							src/split/split.c
 
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
-OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o})
+OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_ENV:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o})
 
 OBJS_DIR			= objs
 
