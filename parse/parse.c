@@ -55,7 +55,7 @@ int	check_redirection(char *string)
 	return (0);
 }
 
-int check_quote(char *string, char c)
+int check_quote(char *string)
 {
 	size_t i;
 	i = ft_strlen(string);
@@ -64,7 +64,7 @@ int check_quote(char *string, char c)
 		printf("command not found");
 		return(1);
 	}
-	if((string[0] == 34 && string[i - 1] != 34) && (string[0] == 39 && string[i - 1] != 39))
+	if((string[0] == 34 && string[i - 1] != 34) || (string[0] == 39 && string[i - 1] != 39))  
 	{
 		printf("quote not closed");
 		return(1);
@@ -81,7 +81,7 @@ int	check_parameter(char *string, char c)
 		if(check_redirection(string))
 			return(1);
 	if(c == 34 || c == 39)
-		if(check_quote(string, c))
+		if(check_quote(string))
 			return(1);
 	return (0);
 }
@@ -113,6 +113,11 @@ int main (int ac, char **av)
 
 	i = 1;
 	j = 0;
+	while(av[1][j])
+	{
+		printf("%c",av[1][j]);
+		j++;
+	}
 	if(parse(av))
 		return 1;
 }
