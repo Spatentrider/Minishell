@@ -6,12 +6,21 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/11 14:03:38 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/18 10:50:38 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
 
+/**
+ * @brief Takes a single character and checks if it is the one of the
+ * separators, it returns a diffirent number depending on which operator
+ * it is
+ * 
+ * @param c the character to be checked
+ * @return int it returns a diffirent number depending on which operator
+ * it is
+ */
 int	is_separator(char c)
 {
 	if (c == '\0')
@@ -29,6 +38,13 @@ int	is_separator(char c)
 	return (0);
 }
 
+/**
+ * @brief Scrolls the entire string and count into how many strings
+ * the sent string needs to be divided into
+ * 
+ * @param str the string that is to be divided
+ * @return int how many strings the sent string needs to be divided into
+ */
 int	words(char *str)
 {
 	int	i;
@@ -38,6 +54,8 @@ int	words(char *str)
 	w = 0;
 	while (str[i] != '\0')
 	{
+		if (is_separator(str[i] == -1))
+			w++;
 		if (is_separator(str[i] == 2))
 			w++;
 		if (is_separator(str[i] == 3))
@@ -52,23 +70,45 @@ int	words(char *str)
 	return (w);
 }
 
-int	write_word(char *dest, char *src)
+/**
+ * @brief takes the string that needs to be save and the array where
+ * we save the string and the lenght of the string to save, save
+ * character by charater until j reaches 0
+ * 
+ * @param dest cell of the string array
+ * @param src string that needs to be save
+ * @param j lenght of the string
+ */
+void	write_word(char *dest, char *src, int j)
 {
 	int	i;
-	int	c;
 
 	i = 0;
-	c = 0;
-	while (src[i])
+	while (j > 0)
 	{
 		dest[i] = src[i];
-		i++;
-		c++;
+			i++;
+			j--;
 	}
 	dest[i] = '\0';
-	return (c);
 }
 
+/**
+ * @brief Takes the string array and the string that needs to be split
+ * with a loop it scroll through the whole string and checks letter by
+ * letter, with the is_separator function it checks if str[i] is a
+ * separator, if it mallocates the cell of the array by 3, checks with
+ * function which of the operators it is on and if more of one saves two
+ * in the same cell otherwise only one. If instead it is not one of the
+ * separators with control_quote it counts how long the string is and
+ * mallocates the cell of the array for that lenght and then with
+ * write_word saves the whole string up to the next separator or ends at
+ * the end
+ * 
+ * @param split the string array where we saves the splitted string
+ * @param str the string that needs to be split
+ * @return int return 1
+ */
 int	write_split(char **split, char *str)
 {
 	int	i;
@@ -87,17 +127,25 @@ int	write_split(char **split, char *str)
 		}
 		else
 		{
-			j = 0;
-			while (is_separator(str[i + j]) <= 0)
-				j++;
-			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			i += write_word(split[w], str + i);
+			j = control_quote(str + i, i);
+			split[w] = (char *)malloc(sizeof(char) * (j));
+			write_word(split[w], str + i, j);
+			i = i + j;
 			w++;
 		}
 	}
 	return (1);
 }
 
+/**
+ * @brief Takes the string to be split and counts the cells of the array
+ * to be prepared where to insert the single strings to be created, once
+ * the count is finished it mallocates the necessary cells and checks
+ * that if the mallocation or copying fails it frees everything
+ * 
+ * @param s the string that needs to be split
+ * @return char** the string array with split string
+ */
 char	**split_cmd(char const *s)
 {
 	int		w;

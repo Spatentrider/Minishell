@@ -3,37 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 15:27:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:26:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_proc.h"
 
-int	search(const char *s, const char *c)
+/**
+ * @brief function that takes the structure of structures to be freed,
+ * iterates cell by cell to be free and then does a general free of the
+ * array
+ * 
+ * @param shell the structure of structures
+ */
+void	free_struct(t_shell *shell)
 {
 	int	i;
-	int	cnt;
 
 	i = -1;
-	cnt = 0;
-	printf ("%c\n", c[0]);
-	while (s[++i])
-		cnt++;
-	i = 0;
-	while (cnt != 0)
-	{
-		if (s[i] == c[0])
-		{
-			c = 0;
-			return (0);
-		}
-		i++;
-		cnt--;
-	}
-	return (1);
+	while (shell->env.current[++i])
+		free(shell->env.current[i]);
+	free(shell->env.current);
+	free(shell->lst.input);
+	i = -1;
+	while (shell->lst.split[++i])
+		free(shell->lst.split[i]);
+	free(shell->lst.split);
 }
 
 /**
@@ -67,7 +65,10 @@ int	main(int argc, char **argv, char **envp)
 		shell.lst.split = split_cmd(shell.lst.input);
 		i = -1;
 		if (!shell.lst.input)
+		{
+			free_struct(&shell);
 			exit(0);
+		}
 		while (shell.lst.split[++i])
 			printf("%s\n", shell.lst.split[i]);
 	}

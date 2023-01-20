@@ -6,101 +6,94 @@
 #    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/10 13:53:08 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/01/18 11:13:14 by mvolpi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	minishell
+NAME := minishell
 
-SRC_MAIN			=	src/main_proc/init_env.c \
-						src/main_proc/main.c \
-						src/main_proc/split_utils.c \
-						src/main_proc/split.c
+SRC            =    src/main_proc/init_env.c \
+                        src/main_proc/main.c \
+                        src/main_proc/split_utils.c \
+                        src/main_proc/split.c
 
-LIBFT		=	libft/libft.a
+FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
-CFLAGS		=	-Wall -Werror -Wextra
+OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o})
 
-OBJ_DIR		=	obj
+OBJS_DIR			= objs
 
-OBJ			=	$(SRC_MAIN:src/main_proc/%.c=$(OBJ_DIR)/main_proc/%.o) \
-					
+READLINE_FLAG	:= -lreadline -lcurses
+# READLINE_FLAG	:= -lreadline -ltinfo
+READLINE_DIR		:= readline/
+READLINE_A			= readline/libhistory.a readline/libreadline.a
+READLINE_MAKEFILE 	:= readline/Makefile
+READLINE_CONFIGURE	:= @cd readline && sh ./configure
+READLINE_MAKE		:= @cd readline && make
+RMREADLINE			:= @cd readline && make distclean
 
-# LINKS		=	-lreadline
-# LINKS		=	-lreadline -L$$HOME/.brew/opt/readline/lib -I $$HOME/.brew/opt/readline/include/readline
-# LINKS		=	-lreadline -L/usr/local/Cellar/readline/8.2.1/lib -I /usr/local/Cellar/readline/8.2.1/include/readline
+LIBFT_DIR	:= libft/
+LIBFT_A		:= libft/libft.a
+LIBFT_MAKE	:= @cd libft && make && make clean
+RMLIB		:= @cd libft && make fclean
 
-READLINE_FLAG			= -lreadline -lcurses
-# READLINE_FLAG			= -lreadline -ltinfo
-READLINE_DIR			= readline/
-READLINE_A				= readline/libhistory.a readline/libreadline.a
-READLINE_MAKEFILE		= readline/Makefile
-READLINE_MAKE			= @cd readline && make 
-READLINE_CONFIGURE		= cd readline && ./configure 
-RMREADLINE				= @cd readline && make distclean
+CC	= @gcc
 
-BRANCH 		?= $(shell bash -c 'read -p "Branch: " branch; echo $$branch')
-COMMIT 		?= $(shell bash -c 'read -p "Commit: " commit; echo $$commit')
+DEBUG_F	= -g -fsanitize=address
 
 GREEN='\033[1;32m'
+BLUE='\033[1;34m'
+CYAN='\033[1;36m'
+PURPLE='\033[1;35m'
 RED='\033[1;31m'
 YELLOW='\033[1;33m'
 
-all:	$(NAME)
+$(NAME): $(OBJS) $(READLINE_MAKEFILE)
+	@echo $(PURPLE)"	-Making Readline..."
+	@$(READLINE_MAKE) 
+	@echo $(GREEN)"		-READLINE COMPILED"
+	@echo $(CYAN)"		-Making libft.."
+	@$(LIBFT_MAKE)
+	@echo $(GREEN)"		-LIBFT COMPILED"
+	@echo $(YELLOW)"		-Making $(NAME)..."
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) $(READLINE_A) $(READLINE_FLAG) -o $(NAME) > /dev/null
+	@echo $(GREEN)"		-MINISHELL COMPILED"
 
-clean:
-	@echo $(YELLOW)"-Removing minishell object files..."
-	@rm -rf $(OBJ_DIR)
-	@echo $(RED)"		MINISHELL OBJECT DELETED!!"
-	@make -C libft clean
-
-fclean: clean
-	@echo $(YELLOW)"-Removing $(NAME)"
-	@rm -rf $(NAME)
-	@echo $(RED)"		$(NAME) *.a DELETED!!"
-	@make -C libft fclean
-
-re: fclean all
-
-rec: re clean
-
-$(OBJ_DIR):
-			@mkdir $(OBJ_DIR)
-			@mkdir obj/main_proc
-
-$(OBJ_DIR)/main_proc/%.o: src/main_proc/%.c
-				@$(CC) $(CFLAGS) -c -g $< -o $@
-
-# $(OBJ_DIR)/builtins/%.o: src/builtins/%.c
-# 				@$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME):	$(OBJ_DIR) $(OBJ) $(READLINE_MAKEFILE)
-			@echo $(YELLOW)"-Making libft..."
-			@make -s -C libft
-			@echo $(YELLOW)"-Making $(NAME)..."
-			@echo $(RED)"-Making readline..."
-			@$(READLINE_MAKE)
-			@echo $(GREEN)"		Readline created"
-			@gcc $(CFLAGS) $(LIBFT) $(READLINE_A) $(READLINE_FLAG) $(OBJ) -o $(NAME)
-			@echo $(RED)"  $(NAME) CREATED!!"
-			@echo $(GREEN)"		-COMPILED-"
+$(shell echo $(OBJS_DIR))/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(FLAGS) -c $< -o $@
 
 $(READLINE_MAKEFILE):
-	$(READLINE_CONFIGURE)
+	@echo $(BLUE)"		-Readline Configuration..."
+	@$(READLINE_CONFIGURE)
+	@echo $(GREEN)"		-READLINE CONFIGURED-"
 
-norm:
-		@norminette -R CheckForbiddenSourceHeader
+all: $(NAME)
 
-add: fclean
-		@git add *.c *.h Makefile
-		@git status
+clean:
+	@echo $(CYAN)"		Removing minishell objs files..."
+	@rm   -rf ${OBJS_DIR}
+	@echo $(GREEN)"		-MINISHELL OBJS DELETED"
 
-push: add
-	git commit -m $(COMMIT)
-	@git push origin $(BRANCH)
+fclean: clean
+	@echo $(RED)"		Removing $(NAME)..."
+	@rm -rf ${NAME}
+	@echo $(BLUE)"		*.a'S DELETED"
+	$(RMLIB)
 
 clean_all: fclean
 	$(RMREADLINE)
 	$(RMLIB)
 
-.PHONY: re fclean clean rec all norm
+readline:	$(READLINE_MAKEFILE)
+
+norm:
+	@norminette -R CheckForbiddenSourceHeader src/*.c src/*.h src/*/*.c src/*/*.h libft/*c libft/*.h
+
+sanitize:	re $(OBJS)
+			@$(CC) $(DEBUG_F) $(OBJS) $(LIBFT_A) $(READLINE_A) $(READLINE_FLAG) -o $(NAME)
+			$(info [Making with fsanitize=address ...])
+
+re: 		fclean $(NAME)
+
+.PHONY : all clean fclean re
