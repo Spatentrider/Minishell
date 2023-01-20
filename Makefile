@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mich <mich@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/16 18:24:04 by mich             ###   ########.fr        #
+#    Updated: 2023/01/18 11:13:14 by mvolpi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o})
 
 OBJS_DIR			= objs
 
-# READLINE_FLAG	:= -lreadline -lcurses
-READLINE_FLAG	:= -lreadline -ltinfo
+READLINE_FLAG	:= -lreadline -lcurses
+# READLINE_FLAG	:= -lreadline -ltinfo
 READLINE_DIR		:= readline/
 READLINE_A			= readline/libhistory.a readline/libreadline.a
 READLINE_MAKEFILE 	:= readline/Makefile
@@ -42,17 +42,20 @@ CC	= @gcc
 DEBUG_F	= -g -fsanitize=address
 
 GREEN='\033[1;32m'
+BLUE='\033[1;34m'
+CYAN='\033[1;36m'
+PURPLE='\033[1;35m'
 RED='\033[1;31m'
 YELLOW='\033[1;33m'
 
 $(NAME): $(OBJS) $(READLINE_MAKEFILE)
-	@echo $(RED)"	-Making Readline..."
+	@echo $(PURPLE)"	-Making Readline..."
 	@$(READLINE_MAKE) 
 	@echo $(GREEN)"		-READLINE COMPILED"
-	@echo $(YELLOW)"		-Making libft.."
+	@echo $(CYAN)"		-Making libft.."
 	@$(LIBFT_MAKE)
 	@echo $(GREEN)"		-LIBFT COMPILED"
-	@echo $(RED)"		-Making $(NAME)..."
+	@echo $(YELLOW)"		-Making $(NAME)..."
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) $(READLINE_A) $(READLINE_FLAG) -o $(NAME) > /dev/null
 	@echo $(GREEN)"		-MINISHELL COMPILED"
 
@@ -61,21 +64,21 @@ $(shell echo $(OBJS_DIR))/%.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 $(READLINE_MAKEFILE):
-	@echo $(YELLOW)"		-Readline Configuration..."
+	@echo $(BLUE)"		-Readline Configuration..."
 	@$(READLINE_CONFIGURE)
 	@echo $(GREEN)"		-READLINE CONFIGURED-"
 
 all: $(NAME)
 
 clean:
-	@echo $(RED)"		Removing minishell objs files..."
+	@echo $(CYAN)"		Removing minishell objs files..."
 	@rm   -rf ${OBJS_DIR}
 	@echo $(GREEN)"		-MINISHELL OBJS DELETED"
 
 fclean: clean
 	@echo $(RED)"		Removing $(NAME)..."
 	@rm -rf ${NAME}
-	@echo $(GREEN)"		*.a'S DELETED"
+	@echo $(BLUE)"		*.a'S DELETED"
 	$(RMLIB)
 
 clean_all: fclean

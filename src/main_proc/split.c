@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/16 18:25:33 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/18 10:50:38 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	is_separator(char c)
 		return (-1);
 	return (0);
 }
-
 
 /**
  * @brief Scrolls the entire string and count into how many strings
