@@ -6,11 +6,11 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/10 15:06:12 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:32:44 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main_proc.h"
+#include "get_env.h"
 
 /**
  * @brief Takes the working enviroment and save it in a list

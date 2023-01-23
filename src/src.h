@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   src.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 15:49:42 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 10:41:25 by mvolpi           ###   ########.fr       */
+/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
+/*   Updated: 2023/01/23 10:44:37 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../h_file/libft.h"
+#ifndef SRC_H
+# define SRC_H
 
-char	*ft_strdup(const char *s1)
-{
-	char	*str;
-	size_t	i;
+# include "../h_file/minishell.h"
+# include "split/split.h"
+# include "get_env/get_env.h"
+# include "arr_utils/arr_utils.h"
 
-	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+#endif
