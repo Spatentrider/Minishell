@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 10:39:55 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/23 11:28:45 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int	main(int argc, char **argv, char **envp)
 			free_struct(&shell);
 			exit(0);
 		}
+		i = -1;
+		while (shell.lst.split[++i])
+			printf("%s\n", shell.lst.split[i]);
 	}
 	return (0);
 }

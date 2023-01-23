@@ -6,7 +6,7 @@
 #    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/23 10:48:16 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/01/23 11:26:54 by mvolpi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ SRC				=	src/main.c
 
 SRC_ENV				=	src/get_env/init_env.c
 
-SRC_SPLIT			=	src/split/split_utils.c \
-							src/split/split.c
+SRC_SPLIT			=	src/split/split_executor.c \
+							src/split/split_parse_utils.c \
+							src/split/split_parse.c \
+							src/split/split_pipe.c
 
 SRC_ARR				=	src/arr_utils/arr_add_back.c
 
