@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   arr_add_back.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 15:49:42 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 10:41:25 by mvolpi           ###   ########.fr       */
+/*   Created: 2023/01/20 11:26:35 by mvolpi            #+#    #+#             */
+/*   Updated: 2023/01/23 10:43:39 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../h_file/libft.h"
+#include "arr_utils.h"
 
-char	*ft_strdup(const char *s1)
+void	arr_add_back(t_shell *env_list, char *copy, int n)
 {
-	char	*str;
-	size_t	i;
+	int	i;
+	int	l;
 
-	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	i = -1;
+	while (env_list->env.current[++i])
+		;
+	l = n + 1;
+	env_list->env.current = (char **)realloc(env_list->env.current, l);
+	env_list->env.current[n] = ft_strdup(copy);
+	n++;
+	env_list->env.current[n] = NULL;
 }

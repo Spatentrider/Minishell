@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/20 10:37:29 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/23 10:39:55 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	int		i;
+	char	*str;
 
 	i = -1;
+	str = "ciao";
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	(void)argv;
@@ -69,8 +71,6 @@ int	main(int argc, char **argv, char **envp)
 			free_struct(&shell);
 			exit(0);
 		}
-		while (shell.lst.split[++i])
-			printf("%s\n", shell.lst.split[i]);
 	}
 	return (0);
 }
