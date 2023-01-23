@@ -6,12 +6,20 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 11:16:57 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/23 11:47:00 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "split.h"
 
+/**
+ * @brief Takes a single character and checks if it is a pipe, if not
+ * it return 0, instead if it ia a pipe or the end of the string it
+ * returns 1
+ * 
+ * @param c the character to be checked
+ * @return int returns 0 if it is not a pipe, if it is, returns 1
+ */
 int	is_pipe(char c)
 {
 	if (c == '|')
@@ -21,6 +29,13 @@ int	is_pipe(char c)
 	return (0);
 }
 
+/**
+ * @brief Scrolls the entire string and count into how many strings
+ * the sent string needs to be divided into
+ * 
+ * @param str the string that is to be divided
+ * @return int how many strings the sent string needs to be divided into
+ */
 int	count_words(char *str)
 {
 	int	i;
@@ -38,6 +53,13 @@ int	count_words(char *str)
 	return (w);
 }
 
+/**
+ * @brief takes the string that needs to be save and the array where
+ * we save the string, save character by charater
+ * 
+ * @param dest cell of the string array
+ * @param src string that needs to be save
+ */
 void	save_word(char *dest, char *src)
 {
 	int	i;
@@ -51,6 +73,19 @@ void	save_word(char *dest, char *src)
 	dest[i] = '\0';
 }
 
+/**
+ * @brief Takes the string array and the string that needs to be split
+ * with a loop it scroll through the whole string and checks letter by
+ * letter, with the is_pipe function it checks if str[i] is a
+ * pipe, if it skip the pipe. If instead it is a pipe with a loop it
+ * counts how long the string is and mallocates the cell of the array 
+ * for that lenght and then with save_word saves the whole string up 
+ * to the next separator or ends at the end
+ * 
+ * @param split the string array where we saves the splitted string
+ * @param str the string that needs to be split
+ * @return int return 1
+ */
 int	save_split(char **split, char *str)
 {
 	int	i;
@@ -79,6 +114,15 @@ int	save_split(char **split, char *str)
 	return (1);
 }
 
+/**
+ * @brief Takes the string to be split and counts the cells of the array
+ * to be prepared where to insert the single strings to be created, once
+ * the count is finished it mallocates the necessary cells and checks
+ * that if the mallocation or copying fails it frees everything
+ * 
+ * @param s the string that needs to be split
+ * @return char** the string array with split string
+ */
 char	**split_pipe(char const *s)
 {
 	int		w;
