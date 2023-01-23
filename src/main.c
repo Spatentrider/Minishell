@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 11:28:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/23 13:16:02 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	int		i;
-	char	*str;
 
+	(void)argv;
 	i = -1;
-	str = "ciao";
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
-	(void)argv;
 	get_env(envp, &shell);
 	while (1)
 	{
 		shell.lst.input = readline("minishell: ");
 		shell.lst.split = split_cmd(shell.lst.input);
+		if (ft_strncmp(shell.lst.input, "", 1))
+			add_history(shell.lst.input);
 		i = -1;
-		if (!shell.lst.input)
+		if (ft_strncmp(shell.lst.input, "exit", 4) == 0)
 		{
 			free_struct(&shell);
 			exit(0);
