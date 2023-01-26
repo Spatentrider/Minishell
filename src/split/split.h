@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 11:26:30 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/26 11:38:16 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	word(char *dest, char *src);
 int		split(char **split, char *str);
 char	**split_executor(char const *s);
 /*split_parse_utils.c*/
-void	write_pipe(char *dest, char *src);
-void	write_red_r(char *dest, char *src);
-void	write_red_l(char *dest, char *src);
+int		write_pipe(char *dest, char *src);
+int		write_red_r(char *dest, char *src);
+int		write_red_l(char *dest, char *src);
 int		control_quote(char *str, int i);
 int		control_sep(char *str, char *split, int i);
 /*split_parse.c*/

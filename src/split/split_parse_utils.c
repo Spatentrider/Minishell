@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_utils.c                                      :+:      :+:    :+:   */
+/*   split_parse_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/20 10:37:48 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/26 11:45:01 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param dest cell of the string array
  * @param src the pipe or double pipe to save
  */
-void	write_pipe(char *dest, char *src)
+int	write_pipe(char *dest, char *src)
 {
 	int	i;
 	int	j;
@@ -27,13 +27,12 @@ void	write_pipe(char *dest, char *src)
 	i = 0;
 	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 2 && is_separator(src[j]) != 0)
+	if (is_separator(src[i]) == 2 && is_separator(src[j]) == 2)
 	{
 		while (p < 2)
 		{	
 			dest[i] = src[i];
 			i++;
-			j++;
 			p++;
 		}
 	}
@@ -42,9 +41,9 @@ void	write_pipe(char *dest, char *src)
 		if (is_separator(src[i]) != 0)
 			dest[i] = src[i];
 		i++;
-		j++;
 	}
 	dest[i] = '\0';
+	return (p);
 }
 
 /**
@@ -54,7 +53,7 @@ void	write_pipe(char *dest, char *src)
  * @param dest cell of the string array
  * @param src the redirection or double redirection to save
  */
-void	write_red_r(char *dest, char *src)
+int	write_red_r(char *dest, char *src)
 {
 	int	i;
 	int	j;
@@ -79,6 +78,7 @@ void	write_red_r(char *dest, char *src)
 		i++;
 	}
 	dest[i] = '\0';
+	return (p);
 }
 
 /**
@@ -88,7 +88,7 @@ void	write_red_r(char *dest, char *src)
  * @param dest cell of the string array
  * @param src the redirection or double redirection to save
  */
-void	write_red_l(char *dest, char *src)
+int	write_red_l(char *dest, char *src)
 {
 	int	i;
 	int	j;
@@ -113,6 +113,7 @@ void	write_red_l(char *dest, char *src)
 		i++;
 	}
 	dest[i] = '\0';
+	return (p);
 }
 
 /**
@@ -167,18 +168,17 @@ int	control_quote(char *str, int i)
  */
 int	control_sep(char *str, char *split, int i)
 {
+	int	p;
+	
+	p = 0; 
 	if (is_separator(str[i]) == 2)
-		write_pipe(split, str + i);
+		p = write_pipe(split, str + i);
 	if (is_separator(str[i]) == 3)
-		write_red_r(split, str + i);
+		p = write_red_r(split, str + i);
 	if (is_separator(str[i]) == 4)
-		write_red_l(split, str + i);
+		p = write_red_l(split, str + i);
 	i++;
-	if (is_separator(str[i]) == 2)
-		i++;
-	else if (is_separator(str[i]) == 3)
-		i++;
-	else if (is_separator(str[i]) == 4)
+	if (p == 2)
 		i++;
 	while (str[i] == ' ')
 		i++;
