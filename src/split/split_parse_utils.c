@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_parse_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/26 11:45:01 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/01/27 16:04:52 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,29 +129,22 @@ int	write_red_l(char *dest, char *src)
 int	control_quote(char *str, int i)
 {
 	int	j;
+	int	c;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	while (is_separator(str[i]) <= 0)
+	c = 0;
+	while (str[++i])
 	{
-		while (is_separator(str[i]) == 0)
-		{
-			j++;
-			i++;
-		}
 		if (is_separator(str[i]) == -1)
-		{
-			i++;
-			j++;
-			while (is_separator(str[i]) != -1)
-			{
-				j++;
-				i++;
-			}
-			j++;
-			i++;
-		}
+			c++;
 	}
+	j = c % 2;
+	if (j != 0)
+		j = count_quote(str, c);
+	else
+		j = count_str(str, i);
+	printf("%d\n", j);
 	return (j);
 }
 
@@ -169,8 +162,8 @@ int	control_quote(char *str, int i)
 int	control_sep(char *str, char *split, int i)
 {
 	int	p;
-	
-	p = 0; 
+
+	p = 0;
 	if (is_separator(str[i]) == 2)
 		p = write_pipe(split, str + i);
 	if (is_separator(str[i]) == 3)
