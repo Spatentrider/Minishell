@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+         #
+#    By: ldi-masc <ldi-masc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/23 11:26:54 by mvolpi           ###   ########.fr        #
+#    Updated: 2023/01/27 10:12:38 by ldi-masc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC_SPLIT			=	src/split/split_executor.c \
 							src/split/split_parse.c \
 							src/split/split_pipe.c
 
+PARSE				=	parse/parse.c
+
 SRC_ARR				=	src/arr_utils/arr_add_back.c
 
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
@@ -28,7 +30,8 @@ FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_ENV:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_ARR:.c=.o})
+						$(addprefix $(OBJS_DIR)/, ${SRC_ARR:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${PARSE:.c=.o})
 
 OBJS_DIR			= objs
 

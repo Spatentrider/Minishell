@@ -11,21 +11,6 @@ size_t	ft_strlen(const char *s)
 	return (l);
 }
 
-int	is_separator(char c)
-{
-	if (c == '\0')
-		return (1);
-	else if (c == '|')
-		return (2);
-	else if (c == '>')
-		return (3);
-	else if (c == '<')
-		return (4);
-	else if (c == '\0')
-		return (1);
-	return (0);
-}
-
 int	check_pipe(char *string)
 {
 	size_t i;
@@ -90,7 +75,7 @@ int	parse(char **string)
 {
 	int i;
 
-	if(string[1][0] == '|')
+	if(string[0][0] == '|')
 	{
 		printf("il carattere | non può essere all'inizio dell'array");
 		return 1;
@@ -106,18 +91,18 @@ int	parse(char **string)
 	return 0;
 }
 
-int main (int ac, char **av)
-{
-	int i;
-	int j;
+// int main (int ac, char **av)
+// {
+// 	int i;
+// 	int j;
 
-	i = 1;
-	j = 0;
-	while(av[1][j])
-	{
-		printf("%c",av[1][j]);
-		j++;
-	}
-	if(parse(av))
-		return 1;
-}
+// 	i = 1;
+// 	j = 0;
+// 	while(av[1][j])
+// 	{
+// 		printf("%c",av[1][j]);
+// 		j++;
+// 	}
+// 	if(parse(av))
+// 		return 1;
+// }
