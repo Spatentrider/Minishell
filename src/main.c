@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldi-masc <ldi-masc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/27 10:14:53 by ldi-masc         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:35:37 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	main(int argc, char **argv, char **envp)
 			exit(0);
 		}
 		i = -1;
-		if(parse(shell.lst.split))
-			return(1);
+		if (parse(shell.lst.split))
+			return (1);
 		while (shell.lst.split[++i])
 			printf("%s\n", shell.lst.split[i]);
 	}

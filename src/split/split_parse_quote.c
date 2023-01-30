@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_parse_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:21:03 by mich              #+#    #+#             */
-/*   Updated: 2023/01/27 16:04:44 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/30 11:02:42 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	count_str(char *str, int i)
 		}
 		if (is_separator(str[i]) == -1)
 		{
-			i++;
 			j++;
+			i++;
 			while (is_separator(str[i]) != -1)
 			{
 				j++;
@@ -48,10 +48,8 @@ int	count_quote(char *str, int c)
 
 	j = 0;
 	i = 0;
-	printf("EHIIIIII SONO QUI\n");
 	while (c > 0)
 	{
-		printf("%d\n", c);
 		if (is_separator(str[i]) != -1)
 			j++;
 		else
@@ -59,6 +57,21 @@ int	count_quote(char *str, int c)
 			j++;
 			c--;
 		}
+		i++;
+	}
+	return (j);
+}
+
+int	count_all(char *str)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (is_separator(str[i]) == 0)
+	{
+		j++;
 		i++;
 	}
 	return (j);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_parse_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/27 16:04:52 by mich             ###   ########.fr       */
+/*   Updated: 2023/01/30 11:01:10 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,10 @@ int	control_quote(char *str, int i)
 	j = c % 2;
 	if (j != 0)
 		j = count_quote(str, c);
+	else if (c == 0)
+		j = count_all(str);
 	else
 		j = count_str(str, i);
-	printf("%d\n", j);
 	return (j);
 }
 
