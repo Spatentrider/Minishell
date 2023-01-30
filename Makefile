@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ldi-masc <ldi-masc@student.42.fr>          +#+  +:+       +#+         #
+#    By: mich <mich@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/27 10:12:38 by ldi-masc         ###   ########.fr        #
+#    Updated: 2023/01/27 15:35:55 by mich             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC				=	src/main.c
 SRC_ENV				=	src/get_env/init_env.c
 
 SRC_SPLIT			=	src/split/split_executor.c \
+							src/split/split_parse_quote.c \
 							src/split/split_parse_utils.c \
 							src/split/split_parse.c \
 							src/split/split_pipe.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/26 11:38:16 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/01/30 10:45:02 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		how_much_words(char *str);
 void	word(char *dest, char *src);
 int		split(char **split, char *str);
 char	**split_executor(char const *s);
+/*split_parse_quote.c*/
+int		count_str(char *str, int i);
+int		count_quote(char *str, int c);
+int		count_all(char *str);
+int		num_of_quote(char *str);
 /*split_parse_utils.c*/
 int		write_pipe(char *dest, char *src);
 int		write_red_r(char *dest, char *src);
