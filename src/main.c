@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/30 10:35:37 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:34:23 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,33 @@ void	free_struct(t_shell *shell)
 	free(shell->lst.split);
 }
 
+int	check_error_cod(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	printf("ciaooo\n");
+	shell->lst.error = ft_split(shell->lst.input, ' ');
+	printf("%s\n", shell->lst.error[0]);
+	while (shell->lst.error[++i])
+	{
+		printf("ciaooo\n");
+		if (ft_strncmp(shell->lst.error[i], "$?", 3) == 0)
+		{
+			printf("%d: command not found\n", g_exit);
+			g_exit = parse(shell->lst.split);
+			return (g_exit);
+		}
+		else
+		{
+			printf("ciaooo\n");
+			g_exit = 0;
+			g_exit = parse(shell->lst.split);
+		}
+	}
+	return (g_exit);
+}
+
 /**
  * @brief the start of the program that checks for errors,
  * saves the enviroment in a list and sets up a new prompt
@@ -52,10 +79,9 @@ void	free_struct(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	int		i;
 
 	(void)argv;
-	i = -1;
+	g_exit = 0;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
@@ -65,17 +91,15 @@ int	main(int argc, char **argv, char **envp)
 		shell.lst.split = split_cmd(shell.lst.input);
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
-		i = -1;
 		if (ft_strncmp(shell.lst.input, "exit", 4) == 0)
 		{
 			free_struct(&shell);
 			exit(0);
 		}
-		i = -1;
-		if (parse(shell.lst.split))
-			return (1);
-		while (shell.lst.split[++i])
-			printf("%s\n", shell.lst.split[i]);
+		g_exit = check_error_cod(&shell);
+		// printf("MAIN 1= %d\n", g_exit);
+		// g_exit = parse(shell.lst.split);
+		printf("MAIN = %d\n", g_exit);
 	}
 	return (0);
 }
