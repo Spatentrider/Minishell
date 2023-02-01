@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:00:36 by mich              #+#    #+#             */
+/*   Updated: 2023/02/01 15:30:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+# include "../src.h"
+# include "cd/cd.h"
+# include "echo/echo.h"
+# include "env/env.h"
+# include "exit/exit.h"
+# include "export/export.h"
+# include "pwd/pwd.h"
+# include "unset/unset.h"
 
 #endif

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
+/*   Updated: 2023/02/01 15:27:48 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#include "unset.h"
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+void	ft_unset(int argc, char **argv, char **current)
+{
+	int			i;
+	int			position;
 
-#endif
+	i = -1;
+	ft_env(current);
+	while (current[++i])
+	{
+		position = ft_strchrp(current[i], '=');
+		if (ft_strncmp(current[i], argv[2], position) == 0)
+		{
+			free(current[i]);
+			current[i] = (current[i + 1]);
+			i++;
+		}
+	}
+	ft_env(current);
+}

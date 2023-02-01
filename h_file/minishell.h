@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:15:20 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/01 15:06:03 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 
 int	g_exit;
 
-/**
- * @brief 
- * 
- */
 typedef struct s_env
 {
 	char			**current;
@@ -43,8 +39,14 @@ typedef struct s_lst
 	char			**error;
 }					t_lst;
 
+typedef struct s_cd
+{
+	int	bash_level;
+}			t_cd;
+
 typedef struct s_shell
 {
+	t_cd	cd;
 	t_lst	lst;
 	t_env	env;
 }				t_shell;
