@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/02 17:07:04 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:11:05 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_unset
 	int	j;
 	int	position;
 }					t_unset;
-
 
 typedef struct s_env
 {

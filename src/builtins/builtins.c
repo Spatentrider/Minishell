@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/02 16:01:59 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:10:53 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	executor(t_shell *shell)
 	int			i;
 
 	i = -1;
-	// printf("sono qui\n");
 	shell->lst.executor = split_executor(shell->lst.input);
 	while (shell->lst.executor[++i])
 	{
