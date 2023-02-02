@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 10:16:48 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/30 11:01:10 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:18:58 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,13 @@ int	write_pipe(char *dest, char *src)
 int	write_red_r(char *dest, char *src)
 {
 	int	i;
-	int	j;
 	int	p;
 
 	i = 0;
-	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 3 && is_separator(src[j]) != 0)
+	if (is_separator(src[i]) == 3 && is_separator(src[i + 1]) != 0)
 	{
-		while (p < 2)
+		while (is_separator(src[i]) != 0)
 		{	
 			dest[i] = src[i];
 			i++;
@@ -76,6 +74,7 @@ int	write_red_r(char *dest, char *src)
 		if (is_separator(src[i]) != 0)
 			dest[i] = src[i];
 		i++;
+		p++;
 	}
 	dest[i] = '\0';
 	return (p);
@@ -91,15 +90,13 @@ int	write_red_r(char *dest, char *src)
 int	write_red_l(char *dest, char *src)
 {
 	int	i;
-	int	j;
 	int	p;
 
 	i = 0;
-	j = i + 1;
 	p = 0;
-	if (is_separator(src[i]) == 4 && is_separator(src[j]) != 0)
+	if (is_separator(src[i]) == 3 && is_separator(src[i + 1]) != 0)
 	{
-		while (p < 2)
+		while (is_separator(src[i]) != 0)
 		{	
 			dest[i] = src[i];
 			i++;
@@ -108,9 +105,10 @@ int	write_red_l(char *dest, char *src)
 	}
 	else
 	{
-		if (is_separator(src[i]) == 4)
+		if (is_separator(src[i]) != 0)
 			dest[i] = src[i];
 		i++;
+		p++;
 	}
 	dest[i] = '\0';
 	return (p);
@@ -167,13 +165,11 @@ int	control_sep(char *str, char *split, int i)
 	p = 0;
 	if (is_separator(str[i]) == 2)
 		p = write_pipe(split, str + i);
-	if (is_separator(str[i]) == 3)
+	else if (is_separator(str[i]) == 3)
 		p = write_red_r(split, str + i);
-	if (is_separator(str[i]) == 4)
+	else if (is_separator(str[i]) == 4)
 		p = write_red_l(split, str + i);
-	i++;
-	if (p == 2)
-		i++;
+	i = i + p;
 	while (str[i] == ' ')
 		i++;
 	return (i);

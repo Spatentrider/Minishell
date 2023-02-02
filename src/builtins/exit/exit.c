@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/02/02 14:43:51 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:02:16 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_exit(char **current)
 
 	i = -1;
 	j = -1;
-	ft_env(current);
 	while (current[++i])
 	{
 		if (strncmp(current[i], "SHLVL=", 6) == 0)

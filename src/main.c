@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/02 15:59:46 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:19:54 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,9 @@ int	check_error_cod(t_shell *shell)
 	int	i;
 
 	i = -1;
-	printf("ciaooo\n");
 	shell->lst.error = ft_split(shell->lst.input, ' ');
-	printf("%s\n", shell->lst.error[0]);
 	while (shell->lst.error[++i])
 	{
-		printf("ciaooo\n");
 		if (ft_strncmp(shell->lst.error[i], "$?", 3) == 0)
 		{
 			printf("%d: command not found\n", g_exit);
@@ -53,7 +50,6 @@ int	check_error_cod(t_shell *shell)
 		}
 		else
 		{
-			printf("ciaooo\n");
 			g_exit = 0;
 			g_exit = parse(shell->lst.split);
 		}
@@ -91,17 +87,9 @@ int	main(int argc, char **argv, char **envp)
 		shell.lst.split = split_cmd(shell.lst.input);
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
-		if (ft_strncmp(shell.lst.input, "exit", 4) == 0)
-		{
-			free_struct(&shell);
-			exit(0);
-		}
 		if (executor(&shell))
 			printf("successful\n");
-		// g_exit = check_error_cod(&shell);
-		// printf("MAIN 1= %d\n", g_exit);
-		// g_exit = parse(shell.lst.split);
-		// printf("MAIN = %d\n", g_exit);
+		g_exit = check_error_cod(&shell);
 	}
 	return (0);
 }
