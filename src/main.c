@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:34:23 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 15:59:46 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ int	main(int argc, char **argv, char **envp)
 			free_struct(&shell);
 			exit(0);
 		}
-		g_exit = check_error_cod(&shell);
+		if (executor(&shell))
+			printf("successful\n");
+		// g_exit = check_error_cod(&shell);
 		// printf("MAIN 1= %d\n", g_exit);
 		// g_exit = parse(shell.lst.split);
-		printf("MAIN = %d\n", g_exit);
+		// printf("MAIN = %d\n", g_exit);
 	}
 	return (0);
 }

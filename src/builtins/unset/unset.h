@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:25:42 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:27:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 14:46:19 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../builtins.h"
 
 /*unset.c*/
-void	ft_unset(int argc, char **argv, char **current);
+void	ft_unset(t_shell *shell, char **current);
 
 #endif

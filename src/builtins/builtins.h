@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:36 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:30:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 15:57:15 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include "export/export.h"
 # include "pwd/pwd.h"
 # include "unset/unset.h"
+
+int	executor(t_shell *shell);
 
 #endif

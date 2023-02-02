@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:58:41 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:03:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 14:48:19 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../builtins.h"
 
 /*cd.c*/
-void	ft_cd(int argc, char **argv, t_shell shell);
+void	ft_cd(t_shell *shell);
 
 #endif

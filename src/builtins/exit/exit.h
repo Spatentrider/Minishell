@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:13 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:19:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 14:40:51 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../builtins.h"
 
 /*exit.c*/
-void	ft_exit(int argc, char **argv, char **current);
+void	ft_exit(char **current);
 
 #endif

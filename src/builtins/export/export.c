@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:21:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 16:16:46 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
+
+int	ft_strchrp(const char *s, int c)
+{
+	char	find;
+	int		i;
+
+	find = (unsigned char)c;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == find)
+			return (i);
+		i++;
+	}
+	if (s[i] == find)
+		return (i);
+	return (1);
+}
 
 char	**sort(char **sorting)
 {
@@ -37,31 +55,34 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
-void	ft_export(int argc, char **argv, t_shell shell)
+void	ft_export(t_shell *shell)
 {
-	shell.exp.i = -1;
-	shell.exp.j = -1;
-	if (argc == 2)
+	shell->exp.i = -1;
+	shell->exp.j = -1;
+	if (!shell->lst.executor[1])
 	{
-		shell.exp.sort_env = sort(shell.env.current);
-		shell.exp.i = -1;
-		while (shell.exp.sort_env[++shell.exp.i])
-			printf("declare -x %s\n", shell.exp.sort_env[shell.exp.i]);
+		shell->exp.sort_env = sort(shell->env.current);
+		shell->exp.i = -1;
+		while (shell->exp.sort_env[++shell->exp.i])
+			printf("declare -x %s\n", shell->exp.sort_env[shell->exp.i]);
 	}
-	while (shell.env.current[++shell.exp.i])
+	else
 	{
-		shell.exp.pos = ft_strchrp(shell.env.current[shell.exp.i], '=');
-		if (ft_strncmp(shell.env.current[shell.exp.i], \
-					argv[2], shell.exp.pos + 1) == 0)
+		while (shell->env.current[++shell->exp.i])
 		{
-			shell.env.current[shell.exp.i] = argv[2];
-			shell.exp.j = 0;
+			shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
+			if (ft_strncmp(shell->env.current[shell->exp.i], \
+						shell->lst.executor[1], shell->exp.pos + 1) == 0)
+			{
+				shell->env.current[shell->exp.i] = shell->lst.executor[1];
+				shell->exp.j = 0;
+			}
 		}
-	}
-	if (shell.exp.j == -1)
-	{
-		shell.env.current[shell.exp.i] = argv[2];
-		shell.env.current[shell.exp.i + 1] = NULL;
+		if (shell->exp.j == -1)
+		{
+			shell->env.current[shell->exp.i] = shell->lst.executor[1];
+			shell->env.current[shell->exp.i + 1] = NULL;
+		}
 	}
 	return ;
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:19:16 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 14:43:51 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-void	ft_exit(int argc, char **argv, char **current)
+void	ft_exit(char **current)
 {
 	int		i;
 	int		j;
