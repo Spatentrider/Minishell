@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:17:13 by mich              #+#    #+#             */
+/*   Updated: 2023/02/02 14:40:51 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef EXIT_H
+# define EXIT_H
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+# include "../builtins.h"
+
+/*exit.c*/
+void	ft_exit(char **current);
 
 #endif

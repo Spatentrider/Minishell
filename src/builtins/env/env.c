@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:15:42 by mich              #+#    #+#             */
+/*   Updated: 2023/02/01 15:16:02 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#include "env.h"
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+void	ft_env(char **current)
+{
+	int	i;
 
-#endif
+	i = -1;
+	while (current[++i])
+	{
+		if (strchr(current[i], '=') != NULL)
+			printf("%s\n", current[i]);
+	}
+}

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:19:54 by mich              #+#    #+#             */
+/*   Updated: 2023/02/02 14:48:41 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef EXPORT_H
+# define EXPORT_H
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+# include "../builtins.h"
+
+/*export.c*/
+int		ft_strchrp(const char *s, int c);
+char	**sort(char **sorting);
+void	ft_export(t_shell *shell);
 
 #endif

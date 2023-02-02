@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:40 by mich             ###   ########.fr       */
+/*   Created: 2023/02/01 15:09:25 by mich              #+#    #+#             */
+/*   Updated: 2023/02/02 14:48:32 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef ECHO_H
+# define ECHO_H
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
+# include "../builtins.h"
+
+/*echo.c*/
+void	short_echo(t_shell *shell);
+void	ft_echo(t_shell *shell);
 
 #endif

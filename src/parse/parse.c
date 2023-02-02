@@ -6,11 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/31 16:10:54 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/01 15:36:09 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../h_file/minishell.h"
+#include "parse.h"
 
 int	check_pipe(char *string)
 {

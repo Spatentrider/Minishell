@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/30 10:45:02 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/01 15:07:09 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPLIT_H
 # define SPLIT_H
 
-# include "../../h_file/minishell.h"
+# include "../src.h"
 
 /*split_executor.c*/
 int		separator(char c);

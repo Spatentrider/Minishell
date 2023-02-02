@@ -6,33 +6,57 @@
 #    By: mich <mich@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/01/27 15:35:55 by mich             ###   ########.fr        #
+#    Updated: 2023/02/01 15:54:09 by mich             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := minishell
 
-SRC				=	src/main.c
+SRC						=	src/main.c
 
-SRC_ENV				=	src/get_env/init_env.c
+SRC_ARR					=	src/arr_utils/arr_add_back.c
 
-SRC_SPLIT			=	src/split/split_executor.c \
-							src/split/split_parse_quote.c \
-							src/split/split_parse_utils.c \
-							src/split/split_parse.c \
-							src/split/split_pipe.c
+SRC_BUILTINS			=	src/builtins/builtins.c
 
-PARSE				=	parse/parse.c
+SRC_CD					=	src/builtins/cd/cd.c
 
-SRC_ARR				=	src/arr_utils/arr_add_back.c
+SRC_ECHO				=	src/builtins/echo/echo.c
+
+SRC_ENV					=	src/builtins/env/env.c
+
+SRC_EXIT				=	src/builtins/exit/exit.c
+
+SRC_EXPORT				=	src/builtins/export/export.c
+
+SRC_PWD					=	src/builtins/pwd/pwd.c
+
+SRC_UNSET				=	src/builtins/unset/unset.c
+
+SRC_GET_ENV				=	src/get_env/init_env.c
+
+SRC_PARSE				=	src/parse/parse.c
+
+SRC_SPLIT				=	src/split/split_executor.c \
+								src/split/split_parse_quote.c \
+								src/split/split_parse_utils.c \
+								src/split/split_parse.c \
+								src/split/split_pipe.c
 
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
 OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_ENV:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_ARR:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${PARSE:.c=.o})
+						$(addprefix $(OBJS_DIR)/, ${SRC_BUILTINS:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_CD:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_ECHO:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_ENV:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_EXIT:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_EXPORT:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_PWD:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_UNSET:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_GET_ENV:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o})
 
 OBJS_DIR			= objs
 
