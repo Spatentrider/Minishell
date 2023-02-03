@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:36:09 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 17:57:24 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	check_pipe(char *string)
 		printf("minishell: double pipe is not allowed\n");
 		g_exit = 2;
 	}
-	printf("CHECK_PIPE = %d\n", g_exit);
 	return (g_exit);
 }
 
@@ -41,7 +40,6 @@ int	check_redirection(char *string)
 		printf("minishell: redirection >< is not allowed\n");
 		g_exit = 2;
 	}
-	printf("CHECK_REDIRECTION = %d\n", g_exit);
 	return (g_exit);
 }
 
@@ -61,7 +59,6 @@ int	check_quote(char *string)
 		printf("minishell: quote not closed\n");
 		g_exit = 2;
 	}
-	printf("CHECK_QUOTE = %d\n", g_exit);
 	return (g_exit);
 }
 
@@ -73,7 +70,6 @@ int	check_parameter(char *string, char c)
 		return (g_exit = check_redirection(string));
 	if (c == 34 || c == 39)
 		return (g_exit = check_quote(string));
-	printf("CHECK_PARAMETER = %d\n", g_exit);
 	return (g_exit);
 }
 
@@ -86,15 +82,16 @@ int	parse(char **string)
 		printf("minishell: syntax error near unexpected token `|'\n");
 		g_exit = 258;
 	}
-	i = 0;
-	while (string[++i])
+	else
 	{
-		if (string[i][0] == '|' || string[i][0] == '<'
-			|| string[i][0] == '>' || string[i][0] == 34
-			|| string[i][0] == 39)
-			g_exit = check_parameter(string[i], string[i][0]);
-		printf("WHILE PARSE = %d\n", g_exit);
+		i = -1;
+		while (string[++i])
+		{
+			if (string[i][0] == '|' || string[i][0] == '<'
+				|| string[i][0] == '>' || string[i][0] == 34
+				|| string[i][0] == 39)
+				g_exit = check_parameter(string[i], string[i][0]);
+		}
 	}
-	printf("PARSE = %d\n", g_exit);
 	return (g_exit);
 }
