@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:21:03 by mich              #+#    #+#             */
-/*   Updated: 2023/01/30 11:02:42 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/03 10:36:50 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,20 @@ int	count_all(char *str)
 	j = 0;
 	i = 0;
 	while (is_separator(str[i]) == 0)
+	{
+		j++;
+		i++;
+	}
+	return (j);
+}
+
+int	count_sep(char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (is_separator(str[i]) > 1)
 	{
 		j++;
 		i++;

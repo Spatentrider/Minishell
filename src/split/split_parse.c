@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   split_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/20 10:37:40 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/03 11:11:13 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@
  */
 int	is_separator(char c)
 {
-	if (c == '\0')
-		return (1);
-	else if (c == '|')
+	if (c == '|')
 		return (2);
 	else if (c == '>')
 		return (3);
@@ -119,7 +117,7 @@ int	write_split(char **split, char *str)
 	w = 0;
 	while (str[i] != '\0')
 	{
-		if (is_separator(str[i]) > 0)
+		if (is_separator(str[i]) > 1)
 		{
 			split[w] = (char *)malloc(sizeof(char) * (3));
 			i = control_sep(str, split[w], i);

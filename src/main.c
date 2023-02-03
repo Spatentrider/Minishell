@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/02 18:19:54 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/03 11:13:11 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
+	int		i;
 
 	(void)argv;
 	g_exit = 0;
@@ -90,6 +91,9 @@ int	main(int argc, char **argv, char **envp)
 		if (executor(&shell))
 			printf("successful\n");
 		g_exit = check_error_cod(&shell);
+		i = -1;
+		while (shell.lst.split[++i])
+			printf("%s\n", shell.lst.split[i]);
 	}
 	return (0);
 }

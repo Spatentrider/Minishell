@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/01 15:07:09 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/02 18:30:45 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		count_str(char *str, int i);
 int		count_quote(char *str, int c);
 int		count_all(char *str);
 int		num_of_quote(char *str);
+int		count_sep(char *str, int i);
 /*split_parse_utils.c*/
 int		write_pipe(char *dest, char *src);
 int		write_red_r(char *dest, char *src);
