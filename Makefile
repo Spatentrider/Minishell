@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mich <mich@student.42.fr>                  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/02 13:02:52 by marimatt          #+#    #+#              #
-#    Updated: 2023/02/01 15:54:09 by mich             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME := minishell
 
 SRC						=	src/main.c
@@ -34,13 +22,16 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
 
+SRC_OPERATOR			=	src/operator/check_op.c
+
 SRC_PARSE				=	src/parse/parse.c
 
 SRC_SPLIT				=	src/split/split_executor.c \
 								src/split/split_parse_quote.c \
 								src/split/split_parse_utils.c \
 								src/split/split_parse.c \
-								src/split/split_pipe.c
+								src/split/split_pipe.c \
+								src/split/split_red.c
 
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
@@ -55,13 +46,14 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PWD:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_UNSET:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_GET_ENV:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_OPERATOR:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o})
 
 OBJS_DIR			= objs
 
-READLINE_FLAG	:= -lreadline -lcurses
-# READLINE_FLAG	:= -lreadline -ltinfo
+# READLINE_FLAG	:= -lreadline -lcurses
+READLINE_FLAG	:= -lreadline -ltinfo
 READLINE_DIR		:= readline/
 READLINE_A			= readline/libhistory.a readline/libreadline.a
 READLINE_MAKEFILE 	:= readline/Makefile
