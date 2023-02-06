@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/03 11:13:11 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:06:08 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	main(int argc, char **argv, char **envp)
 		shell.lst.split = split_cmd(shell.lst.input);
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
-		if (executor(&shell))
-			printf("successful\n");
 		g_exit = check_error_cod(&shell);
+		if (g_exit == 0)
+			executor(&shell);
 		i = -1;
 		while (shell.lst.split[++i])
 			printf("%s\n", shell.lst.split[i]);
