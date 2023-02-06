@@ -27,6 +27,7 @@ void	expansion(char **expansion, char **current)
 		str[i] = expansion[0][j];
 		i++;
 	}
+	str[i] = '\0';
 	printf("ciao = %s\n", str);
 	i = -1;
 	while (current[++i])
@@ -34,10 +35,15 @@ void	expansion(char **expansion, char **current)
 		pos = ft_strchrp(current[i], '=');
 		if (ft_strncmp(current[i], str, pos) == 0)
 		{
-			expansion [0] = current[pos];
+			j = 0;
+			while(current[i][++pos])
+			{
+				expansion [0][j] = current[i][pos];
+				j++;
+			}
 		}
-		printf("pipooooooooooooooo = %s\n", expansion[0]);
 	}
+	printf("pipooooooooooooooo = %s\n", expansion[0]);
 }
 
 int	check_operator(t_shell *shell)
