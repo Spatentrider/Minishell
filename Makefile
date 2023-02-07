@@ -22,7 +22,8 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
 
-SRC_OPERATOR			=	src/operator/check_op.c
+SRC_OPERATOR			=	src/operator/check_op.c \
+								src/operator/redirection.c
 
 SRC_PARSE				=	src/parse/parse.c
 
@@ -52,8 +53,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 
 OBJS_DIR			= objs
 
-# READLINE_FLAG	:= -lreadline -lcurses
-READLINE_FLAG	:= -lreadline -ltinfo
+READLINE_FLAG	:= -lreadline -lcurses
+# READLINE_FLAG	:= -lreadline -ltinfo
 READLINE_DIR		:= readline/
 READLINE_A			= readline/libhistory.a readline/libreadline.a
 READLINE_MAKEFILE 	:= readline/Makefile

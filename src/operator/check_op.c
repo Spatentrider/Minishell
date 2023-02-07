@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/07 14:30:44 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/07 16:25:37 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
+
+void	redirection(char **redirection, int c)
+{
+	if (c == 1)
+		red_out(redirection);
+	// else if(c == 2)
+	// 	red_inp();
+	// else if(c == 3)
+	// 	append();
+	// else if(c == 4)
+	// 	here_doc();
+}
+
+int	check_red(char *input)
+{
+	int i;
+	int c;
+	
+	i = -1;
+	c = 0;
+	while(input[++i])
+	{
+		if(input[i] == '<')
+		{
+			if(input[i+1] == '<')
+			{
+				c = 4;
+				break;
+			}
+			else
+				c = 2;
+		}
+		else if(input[i] == '>')
+		{
+			if(input[i + 1] == '>')
+			{
+				c = 3;
+				break;
+			}
+			else
+				c = 1;
+		}
+	}
+	return(c);
+}
 
 void	expansion(char *expansion, char **current)
 {
@@ -42,20 +87,24 @@ void	expansion(char *expansion, char **current)
 int	check_operator(t_shell *shell)
 {
 	int		i;
-
+	int 	c;
 	i = -1;
 	// shell->lst.pipe = split_pipe(shell->lst.input);
 	// if (shell->lst.pipe[1] != NULL)
 	// 	ft_pipe();
-	// shell->lst.redirection = split_redirection(shell->lst.input);
-	// if (shell->lst.redirection[1] != NULL)
-	// 	redirection();
+	shell->lst.redirection = split_redirection(shell->lst.input);
+	c = check_red(shell->lst.input);
+	if (c != 0)
+	  	redirection(shell->lst.redirection, c);
 	shell->lst.expansion = split_executor(shell->lst.split[0]);
 	while (shell->lst.expansion[++i])
 	{
 		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
+		{
 			expansion(shell->lst.expansion[i], shell->env.current);
+		}
 	}
 	executor(shell);
 	return (0);
 }
+
