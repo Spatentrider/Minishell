@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/02 18:30:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:41:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int		count_words(char *str);
 void	save_word(char *dest, char *src);
 int		save_split(char **split, char *str);
 char	**split_pipe(char const *s);
+/*split_red.c*/
+char	**split_redirection(char const *s);
 
 #endif

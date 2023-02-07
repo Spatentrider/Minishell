@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 15:06:08 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/06 16:30:49 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	int		i;
+	// int		i;
 
 	(void)argv;
 	g_exit = 0;
@@ -90,10 +90,10 @@ int	main(int argc, char **argv, char **envp)
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
 		if (g_exit == 0)
-			executor(&shell);
-		i = -1;
-		while (shell.lst.split[++i])
-			printf("%s\n", shell.lst.split[i]);
+			check_operator(&shell);
+		// i = -1;
+		// while (shell.lst.split[++i])
+		// 	printf("%s\n", shell.lst.split[i]);
 	}
 	return (0);
 }

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 16:15:01 by mich             ###   ########.fr       */
+/*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
+/*   Updated: 2023/02/06 16:14:44 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef OPERATOR_H
+# define OPERATOR_H
 
-# include "../h_file/minishell.h"
-# include "split/split.h"
-# include "get_env/get_env.h"
-# include "arr_utils/arr_utils.h"
-# include "builtins/builtins.h"
-# include "parse/parse.h"
-# include "operator/operator.h"
+# include "../src.h"
+
+/*check_op*/
+int	check_operator(t_shell *shell);
 
 #endif
