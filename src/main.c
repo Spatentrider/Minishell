@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 16:30:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/08 14:35:10 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,43 @@ void	free_struct(t_shell *shell)
 
 	i = -1;
 	while (shell->env.current[++i])
+	{
 		free(shell->env.current[i]);
+		shell->env.current[i] = NULL;
+	}
 	free(shell->env.current);
 	free(shell->lst.input);
 	i = -1;
 	while (shell->lst.split[++i])
+	{
 		free(shell->lst.split[i]);
+		shell->lst.split[i] = NULL;
+	}
 	free(shell->lst.split);
+	i = -1;
+	while (shell->exp.sort_env[++i])
+	{
+		free(shell->exp.sort_env[i]);
+		shell->exp.sort_env[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.executor[++i])
+	{
+		free(shell->lst.executor[i]);
+		shell->lst.executor[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.expansion[++i])
+	{
+		free(shell->lst.expansion[i]);
+		shell->lst.expansion[i] = NULL;
+	}
+	// i = -1;
+	// while (shell->lst.redirection[++i])
+	// {
+	// 	free(shell->lst.redirection[i]);
+	// 	shell->lst.redirection[i] = NULL;
+	// }
 }
 
 int	check_error_cod(t_shell *shell)

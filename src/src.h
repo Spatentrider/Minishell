@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 16:15:01 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/08 11:34:00 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@
 # include "builtins/builtins.h"
 # include "parse/parse.h"
 # include "operator/operator.h"
+
+void	free_struct(t_shell *shell);
 
 #endif

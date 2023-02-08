@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:00:36 by mich              #+#    #+#             */
-/*   Updated: 2023/02/07 16:26:23 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/08 10:11:47 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@
 # include "pwd/pwd.h"
 # include "unset/unset.h"
 
-int	executor(t_shell *shell);
+int	executor(t_shell *shell, char *str);
 
 #endif
