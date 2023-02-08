@@ -75,13 +75,14 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	// int		i;
+	int		i;
 
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
+	i = dup(STDOUT_FILENO);
 	while (1)
 	{
 		shell.lst.input = readline("minishell: ");
@@ -94,6 +95,7 @@ int	main(int argc, char **argv, char **envp)
 		// i = -1;
 		// while (shell.lst.split[++i])
 		// 	printf("%s\n", shell.lst.split[i]);
+		dup2(i, STDOUT_FILENO);
 	}
 	return (0);
 }
