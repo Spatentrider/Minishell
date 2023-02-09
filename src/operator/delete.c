@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 15:00:36 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 14:45:51 by mvolpi           ###   ########.fr       */
+/*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
+/*   Updated: 2023/02/09 15:43:39 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "operator.h"
 
-# include "../src.h"
-# include "cd/cd.h"
-# include "echo/echo.h"
-# include "env/env.h"
-# include "exit/exit.h"
-# include "export/export.h"
-# include "pwd/pwd.h"
-# include "unset/unset.h"
+void	delete_op(t_shell *shell)
+{
+	int	i;
 
-int	executor(t_shell *shell);
-
-#endif
+	i = -1;
+	while (shell->lst.input[++i])
+	{
+		if (is_separator(shell->lst.input[i]) > 1)
+			shell->lst.input[i] = ' ';
+		while (is_separator(shell->lst.input[i]) == -1)
+			shell->lst.input[i] = ' ';
+	}
+}

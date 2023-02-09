@@ -3,39 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/08 15:12:37 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/09 16:03:32 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	executor(t_shell *shell, char *str)
+int	check_file(t_shell *shell)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	if (shell->lst.file[0] == NULL)
+		return (1);
+	while (shell->lst.executor[++i])
+	{
+		while (shell->lst.executor[i][++j])
+			;
+		if (ft_strncmp(shell->lst.executor[i], shell->lst.file[0], j) == 0)
+		{
+			i -= 1;
+			while (shell->lst.executor[++i])
+			{
+				if (shell->lst.executor[i + 1] != NULL)
+				{
+					free(shell->lst.executor[i]);
+					shell->lst.executor[i] = ft_strdup(shell->lst.executor[i + 1]);
+				}
+				else
+				{
+					free(shell->lst.executor[i]);
+					shell->lst.executor[i] = NULL;
+				}
+			}
+			break ;
+		}
+	}
+	return (0);
+}
+
+int	executor(t_shell *shell)
 {
 	int		i;
 	// int		pid;
 	// int		status;
 
 	i = -1;
-	shell->lst.executor = split_executor(str);
-	while (shell->lst.executor[++i])
-	{
-		if (strncmp(shell->lst.executor[i], "pwd", 4) == 0)
-			pwd();
-		else if (strncmp(shell->lst.executor[i], "echo", 5) == 0)
-			ft_echo(shell);
-		else if (strncmp(shell->lst.executor[i], "cd", 3) == 0)
-			ft_cd(shell);
-		else if (strncmp(shell->lst.executor[i], "env", 4) == 0)
-			ft_env(shell->env.current);
-		else if (strncmp(shell->lst.executor[i], "exit", 5) == 0)
-			ft_exit(shell->env.current);
-		else if (strncmp(shell->lst.executor[i], "export", 7) == 0)
-			ft_export(shell);
-		else if (strncmp(shell->lst.executor[i], "unset", 6) == 0)
-			ft_unset (shell, shell->env.current);
+	shell->lst.executor = split_executor(shell->lst.input);
+	check_file(shell);
+	// while (shell->lst.executor[++i])
+	// 	printf("%s\n", shell->lst.executor[i]);
+	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
+		pwd();
+	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)
+		ft_echo(shell);
+	else if (strncmp(shell->lst.executor[0], "cd", 3) == 0)
+		ft_cd(shell);
+	else if (strncmp(shell->lst.executor[0], "env", 4) == 0)
+		ft_env(shell->env.current);
+	else if (strncmp(shell->lst.executor[0], "exit", 5) == 0)
+		ft_exit(shell->env.current);
+	else if (strncmp(shell->lst.executor[0], "export", 7) == 0)
+		ft_export(shell);
+	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
+		ft_unset (shell, shell->env.current);
 		// else
 		// {
 		// 	pid = fork();
@@ -53,6 +89,6 @@ int	executor(t_shell *shell, char *str)
 		// 			break ;
 		// 		}
 		// 	}
-	}
+		// }
 	return (0);
 }

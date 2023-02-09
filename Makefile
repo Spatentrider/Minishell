@@ -23,6 +23,7 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 SRC_GET_ENV				=	src/get_env/init_env.c
 
 SRC_OPERATOR			=	src/operator/check_op.c \
+								src/operator/delete.c \
 								src/operator/redirection.c
 
 SRC_PARSE				=	src/parse/parse.c

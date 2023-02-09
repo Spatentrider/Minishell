@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/08 15:53:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/09 15:32:26 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	redirection(char **redirection, int c, t_shell *shell)
 {
+	shell->lst.file = split_executor(redirection[1]);
 	if (c == 1)
-		red_out(redirection);
+		red_out(shell->lst.file[0]);
 	else if (c == 2)
-		red_inp(redirection);
+		red_inp(shell->lst.file[0]);
 	else if (c == 3)
-		append(redirection);
-	else if (c == 4)
-		here_doc(redirection, shell);
+		append(shell->lst.file[0]);
+	// else if (c == 4)
+	// 	here_doc(shell->lst.file[0], shell);
 }
 
 int	check_red(char *input)
@@ -103,6 +104,7 @@ int	check_operator(t_shell *shell)
 		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
 			expansion(shell->lst.expansion[i], shell->env.current);
 	}
-	executor(shell, shell->lst.split[0]);
+	delete_op(shell);
+	executor(shell);
 	return (0);
 }
