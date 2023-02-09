@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 15:32:26 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:43:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	redirection(char **redirection, int c, t_shell *shell)
 		red_inp(shell->lst.file[0]);
 	else if (c == 3)
 		append(shell->lst.file[0]);
-	// else if (c == 4)
-	// 	here_doc(shell->lst.file[0], shell);
+	else if (c == 4)
+		here_doc(shell->lst.file[0], shell);
 }
 
 int	check_red(char *input)
@@ -34,26 +34,20 @@ int	check_red(char *input)
 	c = 0;
 	while (input[++i])
 	{
-		if (input[i] == '<')
+		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			if (input[i + 1] == '<')
-			{
-				c = 4;
-				break ;
-			}
-			else
-				c = 2;
+			c = 4;
+			break ;
 		}
+		else if (input[i] == '>' && input[i + 1] == '>')
+		{
+			c = 3;
+			break ;
+		}
+		else if (input[i] == '<')
+			c = 2;
 		else if (input[i] == '>')
-		{
-			if (input[i + 1] == '>')
-			{
-				c = 3;
-				break ;
-			}
-			else
-				c = 1;
-		}
+			c = 1;
 	}
 	return (c);
 }
@@ -79,7 +73,7 @@ void	expansion(char *expansion, char **current)
 		{
 			j = -1;
 			while (current[i][++pos])
-				expansion [++j] = current[i][pos];
+				expansion[++j] = current[i][pos];
 			expansion[++j] = '\0';
 		}
 	}
@@ -91,9 +85,6 @@ int	check_operator(t_shell *shell)
 	int	c;
 
 	i = -1;
-	// shell->lst.pipe = split_pipe(shell->lst.input);
-	// if (shell->lst.pipe[1] != NULL)
-	// 	ft_pipe();
 	shell->lst.redirection = split_redirection(shell->lst.input);
 	c = check_red(shell->lst.input);
 	if (c != 0)
@@ -108,3 +99,7 @@ int	check_operator(t_shell *shell)
 	executor(shell);
 	return (0);
 }
+
+// shell->lst.pipe = split_pipe(shell->lst.input);
+// if (shell->lst.pipe[1] != NULL)
+// 	ft_pipe();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 15:13:30 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:18:48 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	delete_op(t_shell *shell);
 void	red_out(char *redirection);
 void	red_inp(char	*redirection);
 void	append(char *redirection);
-// void	here_doc(char *redirection, t_shell *shell);
+void	here_doc(char *redirection, t_shell *shell);
 
 #endif

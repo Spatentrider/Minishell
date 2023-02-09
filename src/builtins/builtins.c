@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 16:03:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:40:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	check_file(t_shell *shell)
+void	delete_file(t_shell *shell, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	j = -1;
-	if (shell->lst.file[0] == NULL)
-		return (1);
 	while (shell->lst.executor[++i])
 	{
 		while (shell->lst.executor[i][++j])
@@ -33,7 +26,8 @@ int	check_file(t_shell *shell)
 				if (shell->lst.executor[i + 1] != NULL)
 				{
 					free(shell->lst.executor[i]);
-					shell->lst.executor[i] = ft_strdup(shell->lst.executor[i + 1]);
+					shell->lst.executor[i] = ft_strdup \
+						(shell->lst.executor[i + 1]);
 				}
 				else
 				{
@@ -44,20 +38,25 @@ int	check_file(t_shell *shell)
 			break ;
 		}
 	}
+}
+
+int	check_file(t_shell *shell)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	if (shell->lst.redirection[1] == NULL)
+		return (1);
+	delete_file(shell, i, j);
 	return (0);
 }
 
 int	executor(t_shell *shell)
 {
-	int		i;
-	// int		pid;
-	// int		status;
-
-	i = -1;
 	shell->lst.executor = split_executor(shell->lst.input);
 	check_file(shell);
-	// while (shell->lst.executor[++i])
-	// 	printf("%s\n", shell->lst.executor[i]);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)
@@ -72,12 +71,21 @@ int	executor(t_shell *shell)
 		ft_export(shell);
 	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
 		ft_unset (shell, shell->env.current);
-		// else
+	return (0);
+}
+
+// int		i;
+// int		pid;
+// int		status;
+
+// i = -1;
+// else
 		// {
 		// 	pid = fork();
 		// 	if (pid == 0)
 		// 	{
-		// 		char *args[] = {shell->lst.executor[i], shell->lst.executor[i + 1], NULL};
+		// 		char *args[] = {shell->lst.executor[i], 
+				// shell->lst.executor[i + 1], NULL};
 		// 		execve("/bin/ls", args, NULL);
 		// 	}
 		// 	else
@@ -85,10 +93,9 @@ int	executor(t_shell *shell)
 		// 		waitpid(pid, &status, 0);
 		// 		if (WIFEXITED(status))
 		// 		{
-		// 			printf("Il processo figlio ha terminato con codice %d\n", WEXITSTATUS(status));
+		// 			printf("Il processo figlio ha terminato 
+				// con codice %d\n", WEXITSTATUS(status));
 		// 			break ;
 		// 		}
 		// 	}
 		// }
-	return (0);
-}

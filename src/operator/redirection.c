@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 15:13:08 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:19:03 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,17 @@ void	append(char *redirection)
 	dup2(i, STDOUT_FILENO);
 }
 
-// void	here_doc(char *redirection, t_shell *shell)
-// {
-// 	int		i;
-// 	char	*str;
+void	here_doc(char *redirection, t_shell *shell)
+{
+	int		i;
 
-// 	while (1)
-// 	{
-// 		shell->lst.doc = readline("> ");
-// 		i = -1;
-// 		str = *split_executor(redirection[1]);
-// 		while (str[++i])
-// 			;
-// 		if (ft_strncmp(str, shell->lst.doc, i + 1) == 0)
-// 			break ;
-// 	}
-// }
+	while (1)
+	{
+		shell->lst.doc = readline("> ");
+		i = -1;
+		while (redirection[++i])
+			;
+		if (ft_strncmp(redirection, shell->lst.doc, i + 1) == 0)
+			break ;
+	}
+}

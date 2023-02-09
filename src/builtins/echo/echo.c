@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:10:40 by mich              #+#    #+#             */
-/*   Updated: 2023/02/08 10:30:45 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/09 17:01:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	short_echo(t_shell *shell)
 {
 	while (shell->lst.executor[shell->echo.i])
 	{
-		printf("%s ", shell->lst.executor[shell->echo.i]);
+		printf("%s", shell->lst.executor[shell->echo.i]);
+		if (shell->lst.executor[shell->echo.i + 1] != NULL)
+			printf(" ");
 		shell->echo.i++;
 	}
 	printf("\n");

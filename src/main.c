@@ -6,11 +6,33 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/08 14:35:10 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/09 17:43:09 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
+
+void	free_struct2(t_shell *shell, int i)
+{
+	i = -1;
+	while (shell->exp.sort_env[++i])
+	{
+		free(shell->exp.sort_env[i]);
+		shell->exp.sort_env[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.executor[++i])
+	{
+		free(shell->lst.executor[i]);
+		shell->lst.executor[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.expansion[++i])
+	{
+		free(shell->lst.expansion[i]);
+		shell->lst.expansion[i] = NULL;
+	}
+}
 
 /**
  * @brief function that takes the structure of structures to be freed,
@@ -38,30 +60,7 @@ void	free_struct(t_shell *shell)
 		shell->lst.split[i] = NULL;
 	}
 	free(shell->lst.split);
-	i = -1;
-	while (shell->exp.sort_env[++i])
-	{
-		free(shell->exp.sort_env[i]);
-		shell->exp.sort_env[i] = NULL;
-	}
-	i = -1;
-	while (shell->lst.executor[++i])
-	{
-		free(shell->lst.executor[i]);
-		shell->lst.executor[i] = NULL;
-	}
-	i = -1;
-	while (shell->lst.expansion[++i])
-	{
-		free(shell->lst.expansion[i]);
-		shell->lst.expansion[i] = NULL;
-	}
-	// i = -1;
-	// while (shell->lst.redirection[++i])
-	// {
-	// 	free(shell->lst.redirection[i]);
-	// 	shell->lst.redirection[i] = NULL;
-	// }
+	free_struct2(shell, i);
 }
 
 int	check_error_cod(t_shell *shell)
@@ -122,9 +121,6 @@ int	main(int argc, char **argv, char **envp)
 		g_exit = check_error_cod(&shell);
 		if (g_exit == 0)
 			check_operator(&shell);
-		// i = -1;
-		// while (shell.lst.split[++i])
-		// 	printf("%s\n", shell.lst.split[i]);
 		dup2(i, STDOUT_FILENO);
 	}
 	return (0);
