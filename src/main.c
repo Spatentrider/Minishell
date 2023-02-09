@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ldi-masc <ldi-masc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 16:30:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/09 15:58:24 by ldi-masc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
+
+void signal_handler()
+{
+	
+}
 
 /**
  * @brief function that takes the structure of structures to be freed,
@@ -82,6 +87,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGINT,signal_handler);
 	while (1)
 	{
 		shell.lst.input = readline("minishell: ");
