@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 16:02:26 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 16:11:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,9 @@ int	check_operator(t_shell *shell)
 	i = -1;
 	q = -1;
 	q = clean_quote(shell);
-	printf("q = %d\n", q);
-	if (q == 0 || q == 4)
+	if (q == 0 || q == 3)
 		executor(shell);
-	else if (q == 1 || q == 3)
+	else if (q == 1 || q == 4)
 	{
 		c = check_red(shell->lst.input);
 		if (c > 0)

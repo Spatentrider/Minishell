@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 16:01:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 16:40:28 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	is_sep(char c)
 		return (2);
 	else if (c == 39)
 		return (3);
+	else if (c == ' ')
+		return (4);
 	return (0);
 }
 
@@ -35,27 +37,103 @@ void	delete_qt(t_shell *shell)
 	}
 }
 
-void	delete_dq(t_shell *shell)
+void	delete_dq(t_shell *shell, int q)
 {
 	int	i;
+	int	j;
 
 	i = -1;
+	j = q;
+	while (q > 1)
+	{
+		if (is_separator(shell->lst.input[++i]) == -1)
+		{
+			shell->lst.input[i] = ' ';
+			q--;
+		}
+	}
+	shell->lst.input[i] = 39;
+	i++;
 	while (shell->lst.input[++i])
 	{
-		if (is_sep(shell->lst.input[i]) == 2)
-			shell->lst.input[i] = ' ';
+		if (is_separator(shell->lst.input[i]) == -1)
+		{
+			shell->lst.input[i] = 39;
+			i++;
+			while (j > 1)
+			{
+				shell->lst.input[i] = ' ';
+				j--;
+				i++;
+			}
+			break ;
+		}
 	}
 }
 
-void	delete_sq(t_shell *shell)
+void	delete_sq(t_shell *shell, int q)
 {
 	int	i;
+	int	j;
 
 	i = -1;
+	j = q;
+	while (q > 1)
+	{
+		if (is_separator(shell->lst.input[++i]) == -1)
+		{
+			shell->lst.input[i] = ' ';
+			q--;
+		}
+	}
+	shell->lst.input[i] = 34;
+	i++;
 	while (shell->lst.input[++i])
 	{
-		if (is_sep(shell->lst.input[i]) == 3)
+		if (is_separator(shell->lst.input[i]) == -1)
+		{
+			shell->lst.input[i] = 34;
+			i++;
+			while (j > 1)
+			{
+				shell->lst.input[i] = ' ';
+				j--;
+				i++;
+			}
+			break ;
+		}
+	}
+}
+
+void	delete_sdq(t_shell *shell, int q)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = q;
+	while (q > 1)
+	{
+		if (is_separator(shell->lst.input[++i]) == -1)
+		{
 			shell->lst.input[i] = ' ';
+			q--;
+		}
+	}
+	i++;
+	while (shell->lst.input[++i])
+	{
+		if (is_separator(shell->lst.input[i]) == -1)
+		{
+			i++;
+			while (j > 1)
+			{
+				shell->lst.input[i] = ' ';
+				j--;
+				i++;
+			}
+			break ;
+		}
 	}
 }
 
@@ -110,27 +188,19 @@ int	clean_quote(t_shell *shell)
 	q = d + s;
 	if ((q % 2) == 0)
 	{
-		if ((d % 2) == 0)
-		{
-			delete_dq(shell);
-			return (3);
-		}
-		else
-		{
-			delete_sq(shell);
-			return (3);
-		}
+		delete_sdq(shell, q);
+		return (3);
 	}
 	else
 	{
 		if ((d % 2) == 0)
 		{
-			delete_dq(shell);
+			delete_dq(shell, q);
 			return (4);
 		}
 		else
 		{
-			delete_sq(shell);
+			delete_sq(shell, q);
 			return (4);
 		}
 	}
