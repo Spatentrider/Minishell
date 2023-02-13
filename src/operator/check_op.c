@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/07 14:30:44 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 11:45:51 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ int	check_operator(t_shell *shell)
 	// if (shell->lst.redirection[1] != NULL)
 	// 	redirection();
 	shell->lst.expansion = split_executor(shell->lst.split[0]);
-	while (shell->lst.expansion[++i])
+	if (shell->lst.expansion)
 	{
-		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
-			expansion(shell->lst.expansion[i], shell->env.current);
+		while (shell->lst.expansion[++i])
+		{
+			if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
+				expansion(shell->lst.expansion[i], shell->env.current);
+		}
 	}
 	executor(shell);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 11:31:38 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 11:59:50 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	int		i;
-	char	buf[1];
+	// int		i;
+	// char	buf[1];
 
 	(void)argv;
 	g_exit = 0;
@@ -88,10 +88,9 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{	
 		shell.lst.input = readline("minishell: ");
-		i = read(STDIN_FILENO, buf, 1);
-		if (i == 0) 
+		if (!shell.lst.input) 
 		{
-      		printf("\nExiting...\n");
+      		printf("Exiting...\n");
       		exit(0);
     	}
 		shell.lst.split = split_cmd(shell.lst.input);
