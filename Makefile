@@ -26,6 +26,8 @@ SRC_OPERATOR			=	src/operator/check_op.c
 
 SRC_PARSE				=	src/parse/parse.c
 
+SRC_SIGNALS				=	src/signals/signals.c
+
 SRC_SPLIT				=	src/split/split_executor.c \
 								src/split/split_parse_quote.c \
 								src/split/split_parse_utils.c \
@@ -48,7 +50,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_GET_ENV:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_OPERATOR:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o})
+						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o}) 
 
 OBJS_DIR			= objs
 

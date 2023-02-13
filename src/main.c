@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldi-masc <ldi-masc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/09 15:58:24 by ldi-masc         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:31:38 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
-
-void signal_handler(int sig)
-{
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	(void)sig;
-}
 
 /**
  * @brief function that takes the structure of structures to be freed,
@@ -84,7 +75,8 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	// int		i;
+	int		i;
+	char	buf[1];
 
 	(void)argv;
 	g_exit = 0;
@@ -94,8 +86,14 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT,SIG_IGN);
 	signal(SIGINT,signal_handler);
 	while (1)
-	{
+	{	
 		shell.lst.input = readline("minishell: ");
+		i = read(STDIN_FILENO, buf, 1);
+		if (i == 0) 
+		{
+      		printf("\nExiting...\n");
+      		exit(0);
+    	}
 		shell.lst.split = split_cmd(shell.lst.input);
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);

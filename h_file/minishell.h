@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 15:49:33 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 10:52:35 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <dirent.h>
+# include <termios.h>
 # include "../readline/readline.h"
 # include "../readline/history.h"
 # include "../libft/h_file/libft.h"
 # include "../src/src.h"
+
+#define BUFSIZE 100
 
 int	g_exit;
 
