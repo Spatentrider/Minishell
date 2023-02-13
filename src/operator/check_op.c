@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 17:43:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 12:17:28 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,31 @@ void	expansion(char *expansion, char **current)
 int	check_operator(t_shell *shell)
 {
 	int	i;
+	int	q;
 	int	c;
 
 	i = -1;
-	shell->lst.redirection = split_redirection(shell->lst.input);
-	c = check_red(shell->lst.input);
-	if (c != 0)
-		redirection(shell->lst.redirection, c, shell);
-	shell->lst.expansion = split_executor(shell->lst.split[0]);
-	while (shell->lst.expansion[++i])
+	q = -1;
+	q = clean_quote(shell);
+	if (q == 0)
+		executor(shell);
+	else
 	{
-		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
-			expansion(shell->lst.expansion[i], shell->env.current);
+		shell->lst.redirection = split_redirection(shell->lst.input);
+		c = check_red(shell->lst.input);
+		if (c != 0)
+		{
+			if ((q % 2) == 0)
+				redirection(shell->lst.redirection, c, shell);
+		}
+		shell->lst.expansion = split_executor(shell->lst.split[0]);
+		while (shell->lst.expansion[++i])
+		{
+			if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
+				expansion(shell->lst.expansion[i], shell->env.current);
+			executor(shell);
+		}
 	}
-	delete_op(shell);
-	executor(shell);
 	return (0);
 }
 

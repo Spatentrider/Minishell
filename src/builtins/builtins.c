@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/09 17:40:41 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 12:00:25 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	check_file(t_shell *shell)
 
 int	executor(t_shell *shell)
 {
-	shell->lst.executor = split_executor(shell->lst.input);
-	check_file(shell);
+	shell->lst.executor = ft_split(shell->lst.input, ' ');
+	// check_file(shell);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)
