@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 12:17:28 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 16:02:26 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	redirection(char **redirection, int c, t_shell *shell)
 {
-	shell->lst.file = split_executor(redirection[1]);
+	shell->lst.file = ft_split(redirection[1], ' ');
 	if (c == 1)
 		red_out(shell->lst.file[0]);
 	else if (c == 2)
@@ -88,24 +88,25 @@ int	check_operator(t_shell *shell)
 	i = -1;
 	q = -1;
 	q = clean_quote(shell);
-	if (q == 0)
+	printf("q = %d\n", q);
+	if (q == 0 || q == 4)
 		executor(shell);
-	else
+	else if (q == 1 || q == 3)
 	{
-		shell->lst.redirection = split_redirection(shell->lst.input);
 		c = check_red(shell->lst.input);
-		if (c != 0)
+		if (c > 0)
 		{
-			if ((q % 2) == 0)
-				redirection(shell->lst.redirection, c, shell);
+			shell->lst.redirection = split_redirection(shell->lst.input);
+			redirection(shell->lst.redirection, c, shell);
 		}
 		shell->lst.expansion = split_executor(shell->lst.split[0]);
 		while (shell->lst.expansion[++i])
 		{
 			if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
 				expansion(shell->lst.expansion[i], shell->env.current);
-			executor(shell);
 		}
+		delete_op(shell);
+		executor(shell);
 	}
 	return (0);
 }

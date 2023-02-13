@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/09 17:43:09 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 15:47:18 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell.lst.input = readline("minishell: ");
 		shell.lst.split = split_cmd(shell.lst.input);
+		shell.lst.redirection = NULL;
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);

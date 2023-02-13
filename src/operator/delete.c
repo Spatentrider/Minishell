@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 12:20:50 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 16:01:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,30 @@ void	delete_qt(t_shell *shell)
 	}
 }
 
+void	delete_dq(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (shell->lst.input[++i])
+	{
+		if (is_sep(shell->lst.input[i]) == 2)
+			shell->lst.input[i] = ' ';
+	}
+}
+
+void	delete_sq(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (shell->lst.input[++i])
+	{
+		if (is_sep(shell->lst.input[i]) == 3)
+			shell->lst.input[i] = ' ';
+	}
+}
+
 int	clean_quote(t_shell *shell)
 {
 	int	i;
@@ -52,16 +76,10 @@ int	clean_quote(t_shell *shell)
 		{
 			while (is_sep(shell->lst.input[i]) > 1)
 			{
-				while (is_sep(shell->lst.input[i]) == 2)
-				{
+				if (is_sep(shell->lst.input[i]) == 2)
 					d++;
-					i++;
-				}
-				while (is_sep(shell->lst.input[i]) == 3)
-				{
+				if (is_sep(shell->lst.input[i]) == 3)
 					s++;
-					i++;
-				}
 				i++;
 			}
 			break ;
@@ -70,18 +88,52 @@ int	clean_quote(t_shell *shell)
 	if (d > 0)
 	{
 		if (s == 0)
+		{
 			delete_qt(shell);
-		return (0);
+			if ((d % 2) == 0)
+				return (1);
+			else
+				return (0);
+		}
 	}
 	if (s > 0)
 	{
 		if (d == 0)
+		{
 			delete_qt(shell);
-		return (0);
+			if ((s % 2) == 0)
+				return (1);
+			else
+				return (0);
+		}
 	}
 	q = d + s;
-	
-	return (q);
+	if ((q % 2) == 0)
+	{
+		if ((d % 2) == 0)
+		{
+			delete_dq(shell);
+			return (3);
+		}
+		else
+		{
+			delete_sq(shell);
+			return (3);
+		}
+	}
+	else
+	{
+		if ((d % 2) == 0)
+		{
+			delete_dq(shell);
+			return (4);
+		}
+		else
+		{
+			delete_sq(shell);
+			return (4);
+		}
+	}
 }
 
 void	delete_op(t_shell *shell)
