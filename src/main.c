@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 16:30:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/13 12:03:34 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,22 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	// int		i;
 
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGINT,signal_handler);
 	while (1)
-	{
+	{	
 		shell.lst.input = readline("minishell: ");
+		if (!shell.lst.input) 
+		{
+      		printf("Exiting...\n");
+      		exit(0);
+    	}
 		shell.lst.split = split_cmd(shell.lst.input);
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
