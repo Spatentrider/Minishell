@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 11:59:50 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 12:03:34 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	check_error_cod(t_shell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	// int		i;
-	// char	buf[1];
 
 	(void)argv;
 	g_exit = 0;
