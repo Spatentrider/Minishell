@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 11:45:51 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 16:54:48 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
+
+void	redirection(char **redirection, int c, t_shell *shell)
+{
+	shell->lst.file = ft_split(redirection[1], ' ');
+	if (c == 1)
+		red_out(shell->lst.file[0]);
+	else if (c == 2)
+		red_inp(shell->lst.file[0]);
+	else if (c == 3)
+		append(shell->lst.file[0]);
+	else if (c == 4)
+		here_doc(shell->lst.file[0], shell);
+}
+
+int	check_red(char *input)
+{
+	int	i;
+	int	c;
+
+	i = -1;
+	c = 0;
+	while (input[++i])
+	{
+		if (input[i] == '<' && input[i + 1] == '<')
+		{
+			c = 4;
+			break ;
+		}
+		else if (input[i] == '>' && input[i + 1] == '>')
+		{
+			c = 3;
+			break ;
+		}
+		else if (input[i] == '<')
+			c = 2;
+		else if (input[i] == '>')
+			c = 1;
+	}
+	return (c);
+}
 
 void	expansion(char *expansion, char **current)
 {
@@ -33,7 +73,7 @@ void	expansion(char *expansion, char **current)
 		{
 			j = -1;
 			while (current[i][++pos])
-				expansion [++j] = current[i][pos];
+				expansion[++j] = current[i][pos];
 			expansion[++j] = '\0';
 		}
 	}
@@ -41,24 +81,35 @@ void	expansion(char *expansion, char **current)
 
 int	check_operator(t_shell *shell)
 {
-	int		i;
+	int	i;
+	int	q;
+	int	c;
 
 	i = -1;
-	// shell->lst.pipe = split_pipe(shell->lst.input);
-	// if (shell->lst.pipe[1] != NULL)
-	// 	ft_pipe();
-	// shell->lst.redirection = split_redirection(shell->lst.input);
-	// if (shell->lst.redirection[1] != NULL)
-	// 	redirection();
-	shell->lst.expansion = split_executor(shell->lst.split[0]);
-	if (shell->lst.expansion)
+	q = -1;
+	q = clean_quote(shell);
+	if (q == 0 || q == 3)
+		executor(shell);
+	else if (q == 1 || q == 4)
 	{
+		c = check_red(shell->lst.input);
+		if (c > 0)
+		{
+			shell->lst.redirection = split_redirection(shell->lst.input);
+			redirection(shell->lst.redirection, c, shell);
+		}
+		shell->lst.expansion = split_executor(shell->lst.split[0]);
 		while (shell->lst.expansion[++i])
 		{
 			if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
 				expansion(shell->lst.expansion[i], shell->env.current);
 		}
+		delete_op(shell);
+		executor(shell);
 	}
-	executor(shell);
 	return (0);
 }
+
+// shell->lst.pipe = split_pipe(shell->lst.input);
+// if (shell->lst.pipe[1] != NULL)
+// 	ft_pipe();

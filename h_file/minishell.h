@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 10:52:35 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 16:54:31 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ typedef struct s_env
 
 typedef struct s_lst
 {
-	char			*input;
-	char			**split;
-	char			**error;
-	char			**executor;
-	char			**pipe;
-	char			**redirection;
-	char			**expansion;
+	char	*input;
+	char	*doc;
+	char	**split;
+	char	**error;
+	char	**executor;
+	char	**pipe;
+	char	**redirection;
+	char	**file;
+	char	**expansion;
 }					t_lst;
 
 typedef struct s_cd

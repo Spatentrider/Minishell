@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:44:30 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/09 15:29:48 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:59:55 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	ft_write_split(char **split, char *str, char c)
 			w++;
 		}
 	}
+	split[w] = NULL;
 	return (1);
 }
 

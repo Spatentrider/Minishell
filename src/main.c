@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 12:03:34 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/02/13 16:55:31 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
+
+void	free_struct2(t_shell *shell, int i)
+{
+	i = -1;
+	while (shell->exp.sort_env[++i])
+	{
+		free(shell->exp.sort_env[i]);
+		shell->exp.sort_env[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.executor[++i])
+	{
+		free(shell->lst.executor[i]);
+		shell->lst.executor[i] = NULL;
+	}
+	i = -1;
+	while (shell->lst.expansion[++i])
+	{
+		free(shell->lst.expansion[i]);
+		shell->lst.expansion[i] = NULL;
+	}
+}
 
 /**
  * @brief function that takes the structure of structures to be freed,
@@ -25,13 +47,20 @@ void	free_struct(t_shell *shell)
 
 	i = -1;
 	while (shell->env.current[++i])
+	{
 		free(shell->env.current[i]);
+		shell->env.current[i] = NULL;
+	}
 	free(shell->env.current);
 	free(shell->lst.input);
 	i = -1;
 	while (shell->lst.split[++i])
+	{
 		free(shell->lst.split[i]);
+		shell->lst.split[i] = NULL;
+	}
 	free(shell->lst.split);
+	free_struct2(shell, i);
 }
 
 int	check_error_cod(t_shell *shell)
@@ -92,14 +121,13 @@ int	main(int argc, char **argv, char **envp)
       		exit(0);
     	}
 		shell.lst.split = split_cmd(shell.lst.input);
+		shell.lst.redirection = NULL;
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
 		if (g_exit == 0)
 			check_operator(&shell);
-		// i = -1;
-		// while (shell.lst.split[++i])
-		// 	printf("%s\n", shell.lst.split[i]);
+		dup2(i, STDOUT_FILENO);
 	}
 	return (0);
 }
