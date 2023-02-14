@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 16:54:48 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 16:51:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_red(char *input)
 	return (c);
 }
 
-void	expansion(char *expansion, char **current)
+void	expansion(t_shell *shell, int p)
 {
 	int		i;
 	int		j;
@@ -62,20 +62,28 @@ void	expansion(char *expansion, char **current)
 	i = -1;
 	j = 0;
 	str = (char *)malloc(sizeof(char) * 100);
-	while (expansion[++j])
-		str[++i] = expansion[j];
+	while (shell->lst.expansion[p][++j])
+		str[++i] = shell->lst.expansion[p][j];
 	str[++i] = '\0';
 	i = -1;
-	while (current[++i])
+	while (shell->env.current[++i])
 	{
-		pos = ft_strchrp(current[i], '=');
-		if (ft_strncmp(current[i], str, pos) == 0)
-		{
-			j = -1;
-			while (current[i][++pos])
-				expansion[++j] = current[i][pos];
-			expansion[++j] = '\0';
-		}
+		pos = ft_strchrp(shell->env.current[i], '=');
+		if (ft_strncmp(shell->env.current[i], str, pos) == 0)
+			change_word(shell, i, pos);
+	}
+}
+
+void	control_exp(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	shell->lst.expansion = split_executor(shell->lst.split[0]);
+	while (shell->lst.expansion[++i])
+	{
+		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
+			expansion(shell, i);
 	}
 }
 
@@ -87,7 +95,8 @@ int	check_operator(t_shell *shell)
 
 	i = -1;
 	q = -1;
-	q = clean_quote(shell);
+	control_exp(shell);
+	q = clean_quote(shell, i);
 	if (q == 0 || q == 3)
 		executor(shell);
 	else if (q == 1 || q == 4)
@@ -97,12 +106,6 @@ int	check_operator(t_shell *shell)
 		{
 			shell->lst.redirection = split_redirection(shell->lst.input);
 			redirection(shell->lst.redirection, c, shell);
-		}
-		shell->lst.expansion = split_executor(shell->lst.split[0]);
-		while (shell->lst.expansion[++i])
-		{
-			if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
-				expansion(shell->lst.expansion[i], shell->env.current);
 		}
 		delete_op(shell);
 		executor(shell);

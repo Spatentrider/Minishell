@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/02/14 16:10:20 by mich             ###   ########.fr       */
+/*   Created: 2023/02/14 16:35:40 by mich              #+#    #+#             */
+/*   Updated: 2023/02/14 16:50:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signals.h"
+#include "operator.h"
 
-void	signal_handler(int sig)
+void	change_word(t_shell *shell, int i, int pos)
 {
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	(void)sig;
-}
+	int	j;
 
-// void handler_quit(int sig)
-// {
-// 	printf("Exit");
-// 	exit(0);
-// }
+	j = -1;
+	while (shell->lst.input[++j] != '$')
+		;
+	while (shell->env.current[i][++pos])
+	{
+		shell->lst.input[j] = shell->env.current[i][++pos];
+		j++;
+	}
+	while (shell->lst.input[++j] != ' ' || shell->lst.input[++j] != '\0')
+		shell->lst.input[j] = ' ';
+}

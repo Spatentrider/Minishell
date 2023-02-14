@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 16:54:31 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 16:12:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "../libft/h_file/libft.h"
 # include "../src/src.h"
 
-#define BUFSIZE 100
+# define BUFSIZE 100
 
 int	g_exit;
 
