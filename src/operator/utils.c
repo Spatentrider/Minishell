@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:35:40 by mich              #+#    #+#             */
-/*   Updated: 2023/02/14 16:50:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 17:23:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	change_word(t_shell *shell, int i, int pos)
 		;
 	while (shell->env.current[i][++pos])
 	{
-		shell->lst.input[j] = shell->env.current[i][++pos];
+		shell->lst.input[j] = shell->env.current[i][pos];
 		j++;
 	}
-	while (shell->lst.input[++j] != ' ' || shell->lst.input[++j] != '\0')
-		shell->lst.input[j] = ' ';
+	shell->lst.input[j] = ' ';
 }

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 17:08:47 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 17:36:06 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ int	check_error_cod(t_shell *shell)
 	return (g_exit);
 }
 
+void	ctrl_d(t_shell *shell)
+{
+	if (!shell->lst.input)
+	{
+		printf("Exiting...\n");
+		exit(0);
+	}
+}
+
 /**
  * @brief the start of the program that checks for errors,
  * saves the enviroment in a list and sets up a new prompt
@@ -117,17 +126,12 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{	
 		shell.lst.input = readline("minishell: ");
-		if (!shell.lst.input)
-		{
-			printf("Exiting...\n");
-			exit(0);
-		}
+		ctrl_d(&shell);
 		shell.lst.split = split_cmd(shell.lst.input);
 		shell.lst.redirection = NULL;
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
-		bho();
 		if (g_exit == 0)
 			check_operator(&shell);
 		dup2(i, STDOUT_FILENO);
