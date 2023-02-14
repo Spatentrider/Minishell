@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 17:28:36 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 17:08:47 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strncmp(shell.lst.input, "", 1))
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
+		bho();
 		if (g_exit == 0)
 			check_operator(&shell);
 		dup2(i, STDOUT_FILENO);
