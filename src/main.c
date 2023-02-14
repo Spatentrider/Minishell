@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 17:55:05 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 18:04:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,16 @@ void	ctrl_d(t_shell *shell)
 	}
 }
 
+int	count_input(t_shell *shell)
+{
+	int	i;
+
+	i = -1;
+	while (shell->lst.input[++i])
+		;
+	return (i);
+}
+
 /**
  * @brief the start of the program that checks for errors,
  * saves the enviroment in a list and sets up a new prompt
@@ -125,7 +135,6 @@ int	main(int argc, char **argv, char **envp)
 	i = dup(STDOUT_FILENO);
 	while (1)
 	{	
-		shell.lst.input = NULL;
 		shell.lst.input = readline("minishell: ");
 		ctrl_d(&shell);
 		shell.lst.split = split_cmd(shell.lst.input);
@@ -134,7 +143,10 @@ int	main(int argc, char **argv, char **envp)
 			add_history(shell.lst.input);
 		g_exit = check_error_cod(&shell);
 		if (g_exit == 0 && ft_strncmp(shell.lst.input, "", 1) != 0)
-			check_operator(&shell);
+		{
+			if (shell.lst.input[0] != ' ')
+				check_operator(&shell);
+		}
 		dup2(i, STDOUT_FILENO);
 	}
 	return (0);
