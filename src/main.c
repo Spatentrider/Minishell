@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 18:04:16 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/14 18:08:18 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,24 @@ void	ctrl_d(t_shell *shell)
 	}
 }
 
-int	count_input(t_shell *shell)
+int	loop(t_shell *shell, int i)
 {
-	int	i;
-
-	i = -1;
-	while (shell->lst.input[++i])
-		;
-	return (i);
+	while (1)
+	{	
+		shell->lst.input = readline("minishell: ");
+		ctrl_d(shell);
+		shell->lst.split = split_cmd(shell->lst.input);
+		shell->lst.redirection = NULL;
+		if (ft_strncmp(shell->lst.input, "", 1))
+			add_history(shell->lst.input);
+		g_exit = check_error_cod(shell);
+		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+		{
+			if (shell->lst.input[0] != ' ')
+				check_operator(shell);
+		}
+		dup2(i, STDOUT_FILENO);
+	}
 }
 
 /**
@@ -133,21 +143,6 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 	i = dup(STDOUT_FILENO);
-	while (1)
-	{	
-		shell.lst.input = readline("minishell: ");
-		ctrl_d(&shell);
-		shell.lst.split = split_cmd(shell.lst.input);
-		shell.lst.redirection = NULL;
-		if (ft_strncmp(shell.lst.input, "", 1))
-			add_history(shell.lst.input);
-		g_exit = check_error_cod(&shell);
-		if (g_exit == 0 && ft_strncmp(shell.lst.input, "", 1) != 0)
-		{
-			if (shell.lst.input[0] != ' ')
-				check_operator(&shell);
-		}
-		dup2(i, STDOUT_FILENO);
-	}
+	loop(&shell, i);
 	return (0);
 }
