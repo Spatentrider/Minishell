@@ -38,13 +38,17 @@ int	ft_pipe(char **pip, t_shell *shell)
 	int	pid;
 	int	pid1;
 	int	i;
+	int k;
 
 	(void)pip;
+	i = -1;
+	k = ft_count_arraystr(pip);
 	i = dup(STDOUT_FILENO);
 	// j = dup(STDIN_FILENO);
 	if (pipe(fd) == -1)
 		exit(printf("Failure\n"));
 	pid = fork();
+	//primo processo figlio
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -52,12 +56,16 @@ int	ft_pipe(char **pip, t_shell *shell)
 		close(fd[1]);
 		// change_in(shell);
 		printf("bho\n");
+		if (k > 2)
+			fork
 		exit(EXIT_FAILURE);
 	}
+	//ritorno al processo padre
 	else
 	{
 		dup2(i, STDOUT_FILENO);
 		pid1 = fork();
+		//crea un altro processo figlio
 		if (pid1 == 0)
 		{
 			close(fd[1]);
@@ -66,6 +74,7 @@ int	ft_pipe(char **pip, t_shell *shell)
 			change_in(shell);
 			exit(EXIT_FAILURE);
 		}
+		//Ritorno al processo padre
 		else
 		{
 			close(fd[0]);
