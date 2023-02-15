@@ -52,6 +52,7 @@ int	ft_pipe(char **pip, t_shell *shell)
 		close(fd[1]);
 		// change_in(shell);
 		printf("bho\n");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -63,6 +64,7 @@ int	ft_pipe(char **pip, t_shell *shell)
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 			change_in(shell);
+			exit(EXIT_FAILURE);
 		}
 		else
 		{
