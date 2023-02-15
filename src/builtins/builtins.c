@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/13 15:47:34 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 14:56:21 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	check_file(t_shell *shell)
 	}
 }
 
+// control_exp(shell);
+
 int	executor(t_shell *shell)
 {
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
@@ -76,29 +78,3 @@ int	executor(t_shell *shell)
 		ft_unset (shell, shell->env.current);
 	return (0);
 }
-
-// int		i;
-// int		pid;
-// int		status;
-
-// i = -1;
-// else
-		// {
-		// 	pid = fork();
-		// 	if (pid == 0)
-		// 	{
-		// 		char *args[] = {shell->lst.executor[i], 
-				// shell->lst.executor[i + 1], NULL};
-		// 		execve("/bin/ls", args, NULL);
-		// 	}
-		// 	else
-		// 	{
-		// 		waitpid(pid, &status, 0);
-		// 		if (WIFEXITED(status))
-		// 		{
-		// 			printf("Il processo figlio ha terminato 
-				// con codice %d\n", WEXITSTATUS(status));
-		// 			break ;
-		// 		}
-		// 	}
-		// }

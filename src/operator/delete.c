@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 16:02:31 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 10:30:20 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	clean_quote(t_shell *shell, int i)
 	int	d;
 	int	s;
 
-	q = 0;
+	q = -1;
 	d = 0;
 	s = 0;
 	while (shell->lst.input[++i])
@@ -100,7 +100,8 @@ int	clean_quote(t_shell *shell, int i)
 			break ;
 		}
 	}
-	q = control_qt(q, d, s, shell);
+	if (q > 0 || d > 0 || s > 0)
+		q = control_qt(q, d, s, shell);
 	return (q);
 }
 

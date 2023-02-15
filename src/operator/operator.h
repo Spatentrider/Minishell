@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/02/14 16:50:35 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 10:21:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "../src.h"
 
 /*check_op.c*/
-void	redirection(char **redirection, int c, t_shell *shell);
-int		check_red(char *input);
+void	redirection(int c, t_shell *shell);
+void	check_red(char *input, t_shell *shell, int i);
 void	expansion(t_shell *shell, int p);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);

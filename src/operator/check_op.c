@@ -6,15 +6,16 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/14 17:30:19 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 11:05:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
 
-void	redirection(char **redirection, int c, t_shell *shell)
+void	redirection(int c, t_shell *shell)
 {
-	shell->lst.file = ft_split(redirection[1], ' ');
+	shell->lst.redirection = split_redirection(shell->lst.input);
+	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
 	if (c == 1)
 		red_out(shell->lst.file[0]);
 	else if (c == 2)
@@ -23,11 +24,12 @@ void	redirection(char **redirection, int c, t_shell *shell)
 		append(shell->lst.file[0]);
 	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
+	delete_op(shell);
+	executor(shell);
 }
 
-int	check_red(char *input)
+void	check_red(char *input, t_shell *shell, int i)
 {
-	int	i;
 	int	c;
 
 	i = -1;
@@ -49,7 +51,8 @@ int	check_red(char *input)
 		else if (input[i] == '>')
 			c = 1;
 	}
-	return (c);
+	if (c > 0)
+		redirection(c, shell);
 }
 
 void	expansion(t_shell *shell, int p)
@@ -91,28 +94,16 @@ int	check_operator(t_shell *shell)
 {
 	int	i;
 	int	q;
-	int	c;
 
 	i = -1;
 	q = -1;
-	control_exp(shell);
 	q = clean_quote(shell, i);
 	if (q == 0 || q == 3)
 		executor(shell);
-	else if (q == 1 || q == 4)
+	else if (q == 1 || q == 4 || q == -1)
 	{
-		c = check_red(shell->lst.input);
-		if (c > 0)
-		{
-			shell->lst.redirection = split_redirection(shell->lst.input);
-			redirection(shell->lst.redirection, c, shell);
-		}
-		delete_op(shell);
-		executor(shell);
+		if (!control_pipe(shell))
+			check_red(shell->lst.input, shell, i);
 	}
 	return (0);
 }
-
-// shell->lst.pipe = split_pipe(shell->lst.input);
-// if (shell->lst.pipe[1] != NULL)
-// 	ft_pipe();

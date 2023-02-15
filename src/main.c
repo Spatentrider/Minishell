@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 18:11:23 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 15:36:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ int	check_error_cod(t_shell *shell)
 void	ctrl_d(t_shell *shell)
 {
 	if (!shell->lst.input)
-	{
-		printf("Exiting...\n");
-		exit(0);
-	}
+		exit(printf("Exiting...\n"));
 }
 
-int	loop(t_shell *shell, int i)
+int	loop(t_shell *shell, int i, int j)
 {
 	while (1)
 	{	
@@ -61,6 +58,7 @@ int	loop(t_shell *shell, int i)
 				check_operator(shell);
 		}
 		dup2(i, STDOUT_FILENO);
+		dup2(j, STDIN_FILENO);
 	}
 }
 
@@ -83,15 +81,17 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	int		i;
+	int		j;
 
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
+	i = dup(STDOUT_FILENO);
+	j = dup(STDIN_FILENO);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
-	i = dup(STDOUT_FILENO);
-	loop(&shell, i);
+	loop(&shell, i, j);
 	return (0);
 }
