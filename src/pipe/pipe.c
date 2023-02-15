@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/02/15 15:51:32 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 16:21:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@ void	change_in(t_shell *shell)
 	int	j;
 
 	i = 0;
+	while (shell->lst.input[++i])
+		shell->lst.input[i] = ' ';
+	i = 0;
+	j = -1;
 	while (shell->lst.pipe[1][++j])
 	{
 		shell->lst.input[i] = shell->lst.pipe[1][j];
 		i++;
 	}
+	shell->lst.input[i] = '\0';
 	executor(shell);
 }
 
@@ -32,8 +37,11 @@ int	ft_pipe(char **pip, t_shell *shell)
 	int	status;
 	int	pid;
 	int	pid1;
+	int	i;
 
 	(void)pip;
+	i = dup(STDOUT_FILENO);
+	// j = dup(STDIN_FILENO);
 	if (pipe(fd) == -1)
 		exit(printf("Failure\n"));
 	pid = fork();
@@ -47,6 +55,7 @@ int	ft_pipe(char **pip, t_shell *shell)
 	}
 	else
 	{
+		dup2(i, STDOUT_FILENO);
 		pid1 = fork();
 		if (pid1 == 0)
 		{
@@ -61,7 +70,7 @@ int	ft_pipe(char **pip, t_shell *shell)
 			close(fd[1]);
 			waitpid(pid, &status, 0);
 			if (WIFEXITED(status))
-				printf("ciao\n");
+				printf("fiuto\n");
 			waitpid(pid1, &status, 0);
 			if (WIFEXITED(status))
 				printf("pippo\n");
@@ -79,7 +88,7 @@ int	control_pipe(t_shell *shell)
 	j = 0;
 	while (shell->lst.input[++i])
 	{
-		if (is_pipe(shell->lst.input[i]) == 0)
+		if (is_pipe(shell->lst.input[i]) == 1)
 		{
 			j = 1;
 			break ;

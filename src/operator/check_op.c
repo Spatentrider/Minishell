@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/15 11:05:24 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/15 16:16:40 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	check_operator(t_shell *shell)
 	{
 		if (!control_pipe(shell))
 			check_red(shell->lst.input, shell, i);
+		executor(shell);
 	}
 	return (0);
 }
