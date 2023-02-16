@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/14 18:11:41 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/16 14:50:12 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include "operator/operator.h"
 # include "signals/signals.h"
 # include "pipe/pipe.h"
+# include "commands/commands.h"
 
 #endif

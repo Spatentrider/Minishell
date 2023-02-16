@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/02/15 16:10:51 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/16 14:45:35 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int	executor(t_shell *shell)
 		ft_export(shell);
 	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
 		ft_unset (shell, shell->env.current);
+	else
+		commands(shell);
 	return (0);
 }
