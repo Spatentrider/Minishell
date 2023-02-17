@@ -31,89 +31,50 @@ void	change_in(t_shell *shell)
 	executor(shell);
 }
 
-// int	ft_pipe(char **pip, t_shell *shell)
-// {
-// 	int	fd[2];
-// 	int	status;
-// 	int	pid;
-// 	int	pid1;
-// 	int	i;
-// 	int k;
+int process_pipe(t_shell *shell, int *pid, int c)
+{
+	int fd[2];
 
-// 	(void)pip;
-// 	i = -1;
-// 	k = ft_count_arraystr(pip);
-// 	i = dup(STDOUT_FILENO);
-// 	// j = dup(STDIN_FILENO);
-// 	if (pipe(fd) == -1)
-// 		exit(printf("Failure\n"));
-// 	pid = fork();
-// 	//primo processo figlio
-// 	if (pid == 0)
-// 	{
-// 		close(fd[0]);
-// 		dup2(fd[1], STDOUT_FILENO);
-// 		close(fd[1]);
-// 		// change_in(shell);
-// 		printf("bho\n");
-// 		if (k > 2)
-// 			fork
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	//ritorno al processo padre
-// 	else
-// 	{
-// 		dup2(i, STDOUT_FILENO);
-// 		pid1 = fork();
-// 		//crea un altro processo figlio
-// 		if (pid1 == 0)
-// 		{
-// 			close(fd[1]);
-// 			dup2(fd[0], STDIN_FILENO);
-// 			close(fd[0]);
-// 			change_in(shell);
-// 			exit(EXIT_FAILURE);
-// 		}
-// 		//Ritorno al processo padre
-// 		else
-// 		{
-// 			close(fd[0]);
-// 			close(fd[1]);
-// 			waitpid(pid, &status, 0);
-// 			if (WIFEXITED(status))
-// 				printf("fiuto\n");
-// 			waitpid(pid1, &status, 0);
-// 			if (WIFEXITED(status))
-// 				printf("pippo\n");
-// 		}
-// 	}
-// 	return (0);
-// }
+	pipe(fd);
+	pid[c] = fork();
+	dup2(fd[0], STDIN_FILENO);
+	executor(shell);
+	close(fd[1]);
+	close(fd[0]);
+	return (1);
+}
 
 int	control_pipe(t_shell *shell)
 {
 	int	i;
-	int	j;
-	int	c;
+	int	pipe_counter;
+	int *pid;
+	int c;
+	int status;
 
 	i = -1;
-	j = 0;
 	c = 0;
+	status = 0;
+	pipe_counter = 0;
 	while (shell->lst.input[++i])
 	{
 		if (is_pipe(shell->lst.input[i]) == 1)
-		{
-			j = 1;
-			c++;
-		}
+			pipe_counter++;
 	}
-	if (j == 1)
+	if (pipe_counter > 0)
 	{
 		shell->lst.pipe = split_pipe(shell->lst.input);
+		pid = (int *) malloc(sizeof(int) * pipe_counter);
+		while (c < pipe_counter)
+		{
+			status = process_pipe(shell,pid,c);
+			c++;
+		}
 		// if (c == 1)
 		// 	ft_pipe(shell->lst.pipe, shell);
 		// else
 		// 	cazzi_e_mazzi(shell->lst.pipe, shell);
 	}
+	(void)status;
 	return (0);
 }

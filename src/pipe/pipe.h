@@ -16,5 +16,6 @@
 # include "../src.h"
 
 int	control_pipe(t_shell *shell);
+int process_pipe(t_shell *shell, int *pid, int c);
 
 #endif
