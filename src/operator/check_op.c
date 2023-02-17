@@ -28,7 +28,7 @@ void	redirection(int c, t_shell *shell)
 	executor(shell);
 }
 
-void	check_red(char *input, t_shell *shell, int i)
+int	check_red(char *input, t_shell *shell, int i)
 {
 	int	c;
 
@@ -53,6 +53,7 @@ void	check_red(char *input, t_shell *shell, int i)
 	}
 	if (c > 0)
 		redirection(c, shell);
+	return(c);
 }
 
 void	expansion(t_shell *shell, int p)
@@ -104,7 +105,8 @@ int	check_operator(t_shell *shell)
 	{
 		if (!control_pipe(shell))
 			check_red(shell->lst.input, shell, i);
-		executor(shell);
+		else	
+			executor(shell);
 	}
 	return (0);
 }

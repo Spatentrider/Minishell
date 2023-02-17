@@ -17,7 +17,7 @@
 
 /*check_op.c*/
 void	redirection(int c, t_shell *shell);
-void	check_red(char *input, t_shell *shell, int i);
+int		check_red(char *input, t_shell *shell, int i);
 void	expansion(t_shell *shell, int p);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);
