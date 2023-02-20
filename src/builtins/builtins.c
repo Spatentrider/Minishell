@@ -71,7 +71,7 @@ int	executor(t_shell *shell)
 	else if (strncmp(shell->lst.executor[0], "env", 4) == 0)
 		ft_env(shell->env.current);
 	else if (strncmp(shell->lst.executor[0], "exit", 5) == 0)
-		ft_exit(shell->env.current);
+		ft_exit(shell->env.current,shell);
 	else if (strncmp(shell->lst.executor[0], "export", 7) == 0)
 		ft_export(shell);
 	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
