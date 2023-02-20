@@ -6,16 +6,16 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 12:03:25 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/20 15:47:35 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commands.h"
 
-int	commands(t_shell *shell)
+int	ft_fork(t_shell *shell)
 {
-	int		status;
-	pid_t	pid;
+	int	pid;
+	int	status;
 
 	pid = fork();
 	if (pid == 0)
@@ -37,6 +37,53 @@ int	commands(t_shell *shell)
 	{
 		perror("fork failed");
 		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
+
+int	ab_path(t_shell	*shell)
+{
+	int	pid;
+	int	status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
+		{
+			perror("execve failed");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			return (0);
+	}
+	else
+	{
+		perror("fork failed");
+		exit(EXIT_FAILURE);
+	}
+	return (0);
+}
+
+int	commands(t_shell *shell)
+{
+	int		c;
+
+	c = -1;
+	if (ft_strncmp("/bin/", shell->lst.executor[0], 5) == 0)
+	{
+		ab_path(shell);
+		return (1);
+	}
+	while (shell->env.current[++c])
+	{
+		if (ft_strncmp(shell->env.save, shell->env.current[c], \
+			shell->env.i) == 0)
+			ft_fork(shell);
 	}
 	return (1);
 }
