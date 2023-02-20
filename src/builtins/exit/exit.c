@@ -30,11 +30,15 @@ void	ft_exit(char **current, t_shell *shell)
 			j--;
 			j += '0';
 			current[i][6] = j;
-			while(isdigit(shell->lst.executor[1][++k]) == 0)
+			if(shell->lst.executor[1] != NULL)
 			{
-				printf("exit\n");
-				exit(printf("minishell: exit: %s: numeric argument required\n", shell->lst.executor[1]));
+				while(isdigit(shell->lst.executor[1][++k]) == 0)
+				{
+					printf("exit\n");
+					exit(printf("minishell: exit: %s: numeric argument required\n", shell->lst.executor[1]));
+				}
 			}
+			exit(printf("exit\n"));
 		}
 	}
 }
