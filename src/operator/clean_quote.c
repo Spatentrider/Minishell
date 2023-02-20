@@ -26,10 +26,11 @@ void	delete_qt(t_shell *shell)
 
 int	clean_q(t_shell *shell, int q, int i)
 {
-	while (q > 1)
+	while (q >= 1)
 	{
 		if (is_separator(shell->lst.input[++i]) == -1)
 		{
+			printf("%d\n", q);
 			shell->lst.input[i] = ' ';
 			q--;
 		}
