@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 11:19:21 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/20 11:42:53 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	change_in(t_shell *shell, int c)
 	int	j;
 
 	i = 0;
-	printf("%d", c);
 	while (shell->lst.input[++i])
 		shell->lst.input[i] = ' ';
 	i = 0;
@@ -31,6 +30,24 @@ void	change_in(t_shell *shell, int c)
 	shell->lst.input[i] = '\0';
 }
 
+int	last_process(t_shell *shell, int c, int i)
+{
+	int	d;
+	int	fd[2];
+
+	d = 0;
+	pipe(fd);
+	dup2(fd[0], STDIN_FILENO);
+	c++;
+	change_in(shell, c);
+	d = check_red(shell->lst.input, shell, i);
+	if (d == 0)
+		executor(shell);
+	close(fd[0]);
+	close(fd[1]);
+	return (1);
+}
+
 int	process_pipe(t_shell *shell, int *pid, int c, int j)
 {
 	int	fd[2];
@@ -40,6 +57,11 @@ int	process_pipe(t_shell *shell, int *pid, int c, int j)
 	d = 0;
 	i = -1;
 	pipe(fd);
+	if (j == 1)
+	{
+		last_process(shell, c, i);
+		return (1);
+	}
 	pid[c] = fork();
 	if (!pid[c])
 	{
@@ -65,35 +87,14 @@ int	process_pipe(t_shell *shell, int *pid, int c, int j)
 	return (0);
 }
 
-int	last_process(t_shell *shell, int c, int i)
-{
-	int	d;
-	int	fd[2];
-
-	d = 0;
-	pipe(fd);
-	printf("%d", c);
-	sleep(5);
-	dup2(fd[0], STDIN_FILENO);
-	++c;
-	change_in(shell, c);
-	d = check_red(shell->lst.input, shell, i);
-	if (d == 0)
-		executor(shell);
-	close(fd[0]);
-	close(fd[1]);
-	return (1);
-}
-
 int	control_pipe(t_shell *shell)
 {
 	int	i;
 	int	j;
 	int	pipe_counter;
 	int	*pid;
-	int	c;
 	int	status;
-	int	copy;
+	int	c;
 
 	i = -1;
 	c = 0;
@@ -105,23 +106,19 @@ int	control_pipe(t_shell *shell)
 		if (is_pipe(shell->lst.input[i]) == 1)
 			pipe_counter++;
 	}
-	copy = dup(STDOUT_FILENO);
+	i = dup(STDOUT_FILENO);
 	if (pipe_counter > 0)
 	{
 		shell->lst.pipe = split_pipe(shell->lst.input);
 		pid = (int *) malloc(sizeof(int) * pipe_counter);
-		while (c < pipe_counter)
+		while (c < pipe_counter || j == 0)
 		{
 			if (c == pipe_counter - 1)
 				j = 1;
 			status = process_pipe(shell, pid, c, j);
-			if (j == 0)
 				c++;
-			printf("%d", c);
+			dup2(i, STDOUT_FILENO);
 		}
-		dup2(copy, STDOUT_FILENO);
-		printf("%d", c);
-		last_process(shell, c, i);
 	}
 	(void)status;
 	return (0);
