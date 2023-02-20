@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:09:25 by mich              #+#    #+#             */
-/*   Updated: 2023/02/02 14:48:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/02/20 15:04:02 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 /*echo.c*/
 void	short_echo(t_shell *shell);
-void	ft_echo(t_shell *shell);
+int		ft_echo(t_shell *shell);
 
 #endif
