@@ -18,6 +18,7 @@ void	change_in(t_shell *shell, int c)
 	int	j;
 
 	i = 0;
+	printf("%d", c);
 	while (shell->lst.input[++i])
 		shell->lst.input[i] = ' ';
 	i = 0;
@@ -110,12 +111,15 @@ int	control_pipe(t_shell *shell)
 		pid = (int *) malloc(sizeof(int) * pipe_counter);
 		while (c < pipe_counter)
 		{
-			if(c < (pipe_counter))
+			if(c == pipe_counter - 1)
 				j = 1;
 			status = process_pipe(shell, pid, c, j);
-			c++;
+			if(j == 0)
+				c++;
+			printf("%d", c);
 		}
 		dup2(copy, STDOUT_FILENO);
+		printf("%d", c);
 		last_process(shell, c, i);
 		//dup2(i, STDOUT_FILENO);
 		//status = ft_pipe(shell, pid, c);
