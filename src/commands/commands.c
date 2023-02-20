@@ -20,12 +20,14 @@ int	ft_fork(t_shell *shell)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, signal_handler2);
 		if (execve(ft_strjoin("/bin/", shell->lst.executor[0]), \
 			shell->lst.executor, NULL) == -1)
 		{
 			perror("execve failed");
 			exit(EXIT_FAILURE);
 		}
+		exit(0);
 	}
 	else if (pid > 0)
 	{

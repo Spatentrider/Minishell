@@ -16,5 +16,6 @@
 # include "../src.h"
 
 void	signal_handler(int sig);
+void signal_handler2(int sig);
 
 #endif

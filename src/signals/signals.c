@@ -21,8 +21,10 @@ void	signal_handler(int sig)
 	(void)sig;
 }
 
-// void handler_quit(int sig)
-// {
-// 	printf("Exit");
-// 	exit(0);
-// }
+void signal_handler2(int sig)
+{
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
