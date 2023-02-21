@@ -3,6 +3,7 @@
 
 # include "../src.h"
 
-int	commands(t_shell *shell);
+int		commands(t_shell *shell);
+void	change_shlvl(t_shell *shell);
 
 #endif

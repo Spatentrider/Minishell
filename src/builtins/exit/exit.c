@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 17:54:40 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/21 15:50:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,35 @@ void	nor_exit(t_shell *shell)
 	exit(printf("exit\n"));
 }
 
+void	reduce_shlvl(t_shell *shell)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*save;
+
+	i = -1;
+	j = 0;
+	k = 5;
+	save = (char *)malloc(sizeof(char) * 10);
+	while (shell->env.current[++i])
+	{
+		if (ft_strncmp("SHLVL=", shell->env.current[i], 6) == 0)
+		{
+			while (shell->env.current[i][++k])
+			{
+				save[j] = shell->env.current[i][k];
+				j++;
+			}
+			save[j] = '\0';
+			break ;
+		}
+	}
+	save[0]--;
+	shell->env.current[i] = ft_strjoin("SHLVL=", save);
+	printf("exit\n");
+}
+
 void	ft_exit(char **current, t_shell *shell)
 {
 	int		i;
@@ -41,12 +70,7 @@ void	ft_exit(char **current, t_shell *shell)
 	{
 		if (strncmp(current[i], "SHLVL=3", 7) == 0)
 			nor_exit(shell);
+		else if (strncmp(current[i], "SHLVL=", 6) == 0)
+			reduce_shlvl(shell);
 	}
 }
-
-// int		j;
-// j = -1;
-// j = current[i][6] - '0';
-// j--;
-// j += '0';
-// current[i][6] = j;

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/20 15:32:28 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/21 15:38:36 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	get_env(char **envp, t_shell *env_list)
 				;
 		}
 		env_list->env.current[c] = ft_strdup(envp[c]);
+		if (ft_strncmp("SHLVL=", envp[c], 6) == 0)
+			change_shlvl(env_list);
 		if (ft_strncmp("SHELL", envp[c], 5) == 0)
 			env_list->env.current[c] = "SHELL=minishell";
 	}
