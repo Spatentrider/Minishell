@@ -17,5 +17,5 @@
 
 /*exit.c*/
 void	ft_exit(char **current,t_shell *shell);
-
+void    inside_exit(t_shell *shell);
 #endif

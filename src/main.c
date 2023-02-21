@@ -38,7 +38,10 @@ int	check_error_cod(t_shell *shell)
 void	ctrl_d(t_shell *shell)
 {
 	if (!shell->lst.input)
-		exit(printf("Exiting...\n"));
+	{
+		printf("Exiting...\n");
+		exit(0);
+	}
 }
 
 int	loop(t_shell *shell, int i, int j)
