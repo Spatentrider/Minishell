@@ -18,16 +18,17 @@ int	ft_fork(t_shell *shell)
 	int	status;
 
 	pid = fork();
+	signal(SIGINT, signal_handler2);
 	if (pid == 0)
 	{
-		signal(SIGINT, signal_handler2);
 		if (execve(ft_strjoin("/bin/", shell->lst.executor[0]), \
 			shell->lst.executor, NULL) == -1)
 		{
 			perror("execve failed");
 			exit(EXIT_FAILURE);
 		}
-		exit(0);
+		if(g_exit == 500)
+			exit(0);
 	}
 	else if (pid > 0)
 	{
@@ -40,6 +41,7 @@ int	ft_fork(t_shell *shell)
 		perror("fork failed");
 		exit(EXIT_FAILURE);
 	}
+	signal(SIGINT, signal_handler);
 	return (0);
 }
 

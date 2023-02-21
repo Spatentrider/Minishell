@@ -21,10 +21,13 @@ void	signal_handler(int sig)
 	(void)sig;
 }
 
-void signal_handler2(int sig)
+void	signal_handler2(int sig)
 {
+	g_exit = 500;
 	printf("\n");
-	rl_on_new_line();
+	signal(SIGQUIT, SIG_IGN);
+	//rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	(void)sig;
 }
