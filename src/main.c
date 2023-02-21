@@ -22,13 +22,12 @@ int	check_error_cod(t_shell *shell)
 	{
 		if (ft_strncmp(shell->lst.error[i], "$?", 3) == 0)
 		{
-			printf("%d: command not found\n", g_exit);
+			printf("%d: command not found\n", shell->old_g_exit);
 			g_exit = parse(shell->lst.split);
 			return (g_exit);
 		}
 		else
 		{
-			g_exit = 0;
 			g_exit = parse(shell->lst.split);
 		}
 	}
@@ -62,6 +61,8 @@ int	loop(t_shell *shell, int i, int j)
 		}
 		dup2(i, STDOUT_FILENO);
 		dup2(j, STDIN_FILENO);
+		shell->old_g_exit = g_exit;
+		g_exit = 0;
 	}
 }
 

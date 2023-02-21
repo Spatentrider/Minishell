@@ -90,6 +90,7 @@ typedef struct s_shell
 	t_echo	echo;
 	t_exp	exp;
 	t_unset	unset;
+	int		old_g_exit;
 }				t_shell;
 
 #endif

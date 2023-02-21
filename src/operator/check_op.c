@@ -71,7 +71,7 @@ void	expansion(t_shell *shell, int p)
 	str[++i] = '\0';
 	i = -1;
 	while (shell->env.current[++i])
-	{
+	{		
 		pos = ft_strchrp(shell->env.current[i], '=');
 		if (ft_strncmp(shell->env.current[i], str, pos) == 0)
 			change_word(shell, i, pos);
