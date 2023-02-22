@@ -20,16 +20,7 @@ int	check_error_cod(t_shell *shell)
 	shell->lst.error = ft_split(shell->lst.input, ' ');
 	while (shell->lst.error[++i])
 	{
-		if (ft_strncmp(shell->lst.error[i], "$?", 3) == 0)
-		{
-			printf("%d: command not found\n", shell->old_g_exit);
-			g_exit = parse(shell->lst.split);
-			return (g_exit);
-		}
-		else
-		{
-			g_exit = parse(shell->lst.split);
-		}
+		g_exit = parse(shell->lst.split);
 	}
 	return (g_exit);
 }
@@ -84,18 +75,17 @@ int	loop(t_shell *shell, int i, int j)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	int		i;
-	int		j;
+
 
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
 		exit(printf("Error, there are too many argument!!"));
 	get_env(envp, &shell);
-	i = dup(STDOUT_FILENO);
-	j = dup(STDIN_FILENO);
+	shell.stdout = dup(STDOUT_FILENO);
+	shell.stdin = dup(STDIN_FILENO);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
-	loop(&shell, i, j);
+	loop(&shell, shell.stdout, shell.stdin);
 	return (0);
 }

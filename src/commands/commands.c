@@ -105,11 +105,33 @@ void	change_shlvl(t_shell *shell)
 int	commands(t_shell *shell)
 {
 	int		c;
+	int		pid;
+	int		status;
 
 	c = -1;
 	if (ft_strncmp("./minishell", shell->lst.executor[0], 12) == 0)
 	{
-		change_shlvl(shell);
+		pid = fork();
+		if (pid == 0)
+		{
+			change_shlvl(shell);
+			if (loop(shell, shell->stdout, shell->stdin) == -1)
+			{
+				perror("execve failed");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (pid > 0)
+		{	
+			waitpid(pid, &status, 0);
+			if (WIFEXITED(status))
+				return (0);
+		}
+		else
+		{
+		perror("fork failed");
+		exit(EXIT_FAILURE);
+		}
 		return (1);
 	}
 	if (ft_strncmp("/bin/", shell->lst.executor[0], 5) == 0)
@@ -127,4 +149,5 @@ int	commands(t_shell *shell)
 			ft_fork(shell);
 	}
 	return (1);
+	(void)pid;
 }

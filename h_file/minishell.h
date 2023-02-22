@@ -91,6 +91,8 @@ typedef struct s_shell
 	t_exp	exp;
 	t_unset	unset;
 	int		old_g_exit;
+	int		stdin;
+	int		stdout;
 }				t_shell;
 
 #endif

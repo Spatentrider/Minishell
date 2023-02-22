@@ -62,6 +62,11 @@ int	executor(t_shell *shell)
 {
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
+	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
+	{
+		printf("%d: command not found\n", shell->old_g_exit);
+		return (g_exit);
+	}
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)

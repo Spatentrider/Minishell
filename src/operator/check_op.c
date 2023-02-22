@@ -70,6 +70,10 @@ void	expansion(t_shell *shell, int p)
 		str[++i] = shell->lst.expansion[p][j];
 	str[++i] = '\0';
 	i = -1;
+	if (ft_strncmp(shell->lst.input, "$?", 2))
+	{
+		
+	}
 	while (shell->env.current[++i])
 	{		
 		pos = ft_strchrp(shell->env.current[i], '=');
