@@ -49,16 +49,16 @@ int	words(char *str)
 	int	w;
 
 	i = 0;
-	w = 0;
+	w = 1;
 	while (str[i] != '\0')
 	{
-		if (is_separator(str[i] == -1))
+		if (is_separator(str[i]) == -1)
 			w++;
-		if (is_separator(str[i] == 2))
+		if (is_separator(str[i]) == 2)
 			w++;
-		if (is_separator(str[i] == 3))
+		if (is_separator(str[i]) == 3)
 			w++;
-		if (is_separator(str[i] == 4))
+		if (is_separator(str[i]) == 4)
 			w++;
 		if (is_separator(str[i]) == 0
 			&& is_separator(str[i + 1]) == 2)
