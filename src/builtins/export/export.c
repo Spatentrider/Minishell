@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/02/23 15:34:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/23 15:40:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,20 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
+void	change_var(t_shell *shell)
+{
+	while (shell->env.current[++shell->exp.i])
+	{
+		shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
+		if (ft_strncmp(shell->env.current[shell->exp.i], \
+					shell->lst.executor[1], shell->exp.pos + 1) == 0)
+		{
+			shell->env.current[shell->exp.i] = shell->lst.executor[1];
+			shell->exp.j = 0;
+		}
+	}
+}
+
 void	ft_export(t_shell *shell)
 {
 	char	**str_save;
@@ -84,16 +98,7 @@ void	ft_export(t_shell *shell)
 	}
 	else
 	{
-		while (shell->env.current[++shell->exp.i])
-		{
-			shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
-			if (ft_strncmp(shell->env.current[shell->exp.i], \
-						shell->lst.executor[1], shell->exp.pos + 1) == 0)
-			{
-				shell->env.current[shell->exp.i] = shell->lst.executor[1];
-				shell->exp.j = 0;
-			}
-		}
+		change_var(shell);
 		if (shell->exp.j == -1)
 		{
 			shell->env.current[shell->exp.i] = shell->lst.executor[1];
