@@ -36,24 +36,41 @@ void	ctrl_d(t_shell *shell)
 
 int	loop(t_shell *shell, int i, int j)
 {
+	int k;
+	int p;
+
+	k = -1;
+	p = 0;
 	while (1)
 	{	
 		shell->lst.input = readline("minishell: ");
 		ctrl_d(shell);
-		shell->lst.split = split_cmd(shell->lst.input);
-		shell->lst.redirection = NULL;
-		if (ft_strncmp(shell->lst.input, "", 1))
-			add_history(shell->lst.input);
-		g_exit = check_error_cod(shell);
-		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+		while(shell->lst.input[++k])
 		{
-			if (shell->lst.input[0] != ' ')
-				check_operator(shell);
+			if (shell->lst.input[k] == ' ')
+				p = 1;
+			else
+			{
+				p = 0;
+				break;
+			}
 		}
-		dup2(i, STDOUT_FILENO);
-		dup2(j, STDIN_FILENO);
-		shell->old_g_exit = g_exit;
-		g_exit = 0;
+		if (p == 0)
+		{
+			shell->lst.split = split_cmd(shell->lst.input);
+			shell->lst.redirection = NULL;
+			if (ft_strncmp(shell->lst.input, "", 1))
+				add_history(shell->lst.input);
+			g_exit = check_error_cod(shell);
+			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+			{
+					check_operator(shell);
+			}
+			dup2(i, STDOUT_FILENO);
+			dup2(j, STDIN_FILENO);
+			shell->old_g_exit = g_exit;
+			g_exit = 0;
+		}
 	}
 }
 

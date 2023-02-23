@@ -30,7 +30,6 @@ int	clean_q(t_shell *shell, int q, int i)
 	{
 		if (is_separator(shell->lst.input[++i]) == -1)
 		{
-			printf("%d\n", q);
 			shell->lst.input[i] = ' ';
 			q--;
 		}
