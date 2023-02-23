@@ -12,6 +12,8 @@
 
 #include "export.h"
 
+
+
 int	ft_strchrp(const char *s, int c)
 {
 	char	find;
@@ -28,6 +30,36 @@ int	ft_strchrp(const char *s, int c)
 	if (s[i] == find)
 		return (i);
 	return (1);
+}
+
+void print_export(t_shell *shell, char **str_save)
+{
+	int i;
+	int j;
+	int k;
+
+	i = -1;
+	k = 0;
+	while (shell->env.current[++i])
+	{
+		j = ft_strchrp(shell->env.current[i], '=');
+		while (j >= 0)
+		{
+			str_save[0][k] = shell->env.current[i][k];
+			j--;
+			k++;
+		}
+		j = ft_strchrp(shell->env.current[i], '=');
+		k = 0;
+		while (shell->env.current[i][++j])
+		{
+			str_save[1][k] = shell->env.current[i][j];
+			k++;
+		}
+		printf("declare -x %s%c", str_save[0], 34);
+		printf("%s%c\n", str_save[1], 34);
+	}
+	(void)str_save;
 }
 
 char	**sort(char **sorting)
@@ -57,14 +89,16 @@ char	**sort(char **sorting)
 
 void	ft_export(t_shell *shell)
 {
+	char **str_save;
+
 	shell->exp.i = -1;
 	shell->exp.j = -1;
+	str_save = (char **)malloc(sizeof(char *) * (3));
 	if (!shell->lst.executor[1])
 	{
 		shell->exp.sort_env = sort(shell->env.current);
 		shell->exp.i = -1;
-		while (shell->exp.sort_env[++shell->exp.i])
-			printf("declare -x %s\n", shell->exp.sort_env[shell->exp.i]);
+		print_export(shell,str_save);
 	}
 	else
 	{
