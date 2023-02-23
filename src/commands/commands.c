@@ -12,6 +12,35 @@
 
 #include "commands.h"
 
+int minishell_case(t_shell *shell)
+{
+	int pid;
+	int status;
+
+	pid = fork();
+		if (pid == 0)
+		{
+			change_shlvl(shell);
+			if (loop(shell, shell->stdout, shell->stdin) == -1)
+			{
+				perror("execve failed");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (pid > 0)
+		{	
+			waitpid(pid, &status, 0);
+			if (WIFEXITED(status))
+				return (0);
+		}
+		else
+		{
+		perror("fork failed");
+		exit(EXIT_FAILURE);
+		}
+		return (1);
+}
+
 int	ft_fork(t_shell *shell)
 {
 	int	pid;
@@ -50,26 +79,30 @@ int	ab_path(t_shell	*shell)
 	int	pid;
 	int	status;
 
-	pid = fork();
-	if (pid == 0)
+	if(!access(shell->lst.executor[0], F_OK))
 	{
-		if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
+		pid = fork();
+		if (pid == 0)
 		{
-			perror("execve failed");
+			if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
+			{
+				perror("execve failed");
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (pid > 0)
+		{
+			waitpid(pid, &status, 0);
+			if (WIFEXITED(status))
+				return (0);
+		}
+		else
+		{
+			perror("fork failed");
 			exit(EXIT_FAILURE);
 		}
 	}
-	else if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			return (0);
-	}
-	else
-	{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
-	}
+	printf("ciao");
 	return (0);
 }
 
@@ -105,33 +138,17 @@ void	change_shlvl(t_shell *shell)
 int	commands(t_shell *shell)
 {
 	int		c;
-	int		pid;
-	int		status;
+	char **path;
+	int k;
+	char *str;
 
 	c = -1;
+	k = -1;
+	path = (char **)malloc(sizeof(char *) * 200);
+	str = (char *)malloc(sizeof(char) * 200);
 	if (ft_strncmp("./minishell", shell->lst.executor[0], 12) == 0)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			change_shlvl(shell);
-			if (loop(shell, shell->stdout, shell->stdin) == -1)
-			{
-				perror("execve failed");
-				exit(EXIT_FAILURE);
-			}
-		}
-		else if (pid > 0)
-		{	
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				return (0);
-		}
-		else
-		{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
-		}
+		minishell_case(shell);
 		return (1);
 	}
 	if (ft_strncmp("/bin/", shell->lst.executor[0], 5) == 0)
@@ -141,13 +158,21 @@ int	commands(t_shell *shell)
 	}
 	while (shell->env.current[++c])
 	{
-		if (ft_strncmp(shell->env.save, shell->env.current[c], \
-			shell->env.i) == 0 || ft_strncmp("PATH=/bin/", \
-			shell->env.current[c], shell->env.i) == 0 \
-			|| ft_strncmp("PATH=/bin", shell->env.current[c], \
-			shell->env.i) == 0)
-			ft_fork(shell);
+		if (ft_strncmp(shell->env.current[c], "PATH=", \
+			5) == 0)
+		{
+			path = ft_split(shell->env.current[c] + 5, ':');
+			while(path[++k])
+			{
+				str = ft_strjoin(path[k], "/");
+				str = ft_strjoin(str, shell->lst.executor[0]);
+				if(!access(str, F_OK))
+				{
+					ft_fork(shell);
+					break;
+				}
+			}
+		}
 	}
 	return (1);
-	(void)pid;
 }

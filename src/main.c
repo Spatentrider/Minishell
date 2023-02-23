@@ -71,6 +71,8 @@ int	loop(t_shell *shell, int i, int j)
 			shell->old_g_exit = g_exit;
 			g_exit = 0;
 		}
+		p = 0;
+		k = -1;
 	}
 }
 
