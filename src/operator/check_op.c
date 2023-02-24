@@ -86,13 +86,18 @@ void	expansion(t_shell *shell)
 		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
 			break;
 	}
-	str = ft_strdup(shell->lst.executor[i] + 1);
-	i = -1;
-	while (shell->env.current[++i])
-	{		
-		pos = ft_strchrp(shell->env.current[i], '=');
-		if (ft_strncmp(shell->env.current[i], str, pos) == 0)
-			list_expansion(shell->env.current[i], pos, shell);
+	if (shell->lst.executor[i] != NULL)
+	{
+		str = ft_strdup(shell->lst.executor[i] + 1);
+		i = -1;
+		while (shell->env.current[++i])
+		{		
+			pos = ft_strchrp(shell->env.current[i], '=');
+			if (ft_strncmp(shell->env.current[i], str, pos) == 0)
+				list_expansion(shell->env.current[i], pos, shell);
+		}
+		free(str);
+		str = NULL;
 	}
 }
 
