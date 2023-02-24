@@ -105,6 +105,7 @@ int	check_operator(t_shell *shell)
 {
 	int	i;
 	int	q;
+	int c;
 
 	i = -1;
 	q = -1;
@@ -114,8 +115,9 @@ int	check_operator(t_shell *shell)
 	else if (q == 1 || q == 4 || q == -1)
 	{
 		if (!control_pipe(shell))
-			check_red(shell->lst.input, shell, i);
-		executor(shell);
+			c = check_red(shell->lst.input, shell, i);
+		if (c == 0)
+			executor(shell);
 	}
 	return (0);
 }
