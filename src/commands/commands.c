@@ -169,10 +169,12 @@ int	commands(t_shell *shell)
 				if(!access(str, F_OK))
 				{
 					ft_fork(shell);
-					break;
+					return(0);
 				}
 			}
 		}
 	}
+	g_exit = 127;
+	printf("%s: command not found\n", shell->lst.executor[0]);
 	return (1);
 }
