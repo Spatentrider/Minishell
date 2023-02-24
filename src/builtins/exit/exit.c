@@ -12,7 +12,7 @@
 
 #include "exit.h"
 
-void inside_exit(t_shell *shell)
+int inside_exit(t_shell *shell)
 {
 	int	k;
 
@@ -24,15 +24,20 @@ void inside_exit(t_shell *shell)
 			if (isdigit(shell->lst.executor[1][k]) == 0)
 			{
 				g_exit = (int)shell->lst.executor[1][k];
-				printf("exit\n");
-				exit(printf("minishell: exit: %s: numeric argument required\n", \
-					shell->lst.executor[1]));
+				if (shell->lst.executor[2] == NULL)
+				{
+					printf("exit\n");
+					printf("minishell: exit: %s: numeric argument required\n", \
+					shell->lst.executor[1]);
+					return(0);
+				}
 			}
 		}
 	}
+	return(0);
 }
 
-void	nor_exit(t_shell *shell)
+int	nor_exit(t_shell *shell)
 {
 	int	k;
 
@@ -43,9 +48,13 @@ void	nor_exit(t_shell *shell)
 		{
 			if (isdigit(shell->lst.executor[1][k]) == 0)
 			{
-				printf("exit\nminishell: exit: %s: numeric argument required\n", \
+				if (shell->lst.executor[2] == NULL)
+				{
+					printf("exit\n");
+					printf("minishell: exit: %s: numeric argument required\n", \
 					shell->lst.executor[1]);
-				exit(2);
+					return(0);
+				}
 			}
 		}
 	}
@@ -83,16 +92,27 @@ void	reduce_shlvl(t_shell *shell)
 	inside_exit(shell);
 }
 
-void	ft_exit(char **current, t_shell *shell)
+void	ft_exit(t_shell *shell)
 {
-	int		i;
+	int	k;
 
-	i = -1;
-	while (current[++i])
+	k = -1;
+	if (shell->lst.executor[1] != NULL)
 	{
-		//if (strncmp(current[i], "SHLVL=3", 7) == 0)
-			nor_exit(shell);
-		//else if (strncmp(current[i], "SHLVL=", 6) == 0)
-		//	reduce_shlvl(shell);
+		while (shell->lst.executor[1][++k])
+		{
+			if (isdigit(shell->lst.executor[1][k]) == 0)
+			{
+				if (shell->lst.executor[2] == NULL)
+				{
+					printf("exit\n");
+					printf("minishell: exit: %s: numeric argument required\n", \
+					shell->lst.executor[1]);
+					return ;
+				}
+			}
+		}
 	}
+	printf("exit\n");
+	exit(1);
 }

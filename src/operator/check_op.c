@@ -28,6 +28,24 @@ void	redirection(int c, t_shell *shell)
 	executor(shell);
 }
 
+void	list_expansion(char *current, int pos, t_shell *shell)
+{
+	int i;
+	char *str;
+
+	i = -1;
+	str = ft_strdup(current + pos);
+	while (shell->lst.executor[++i])
+	{
+		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
+			break;
+	}
+	free(shell->lst.executor[i]);
+	shell->lst.executor[i] = ft_strdup(str + 1);
+	free(str);
+	str = NULL;
+}	
+
 int	check_red(char *input, t_shell *shell, int i)
 {
 	int	c;
@@ -56,42 +74,25 @@ int	check_red(char *input, t_shell *shell, int i)
 	return(c);
 }
 
-void	expansion(t_shell *shell, int p)
+void	expansion(t_shell *shell)
 {
 	int		i;
-	int		j;
 	int		pos;
 	char	*str;
 
 	i = -1;
-	j = 0;
-	str = (char *)malloc(sizeof(char) * 100);
-	while (shell->lst.expansion[p][++j])
-		str[++i] = shell->lst.expansion[p][j];
-	str[++i] = '\0';
-	i = -1;
-	if (ft_strncmp(shell->lst.input, "$?", 2))
+	while (shell->lst.executor[++i])
 	{
-		
+		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
+			break;
 	}
+	str = ft_strdup(shell->lst.executor[i] + 1);
+	i = -1;
 	while (shell->env.current[++i])
 	{		
 		pos = ft_strchrp(shell->env.current[i], '=');
 		if (ft_strncmp(shell->env.current[i], str, pos) == 0)
-			change_word(shell, i, pos);
-	}
-}
-
-void	control_exp(t_shell *shell)
-{
-	int	i;
-
-	i = -1;
-	shell->lst.expansion = split_executor(shell->lst.split[0]);
-	while (shell->lst.expansion[++i])
-	{
-		if (ft_strncmp(shell->lst.expansion[i], "$", 1) == 0)
-			expansion(shell, i);
+			list_expansion(shell->env.current[i], pos, shell);
 	}
 }
 

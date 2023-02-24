@@ -16,6 +16,6 @@
 # include "../builtins.h"
 
 /*exit.c*/
-void	ft_exit(char **current,t_shell *shell);
-void    inside_exit(t_shell *shell);
+void	ft_exit(t_shell *shell);
+int    inside_exit(t_shell *shell);
 #endif
