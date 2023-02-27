@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/20 15:24:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/27 15:15:30 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_lst
 	char	**redirection;
 	char	**file;
 	char	**expansion;
+	char	**here_doc;
+	char	**cat_array;
 }					t_lst;
 
 typedef struct s_cd

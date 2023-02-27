@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 11:54:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/27 15:11:06 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ void	redirection(int c, t_shell *shell)
 {
 	shell->lst.redirection = split_redirection(shell->lst.input);
 	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
+	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (c == 1)
 		red_out(shell->lst.file[0]);
 	else if (c == 2)
 		red_inp(shell->lst.file[0]);
 	else if (c == 3)
 		append(shell->lst.file[0]);
+	else if (shell->lst.here_doc[1] == NULL)
+	{
+		here_doc_cat(shell->lst.file[0], shell);
+		return ;
+	}
 	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
 	delete_op(shell);
@@ -30,15 +36,15 @@ void	redirection(int c, t_shell *shell)
 
 void	list_expansion(char *current, int pos, t_shell *shell)
 {
-	int i;
-	char *str;
+	int		i;
+	char	*str;
 
 	i = -1;
 	str = ft_strdup(current + pos);
 	while (shell->lst.executor[++i])
 	{
 		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
-			break;
+			break ;
 	}
 	free(shell->lst.executor[i]);
 	shell->lst.executor[i] = ft_strdup(str + 1);
@@ -71,7 +77,7 @@ int	check_red(char *input, t_shell *shell, int i)
 	}
 	if (c > 0)
 		redirection(c, shell);
-	return(c);
+	return (c);
 }
 
 void	expansion(t_shell *shell)
@@ -84,7 +90,7 @@ void	expansion(t_shell *shell)
 	while (shell->lst.executor[++i])
 	{
 		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
-			break;
+			break ;
 	}
 	if (shell->lst.executor[i] != NULL)
 	{
@@ -105,11 +111,11 @@ int	check_operator(t_shell *shell)
 {
 	int	i;
 	int	q;
-	int c;
+	int	c;
 
 	i = -1;
-	q = -1;
 	q = clean_quote(shell, i);
+	c = 0;
 	if (q == 0 || q == 3)
 		executor(shell);
 	else if (q == 1 || q == 4 || q == -1)

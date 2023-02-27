@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/02/15 10:21:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:04 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	red_out(char *redirection);
 void	red_inp(char	*redirection);
 void	append(char *redirection);
 void	here_doc(char *redirection, t_shell *shell);
+void	here_doc_cat(char *redirection, t_shell *shell);
 /*utils.c*/
 void	change_word(t_shell *shell, int i, int pos);
 
