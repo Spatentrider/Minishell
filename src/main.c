@@ -21,6 +21,8 @@ int	check_error_cod(t_shell *shell)
 	while (shell->lst.error[++i])
 	{
 		g_exit = parse(shell->lst.split);
+		if (g_exit != 0)
+			break;
 	}
 	return (g_exit);
 }
