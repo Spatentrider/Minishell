@@ -25,35 +25,31 @@ int	is_sep(char c)
 	return (0);
 }
 
-int	control_q(int q, int d, t_shell *shell)
+int	control_q(int q, int d)
 {
 	if ((q % 2) == 0)
 	{
-		delete_sdq(shell, q);
 		return (3);
 	}
 	else
 	{
 		if ((d % 2) == 0)
 		{
-			delete_dq(shell, q);
 			return (4);
 		}
 		else
 		{
-			delete_sq(shell, q);
 			return (4);
 		}
 	}
 }
 
-int	control_qt(int q, int d, int s, t_shell *shell)
+int	control_qt(int q, int d, int s)
 {
 	if (d > 0)
 	{
 		if (s == 0)
 		{
-			delete_qt(shell);
 			if ((d % 2) == 0)
 				return (1);
 			else
@@ -64,7 +60,6 @@ int	control_qt(int q, int d, int s, t_shell *shell)
 	{
 		if (d == 0)
 		{
-			delete_qt(shell);
 			if ((s % 2) == 0)
 				return (1);
 			else
@@ -72,7 +67,7 @@ int	control_qt(int q, int d, int s, t_shell *shell)
 		}
 	}
 	q = d + s;
-	q = control_q(q, d, shell);
+	q = control_q(q, d);
 	return (q);
 }
 
@@ -101,7 +96,7 @@ int	clean_quote(t_shell *shell, int i)
 		}
 	}
 	if (q > 0 || d > 0 || s > 0)
-		q = control_qt(q, d, s, shell);
+		q = control_qt(q, d, s);
 	return (q);
 }
 

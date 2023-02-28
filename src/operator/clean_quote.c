@@ -12,106 +12,106 @@
 
 #include "operator.h"
 
-void	delete_qt(t_shell *shell)
+void	clean_double(t_shell *shell)
 {
-	int	i;
+	int i;
+	int j;
+	char *str;
 
 	i = -1;
+	j = 0;
 	while (shell->lst.input[++i])
 	{
-		if (is_separator(shell->lst.input[i]) == -1)
-			shell->lst.input[i] = ' ';
+		if (shell->lst.input[i] == 34)
+			j++;
+	}
+	str = malloc(sizeof(char *) * (i - j));
+	j = 0;
+	i = -1;
+	while(shell->lst.input[++i])
+	{
+		if (shell->lst.input[i] != 34)
+		{
+			str[j] = shell->lst.input[i];
+			j++;
+		}		
+	}
+	free(shell->lst.input);
+	shell->lst.input = NULL;
+	shell->lst.input = ft_strdup(str);
+	printf("%s shell lst input\n", shell->lst.input);
+}
+
+void	clean_single(t_shell *shell)
+{
+	int i;
+	int j;
+	char *str;
+
+	i = -1;
+	j = 0;
+	while (shell->lst.input[++i])
+	{
+		if (shell->lst.input[i] == 39)
+			j++;
+	}
+	str = malloc(sizeof(char *) * (i - j));
+	j = 0;
+	i = -1;
+	while(shell->lst.input[++i])
+	{
+		if (shell->lst.input[i] != 39)
+		{
+			str[j] = shell->lst.input[i];
+			j++;
+		}		
+	}
+	free(shell->lst.input);
+	shell->lst.input = NULL;
+	shell->lst.input = ft_strdup(str);
+	printf("%s shell lst input\n", shell->lst.input);
+}
+
+void clean_all_quote(t_shell *shell)
+{
+	int i;
+
+	i = -1;
+	while(shell->lst.input[++i])
+	{
+		if (shell->lst.input[i] == 39)
+		{
+			clean_single(shell);
+			break;
+		}
+		if (shell->lst.input[i] == 34)
+		{
+			clean_double(shell);
+			break;
+		}
 	}
 }
 
-int	clean_q(t_shell *shell, int q, int i)
+void clean_parse(t_shell *shell)
 {
-	while (q >= 1)
-	{
-		if (is_separator(shell->lst.input[++i]) == -1)
-		{
-			shell->lst.input[i] = ' ';
-			q--;
-		}
-	}
-	return (i);
-}
+	int count_single;
+	int count_double;
+	int i;
 
-void	delete_dq(t_shell *shell, int q)
-{
-	int	i;
-	int	j;
-
+	count_single = 0;
+	count_double = 0;
 	i = -1;
-	j = q;
-	i = clean_q(shell, q, i);
-	shell->lst.input[i] = 39;
-	i++;
-	while (shell->lst.input[++i])
+	while(shell->lst.input[++i])
 	{
-		if (is_separator(shell->lst.input[i]) == -1)
-		{
-			shell->lst.input[i] = 39;
-			i++;
-			while (j > 1)
-			{
-				shell->lst.input[i] = ' ';
-				j--;
-				i++;
-			}
-			break ;
-		}
+		if(shell->lst.input[i] == 39)
+			count_single = 1;
+		if (shell->lst.input[i] == 34)
+			count_double = 1;
 	}
-}
-
-void	delete_sq(t_shell *shell, int q)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = q;
-	i = clean_q(shell, q, i);
-	shell->lst.input[i] = 34;
-	i++;
-	while (shell->lst.input[++i])
-	{
-		if (is_separator(shell->lst.input[i]) == -1)
-		{
-			shell->lst.input[i] = 34;
-			i++;
-			while (j > 1)
-			{
-				shell->lst.input[i] = ' ';
-				j--;
-				i++;
-			}
-			break ;
-		}
-	}
-}
-
-void	delete_sdq(t_shell *shell, int q)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = q;
-	i = clean_q(shell, q, i);
-	i++;
-	while (shell->lst.input[++i])
-	{
-		if (is_separator(shell->lst.input[i]) == -1)
-		{
-			i++;
-			while (j > 1)
-			{
-				shell->lst.input[i] = ' ';
-				j--;
-				i++;
-			}
-			break ;
-		}
-	}
+	if (count_single == 0 && count_double == 1)
+		clean_double(shell);
+	else if(count_single == 1 && count_double == 0)
+		clean_single(shell);
+	else if(count_single == 1 && count_double == 1)
+		clean_all_quote(shell);
 }

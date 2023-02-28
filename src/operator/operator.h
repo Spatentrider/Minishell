@@ -22,16 +22,15 @@ void	expansion(t_shell *shell);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);
 /*clean_quote.c*/
-void	delete_qt(t_shell *shell);
-int		clean_q(t_shell *shell, int q, int i);
-void	delete_dq(t_shell *shell, int q);
-void	delete_sq(t_shell *shell, int q);
-void	delete_sdq(t_shell *shell, int q);
+void    clean_parse(t_shell *shell);
+void    clean_all_quote(t_shell *shell);
+void    clean_single(t_shell *shell);
+void	clean_double(t_shell *shell);
 /*delete.c*/
 int		is_sep(char c);
-int		control_q(int q, int d, t_shell *shell);
-int		control_qt(int q, int d, int s, t_shell *shell);
-int		clean_quote(t_shell *shell, int i);
+int		control_q(int q, int d);
+int		control_qt(int q, int d, int s);
+int     clean_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
 void	red_out(char *redirection);

@@ -30,7 +30,7 @@ void	redirection(int c, t_shell *shell)
 	}
 	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
-	delete_op(shell);
+	//delete_op(shell);
 	executor(shell);
 }
 
@@ -109,21 +109,27 @@ void	expansion(t_shell *shell)
 
 int	check_operator(t_shell *shell)
 {
-	int	i;
 	int	q;
+	int	i;
 	int	c;
 
 	i = -1;
 	q = clean_quote(shell, i);
 	c = 0;
 	if (q == 0 || q == 3)
+	{
+		clean_parse(shell);
 		executor(shell);
+	}
 	else if (q == 1 || q == 4 || q == -1)
 	{
 		if (!control_pipe(shell))
 			c = check_red(shell->lst.input, shell, i);
 		if (c == 0)
+		{
+			clean_parse(shell);
 			executor(shell);
+		}
 	}
 	return (0);
 }
