@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/16 14:50:12 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:40:18 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # include "signals/signals.h"
 # include "pipe/pipe.h"
 # include "commands/commands.h"
+
+int	loop(t_shell *shell, int i, int j);
 
 #endif

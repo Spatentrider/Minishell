@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:31:25 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:53:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ int	ab_path(t_shell	*shell)
 		if (pid == 0)
 		{
 			if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
-			{
-				perror("execve failed");
 				exit(EXIT_FAILURE);
-			}
 		}
 		else if (pid > 0)
 		{
@@ -91,10 +88,7 @@ int	ab_path(t_shell	*shell)
 				return (0);
 		}
 		else
-		{
-			perror("fork failed");
 			exit(EXIT_FAILURE);
-		}
 	}
 	return (0);
 }
@@ -130,43 +124,15 @@ void	change_shlvl(t_shell *shell)
 
 int	commands(t_shell *shell)
 {
-	int		c;
 	char	**path;
-	int		k;
 	char	*str;
 
-	c = -1;
-	k = -1;
 	path = (char **)malloc(sizeof(char *) * 200);
 	str = (char *)malloc(sizeof(char) * 200);
-	if (ft_strncmp("./minishell", shell->lst.executor[0], 12) == 0)
-	{
-		minishell_case(shell);
+	if (control_cmd(shell))
 		return (1);
-	}
-	if (ft_strncmp("/bin/", shell->lst.executor[0], 5) == 0)
-	{
-		ab_path(shell);
+	else if (control_path(shell, path, str))
 		return (1);
-	}
-	while (shell->env.current[++c])
-	{
-		if (ft_strncmp(shell->env.current[c], "PATH=", \
-			5) == 0)
-		{
-			path = ft_split(shell->env.current[c] + 5, ':');
-			while (path[++k])
-			{
-				str = ft_strjoin(path[k], "/");
-				str = ft_strjoin(str, shell->lst.executor[0]);
-				if (!access(str, F_OK))
-				{
-					ft_fork(shell);
-					return (0);
-				}
-			}
-		}
-	}
 	g_exit = 127;
 	printf("%s: command not found\n", shell->lst.executor[0]);
 	return (1);

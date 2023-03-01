@@ -6,11 +6,29 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/01 14:32:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 16:12:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
+
+int	control_space(t_shell *shell, int k)
+{
+	int	p;
+
+	p = 0;
+	while (shell->lst.input[++k])
+	{
+		if (shell->lst.input[k] == ' ')
+			p = 1;
+		else
+		{
+			p = 0;
+			break ;
+		}
+	}
+	return (p);
+}
 
 int	check_error_cod(t_shell *shell)
 {
@@ -41,22 +59,13 @@ int	loop(t_shell *shell, int i, int j)
 	int	k;
 	int	p;
 
-	k = -1;
-	p = 0;
 	while (1)
 	{	
+		p = 0;
+		k = -1;
 		shell->lst.input = readline("minishell: ");
 		ctrl_d(shell);
-		while (shell->lst.input[++k])
-		{
-			if (shell->lst.input[k] == ' ')
-				p = 1;
-			else
-			{
-				p = 0;
-				break ;
-			}
-		}
+		p = control_space(shell, k);
 		if (p == 0)
 		{
 			shell->lst.split = split_cmd(shell->lst.input);
@@ -65,16 +74,12 @@ int	loop(t_shell *shell, int i, int j)
 				add_history(shell->lst.input);
 			g_exit = check_error_cod(shell);
 			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
-			{
 				check_operator(shell);
-			}
 			dup2(i, STDOUT_FILENO);
 			dup2(j, STDIN_FILENO);
 			shell->old_g_exit = g_exit;
 			g_exit = 0;
 		}
-		p = 0;
-		k = -1;
 	}
 }
 

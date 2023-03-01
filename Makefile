@@ -20,7 +20,8 @@ SRC_PWD					=	src/builtins/pwd/pwd.c
 
 SRC_UNSET				=	src/builtins/unset/unset.c
 
-SRC_CMD					=	src/commands/commands.c
+SRC_CMD					=	src/commands/commands.c \
+							src/commands/cmd_utils.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
 
@@ -32,7 +33,8 @@ SRC_OPERATOR			=	src/operator/check_op.c \
 
 SRC_PARSE				=	src/parse/parse.c
 
-SRC_PIPE				=	src/pipe/pipe.c
+SRC_PIPE				=	src/pipe/pipe.c \
+							src/pipe/pipe_utils.c
 
 SRC_SIGNALS				=	src/signals/signals.c
 

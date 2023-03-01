@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 11:42:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:36:10 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ int	last_process(t_shell *shell, int c, int i)
 int	process_pipe(t_shell *shell, int *pid, int c, int j)
 {
 	int	fd[2];
-	int	d;
 	int	i;
 
-	d = 0;
 	i = -1;
 	pipe(fd);
 	if (j == 1)
@@ -65,25 +63,12 @@ int	process_pipe(t_shell *shell, int *pid, int c, int j)
 	pid[c] = fork();
 	if (!pid[c])
 	{
-		change_in(shell, c);
-		dup2(fd[1], STDOUT_FILENO);
-		d = check_red(shell->lst.input, shell, i);
-		if (d == 0)
-			executor(shell);
+		process_child(fd, c, shell, i);
 		free(pid);
 		exit(0);
 	}
 	if (j != 1)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		++c;
-		change_in(shell, c);
-		d = check_red(shell->lst.input, shell, i);
-		if (d == 0)
-			executor(shell);
-		return (1);
-	}
+		process_father(fd, shell, c, i);
 	return (0);
 }
 
@@ -93,19 +78,12 @@ int	control_pipe(t_shell *shell)
 	int	j;
 	int	pipe_counter;
 	int	*pid;
-	int	status;
 	int	c;
 
 	i = -1;
 	c = 0;
 	j = 0;
-	status = 0;
-	pipe_counter = 0;
-	while (shell->lst.input[++i])
-	{
-		if (is_pipe(shell->lst.input[i]) == 1)
-			pipe_counter++;
-	}
+	pipe_counter = count_pipe(shell, i);
 	i = dup(STDOUT_FILENO);
 	if (pipe_counter > 0)
 	{
@@ -115,11 +93,10 @@ int	control_pipe(t_shell *shell)
 		{
 			if (c == pipe_counter - 1)
 				j = 1;
-			status = process_pipe(shell, pid, c, j);
+			process_pipe(shell, pid, c, j);
 				c++;
 			dup2(i, STDOUT_FILENO);
 		}
 	}
-	(void)status;
 	return (0);
 }

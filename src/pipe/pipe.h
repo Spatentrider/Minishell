@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:05:58 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:25:41 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 15:41:21 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 
 # include "../src.h"
 
-int	control_pipe(t_shell *shell);
-int	process_pipe(t_shell *shell, int *pid, int c, int j);
+/*pipe_utils.c*/
+int		count_pipe(t_shell *shell, int i);
+int		process_child(int *fd, int c, t_shell *shell, int i);
+int		process_father(int *fd, t_shell *shell, int c, int i);
+/*pipe.c*/
+void	change_in(t_shell *shell, int c);
+int		control_pipe(t_shell *shell);
+int		process_pipe(t_shell *shell, int *pid, int c, int j);
 
 #endif

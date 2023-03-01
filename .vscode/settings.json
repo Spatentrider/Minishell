@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "operator.h": "c"
+        "*.tcc": "c",
+        "algorithm": "c"
     }
 }
