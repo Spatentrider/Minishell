@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/15 15:36:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:32:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_error_cod(t_shell *shell)
 	{
 		g_exit = parse(shell->lst.split);
 		if (g_exit != 0)
-			break;
+			break ;
 	}
 	return (g_exit);
 }
@@ -38,8 +38,8 @@ void	ctrl_d(t_shell *shell)
 
 int	loop(t_shell *shell, int i, int j)
 {
-	int k;
-	int p;
+	int	k;
+	int	p;
 
 	k = -1;
 	p = 0;
@@ -47,14 +47,14 @@ int	loop(t_shell *shell, int i, int j)
 	{	
 		shell->lst.input = readline("minishell: ");
 		ctrl_d(shell);
-		while(shell->lst.input[++k])
+		while (shell->lst.input[++k])
 		{
 			if (shell->lst.input[k] == ' ')
 				p = 1;
 			else
 			{
 				p = 0;
-				break;
+				break ;
 			}
 		}
 		if (p == 0)
@@ -66,7 +66,7 @@ int	loop(t_shell *shell, int i, int j)
 			g_exit = check_error_cod(shell);
 			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
 			{
-					check_operator(shell);
+				check_operator(shell);
 			}
 			dup2(i, STDOUT_FILENO);
 			dup2(j, STDIN_FILENO);
@@ -96,7 +96,6 @@ int	loop(t_shell *shell, int i, int j)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-
 
 	(void)argv;
 	g_exit = 0;

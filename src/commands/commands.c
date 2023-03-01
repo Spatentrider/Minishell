@@ -6,39 +6,39 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/02/21 15:34:11 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:31:25 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "commands.h"
 
-int minishell_case(t_shell *shell)
+int	minishell_case(t_shell *shell)
 {
-	int pid;
-	int status;
+	int	pid;
+	int	status;
 
 	pid = fork();
-		if (pid == 0)
+	if (pid == 0)
+	{
+		change_shlvl(shell);
+		if (loop(shell, shell->stdout, shell->stdin) == -1)
 		{
-			change_shlvl(shell);
-			if (loop(shell, shell->stdout, shell->stdin) == -1)
-			{
-				perror("execve failed");
-				exit(EXIT_FAILURE);
-			}
+			perror("execve failed");
+			exit(EXIT_FAILURE);
 		}
-		else if (pid > 0)
-		{	
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				return (0);
-		}
-		else
-		{
+	}
+	else if (pid > 0)
+	{	
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			return (0);
+	}
+	else
+	{
 		perror("fork failed");
 		exit(EXIT_FAILURE);
-		}
-		return (1);
+	}
+	return (1);
 }
 
 int	ft_fork(t_shell *shell)
@@ -52,10 +52,7 @@ int	ft_fork(t_shell *shell)
 	{
 		if (execve(ft_strjoin("/bin/", shell->lst.executor[0]), \
 			shell->lst.executor, NULL) == -1)
-		{
-			perror("execve failed");
 			exit(EXIT_FAILURE);
-		}
 		if (g_exit == 500)
 			exit(0);
 	}
@@ -66,10 +63,7 @@ int	ft_fork(t_shell *shell)
 			return (0);
 	}
 	else
-	{
-		perror("fork failed");
 		exit(EXIT_FAILURE);
-	}
 	signal(SIGINT, signal_handler);
 	return (0);
 }
@@ -79,7 +73,7 @@ int	ab_path(t_shell	*shell)
 	int	pid;
 	int	status;
 
-	if(!access(shell->lst.executor[0], F_OK))
+	if (!access(shell->lst.executor[0], F_OK))
 	{
 		pid = fork();
 		if (pid == 0)
@@ -102,7 +96,6 @@ int	ab_path(t_shell	*shell)
 			exit(EXIT_FAILURE);
 		}
 	}
-	printf("ciao");
 	return (0);
 }
 
@@ -138,9 +131,9 @@ void	change_shlvl(t_shell *shell)
 int	commands(t_shell *shell)
 {
 	int		c;
-	char **path;
-	int k;
-	char *str;
+	char	**path;
+	int		k;
+	char	*str;
 
 	c = -1;
 	k = -1;
@@ -162,14 +155,14 @@ int	commands(t_shell *shell)
 			5) == 0)
 		{
 			path = ft_split(shell->env.current[c] + 5, ':');
-			while(path[++k])
+			while (path[++k])
 			{
 				str = ft_strjoin(path[k], "/");
 				str = ft_strjoin(str, shell->lst.executor[0]);
-				if(!access(str, F_OK))
+				if (!access(str, F_OK))
 				{
 					ft_fork(shell);
-					return(0);
+					return (0);
 				}
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:25:22 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	expansion(t_shell *shell);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);
 /*clean_quote.c*/
-void    clean_parse(t_shell *shell);
-void    clean_all_quote(t_shell *shell);
-void    clean_single(t_shell *shell);
+void	clean_parse(t_shell *shell);
+void	clean_all_quote(t_shell *shell);
+void	clean_single(t_shell *shell);
 void	clean_double(t_shell *shell);
 /*delete.c*/
 int		is_sep(char c);
 int		control_q(int q, int d);
 int		control_qt(int q, int d, int s);
-int     clean_quote(t_shell *shell, int i);
+int		clean_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
 void	red_out(char *redirection);

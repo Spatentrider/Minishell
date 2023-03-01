@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:09:29 by mich              #+#    #+#             */
-/*   Updated: 2023/02/14 16:10:30 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:26:04 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../src.h"
 
 void	signal_handler(int sig);
-void signal_handler2(int sig);
+void	signal_handler2(int sig);
 
 #endif

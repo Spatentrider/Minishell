@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/02 17:57:24 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/03/01 14:27:27 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	check_redirection(char *string)
 
 int	check_quote(char *string)
 {
-	size_t i;
-	int	count_quote;
-	int count_single;
+	size_t	i;
+	int		count_quote;
+	int		count_single;
 
 	i = 0;
 	count_quote = 0;
 	count_single = 0;
-	while(string[i])
+	while (string[i])
 	{
 		if (string[i] == 34)
 			count_quote++;

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/02/27 15:11:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/01 14:17:27 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	redirection(int c, t_shell *shell)
 	}
 	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
-	//delete_op(shell);
+	delete_op(shell);
 	executor(shell);
 }
 
