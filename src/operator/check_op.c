@@ -89,7 +89,9 @@ void	expansion(t_shell *shell)
 	i = -1;
 	while (shell->lst.executor[++i])
 	{
-		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
+		if (ft_strncmp(shell->lst.executor[i], "$?", 2) == 0)
+			shell->lst.executor[i] = ft_itoa(shell->old_g_exit);
+		else if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
 			break ;
 	}
 	if (shell->lst.executor[i] != NULL)
