@@ -64,7 +64,6 @@ int	ft_fork(t_shell *shell)
 	}
 	else
 		exit(EXIT_FAILURE);
-	signal(SIGINT, signal_handler);
 	return (0);
 }
 

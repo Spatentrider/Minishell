@@ -63,6 +63,9 @@ int	loop(t_shell *shell, int i, int j)
 	{	
 		p = 0;
 		k = -1;
+
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler);
 		shell->lst.input = readline("minishell: ");
 		ctrl_d(shell);
 		p = control_space(shell, k);
@@ -74,7 +77,9 @@ int	loop(t_shell *shell, int i, int j)
 				add_history(shell->lst.input);
 			g_exit = check_error_cod(shell);
 			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+			{
 				check_operator(shell);
+			}
 			dup2(i, STDOUT_FILENO);
 			dup2(j, STDIN_FILENO);
 			shell->old_g_exit = g_exit;
@@ -109,8 +114,6 @@ int	main(int argc, char **argv, char **envp)
 	get_env(envp, &shell);
 	shell.stdout = dup(STDOUT_FILENO);
 	shell.stdin = dup(STDIN_FILENO);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
 	loop(&shell, shell.stdout, shell.stdin);
 	return (0);
 }

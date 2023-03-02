@@ -114,5 +114,5 @@ void	ft_exit(t_shell *shell)
 		}
 	}
 	printf("exit\n");
-	exit(1);
+	exit(shell->old_g_exit);
 }
