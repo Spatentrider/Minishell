@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:17:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/03 15:51:58 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	check_operator(t_shell *shell)
 
 	i = -1;
 	q = clean_quote(shell, i);
-	c = 0;
+	c = -1;
 	if (q == 0 || q == 3)
 	{
 		clean_parse(shell);
