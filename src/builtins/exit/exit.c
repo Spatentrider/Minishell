@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/03/03 14:36:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:57:11 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_exit(t_shell *shell)
 				}
 			}
 		}
+		printf("exit\n");
+		exit(ft_atoi(shell->lst.executor[1]));
 	}
 	printf("exit\n");
 	exit(shell->old_g_exit);
