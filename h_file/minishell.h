@@ -95,6 +95,7 @@ typedef struct s_shell
 	int		old_g_exit;
 	int		stdin;
 	int		stdout;
+	int		single_quote;
 }				t_shell;
 
 #endif

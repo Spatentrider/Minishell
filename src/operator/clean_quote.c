@@ -52,7 +52,11 @@ void	clean_single(t_shell *shell)
 	while (shell->lst.input[++i])
 	{
 		if (shell->lst.input[i] == 39)
+		{
+			if(shell->lst.input[i + 1] == '$')
+				shell->single_quote += 1;
 			j++;
+		}
 	}
 	str = malloc(sizeof(char *) * (i - j));
 	j = 0;
@@ -99,6 +103,7 @@ void	clean_parse(t_shell *shell)
 	count_single = 0;
 	count_double = 0;
 	i = -1;
+	shell->single_quote = 0;
 	while (shell->lst.input[++i])
 	{
 		if (shell->lst.input[i] == 39)

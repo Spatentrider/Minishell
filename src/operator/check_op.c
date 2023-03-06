@@ -85,28 +85,46 @@ void	expansion(t_shell *shell)
 	int		i;
 	int		pos;
 	char	*str;
+	int		count;
+	int		*dollar;
 
 	i = -1;
+	count = 0;
+	dollar = (int *) malloc(sizeof(int) * 10);
 	while (shell->lst.executor[++i])
 	{
 		if (ft_strncmp(shell->lst.executor[i], "$?", 2) == 0)
 			shell->lst.executor[i] = ft_itoa(shell->old_g_exit);
 		else if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
-			break ;
+		{
+			dollar[count] = i;
+			count++;
+		}			
 	}
-	if (shell->lst.executor[i] != NULL)
+	shell->exp.j = 0;
+	while(count > 0)
 	{
-		str = ft_strdup(shell->lst.executor[i] + 1);
-		i = -1;
-		while (shell->env.current[++i])
-		{		
-			pos = ft_strchrp(shell->env.current[i], '=');
-			if (ft_strncmp(shell->env.current[i], str, pos) == 0)
-				list_expansion(shell->env.current[i], pos, shell);
+		if(shell->single_quote == 0)
+		{
+			printf("shell->exp.j è %d\n", shell->exp.j);
+			printf("$ = %d", dollar[shell->exp.j]);
+			str = ft_strdup(shell->lst.executor[dollar[shell->exp.j]] + 1);
+			i = -1;
+			while (shell->env.current[++i])
+			{		
+				pos = ft_strchrp(shell->env.current[i], '=');
+				if (ft_strncmp(shell->env.current[i], str, pos) == 0)
+					list_expansion(shell->env.current[i], pos, shell);
+			}
+			free(str);
+			str = NULL;	
 		}
-		free(str);
-		str = NULL;
+		else
+			shell->single_quote -= 1;
+		count--;
+		shell->exp.j++;
 	}
+	free(dollar);
 }
 
 int	check_operator(t_shell *shell)
