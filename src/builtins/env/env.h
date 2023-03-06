@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:14:14 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:16:30 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:25:42 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "../builtins.h"
 
 /*env.c*/
-void	ft_env(char **current);
+void	ft_env(t_shell *shell, char **current);
 
 #endif

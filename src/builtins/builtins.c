@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 15:57:45 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:50:54 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	check_file(t_shell *shell)
 	}
 }
 
-// control_exp(shell);
-
 int	executor(t_shell *shell)
 {
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
@@ -75,7 +73,7 @@ int	executor(t_shell *shell)
 	else if (strncmp(shell->lst.executor[0], "cd", 3) == 0)
 		ft_cd(shell);
 	else if (strncmp(shell->lst.executor[0], "env", 4) == 0)
-		ft_env(shell->env.current);
+		ft_env(shell, shell->env.current);
 	else if (strncmp(shell->lst.executor[0], "exit", 5) == 0)
 		ft_exit(shell);
 	else if (strncmp(shell->lst.executor[0], "export", 7) == 0)

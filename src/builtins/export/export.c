@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/02/27 10:12:38 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:41:08 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
-void	change_var(t_shell *shell)
+void	change_var(t_shell *shell, int c)
 {
 	while (shell->env.current[++shell->exp.i])
 	{
 		shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
 		if (ft_strncmp(shell->env.current[shell->exp.i], \
-					shell->lst.executor[1], shell->exp.pos + 1) == 0)
+					shell->lst.executor[c], shell->exp.pos + 1) == 0)
 		{
-			shell->env.current[shell->exp.i] = shell->lst.executor[1];
+			shell->env.current[shell->exp.i] = shell->lst.executor[c];
 			shell->exp.j = 0;
 		}
 	}
@@ -85,9 +85,9 @@ void	change_var(t_shell *shell)
 void	ft_export(t_shell *shell)
 {
 	char	**str_save;
+	int		c;
 
-	shell->exp.i = -1;
-	shell->exp.j = -1;
+	c = 0;
 	str_save = (char **)malloc(sizeof(char *) * 100);
 	if (shell->lst.executor[1] == NULL)
 	{
@@ -96,11 +96,16 @@ void	ft_export(t_shell *shell)
 	}
 	else
 	{
-		change_var(shell);
-		if (shell->exp.j == -1)
+		while (shell->lst.executor[++c])
 		{
-			shell->env.current[shell->exp.i] = shell->lst.executor[1];
-			shell->env.current[shell->exp.i + 1] = NULL;
+			shell->exp.j = -1;
+			shell->exp.i = -1;
+			change_var(shell, c);
+			if (shell->exp.j == -1)
+			{
+				shell->env.current[shell->exp.i] = shell->lst.executor[c];
+				shell->env.current[shell->exp.i + 1] = NULL;
+			}
 		}
 	}
 	return ;

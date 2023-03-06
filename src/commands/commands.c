@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 15:53:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/06 15:46:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ int	ab_path(t_shell	*shell)
 
 	if (!access(shell->lst.executor[0], F_OK))
 	{
+		signal(SIGINT, signal_handler2);
 		pid = fork();
 		if (pid == 0)
 		{
 			if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
 				exit(EXIT_FAILURE);
+			if (g_exit == 500)
+				exit(0);
 		}
 		else if (pid > 0)
 		{
