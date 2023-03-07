@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/03 15:51:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/07 17:52:51 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,48 +83,31 @@ int	check_red(char *input, t_shell *shell, int i)
 void	expansion(t_shell *shell)
 {
 	int		i;
+	int		j;
 	int		pos;
 	char	*str;
-	int		count;
-	int		*dollar;
+	char	*curr;
 
 	i = -1;
-	count = 0;
-	dollar = (int *) malloc(sizeof(int) * 10);
 	while (shell->lst.executor[++i])
 	{
 		if (ft_strncmp(shell->lst.executor[i], "$?", 2) == 0)
 			shell->lst.executor[i] = ft_itoa(shell->old_g_exit);
 		else if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
 		{
-			dollar[count] = i;
-			count++;
-		}			
-	}
-	shell->exp.j = 0;
-	while(count > 0)
-	{
-		if(shell->single_quote == 0)
-		{
-			printf("shell->exp.j è %d\n", shell->exp.j);
-			printf("$ = %d", dollar[shell->exp.j]);
-			str = ft_strdup(shell->lst.executor[dollar[shell->exp.j]] + 1);
-			i = -1;
-			while (shell->env.current[++i])
+			str = ft_strdup(shell->lst.executor[i] + 1);
+			j = -1;
+			while (shell->env.current[++j])
 			{		
-				pos = ft_strchrp(shell->env.current[i], '=');
-				if (ft_strncmp(shell->env.current[i], str, pos) == 0)
-					list_expansion(shell->env.current[i], pos, shell);
+				pos = ft_strchrp(shell->env.current[j], '=');
+				curr = strdup_curr(shell->env.current[j]);
+				if (ft_strncmp(curr, str, pos) == 0)
+					list_expansion(shell->env.current[j], pos, shell);
 			}
 			free(str);
-			str = NULL;	
+			str = NULL;
 		}
-		else
-			shell->single_quote -= 1;
-		count--;
-		shell->exp.j++;
 	}
-	free(dollar);
 }
 
 int	check_operator(t_shell *shell)
