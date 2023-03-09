@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:57:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 16:18:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/09 15:07:15 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cd.h"
+
+void	cd_home(t_shell *shell)
+{
+	int	i;
+	char	*str;
+	
+	i = -1;
+	while(shell->env.current[++i])
+	{
+		if(ft_strncmp(shell->env.current[i], "HOME=", 5) == 0)
+			str = ft_strdup(shell->env.current[i] + 5);
+	}
+	chdir(str);
+}
 
 void	change_pwd(t_shell *shell)
 {
@@ -32,9 +46,7 @@ void	change_pwd(t_shell *shell)
 void	ft_cd(t_shell *shell)
 {
 	if (shell->lst.executor[1] == NULL)
-	{
-		chdir("/root");
-	}
+		cd_home(shell);
 	else
 	{
 		shell->cd.i = -1;

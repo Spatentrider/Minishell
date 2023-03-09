@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/27 15:15:30 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/09 15:31:00 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_unset
 	int	i;
 	int	j;
 	int	position;
+	int k;
 }					t_unset;
 
 typedef struct s_env
