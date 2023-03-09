@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:20:50 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/09 10:34:52 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	clean_single(t_shell *shell)
 	{
 		if (shell->lst.input[i] == 39)
 		{
-			if(shell->lst.input[i + 1] == '$')
-				shell->single_quote += 1;
+			if (shell->lst.input[i + 1] == '$')
+				shell->lst.input[i] = '\a';
 			j++;
 		}
 	}
@@ -67,7 +67,8 @@ void	clean_single(t_shell *shell)
 		{
 			str[j] = shell->lst.input[i];
 			j++;
-		}		
+		}
+		str[j] = '\0';
 	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
@@ -82,15 +83,9 @@ void	clean_all_quote(t_shell *shell)
 	while (shell->lst.input[++i])
 	{
 		if (shell->lst.input[i] == 39)
-		{
 			clean_single(shell);
-			break ;
-		}
 		if (shell->lst.input[i] == 34)
-		{
 			clean_double(shell);
-			break ;
-		}
 	}
 }
 
