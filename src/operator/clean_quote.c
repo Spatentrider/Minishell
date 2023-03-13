@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/03/09 10:34:52 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/13 15:42:27 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,36 @@ void	clean_double(t_shell *shell)
 	shell->lst.input = ft_strdup(str);
 }
 
-void	clean_single(t_shell *shell)
+int	cnt_quote(t_shell *shell, int j)
 {
-	int		i;
-	int		j;
-	char	*str;
-
-	i = -1;
-	j = 0;
-	while (shell->lst.input[++i])
+	while (shell->lst.input[++shell->exp.i])
 	{
-		if (shell->lst.input[i] == 39)
+		if (shell->lst.input[shell->exp.i] == 39)
 		{
-			if (shell->lst.input[i + 1] == '$')
-				shell->lst.input[i] = '\a';
+			if (shell->lst.input[shell->exp.i + 1] == '$')
+				shell->lst.input[shell->exp.i] = '\a';
 			j++;
 		}
 	}
-	str = malloc(sizeof(char *) * (i - j));
+	return (j);
+}
+
+void	clean_single(t_shell *shell)
+{
+	int		j;
+	char	*str;
+
+	shell->exp.i = -1;
 	j = 0;
-	i = -1;
-	while (shell->lst.input[++i])
+	j = cnt_quote(shell, j);
+	str = malloc(sizeof(char *) * (shell->exp.i - j));
+	j = 0;
+	shell->exp.i = -1;
+	while (shell->lst.input[++shell->exp.i])
 	{
-		if (shell->lst.input[i] != 39)
+		if (shell->lst.input[shell->exp.i] != 39)
 		{
-			str[j] = shell->lst.input[i];
+			str[j] = shell->lst.input[shell->exp.i];
 			j++;
 		}
 		str[j] = '\0';
