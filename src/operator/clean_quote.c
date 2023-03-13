@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/03/13 15:42:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/13 17:13:56 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	cnt_quote(t_shell *shell, int j)
 		{
 			if (shell->lst.input[shell->exp.i + 1] == '$')
 				shell->lst.input[shell->exp.i] = '\a';
-			j++;
+			else
+				j++;
 		}
 	}
 	return (j);

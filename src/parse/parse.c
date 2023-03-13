@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/13 16:18:00 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/13 16:33:55 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,6 @@ int	check_quote(char *string)
 	count_single = 0;
 	count_quote = double_count(string, i, count_quote);
 	count_single = single_count(string, i, count_single);
-	i = ft_strlen(string);
-	if (i == 2)
-	{
-		if ((string[0] == 34 && string[1] == 34)
-			|| (string[0] == 39 && string[1] == 39))
-		{
-			printf("Command %c%c not found\n", string[0], string[1]);
-			g_exit = 127;
-		}
-	}
 	if (count_quote % 2 != 0 || count_single % 2 != 0)
 	{
 		printf("minishell: quote not closed\n");
@@ -81,10 +71,28 @@ int	check_parameter(char *string, char c)
 	return (g_exit);
 }
 
+int	control(char *string)
+{
+	int	i;
+
+	i = ft_strlen(string);
+	if (i == 2)
+	{
+		if ((string[0] == 34 && string[1] == 34)
+			|| (string[0] == 39 && string[1] == 39))
+		{
+			printf("Command %s not found\n", string);
+			g_exit = 127;
+		}
+	}
+	return (g_exit);
+}
+
 int	parse(char **string)
 {
 	int	i;
 
+	g_exit = control(string[0]);
 	if (string[0][0] == '|')
 	{
 		printf("minishell: syntax error near unexpected token `|'\n");
