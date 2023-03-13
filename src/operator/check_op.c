@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/07 17:52:51 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/13 16:23:04 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,19 @@ int	check_red(char *input, t_shell *shell, int i)
 
 void	expansion(t_shell *shell)
 {
-	int		i;
 	int		j;
 	int		pos;
 	char	*str;
 	char	*curr;
 
-	i = -1;
-	while (shell->lst.executor[++i])
+	shell->exp.i = -1;
+	while (shell->lst.executor[++shell->exp.i])
 	{
-		if (ft_strncmp(shell->lst.executor[i], "$?", 2) == 0)
-			shell->lst.executor[i] = ft_itoa(shell->old_g_exit);
-		else if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
+		if (ft_strncmp(shell->lst.executor[shell->exp.i], "$?", 2) == 0)
+			shell->lst.executor[shell->exp.i] = ft_itoa(shell->old_g_exit);
+		else if (ft_strncmp(shell->lst.executor[shell->exp.i], "$", 1) == 0)
 		{
-			str = ft_strdup(shell->lst.executor[i] + 1);
+			str = ft_strdup(shell->lst.executor[shell->exp.i] + 1);
 			j = -1;
 			while (shell->env.current[++j])
 			{		
