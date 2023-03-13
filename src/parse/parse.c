@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/01 16:06:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/13 16:18:00 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_quote(char *string)
 		if ((string[0] == 34 && string[1] == 34)
 			|| (string[0] == 39 && string[1] == 39))
 		{
-			printf("minishell: command not found\n");
+			printf("Command %c%c not found\n", string[0], string[1]);
 			g_exit = 127;
 		}
 	}
