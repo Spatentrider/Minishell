@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:03:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:32:38 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	here_doc(char *redirection, t_shell *shell)
 {
 	int		i;
 
+	if (shell->here_pipe == 1)
+		dup2(shell->stdout, STDOUT_FILENO);
 	while (1)
 	{
 		shell->lst.doc = readline("> ");
@@ -55,6 +57,8 @@ void	here_doc(char *redirection, t_shell *shell)
 	}
 	free(shell->lst.doc);
 	shell->lst.doc = NULL;
+	if (shell->here_pipe == 1)
+		dup2(shell->out_pipe, STDOUT_FILENO);
 }
 
 void	here_doc_cat(char *redirection, t_shell *shell)
@@ -64,6 +68,8 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 
 	shell->lst.cat_array = (char **)malloc(sizeof(char *) * 40000);
 	j = 0;
+	if (shell->here_pipe == 1)
+		dup2(shell->stdout, STDOUT_FILENO);
 	while (1)
 	{
 		shell->lst.doc = readline("> ");
@@ -79,6 +85,8 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 	}
 	shell->lst.cat_array[j] = NULL;
 	j = -1;
+	if (shell->here_pipe == 1)
+		dup2(shell->out_pipe, STDOUT_FILENO);
 	while (shell->lst.cat_array[++j])
 		printf("%s\n", shell->lst.cat_array[j]);
 	free(shell->lst.doc);

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:22:07 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:32:23 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,18 @@ void	redirection(int c, t_shell *shell)
 	shell->lst.redirection = split_redirection(shell->lst.input);
 	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
-	if (shell->here_pipe == 1)
-	{
-		if (spec_here_doc(shell, c))
-			return ;
-	}
 	if (c == 1)
 		red_out(shell->lst.file[0]);
 	else if (c == 2)
 		red_inp(shell->lst.file[0]);
 	else if (c == 3)
 		append(shell->lst.file[0]);
-	else if (shell->lst.here_doc[1] == NULL && shell->here_pipe != 1)
+	else if (shell->lst.here_doc[1] == NULL)
 	{
 		here_doc_cat(shell->lst.file[0], shell);
 		return ;
 	}
-	else if (c == 4 && shell->here_pipe != 1)
+	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
 	delete_op(shell);
 	executor(shell);
