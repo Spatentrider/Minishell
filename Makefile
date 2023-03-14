@@ -1,6 +1,7 @@
 NAME := minishell
 
-SRC						=	src/main.c
+SRC						=	src/main.c \
+							src/reset.c
 
 SRC_ARR					=	src/arr_utils/arr_add_back.c
 

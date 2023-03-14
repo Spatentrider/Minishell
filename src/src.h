@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/01 15:40:18 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 15:35:44 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "pipe/pipe.h"
 # include "commands/commands.h"
 
-int	loop(t_shell *shell, int i, int j);
+int		loop(t_shell *shell, int i, int j);
+void	reset_var(t_shell *shell);
+void	init_all(t_shell *shell);
 
 #endif

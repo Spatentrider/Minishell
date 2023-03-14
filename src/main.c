@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/13 16:13:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 15:34:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	loop(t_shell *shell, int i, int j)
 		shell->lst.input = readline("minishell: ");
 		ctrl_d(shell);
 		p = control_space(shell, k);
+		init_all(shell);
 		if (p == 0)
 		{
 			shell->lst.split = split_cmd(shell->lst.input);
@@ -81,7 +82,7 @@ int	loop(t_shell *shell, int i, int j)
 			dup2(j, STDIN_FILENO);
 			if (ft_strncmp(shell->lst.input, "$?", 3) != 0)
 				shell->old_g_exit = g_exit;
-			g_exit = 0;
+			reset_var(shell);
 		}
 	}
 }
