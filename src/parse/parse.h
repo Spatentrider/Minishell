@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:35:28 by mich              #+#    #+#             */
-/*   Updated: 2023/02/01 15:35:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 14:45:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "../src.h"
 
+/*parse_utils.c*/
+int	control(char *string);
 /*parse.c*/
-int		check_pipe(char *string);
-int		check_redirection(char *string);
-int		check_quote(char *string);
-int		check_parameter(char *string, char c);
-int		parse(char **string);
+int	check_pipe(char *string);
+int	check_redirection(char *string);
+int	check_quote(char *string);
+int	check_parameter(char *string, char c);
+int	parse(char **string);
 
 #endif

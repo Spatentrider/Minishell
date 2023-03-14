@@ -31,7 +31,8 @@ SRC_OPERATOR			=	src/operator/check_op.c \
 								src/operator/redirection.c \
 								src/operator/utils.c
 
-SRC_PARSE				=	src/parse/parse.c
+SRC_PARSE				=	src/parse/parse_utils.c \
+							src/parse/parse.c
 
 SRC_PIPE				=	src/pipe/pipe.c \
 							src/pipe/pipe_utils.c
@@ -132,7 +133,7 @@ clean_all: fclean
 readline:	$(READLINE_MAKEFILE)
 
 norm:
-	@norminette -R CheckForbiddenSourceHeader src/*.c src/*.h src/*/*.c src/*/*.h libft/*c libft/*.h
+	@norminette -R CheckForbiddenSourceHeader src/*.c src/*.h src/*/*.c src/*/*.h src/*/*/*.c src/*/*/*.h libft/*c libft/*.h
 
 sanitize:	re $(OBJS)
 			@$(CC) $(DEBUG_F) $(OBJS) $(LIBFT_A) $(READLINE_A) $(READLINE_FLAG) -o $(NAME)

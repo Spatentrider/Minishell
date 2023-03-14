@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/13 16:33:55 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 14:44:54 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,6 @@ int	check_parameter(char *string, char c)
 		return (g_exit = check_pipe(string));
 	if (c == '<' || c == '>')
 		return (g_exit = check_redirection(string));
-	return (g_exit);
-}
-
-int	control(char *string)
-{
-	int	i;
-
-	i = ft_strlen(string);
-	if (i == 2)
-	{
-		if ((string[0] == 34 && string[1] == 34)
-			|| (string[0] == 39 && string[1] == 39))
-		{
-			printf("Command %s not found\n", string);
-			g_exit = 127;
-		}
-	}
 	return (g_exit);
 }
 
