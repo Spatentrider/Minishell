@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:46:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:20:12 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		control_q(int q, int d);
 int		control_qt(int q, int d, int s);
 int		clean_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
+/*here_pipe.c*/
+int		spec_here_doc(t_shell *shell, int c);
 /*redirection.c*/
 void	red_out(char *redirection);
 void	red_inp(char	*redirection);

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/14 15:29:20 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:02:37 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ typedef struct s_shell
 	int		old_g_exit;
 	int		stdin;
 	int		stdout;
+	int		out_pipe;
 	int		single_quote;
+	int		here_pipe;
 }				t_shell;
 
 #endif

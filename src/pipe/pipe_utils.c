@@ -6,12 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:55:58 by mich              #+#    #+#             */
-/*   Updated: 2023/03/03 15:44:00 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:03:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
-	// write(2, shell->lst.input, ft_strlen(shell->lst.input));
 
 int	count_pipe(t_shell *shell, int i)
 {
@@ -36,6 +35,8 @@ int	process_child(int *fd, int c, t_shell *shell, int i)
 		dup2(shell->stdout, STDOUT_FILENO);
 	else
 		dup2(fd[1], STDOUT_FILENO);
+	shell->here_pipe = 1;
+	shell->out_pipe = dup(STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	d = check_red(shell->lst.input, shell, i);

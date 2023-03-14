@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:25:43 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 15:35:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:06 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_all(t_shell *shell)
 	shell->cd.bash_level = 0;
 	shell->cd.i = 0;
 	shell->cd.s = 0;
+	shell->here_pipe = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -46,4 +47,5 @@ void	reset_var(t_shell *shell)
 	shell->cd.bash_level = 0;
 	shell->cd.i = 0;
 	shell->cd.s = 0;
+	shell->here_pipe = 0;
 }
