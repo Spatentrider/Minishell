@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:25:43 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:04:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 14:40:14 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_all(t_shell *shell)
 
 void	reset_var(t_shell *shell)
 {
+	g_exit = 0;
 	shell->unset.i = 0;
 	shell->unset.j = 0;
 	shell->unset.position = 0;

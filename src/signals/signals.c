@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:26:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 16:17:25 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,17 @@ void	signal_handler(int sig)
 
 void	signal_handler2(int sig)
 {
-	g_exit = 500;
+	g_exit = 130;
 	printf("\n");
-	signal(SIGQUIT, SIG_IGN);
+	rl_replace_line("", 0);
+	rl_redisplay();
+	(void)sig;
+}
+
+void	signal_handler3(int sig)
+{
+	printf("\n");
+	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 	(void)sig;

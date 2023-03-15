@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/06 15:46:15 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 16:23:14 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_fork(t_shell *shell)
 
 	pid = fork();
 	signal(SIGINT, signal_handler2);
+	signal(SIGQUIT, SIG_DFL);
 	if (pid == 0)
 	{
 		if (execve(ft_strjoin("/bin/", shell->lst.executor[0]), \
@@ -80,7 +81,7 @@ int	ab_path(t_shell	*shell)
 		{
 			if (execve(shell->lst.executor[0], shell->lst.executor, NULL) == -1)
 				exit(EXIT_FAILURE);
-			if (g_exit == 500)
+			if (g_exit == 130)
 				exit(0);
 		}
 		else if (pid > 0)

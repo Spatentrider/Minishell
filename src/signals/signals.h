@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:09:29 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 14:26:04 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 16:19:56 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@
 
 void	signal_handler(int sig);
 void	signal_handler2(int sig);
-
+void	signal_handler3(int sig);
 #endif
