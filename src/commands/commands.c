@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/15 16:23:14 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/15 16:33:55 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	minishell_case(t_shell *shell)
 	return (1);
 }
 
-int	ft_fork(t_shell *shell)
+int	ft_fork(t_shell *shell, char *str)
 {
 	int	pid;
 	int	status;
@@ -51,8 +51,7 @@ int	ft_fork(t_shell *shell)
 	signal(SIGQUIT, SIG_DFL);
 	if (pid == 0)
 	{
-		if (execve(ft_strjoin("/bin/", shell->lst.executor[0]), \
-			shell->lst.executor, NULL) == -1)
+		if (execve(str, shell->lst.executor, NULL) == -1)
 			exit(EXIT_FAILURE);
 		if (g_exit == 500)
 			exit(0);

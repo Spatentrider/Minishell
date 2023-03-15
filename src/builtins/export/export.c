@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/06 15:41:08 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 16:28:48 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,13 @@ void	print_export(t_shell *shell, char **str_save)
 	while (shell->exp.sort_env[++i])
 	{
 		str_save = ft_split(shell->exp.sort_env[i], '=');
-		printf("declare -x %s=%c", str_save[0], 34);
-		printf("%s%c\n", str_save[1], 34);
+		if (str_save[1] == NULL)
+			printf("declare -x %s\n", str_save[0]);
+		else
+		{
+			printf("declare -x %s=%c", str_save[0], 34);
+			printf("%s%c\n", str_save[1], 34);	
+		}
 	}
 }
 

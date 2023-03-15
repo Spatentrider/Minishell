@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:12:50 by mich              #+#    #+#             */
-/*   Updated: 2023/03/01 15:45:55 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/15 16:34:50 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	control_path(t_shell *shell, char **path, char *str)
 				str = ft_strjoin(str, shell->lst.executor[0]);
 				if (!access(str, F_OK))
 				{
-					ft_fork(shell);
+					ft_fork(shell, str);
 					return (1);
 				}
 			}
