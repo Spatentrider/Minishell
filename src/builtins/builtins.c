@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/13 16:44:09 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 12:01:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	executor(t_shell *shell)
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
+		shell->old_g_exit = 127;
 		return (g_exit);
 	}
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
