@@ -17,6 +17,11 @@ void	ft_exit(t_shell *shell)
 	int	k;
 
 	k = -1;
+	if(shell->lst.executor[2] != NULL)
+	{
+		printf("exit\nbash: exit: too many arguments\n");
+		return ;
+	}
 	if (shell->lst.executor[1] != NULL)
 	{
 		while (shell->lst.executor[1][++k])
@@ -28,7 +33,7 @@ void	ft_exit(t_shell *shell)
 					printf("exit\n");
 					printf("minishell: exit: %s: numeric argument required\n", \
 					shell->lst.executor[1]);
-					return ;
+					exit(1);
 				}
 			}
 		}

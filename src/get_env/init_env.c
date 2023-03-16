@@ -21,27 +21,26 @@
  */
 void	get_env(char **envp, t_shell *env_list)
 {
-	int	c;
-	int	i;
+	int		c;
+	int		i;
+	char	*str;
 
 	c = -1;
 	i = -1;
+	str= "SHELL=minishell";
 	while (envp[++i])
 		;
 	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
 	env_list->env.i = -1;
 	while (envp[++c])
 	{
-		if (ft_strncmp("PATH", envp[c], 4) == 0)
-		{
-			env_list->env.save = ft_strdup(envp[c]);
-			while (envp[c][++env_list->env.i])
-				;
-		}
 		env_list->env.current[c] = ft_strdup(envp[c]);
 		if (ft_strncmp("SHLVL=", envp[c], 6) == 0)
 			change_shlvl(env_list);
 		if (ft_strncmp("SHELL", envp[c], 5) == 0)
-			env_list->env.current[c] = "SHELL=minishell";
+		{
+			free(env_list->env.current[c]);
+			env_list->env.current[c] = ft_strdup(str);
+		}
 	}
 }
