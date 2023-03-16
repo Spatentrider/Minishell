@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 15:44:45 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 15:50:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,31 @@
 void	list_expansion(char *current, int pos, t_shell *shell)
 {
 	int		i;
+	int		j;
+	int		dl;
 	char	*str;
 
 	i = -1;
+	j = -1;
+	dl = 0;
 	str = ft_strdup(current + pos);
 	while (shell->lst.executor[++i])
 	{
 		if (ft_strncmp(shell->lst.executor[i], "$", 1) == 0)
 			break ;
 	}
-	free(shell->lst.executor[i]);
-	shell->lst.executor[i] = ft_strdup(str + 1);
-	free(str);
-	str = NULL;
+	while (shell->lst.executor[i][++j])
+	{
+		if (shell->lst.executor[i][++j] == '$')
+			dl++;
+	}
+	if (dl == 1)
+	{
+		free(shell->lst.executor[i]);
+		shell->lst.executor[i] = ft_strdup(str + 1);
+		free(str);
+		str = NULL;
+	}
 }
 
 void	expansion(t_shell *shell)
