@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 14:52:42 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 14:55:07 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char	**sort(char **sorting)
 
 void	change_var(t_shell *shell, int c)
 {
+	if (ft_strncmp(shell->lst.executor[c], "=", 1) == 0)
+		printf("minishell: export: '=': not a valid identifier\n");
 	shell->echo.j = 0;
 	while (shell->env.current[++shell->exp.i])
 	{
@@ -117,8 +119,6 @@ void	ft_export(t_shell *shell)
 		{
 			shell->exp.j = -1;
 			shell->exp.i = -1;
-			if (ft_strncmp(shell->lst.executor[c], "=", 1) == 0)
-				printf("minishell: export: '=': not a valid identifier\n");
 			change_var(shell, c);
 			if (shell->exp.j == -1)
 			{
