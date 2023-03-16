@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 11:16:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 11:20:59 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	signal_handler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	g_exit = 1;
 	(void)sig;
 }
 

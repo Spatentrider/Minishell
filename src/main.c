@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/15 16:11:48 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/16 11:24:34 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,13 @@ int	loop(t_shell *shell, int i, int j)
 	{	
 		p = 0;
 		k = -1;
+		reset_var(shell);
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
 		shell->lst.input = readline("minishell: ");
+		if (ft_strncmp(shell->lst.input, "$?", 3) != 0)
+				shell->old_g_exit = g_exit;
+		reset_var(shell);
 		ctrl_d(shell);
 		p = control_space(shell, k);
 		init_all(shell);
@@ -80,9 +84,6 @@ int	loop(t_shell *shell, int i, int j)
 				check_operator(shell);
 			dup2(i, STDOUT_FILENO);
 			dup2(j, STDIN_FILENO);
-			if (ft_strncmp(shell->lst.input, "$?", 3) != 0)
-				shell->old_g_exit = g_exit;
-			reset_var(shell);
 		}
 	}
 }

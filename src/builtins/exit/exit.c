@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/03/06 15:57:11 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 11:33:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_exit(t_shell *shell)
 	int	k;
 
 	k = -1;
-	if(shell->lst.executor[2] != NULL)
+	if (shell->lst.executor[1] != NULL && shell->lst.executor[2] != NULL)
 	{
-		printf("exit\nbash: exit: too many arguments\n");
+		printf("exit\nminishell: exit: too many arguments\n");
 		return ;
 	}
 	if (shell->lst.executor[1] != NULL)
