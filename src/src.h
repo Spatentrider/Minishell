@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/14 15:35:44 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 15:16:47 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "signals/signals.h"
 # include "pipe/pipe.h"
 # include "commands/commands.h"
+# include "expansion/expansion.h"
 
 int		loop(t_shell *shell, int i, int j);
 void	reset_var(t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:34:23 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 15:13:22 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /*check_op.c*/
 void	redirection(int c, t_shell *shell);
 int		check_red(char *input, t_shell *shell, int i);
-void	expansion(t_shell *shell);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);
 /*clean_quote.c*/
