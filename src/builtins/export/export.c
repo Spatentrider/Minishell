@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 10:52:39 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/16 11:11:58 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,23 @@ char	**sort(char **sorting)
 
 void	change_var(t_shell *shell, int c)
 {
+	shell->echo.j = 0;
 	while (shell->env.current[++shell->exp.i])
 	{
 		shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
-		if (ft_strncmp(shell->env.current[shell->exp.i], \
+		printf("%d\n", shell->exp.pos);
+		if (shell->exp.pos == 1)
+		{
+			while (shell->env.current[shell->exp.i][++shell->echo.j])
+				;
+			if (ft_strncmp(shell->env.current[shell->exp.i], \
+					shell->lst.executor[c], shell->echo.j) == 0)
+			{
+				shell->env.current[shell->exp.i] = shell->lst.executor[c];
+				shell->exp.j = 0;
+			}
+		}
+		else if (ft_strncmp(shell->env.current[shell->exp.i], \
 					shell->lst.executor[c], shell->exp.pos + 1) == 0)
 		{
 			shell->env.current[shell->exp.i] = shell->lst.executor[c];
@@ -101,8 +114,11 @@ void	ft_export(t_shell *shell)
 	}
 	else
 	{
-		if (ft_strncmp(shell->lst.executor[2], "=", 1) == 0)
-			printf("minishell: export: '=': not a valid identifier\n");
+		if (shell->lst.executor[2] != NULL)
+		{
+			if (ft_strncmp(shell->lst.executor[2], "=", 1) == 0)
+				printf("minishell: export: '=': not a valid identifier\n");
+		}
 		while (shell->lst.executor[++c])
 		{
 			shell->exp.j = -1;
