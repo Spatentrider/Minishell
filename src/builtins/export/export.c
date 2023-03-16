@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/15 16:28:48 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/16 10:52:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_export(t_shell *shell, char **str_save)
 		else
 		{
 			printf("declare -x %s=%c", str_save[0], 34);
-			printf("%s%c\n", str_save[1], 34);	
+			printf("%s%c\n", str_save[1], 34);
 		}
 	}
 }
@@ -101,6 +101,8 @@ void	ft_export(t_shell *shell)
 	}
 	else
 	{
+		if (ft_strncmp(shell->lst.executor[2], "=", 1) == 0)
+			printf("minishell: export: '=': not a valid identifier\n");
 		while (shell->lst.executor[++c])
 		{
 			shell->exp.j = -1;
