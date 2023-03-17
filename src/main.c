@@ -74,7 +74,7 @@ int	loop(t_shell *shell, int i, int j)
 		if (ft_strncmp(shell->lst.input, "$?", 3) != 0)
 			shell->old_g_exit = g_exit;
 		reset_var(shell);
-		ctrl_d(shell);
+		//ctrl_d(shell);
 		p = control_space(shell, k);
 		if (p == 0)
 		{

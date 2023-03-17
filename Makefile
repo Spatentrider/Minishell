@@ -49,6 +49,8 @@ SRC_SPLIT				=	src/split/split_executor.c \
 								src/split/split_pipe.c \
 								src/split/split_red.c
 
+SRC_FREE				=	src/free/free.c
+
 FLAGS				:= -g -Wall -Wextra -Werror -fcommon
 
 OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
@@ -68,7 +70,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PARSE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PIPE:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_SPLIT:.c=.o}) \
-						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o}) 
+						$(addprefix $(OBJS_DIR)/, ${SRC_SIGNALS:.c=.o})	\
+						$(addprefix $(OBJS_DIR)/, ${SRC_FREE:.c=.o})
 
 OBJS_DIR			= objs
 

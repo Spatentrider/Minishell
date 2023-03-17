@@ -10,26 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src.h"
+#include "../src.h"
 
 void	free_struct2(t_shell *shell, int i)
 {
-	i = -1;
-	while (shell->exp.sort_env[++i])
+	if(shell->exp.sort_env)
 	{
-		free(shell->exp.sort_env[i]);
-		shell->exp.sort_env[i] = NULL;
+		i = -1;
+		while (shell->exp.sort_env[++i])
+		{
+			free(shell->exp.sort_env[i]);
+			shell->exp.sort_env[i] = NULL;
+		}
+		free(shell->exp.sort_env);
+		shell->exp.sort_env = NULL;
 	}
-	i = -1;
-	while (shell->lst.executor[++i])
+	if(shell->lst.executor)
 	{
+		i = -1;
+		while (shell->lst.executor[++i])
+		{
+			free(shell->lst.executor[i]);
+			shell->lst.executor[i] = NULL;
+		}
 		free(shell->lst.executor[i]);
-		shell->lst.executor[i] = NULL;
+		shell->lst.executor = NULL;
 	}
-	i = -1;
-	while (shell->lst.expansion[++i])
+	if(shell->lst.expansion)
 	{
-		free(shell->lst.expansion[i]);
+		i = -1;
+		while (shell->lst.expansion[++i])
+		{
+			free(shell->lst.expansion[i]);
+			shell->lst.expansion[i] = NULL;
+		}
+		free(shell->lst.expansion);
 		shell->lst.expansion[i] = NULL;
 	}
 }
@@ -41,24 +56,31 @@ void	free_struct2(t_shell *shell, int i)
  * 
  * @param shell the structure of structures
  */
+
 void	free_struct(t_shell *shell)
 {
 	int	i;
 
-	i = -1;
-	while (shell->env.current[++i])
+	if(shell->env.current)
 	{
-		free(shell->env.current[i]);
-		shell->env.current[i] = NULL;
+		i = -1;
+		while (shell->env.current[++i])
+		{
+			free(shell->env.current[i]);
+			shell->env.current[i] = NULL;
+		}
+		free(shell->env.current);
 	}
-	free(shell->env.current);
 	free(shell->lst.input);
-	i = -1;
-	while (shell->lst.split[++i])
+	if(shell->lst.split)
 	{
-		free(shell->lst.split[i]);
-		shell->lst.split[i] = NULL;
+		i = -1;
+		while (shell->lst.split[++i])
+		{
+			free(shell->lst.split[i]);
+			shell->lst.split[i] = NULL;
+		}
+		free(shell->lst.split);
 	}
-	free(shell->lst.split);
 	free_struct2(shell, i);
 }

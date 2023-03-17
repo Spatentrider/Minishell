@@ -24,9 +24,9 @@
 # include "pipe/pipe.h"
 # include "commands/commands.h"
 # include "expansion/expansion.h"
+# include "free/free.h"
 
 int		loop(t_shell *shell, int i, int j);
 void	reset_var(t_shell *shell);
 void	init_all(t_shell *shell);
-
 #endif
