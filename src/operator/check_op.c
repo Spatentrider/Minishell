@@ -15,6 +15,7 @@
 void	redirection(int c, t_shell *shell)
 {
 	shell->lst.redirection = split_redirection(shell->lst.input);
+	ft_sarprint(shell->lst.redirection);
 	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (c == 1)

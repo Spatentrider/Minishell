@@ -62,8 +62,8 @@ void	free_struct(t_shell *shell)
 		ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
 	if(shell->lst.input)
 		free(shell->lst.input);
-	if(shell->lst.split)
-		ft_sarfree(shell->lst.split, ft_sarsize(shell->lst.split));
+	//if(shell->lst.split)
+		//ft_sarfree(shell->lst.split, ft_sarsize(shell->lst.split));
 	if(shell->exp.sort_env)
 		ft_sarfree(shell->exp.sort_env, ft_sarsize(shell->exp.sort_env));
 	if(shell->lst.expansion)

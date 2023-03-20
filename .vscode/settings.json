@@ -5,6 +5,7 @@
         "src.h": "c",
         "export.h": "c",
         "minishell.h": "c",
-        "free.h": "c"
+        "free.h": "c",
+        "operator.h": "c"
     }
 }

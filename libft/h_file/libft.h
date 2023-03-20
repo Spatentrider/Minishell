@@ -68,5 +68,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 char	*strdup_curr(const char *s1);
-
+int		ft_sarprint(char **sar);
+char	*ft_strjoinfree(char *s1, char *s2);
 #endif

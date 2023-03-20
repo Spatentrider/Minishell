@@ -99,7 +99,7 @@ int	loop(t_shell *shell, int i, int j)
 		p = control_space(shell, k);
 		if (p == 0)
 		{
-			shell->lst.split = split_cmd(shell->lst.input);
+			//shell->lst.split = split_cmd(shell->lst.input);
 			shell->lst.redirection = NULL;
 			if (ft_strncmp(shell->lst.input, "", 1))
 				add_history(shell->lst.input);
@@ -109,6 +109,8 @@ int	loop(t_shell *shell, int i, int j)
 			dup2(i, STDOUT_FILENO);
 			dup2(j, STDIN_FILENO);
 		}
+		free(shell->lst.input);
+		shell->lst.input = NULL;
 	}
 }
 

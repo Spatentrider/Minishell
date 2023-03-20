@@ -59,6 +59,8 @@ SRC_LIBFT = lib/ft_atoi.c \
 	  lib/ft_lstmap.c \
 	  lib/ft_lstnew.c \
 	  lib/ft_lstsize.c \
+	  lib/ft_sarprint.c \
+	  lib/ft_strjoinfree.c \
 
 SRC_PRINTF = printf/ft_printf.c \
 				printf/ft_printf_utils.c \

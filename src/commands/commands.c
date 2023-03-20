@@ -133,7 +133,7 @@ int	commands(t_shell *shell)
 	char	*str;
 
 	path = (char **)malloc(sizeof(char *) * 200);
-	str = (char *)malloc(sizeof(char) * 200);
+	str = NULL;
 	if (control_cmd(shell))
 		return (1);
 	else if (control_path(shell, path, str))
