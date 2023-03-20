@@ -12,41 +12,38 @@
 
 #include "../src.h"
 
-void	free_struct2(t_shell *shell, int i)
+void	ft_sarfree(char **sar, int y)
 {
-	if(shell->exp.sort_env)
+	int	x;
+
+	x = -1;
+	if (!sar)
+		return ;
+	while (++x < y)
 	{
-		i = -1;
-		while (shell->exp.sort_env[++i])
+		if (sar[x])
 		{
-			free(shell->exp.sort_env[i]);
-			shell->exp.sort_env[i] = NULL;
+			free(sar[x]);
+			sar[x] = NULL;
 		}
-		free(shell->exp.sort_env);
-		shell->exp.sort_env = NULL;
 	}
-	if(shell->lst.executor)
+	if (sar)
 	{
-		i = -1;
-		while (shell->lst.executor[++i])
-		{
-			free(shell->lst.executor[i]);
-			shell->lst.executor[i] = NULL;
-		}
-		free(shell->lst.executor[i]);
-		shell->lst.executor = NULL;
+		free(sar);
+		sar = NULL;
 	}
-	if(shell->lst.expansion)
-	{
-		i = -1;
-		while (shell->lst.expansion[++i])
-		{
-			free(shell->lst.expansion[i]);
-			shell->lst.expansion[i] = NULL;
-		}
-		free(shell->lst.expansion);
-		shell->lst.expansion[i] = NULL;
-	}
+}
+
+int	ft_sarsize(char **tocount)
+{
+	int	j;
+
+	j = -1;
+	if (!tocount)
+		return (0);
+	while (tocount[++j])
+		;
+	return (j);
 }
 
 /**
@@ -59,28 +56,15 @@ void	free_struct2(t_shell *shell, int i)
 
 void	free_struct(t_shell *shell)
 {
-	int	i;
 
-	if(shell->env.current)
-	{
-		i = -1;
-		while (shell->env.current[++i])
-		{
-			free(shell->env.current[i]);
-			shell->env.current[i] = NULL;
-		}
-		free(shell->env.current);
-	}
+	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
 	free(shell->lst.input);
 	if(shell->lst.split)
-	{
-		i = -1;
-		while (shell->lst.split[++i])
-		{
-			free(shell->lst.split[i]);
-			shell->lst.split[i] = NULL;
-		}
-		free(shell->lst.split);
-	}
-	free_struct2(shell, i);
+		ft_sarfree(shell->lst.split, ft_sarsize(shell->lst.split));
+	if(shell->exp.sort_env)
+		ft_sarfree(shell->exp.sort_env, ft_sarsize(shell->exp.sort_env));
+	if(shell->lst.executor)
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+	if(shell->lst.expansion)
+		ft_sarfree(shell->lst.expansion, ft_sarsize(shell->lst.expansion));
 }
