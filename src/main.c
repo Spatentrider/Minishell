@@ -12,6 +12,24 @@
 
 #include "src.h"
 
+int	ft_sarprint(char **sar)
+{
+	int	i;
+	int	ret;
+
+	i = -1;
+	ret = 0;
+	if (!sar || !sar[0])
+		return (0);
+	ft_printf("---SPLITTED ARGS---\n");
+	while (sar[++i] && sar[i] != 0)
+	{
+		ret += ft_printf("\"%s\"\n", sar[i]);
+	}
+	ft_printf("-----########-----\n");
+	return (ret);
+}
+
 int	control_space(t_shell *shell, int k)
 {
 	int	p;
@@ -36,6 +54,7 @@ int	check_error_cod(t_shell *shell)
 
 	i = -1;
 	shell->lst.error = ft_split(shell->lst.input, ' ');
+	ft_sarprint(shell->lst.error);
 	while (shell->lst.error[++i])
 	{
 		g_exit = parse(shell->lst.error, shell);
@@ -45,6 +64,7 @@ int	check_error_cod(t_shell *shell)
 			break ;
 		}
 	}
+	ft_sarfree(shell->lst.error, ft_sarsize(shell->lst.error));
 	return (g_exit);
 }
 
@@ -52,6 +72,7 @@ void	ctrl_d(t_shell *shell)
 {
 	if (!shell->lst.input)
 	{
+		free_struct(shell);
 		printf("Exiting...\n");
 		exit(0);
 	}
@@ -69,12 +90,12 @@ int	loop(t_shell *shell, int i, int j)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
 		shell->lst.input = readline("minishell: ");
+		ctrl_d(shell);
 		if (g_exit != 0)
 			shell->old_g_exit = g_exit;
 		if (ft_strncmp(shell->lst.input, "$?", 3) != 0)
 			shell->old_g_exit = g_exit;
 		reset_var(shell);
-		//ctrl_d(shell);
 		p = control_space(shell, k);
 		if (p == 0)
 		{

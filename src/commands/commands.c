@@ -122,6 +122,8 @@ void	change_shlvl(t_shell *shell)
 	if (save[1] == '\0')
 		save[0]++;
 	shell->env.current[i] = ft_strjoin("SHLVL=", save);
+	free(save);
+	save = NULL;
 }
 
 int	commands(t_shell *shell)

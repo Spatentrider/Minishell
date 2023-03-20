@@ -5,5 +5,6 @@
 
 /*free.c*/
 void	free_struct(t_shell *shell);
-void	free_struct2(t_shell *shell, int i);
+void	ft_sarfree(char **sar, int y);
+int	    ft_sarsize(char **tocount);
 #endif

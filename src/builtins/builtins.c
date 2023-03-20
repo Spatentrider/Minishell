@@ -64,6 +64,8 @@ int	executor(t_shell *shell)
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
+		if(shell->lst.executor)
+			ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 		shell->old_g_exit = 127;
 		return (g_exit);
 	}
@@ -83,5 +85,7 @@ int	executor(t_shell *shell)
 		ft_unset (shell, shell->env.current);
 	else
 		commands(shell);
+	if(shell->lst.executor)
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 	return (0);
 }

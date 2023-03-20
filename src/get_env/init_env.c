@@ -27,11 +27,10 @@ void	get_env(char **envp, t_shell *env_list)
 
 	c = -1;
 	i = -1;
-	str= "SHELL=minishell";
+	str = "SHELL=minishell";
 	while (envp[++i])
 		;
 	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
-	env_list->env.i = -1;
 	while (envp[++c])
 	{
 		env_list->env.current[c] = ft_strdup(envp[c]);
@@ -43,4 +42,5 @@ void	get_env(char **envp, t_shell *env_list)
 			env_list->env.current[c] = ft_strdup(str);
 		}
 	}
+	env_list->env.current[c] = NULL;
 }

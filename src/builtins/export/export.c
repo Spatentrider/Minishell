@@ -45,6 +45,7 @@ void	print_export(t_shell *shell, char **str_save)
 			printf("declare -x %s=%c", str_save[0], 34);
 			printf("%s%c\n", str_save[1], 34);
 		}
+		ft_sarfree(str_save, ft_sarsize(str_save));
 	}
 }
 
@@ -107,7 +108,7 @@ void	ft_export(t_shell *shell)
 	int		c;
 
 	c = 0;
-	str_save = (char **)malloc(sizeof(char *) * 100);
+	str_save = NULL;
 	if (shell->lst.executor[1] == NULL)
 	{
 		shell->exp.sort_env = sort(shell->env.current);
@@ -127,5 +128,4 @@ void	ft_export(t_shell *shell)
 			}
 		}
 	}
-	return ;
 }
