@@ -121,6 +121,7 @@ void	change_shlvl(t_shell *shell)
 	}
 	if (save[1] == '\0')
 		save[0]++;
+	free(shell->env.current[i]);
 	shell->env.current[i] = ft_strjoin("SHLVL=", save);
 	free(save);
 	save = NULL;
