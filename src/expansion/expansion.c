@@ -38,8 +38,8 @@ void	list_expansion(char *current, int pos, t_shell *shell)
 		free(shell->lst.executor[i]);
 		shell->lst.executor[i] = ft_strdup(str + 1);
 		free(str);
-		str = NULL;
 	}
+	free(str);
 }
 
 void	expansion(t_shell *shell)
@@ -64,6 +64,7 @@ void	expansion(t_shell *shell)
 				curr = strdup_curr(shell->env.current[j]);
 				if (ft_strncmp(curr, str, pos) == 0)
 					list_expansion(shell->env.current[j], pos, shell);
+				free(curr);
 			}
 			free(str);
 			str = NULL;
