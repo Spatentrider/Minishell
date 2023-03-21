@@ -24,6 +24,7 @@ void	cd_home(t_shell *shell)
 			str = ft_strdup(shell->env.current[i] + 5);
 	}
 	chdir(str);
+	free(str);
 }
 
 void	change_pwd(t_shell *shell)
@@ -33,11 +34,13 @@ void	change_pwd(t_shell *shell)
 		if (strncmp(shell->env.current[shell->cd.i], "OLDPWD", 6) == 0)
 		{
 				shell->cd.pwd = ft_strjoin("OLDPWD=", shell->cd.oldpwd);
+				free(shell->env.current[shell->cd.i]);
 				shell->env.current[shell->cd.i] = shell->cd.pwd;
 		}
 		if (strncmp(shell->env.current[shell->cd.i], "PWD", 3) == 0)
 		{
-			shell->cd.pwd2 = ft_strjoin("PWD=", ft_pwd());
+			shell->cd.pwd2 = ft_strjoinfree(ft_strdup("PWD="), ft_pwd());
+			free(shell->env.current[shell->cd.i]);
 			shell->env.current[shell->cd.i] = shell->cd.pwd2;
 		}
 	}
@@ -59,5 +62,6 @@ void	ft_cd(t_shell *shell)
 			printf("cd: %s: No such file or directory\n", \
 				shell->lst.executor[1]);
 		}
+		free(shell->cd.oldpwd);
 	}
 }

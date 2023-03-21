@@ -52,18 +52,31 @@ int	ft_fork(t_shell *shell, char *str)
 	if (pid == 0)
 	{
 		if (execve(str, shell->lst.executor, NULL) == -1)
+		{
+			free(str);
 			exit(EXIT_FAILURE);
+		}
 		if (g_exit == 130 || g_exit == 131)
+		{
+			free(str);
 			exit(0);
+		}
 	}
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
+		{
+			free(str);
 			return (0);
+		}
 	}
 	else
+	{
+		free(str);
 		exit(EXIT_FAILURE);
+	}
+	free(str);
 	return (0);
 }
 

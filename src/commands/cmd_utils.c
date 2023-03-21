@@ -45,23 +45,17 @@ int	control_path(t_shell *shell)
 			while (path[++k])
 			{
 				str = ft_strjoin(path[k], "/");
-				str = ft_strjoin(str, shell->lst.executor[0]);
+				str = ft_strjoinfree(str, ft_strdup(shell->lst.executor[0]));
 				if (!access(str, F_OK))
 				{
 					ft_fork(shell, str);
-					free(str);
-					str = NULL;
 					ft_sarfree(path, ft_sarsize(path));
 					return (1);
 				}
+				free(str);
 			}
 		}
 	}
 	ft_sarfree(path, ft_sarsize(path));
-	if(str)
-	{
-		free(str);
-		str = NULL;
-	}
 	return (0);
 }
