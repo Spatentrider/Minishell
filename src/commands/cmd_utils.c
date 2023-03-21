@@ -27,10 +27,12 @@ int	control_cmd(t_shell *shell)
 	return (0);
 }
 
-int	control_path(t_shell *shell, char **path, char *str)
+int	control_path(t_shell *shell)
 {
 	int	c;
 	int	k;
+	char **path;
+	char *str;
 
 	c = -1;
 	k = -1;
@@ -47,10 +49,19 @@ int	control_path(t_shell *shell, char **path, char *str)
 				if (!access(str, F_OK))
 				{
 					ft_fork(shell, str);
+					free(str);
+					str = NULL;
+					ft_sarfree(path, ft_sarsize(path));
 					return (1);
 				}
 			}
 		}
+	}
+	ft_sarfree(path, ft_sarsize(path));
+	if(str)
+	{
+		free(str);
+		str = NULL;
 	}
 	return (0);
 }

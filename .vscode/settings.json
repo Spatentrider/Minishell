@@ -6,6 +6,7 @@
         "export.h": "c",
         "minishell.h": "c",
         "free.h": "c",
-        "operator.h": "c"
+        "operator.h": "c",
+        "commands.h": "c"
     }
 }

@@ -17,7 +17,7 @@
 
 /*cmd_utils.c*/
 int		control_cmd(t_shell *shell);
-int		control_path(t_shell *shell, char **path, char *str);
+int		control_path(t_shell *shell);
 /*command.c*/
 int		minishell_case(t_shell *shell);
 int		ft_fork(t_shell *shell, char *str);

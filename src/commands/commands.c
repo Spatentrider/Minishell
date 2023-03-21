@@ -129,14 +129,9 @@ void	change_shlvl(t_shell *shell)
 
 int	commands(t_shell *shell)
 {
-	char	**path;
-	char	*str;
-
-	path = (char **)malloc(sizeof(char *) * 200);
-	str = NULL;
 	if (control_cmd(shell))
 		return (1);
-	else if (control_path(shell, path, str))
+	else if (control_path(shell))
 		return (1);
 	g_exit = 127;
 	printf("%s: command not found\n", shell->lst.executor[0]);

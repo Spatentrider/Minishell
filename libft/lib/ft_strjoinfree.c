@@ -10,8 +10,8 @@ char	*ft_strjoinfree(char *s1, char *s2)
 	j = 0;
 	if (s1 == NULL || s2 == NULL)
 	{
-		ft_free(s1);
-		ft_free(s2);
+		free(s1);
+		free(s2);
 		return (NULL);
 	}
 	joined_str = (char *) malloc (((sizeof(char))
@@ -24,7 +24,7 @@ char	*ft_strjoinfree(char *s1, char *s2)
 	while (s2[j] != '\0')
 		joined_str[i++] = s2[j++];
 	joined_str[i] = '\0';
-	ft_free(s1);
-	ft_free(s2);
+	free(s1);
+	free(s2);
 	return (joined_str);
 }
