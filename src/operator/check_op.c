@@ -15,7 +15,6 @@
 void	redirection(int c, t_shell *shell)
 {
 	shell->lst.redirection = split_redirection(shell->lst.input);
-	ft_sarprint(shell->lst.redirection);
 	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (c == 1)
@@ -27,12 +26,16 @@ void	redirection(int c, t_shell *shell)
 	else if (shell->lst.here_doc[1] == NULL)
 	{
 		here_doc_cat(shell->lst.file[0], shell);
+		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+		ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 		return ;
 	}
 	else if (c == 4)
 		here_doc(shell->lst.file[0], shell);
 	delete_op(shell);
 	executor(shell);
+	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
+	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 }
 
 int	check_red(char *input, t_shell *shell, int i)

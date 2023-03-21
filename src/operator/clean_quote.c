@@ -38,7 +38,7 @@ void	clean_double(t_shell *shell)
 	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
-	shell->lst.input = ft_strdup(str);
+	shell->lst.input = str;
 }
 
 int	cnt_quote(t_shell *shell, int j)
@@ -78,7 +78,7 @@ void	clean_single(t_shell *shell)
 	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
-	shell->lst.input = ft_strdup(str);
+	shell->lst.input = str;
 }
 
 void	clean_all_quote(t_shell *shell)

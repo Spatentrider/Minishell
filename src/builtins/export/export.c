@@ -69,7 +69,7 @@ char	**sort(char **sorting)
 		while (sorting[++j])
 			if (ft_strncmp(sorting[i], sorting[j], ft_strlen(sorting[i])) > 0)
 				c++;
-		sort_env[c] = sorting[i];
+		sort_env[c] = ft_strdup(sorting[i]);
 	}
 	return (sort_env);
 }
@@ -89,14 +89,16 @@ void	change_var(t_shell *shell, int c)
 			if (ft_strncmp(shell->env.current[shell->exp.i], \
 					shell->lst.executor[c], shell->echo.j) == 0)
 			{
-				shell->env.current[shell->exp.i] = shell->lst.executor[c];
+				free(shell->env.current[shell->exp.i]);
+				shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
 				shell->exp.j = 0;
 			}
 		}
 		else if (ft_strncmp(shell->env.current[shell->exp.i], \
 					shell->lst.executor[c], shell->exp.pos + 1) == 0)
 		{
-			shell->env.current[shell->exp.i] = shell->lst.executor[c];
+			free(shell->env.current[shell->exp.i]);
+			shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
 			shell->exp.j = 0;
 		}
 	}
@@ -123,7 +125,7 @@ void	ft_export(t_shell *shell)
 			change_var(shell, c);
 			if (shell->exp.j == -1)
 			{
-				shell->env.current[shell->exp.i] = shell->lst.executor[c];
+				shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
 				shell->env.current[shell->exp.i + 1] = NULL;
 			}
 		}
