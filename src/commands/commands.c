@@ -21,6 +21,9 @@ int	minishell_case(t_shell *shell)
 	if (pid == 0)
 	{
 		change_shlvl(shell);
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+		free(shell->lst.input);
+		shell->lst.input = NULL;
 		if (loop(shell, shell->stdout, shell->stdin) == -1)
 		{
 			perror("execve failed");
