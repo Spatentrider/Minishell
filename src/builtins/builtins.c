@@ -58,17 +58,15 @@ int	check_file(t_shell *shell)
 
 int	executor(t_shell *shell)
 {
-	shell->lst.executor = ft_split(shell->lst.input, ' ');
-	check_file(shell);
-	expansion(shell);
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
-		if (shell->lst.executor)
-			ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 		shell->old_g_exit = 127;
 		return (g_exit);
 	}
+	shell->lst.executor = ft_split(shell->lst.input, ' ');
+	//check_file(shell);
+	expansion(shell);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)
@@ -85,7 +83,6 @@ int	executor(t_shell *shell)
 		ft_unset (shell, shell->env.current);
 	else
 		commands(shell);
-	if(shell->lst.executor)
-		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+	ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 	return (0);
 }
