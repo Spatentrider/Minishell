@@ -30,7 +30,7 @@ void	list_expansion(char *current, int pos, t_shell *shell)
 	}
 	while (shell->lst.executor[i][++j])
 	{
-		if (shell->lst.executor[i][++j] == '$')
+		if (shell->lst.executor[i][j] == '$')
 			dl++;
 	}
 	if (dl == 1)
@@ -38,8 +38,10 @@ void	list_expansion(char *current, int pos, t_shell *shell)
 		free(shell->lst.executor[i]);
 		shell->lst.executor[i] = ft_strdup(str + 1);
 		free(str);
+		return ;
 	}
-	free(str);
+	if(str)
+		free(str);
 }
 
 void	expansion(t_shell *shell)

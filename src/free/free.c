@@ -60,5 +60,4 @@ void	free_struct(t_shell *shell)
 		ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
 	if (shell->lst.input)
 		free(shell->lst.input);
-	ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 }
