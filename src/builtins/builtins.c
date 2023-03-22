@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 15:42:25 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/22 16:14:14 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	check_file(t_shell *shell)
 
 int	executor(t_shell *shell)
 {
-	shell->lst.executor = split_executor(shell->lst.input);
+	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
 	expansion(shell);
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
-		if(shell->lst.executor)
+		if (shell->lst.executor)
 			ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 		shell->old_g_exit = 127;
 		return (g_exit);

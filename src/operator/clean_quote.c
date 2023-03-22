@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/03/13 17:13:56 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/22 16:10:33 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	clean_double(t_shell *shell)
 	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
-	shell->lst.input = str;
+	shell->lst.input = ft_strdup(str);
+	shell->lst.input[j] = '\0';
+	free(str);
 }
 
 int	cnt_quote(t_shell *shell, int j)
@@ -78,7 +80,7 @@ void	clean_single(t_shell *shell)
 	}
 	free(shell->lst.input);
 	shell->lst.input = NULL;
-	shell->lst.input = str;
+	shell->lst.input = ft_strdup(str);
 	shell->lst.input[j] = '\0';
 	free(str);
 }
