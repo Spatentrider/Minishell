@@ -12,6 +12,29 @@
 
 #include "src.h"
 
+void	init_strings(t_shell *shell)
+{
+	shell->env.save = NULL;
+	shell->env.current = NULL;
+	shell->lst.input = NULL;
+	shell->lst.doc = NULL;
+	shell->lst.split = NULL;
+	shell->lst.error = NULL;
+	shell->lst.executor = NULL;
+	shell->lst.pipe = NULL;
+	shell->lst.redirection = NULL;
+	shell->lst.file = NULL;
+	shell->lst.expansion = NULL;
+	shell->lst.here_doc = NULL;
+	shell->lst.cat_array = NULL;
+	shell->cd.oldpwd = NULL;
+	shell->cd.pwd= NULL;
+	shell->cd.pwd2 = NULL;
+	shell->exp.sort_env = NULL;
+	shell->lst.input = NULL;
+}
+
+
 void	init_all(t_shell *shell)
 {
 	shell->old_g_exit = 0;
@@ -30,6 +53,7 @@ void	init_all(t_shell *shell)
 	shell->cd.i = 0;
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
+	//init_strings(shell);
 }
 
 void	reset_var(t_shell *shell)

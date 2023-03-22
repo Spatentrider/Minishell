@@ -79,6 +79,8 @@ void	clean_single(t_shell *shell)
 	free(shell->lst.input);
 	shell->lst.input = NULL;
 	shell->lst.input = str;
+	shell->lst.input[j] = '\0';
+	free(str);
 }
 
 void	clean_all_quote(t_shell *shell)

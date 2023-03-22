@@ -92,8 +92,9 @@ int	parse(char **string, t_shell *shell)
 				g_exit = check_parameter(string[i], string[i][0]);
 				return (g_exit);
 			}
-			g_exit = check_quote(shell->lst.input);
+			//g_exit = check_quote(shell->lst.input);
 		}
+		g_exit = check_quote(shell->lst.input);
 	}
 	return (g_exit);
 }
