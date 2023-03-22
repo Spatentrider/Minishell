@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 14:55:07 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/22 16:27:26 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	ft_export(t_shell *shell)
 	{
 		shell->exp.sort_env = sort(shell->env.current);
 		print_export(shell, str_save);
+		ft_sarfree(shell->exp.sort_env, ft_sarsize(shell->exp.sort_env));
 	}
 	else
 	{
