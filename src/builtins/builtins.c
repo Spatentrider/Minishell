@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/22 16:14:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:01:34 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	executor(t_shell *shell)
 		return (g_exit);
 	}
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
-	//check_file(shell);
+	check_file(shell);
 	expansion(shell);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();

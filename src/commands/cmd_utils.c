@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:12:50 by mich              #+#    #+#             */
-/*   Updated: 2023/03/15 16:34:50 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/23 13:59:33 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	control_cmd(t_shell *shell)
 
 int	control_path(t_shell *shell)
 {
-	int	c;
-	int	k;
-	char **path;
-	char *str;
+	int		c;
+	int		k;
+	char	**path;
+	char	*str;
 
 	c = -1;
 	k = -1;

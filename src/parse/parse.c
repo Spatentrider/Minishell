@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/16 14:49:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 13:58:49 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	parse(char **string, t_shell *shell)
 				g_exit = check_parameter(string[i], string[i][0]);
 				return (g_exit);
 			}
-			//g_exit = check_quote(shell->lst.input);
 		}
 		g_exit = check_quote(shell->lst.input);
 	}

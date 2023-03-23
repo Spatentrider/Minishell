@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:25:43 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 11:39:40 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:02:06 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	init_strings(t_shell *shell)
 	shell->lst.here_doc = NULL;
 	shell->lst.cat_array = NULL;
 	shell->cd.oldpwd = NULL;
-	shell->cd.pwd= NULL;
+	shell->cd.pwd = NULL;
 	shell->cd.pwd2 = NULL;
 	shell->exp.sort_env = NULL;
 	shell->lst.input = NULL;
 }
-
 
 void	init_all(t_shell *shell)
 {
@@ -53,7 +52,6 @@ void	init_all(t_shell *shell)
 	shell->cd.i = 0;
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
-	//init_strings(shell);
 }
 
 void	reset_var(t_shell *shell)

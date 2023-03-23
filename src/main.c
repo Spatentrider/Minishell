@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/16 14:49:18 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:02:19 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	loop(t_shell *shell, int i, int j)
 		p = control_space(shell, k);
 		if (p == 0)
 		{
-			//shell->lst.split = split_cmd(shell->lst.input);
 			shell->lst.redirection = NULL;
 			if (ft_strncmp(shell->lst.input, "", 1))
 				add_history(shell->lst.input);

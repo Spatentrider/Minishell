@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 15:50:39 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:00:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	list_expansion(char *current, int pos, t_shell *shell)
 		free(str);
 		return ;
 	}
-	if(str)
+	if (str)
 		free(str);
 }
 

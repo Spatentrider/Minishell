@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/22 16:27:26 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:04:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	change_var(t_shell *shell, int c)
 					shell->lst.executor[c], shell->echo.j) == 0)
 			{
 				free(shell->env.current[shell->exp.i]);
-				shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
+				shell->env.current[shell->exp.i] = \
+					ft_strdup(shell->lst.executor[c]);
 				shell->exp.j = 0;
 			}
 		}
@@ -98,7 +99,8 @@ void	change_var(t_shell *shell, int c)
 					shell->lst.executor[c], shell->exp.pos + 1) == 0)
 		{
 			free(shell->env.current[shell->exp.i]);
-			shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
+			shell->env.current[shell->exp.i] = \
+				ft_strdup(shell->lst.executor[c]);
 			shell->exp.j = 0;
 		}
 	}
@@ -126,7 +128,8 @@ void	ft_export(t_shell *shell)
 			change_var(shell, c);
 			if (shell->exp.j == -1)
 			{
-				shell->env.current[shell->exp.i] = ft_strdup(shell->lst.executor[c]);
+				shell->env.current[shell->exp.i] = \
+					ft_strdup(shell->lst.executor[c]);
 				shell->env.current[shell->exp.i + 1] = NULL;
 			}
 		}
