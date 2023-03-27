@@ -59,6 +59,7 @@ typedef struct s_lst
 	char	**expansion;
 	char	**here_doc;
 	char	**cat_array;
+	char	**delete_str;
 }					t_lst;
 
 typedef struct s_cd

@@ -12,13 +12,25 @@
 
 #include "operator.h"
 
-void	red_out(char *redirection)
+void	red_out(char *redirection, int count_redirection, char **delete_str, int count_delete_str)
 {
 	int	i;
+	int a;
+	int k;
 
-	i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
+	a = 1;
+	if (a != count_redirection - 1)
+	{
+		k = open(redirection, O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		delete_str[count_delete_str] = ft_strdup(redirection);
+		return ;
+	}
+	i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	delete_str[count_delete_str] = ft_strdup(redirection);
 	dup2(i, STDOUT_FILENO);
+	(void)k;
 }
 
 void	red_inp(char	*redirection)

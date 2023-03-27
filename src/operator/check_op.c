@@ -14,11 +14,26 @@
 
 void	redirection(int c, t_shell *shell)
 {
+	int count_redirection;
+	int count_delete_str;
+
+	count_delete_str = 0;
 	shell->lst.redirection = split_redirection(shell->lst.input);
-	shell->lst.file = ft_split(shell->lst.redirection[1], ' ');
+	count_redirection = ft_sarsize(shell->lst.redirection) - 1;
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (c == 1)
-		red_out(shell->lst.file[0]);
+	{
+		shell->lst.delete_str = (char **)malloc(sizeof(char *) * (count_redirection + 1));
+		while (count_redirection > 0)
+		{
+			shell->lst.file = ft_split(shell->lst.redirection[count_redirection], ' ');
+			red_out(shell->lst.file[0], count_redirection, shell->lst.delete_str, count_delete_str);
+			count_redirection--;
+			count_delete_str++;
+			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
+		}
+
+	}
 	else if (c == 2)
 		red_inp(shell->lst.file[0]);
 	else if (c == 3)

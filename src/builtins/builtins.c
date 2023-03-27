@@ -12,46 +12,47 @@
 
 #include "builtins.h"
 
-void	delete_file(t_shell *shell, int i, int j)
+void	delete_file(t_shell *shell)
 {
-	while (shell->lst.executor[++i])
+	int i;
+	int k;
+	int j;
+	
+	k = 0;
+	while(shell->lst.delete_str[k])
 	{
-		while (shell->lst.executor[i][++j])
-			;
-		if (ft_strncmp(shell->lst.executor[i], shell->lst.file[0], j) == 0)
+		i = -1;
+		while(shell->lst.executor[++i])
 		{
-			i -= 1;
-			while (shell->lst.executor[++i])
+			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
 			{
-				if (shell->lst.executor[i + 1] != NULL)
+				j = i ;
+				while(shell->lst.executor[j])
 				{
-					free(shell->lst.executor[i]);
-					shell->lst.executor[i] = ft_strdup \
-						(shell->lst.executor[i + 1]);
+					free(shell->lst.executor[j]);
+					if(shell->lst.executor[j + 1] != NULL)
+					{
+						shell->lst.executor[j] = ft_strdup(shell->lst.executor[j + 1]);
+						j++;
+					}
+					else
+					{
+						shell->lst.executor[j] = NULL;
+					}
 				}
-				else
-				{
-					free(shell->lst.executor[i]);
-					shell->lst.executor[i] = NULL;
-				}
+				k++;
 			}
-			break ;
 		}
 	}
 }
 
 int	check_file(t_shell *shell)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	j = -1;
 	if (shell->lst.redirection == NULL)
 		return (1);
 	else
 	{
-		delete_file(shell, i, j);
+		delete_file(shell);
 		return (0);
 	}
 }
@@ -66,6 +67,7 @@ int	executor(t_shell *shell)
 	}
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
+	ft_sarprint(shell->lst.delete_str);
 	expansion(shell);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
