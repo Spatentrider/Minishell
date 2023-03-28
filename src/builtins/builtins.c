@@ -23,7 +23,7 @@ void	delete_file(t_shell *shell)
 	{
 		i = -1;
 		ft_sarprint(shell->lst.executor);
-		ft_sarprint(shell->lst.executor);
+		ft_sarprint(shell->lst.delete_str);
 		while(shell->lst.executor[++i])
 		{
 			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
