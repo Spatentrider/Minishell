@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef C2B7F3BC_6568_4979_B36F_6D18B29323DE
+#define C2B7F3BC_6568_4979_B36F_6D18B29323DE
+
 #ifndef SRC_H
 # define SRC_H
 
@@ -30,3 +33,6 @@ int		loop(t_shell *shell, int i, int j);
 void	reset_var(t_shell *shell);
 void	init_all(t_shell *shell);
 #endif
+
+
+#endif /* C2B7F3BC_6568_4979_B36F_6D18B29323DE */

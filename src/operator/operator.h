@@ -32,7 +32,7 @@ int		control_qt(int q, int d, int s);
 int		clean_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
-void	red_out(char *redirection, int count_redirection, char **delete_str, int count_delete_str);
+void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str);
 void	red_inp(char	*redirection);
 void	append(char *redirection);
 void	here_doc(char *redirection, t_shell *shell);

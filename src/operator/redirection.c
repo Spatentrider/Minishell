@@ -12,24 +12,27 @@
 
 #include "operator.h"
 
-void	red_out(char *redirection, int count_redirection, char **delete_str, int count_delete_str)
+void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str)
 {
 	int	i;
 	int a;
 	int k;
 
 	a = 1;
-	if (a != count_redirection - 1)
+	printf("count:%d", count_redirection);
+	if (a == count_redirection - 1)
 	{
-		k = open(redirection, O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		delete_str[count_delete_str] = ft_strdup(redirection);
+		i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		//ft_sarprint(shell->lst.delete_str);
+		dup2(i, STDOUT_FILENO);
 		return ;
 	}
-	i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
+	k = open(redirection, O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	delete_str[count_delete_str] = ft_strdup(redirection);
-	dup2(i, STDOUT_FILENO);
+	shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		//ft_sarprint(shell->lst.delete_str);
 	(void)k;
 }
 

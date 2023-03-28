@@ -18,10 +18,12 @@ void	delete_file(t_shell *shell)
 	int k;
 	int j;
 	
-	k = 0;
-	while(shell->lst.delete_str[k])
+	k = -1;
+	while(shell->lst.delete_str[++k])
 	{
 		i = -1;
+		ft_sarprint(shell->lst.executor);
+		ft_sarprint(shell->lst.executor);
 		while(shell->lst.executor[++i])
 		{
 			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
@@ -40,7 +42,6 @@ void	delete_file(t_shell *shell)
 						shell->lst.executor[j] = NULL;
 					}
 				}
-				k++;
 			}
 		}
 	}
