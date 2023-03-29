@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 14:59:18 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 16:08:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int	commands(t_shell *shell)
 	else if (control_path(shell))
 		return (1);
 	g_exit = 127;
+	dup2(shell->stdout, STDOUT_FILENO);
 	printf("%s: command not found\n", shell->lst.executor[0]);
 	return (1);
 }

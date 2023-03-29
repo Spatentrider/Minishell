@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 14:01:34 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 15:54:59 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 void	delete_file(t_shell *shell)
 {
-	int i;
-	int k;
-	int j;
-	
+	int	i;
+	int	k;
+	int	j;
+
 	k = -1;
-	while(shell->lst.delete_str[++k])
+	printf("sono in delete_file\n");
+	while (shell->lst.delete_str[++k])
 	{
 		i = -1;
-		ft_sarprint(shell->lst.executor);
-		ft_sarprint(shell->lst.delete_str);
-		while(shell->lst.executor[++i])
+		while (shell->lst.executor[++i])
 		{
-			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
+			if (ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
 			{
 				j = i ;
-				while(shell->lst.executor[j])
+				while (shell->lst.executor[j])
 				{
 					free(shell->lst.executor[j]);
-					if(shell->lst.executor[j + 1] != NULL)
+					if (shell->lst.executor[j + 1] != NULL)
 					{
 						shell->lst.executor[j] = ft_strdup(shell->lst.executor[j + 1]);
 						j++;
@@ -49,6 +48,7 @@ void	delete_file(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
+	printf("sono in check_file\n");
 	if (shell->lst.redirection == NULL)
 		return (1);
 	else
@@ -68,8 +68,8 @@ int	executor(t_shell *shell)
 	}
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
-	ft_sarprint(shell->lst.delete_str);
 	expansion(shell);
+	ft_sarprint(shell->lst.executor);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 15:46:13 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 15:55:57 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	redirection(int c, t_shell *shell)
 
 	count_delete_str = 0;
 	shell->lst.redirection = split_redirection(shell->lst.input);
-	ft_sarprint(shell->lst.redirection);
 	count_redirection = ft_sarsize(shell->lst.redirection) - 1;
 	j = count_redirection;
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');

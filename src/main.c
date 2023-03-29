@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/23 14:02:19 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 15:50:26 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	check_error_cod(t_shell *shell)
 
 	i = -1;
 	shell->lst.error = ft_split(shell->lst.input, ' ');
-	ft_sarprint(shell->lst.error);
 	while (shell->lst.error[++i])
 	{
 		g_exit = parse(shell->lst.error, shell);

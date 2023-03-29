@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:32:38 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 15:52:49 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	red_out(char *redirection, int count_redirection, t_shell *shell, int count
 		k = open(redirection, O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
-		//ft_sarprint(shell->lst.delete_str);
 		return ;
 	}
 	else
@@ -30,7 +29,6 @@ void	red_out(char *redirection, int count_redirection, t_shell *shell, int count
 		i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
-		//ft_sarprint(shell->lst.delete_str);
 		dup2(i, STDOUT_FILENO);
 		(void)k;
 		return ;
