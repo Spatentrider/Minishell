@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:32:38 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 16:54:15 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,22 @@ void	red_out(char *redirection, int count_redirection, t_shell *shell, int count
 	}
 }
 
-void	red_inp(char	*redirection)
+void	red_inp(char	*redirection, t_shell *shell)
 {
 	int	i;
 
 	i = open(redirection, O_RDONLY);
 	dup2(i, STDIN_FILENO);
+	shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
-void	append(char *redirection)
+void	append(char *redirection, t_shell *shell)
 {
 	int	i;
 
 	i = open(redirection, O_WRONLY | O_CREAT | O_APPEND,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	shell->lst.delete_str[0] = ft_strdup(redirection);
 	dup2(i, STDOUT_FILENO);
 }
 

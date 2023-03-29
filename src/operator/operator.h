@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 15:13:22 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 16:54:30 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../src.h"
 
 /*check_op.c*/
-void	redirection(int c, t_shell *shell);
+void	redirection(t_shell *shell);
 int		check_red(char *input, t_shell *shell, int i);
 void	control_exp(t_shell *shell);
 int		check_operator(t_shell *shell);
@@ -33,8 +33,8 @@ int		clean_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
 void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j);
-void	red_inp(char	*redirection);
-void	append(char *redirection);
+void	red_inp(char	*redirection, t_shell *shell);
+void	append(char *redirection, t_shell *shell);
 void	here_doc(char *redirection, t_shell *shell);
 void	here_doc_cat(char *redirection, t_shell *shell);
 /*utils.c*/

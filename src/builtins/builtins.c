@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 14:01:34 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 17:00:26 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	delete_file(t_shell *shell)
 	int j;
 	
 	k = -1;
+	printf("entro?");
 	while(shell->lst.delete_str[++k])
 	{
 		i = -1;
-		ft_sarprint(shell->lst.executor);
-		ft_sarprint(shell->lst.delete_str);
 		while(shell->lst.executor[++i])
 		{
 			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
@@ -49,7 +48,7 @@ void	delete_file(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
-	if (shell->lst.redirection == NULL)
+	if (shell->lst.redirection == NULL || shell->redirection_id != 1 || shell->redirection_id != 3)
 		return (1);
 	else
 	{
@@ -68,7 +67,6 @@ int	executor(t_shell *shell)
 	}
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
-	ft_sarprint(shell->lst.delete_str);
 	expansion(shell);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
