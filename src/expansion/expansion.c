@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 14:00:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 16:16:36 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	list_expansion(char *current, int pos, t_shell *shell)
 		if (shell->lst.executor[i][j] == '$')
 			dl++;
 	}
-	if (dl == 1)
+	// if (dl == 1)
 	{
 		free(shell->lst.executor[i]);
 		shell->lst.executor[i] = ft_strdup(str + 1);

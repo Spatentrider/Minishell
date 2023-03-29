@@ -6,29 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/29 15:50:26 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 17:03:48 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
-
-int	ft_sarprint(char **sar)
-{
-	int	i;
-	int	ret;
-
-	i = -1;
-	ret = 0;
-	if (!sar || !sar[0])
-		return (0);
-	ft_printf("---SPLITTED ARGS---\n");
-	while (sar[++i] && sar[i] != 0)
-	{
-		ret += ft_printf("\"%s\"\n", sar[i]);
-	}
-	ft_printf("-----########-----\n");
-	return (ret);
-}
 
 int	control_space(t_shell *shell, int k)
 {
@@ -67,17 +49,22 @@ int	check_error_cod(t_shell *shell)
 	return (g_exit);
 }
 
-void	ctrl_d(t_shell *shell)
+void	loop2(t_shell *shell, int p)
 {
-	if (!shell->lst.input)
+	if (p == 0)
 	{
-		free_struct(shell);
-		printf("Exiting...\n");
-		exit(0);
+		shell->lst.redirection = NULL;
+		if (ft_strncmp(shell->lst.input, "", 1))
+			add_history(shell->lst.input);
+		g_exit = check_error_cod(shell);
+		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+			check_operator(shell);
+		dup2(shell->stdout, STDOUT_FILENO);
+		dup2(shell->stdin, STDIN_FILENO);
 	}
 }
 
-int	loop(t_shell *shell, int i, int j)
+int	loop(t_shell *shell)
 {
 	int	k;
 	int	p;
@@ -96,17 +83,7 @@ int	loop(t_shell *shell, int i, int j)
 			shell->old_g_exit = g_exit;
 		reset_var(shell);
 		p = control_space(shell, k);
-		if (p == 0)
-		{
-			shell->lst.redirection = NULL;
-			if (ft_strncmp(shell->lst.input, "", 1))
-				add_history(shell->lst.input);
-			g_exit = check_error_cod(shell);
-			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
-				check_operator(shell);
-			dup2(i, STDOUT_FILENO);
-			dup2(j, STDIN_FILENO);
-		}
+		loop2(shell, p);
 		free(shell->lst.input);
 		shell->lst.input = NULL;
 	}
@@ -139,6 +116,6 @@ int	main(int argc, char **argv, char **envp)
 	shell.stdout = dup(STDOUT_FILENO);
 	shell.stdin = dup(STDIN_FILENO);
 	init_all(&shell);
-	loop(&shell, shell.stdout, shell.stdin);
+	loop(&shell);
 	return (0);
 }

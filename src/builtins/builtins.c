@@ -6,11 +6,29 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 15:54:59 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 17:12:21 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+void	delete_file2(t_shell *shell, int j)
+{
+	while (shell->lst.executor[j])
+	{
+		free(shell->lst.executor[j]);
+		if (shell->lst.executor[j + 1] != NULL)
+		{
+			shell->lst.executor[j]
+				= ft_strdup(shell->lst.executor[j + 1]);
+			j++;
+		}
+		else
+		{
+			shell->lst.executor[j] = NULL;
+		}
+	}
+}
 
 void	delete_file(t_shell *shell)
 {
@@ -25,22 +43,11 @@ void	delete_file(t_shell *shell)
 		i = -1;
 		while (shell->lst.executor[++i])
 		{
-			if (ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
+			if (ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k],
+					ft_strlen(shell->lst.executor[i])) == 0)
 			{
-				j = i ;
-				while (shell->lst.executor[j])
-				{
-					free(shell->lst.executor[j]);
-					if (shell->lst.executor[j + 1] != NULL)
-					{
-						shell->lst.executor[j] = ft_strdup(shell->lst.executor[j + 1]);
-						j++;
-					}
-					else
-					{
-						shell->lst.executor[j] = NULL;
-					}
-				}
+				j = i;
+				delete_file2(shell, j);
 			}
 		}
 	}

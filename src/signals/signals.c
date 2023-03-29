@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 11:20:59 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 16:49:00 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ void	signal_handler3(int sig)
 	rl_replace_line("", 0);
 	rl_redisplay();
 	(void)sig;
+}
+
+void	ctrl_d(t_shell *shell)
+{
+	if (!shell->lst.input)
+	{
+		free_struct(shell);
+		printf("Exiting...\n");
+		exit(0);
+	}
 }

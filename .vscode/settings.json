@@ -8,6 +8,8 @@
         "free.h": "c",
         "operator.h": "c",
         "commands.h": "c",
-        "pwd.h": "c"
+        "pwd.h": "c",
+        "*.tcc": "c",
+        "algorithm": "c"
     }
 }

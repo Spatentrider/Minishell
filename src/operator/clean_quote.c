@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/03/22 16:10:33 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/29 17:05:08 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	clean_double(t_shell *shell)
 	i = -1;
 	j = 0;
 	while (shell->lst.input[++i])
-	{
 		if (shell->lst.input[i] == 34)
 			j++;
-	}
 	str = malloc(sizeof(char *) * (i - j));
 	j = 0;
 	i = -1;
