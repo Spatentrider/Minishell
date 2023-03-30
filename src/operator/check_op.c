@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 16:18:30 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/30 17:41:47 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ void	redirection(t_shell *shell)
 			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 			shell->lst.delete_str[1] = NULL;
 		}
+		delete_op(shell);
+		executor(shell);
+		if (g_exit != 0)
+				break;
 	}
-	delete_op(shell);
-	executor(shell);
 	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 }
@@ -96,18 +98,25 @@ int	check_red(char *input, t_shell *shell, int i)
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
 			shell->redirection_id[k] = 4;
+			k++;
 			i++;
 		}
 		else if (input[i] == '>' && input[i + 1] == '>')
 		{
 			shell->redirection_id[k] = 4;
+			k++;
 			i++;
 		}
 		else if (input[i] == '<' && input[i + 1] != '<')
+		{
 			shell->redirection_id[k] = 2;
+			k++;
+		}
 		else if (input[i] == '>' && input[i + 1] != '>')
+		{
 			shell->redirection_id[k] = 1;
-		k++;
+			k++;
+		}
 	}
 	if (shell->redirection_id[0] > 0)
 		redirection(shell);
