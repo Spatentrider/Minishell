@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 17:00:26 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/30 16:05:37 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	delete_file(t_shell *shell)
 	int j;
 	
 	k = -1;
-	printf("entro?");
 	while(shell->lst.delete_str[++k])
 	{
 		i = -1;
@@ -48,8 +47,10 @@ void	delete_file(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
-	if (shell->lst.redirection == NULL || shell->redirection_id != 1 || shell->redirection_id != 3)
+	if(shell->lst.redirection == NULL || (shell->redirection_id[shell->red_pos] != 1 && shell->redirection_id[shell->red_pos] != 3 && shell->redirection_id[shell->red_pos] != 4))
+	{
 		return (1);
+	}
 	else
 	{
 		delete_file(shell);

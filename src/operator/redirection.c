@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 16:54:15 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/03/30 15:22:26 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	here_doc(char *redirection, t_shell *shell)
 	shell->lst.doc = NULL;
 	if (shell->here_pipe == 1)
 		dup2(shell->out_pipe, STDOUT_FILENO);
+	shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
 void	here_doc_cat(char *redirection, t_shell *shell)
