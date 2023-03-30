@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 16:08:41 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/30 15:15:00 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	minishell_case(t_shell *shell)
 		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 		free(shell->lst.input);
 		shell->lst.input = NULL;
-		if (loop(shell, shell->stdout, shell->stdin) == -1)
+		if (loop(shell) == -1)
 		{
 			perror("execve failed");
 			exit(EXIT_FAILURE);

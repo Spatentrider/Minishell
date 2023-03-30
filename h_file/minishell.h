@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/14 16:02:37 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/30 14:57:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_shell
 	int		out_pipe;
 	int		single_quote;
 	int		here_pipe;
+	int		dollar;
 }				t_shell;
 
 #endif

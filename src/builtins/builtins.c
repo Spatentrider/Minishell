@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 17:12:21 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/30 15:24:06 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	delete_file(t_shell *shell)
 	int	j;
 
 	k = -1;
-	printf("sono in delete_file\n");
 	while (shell->lst.delete_str[++k])
 	{
 		i = -1;
@@ -55,7 +54,6 @@ void	delete_file(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
-	printf("sono in check_file\n");
 	if (shell->lst.redirection == NULL)
 		return (1);
 	else
@@ -76,7 +74,6 @@ int	executor(t_shell *shell)
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
 	expansion(shell);
-	ft_sarprint(shell->lst.executor);
 	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
 	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)

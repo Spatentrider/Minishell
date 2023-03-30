@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 15:55:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/30 15:20:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	redirection(int c, t_shell *shell)
 {
-	int count_redirection;
-	int count_delete_str;
-	int j;
+	int	count_redirection;
+	int	count_delete_str;
+	int	j;
 
 	count_delete_str = 0;
 	shell->lst.redirection = split_redirection(shell->lst.input);
