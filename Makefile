@@ -15,7 +15,8 @@ SRC_ENV					=	src/builtins/env/env.c
 
 SRC_EXIT				=	src/builtins/exit/exit.c
 
-SRC_EXPORT				=	src/builtins/export/export.c
+SRC_EXPORT				=	src/builtins/export/export.c \
+							src/builtins/export/export_utils.c
 
 SRC_PWD					=	src/builtins/pwd/pwd.c
 

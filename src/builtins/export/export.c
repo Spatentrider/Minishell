@@ -6,29 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 14:04:16 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/31 11:24:59 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export.h"
-
-int	ft_strchrp(const char *s, int c)
-{
-	char	find;
-	int		i;
-
-	find = (unsigned char)c;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == find)
-			return (i);
-		i++;
-	}
-	if (s[i] == find)
-		return (i);
-	return (1);
-}
 
 void	print_export(t_shell *shell, char **str_save)
 {
@@ -74,7 +56,7 @@ char	**sort(char **sorting)
 	return (sort_env);
 }
 
-void	change_var(t_shell *shell, int c)
+int	change_var(t_shell *shell, int c)
 {
 	if (ft_strncmp(shell->lst.executor[c], "=", 1) == 0)
 		printf("minishell: export: '=': not a valid identifier\n");
@@ -82,7 +64,7 @@ void	change_var(t_shell *shell, int c)
 	while (shell->env.current[++shell->exp.i])
 	{
 		shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
-		if (shell->exp.pos == 1)
+		if (shell->exp.pos == 0)
 		{
 			while (shell->env.current[shell->exp.i][++shell->echo.j])
 				;
@@ -92,7 +74,7 @@ void	change_var(t_shell *shell, int c)
 				free(shell->env.current[shell->exp.i]);
 				shell->env.current[shell->exp.i] = \
 					ft_strdup(shell->lst.executor[c]);
-				shell->exp.j = 0;
+				return (1);
 			}
 		}
 		else if (ft_strncmp(shell->env.current[shell->exp.i], \
@@ -101,9 +83,31 @@ void	change_var(t_shell *shell, int c)
 			free(shell->env.current[shell->exp.i]);
 			shell->env.current[shell->exp.i] = \
 				ft_strdup(shell->lst.executor[c]);
-			shell->exp.j = 0;
+			return (1);
 		}
 	}
+	return (0);
+}
+
+void	add_var(t_shell *shell, int c)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = ft_sarsize(shell->env.current);
+	shell->env.save = (char **)malloc(sizeof(char *) * j + 1);
+	while (shell->env.current[++i])
+		shell->env.save[i] = ft_strdup(shell->env.current[i]);
+	shell->env.save[i] = NULL;
+	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
+	shell->env.current = (char **)malloc(sizeof(char *) * j + 1);
+	i = -1;
+	while (shell->env.save[++i])
+		shell->env.current[i] = ft_strdup(shell->env.save[i]);
+	shell->env.current[i] = ft_strdup(shell->lst.executor[c]);
+	shell->env.current[i + 1] = NULL;
+	ft_sarfree(shell->env.save, ft_sarsize(shell->env.save));
 }
 
 void	ft_export(t_shell *shell)
@@ -125,13 +129,8 @@ void	ft_export(t_shell *shell)
 		{
 			shell->exp.j = -1;
 			shell->exp.i = -1;
-			change_var(shell, c);
-			if (shell->exp.j == -1)
-			{
-				shell->env.current[shell->exp.i] = \
-					ft_strdup(shell->lst.executor[c]);
-				shell->env.current[shell->exp.i + 1] = NULL;
-			}
+			if (!change_var(shell, c))
+				add_var(shell, c);
 		}
 	}
 }

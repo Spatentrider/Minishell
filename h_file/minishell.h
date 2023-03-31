@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/30 14:57:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/03/31 10:42:25 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_unset
 typedef struct s_env
 {
 	char	**current;
-	char	*save;
+	char	**save;
 	int		i;
 }			t_env;
 
