@@ -34,7 +34,7 @@ void	delete_op(t_shell *shell);
 /*redirection.c*/
 void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j);
 void	red_inp(char	*redirection, t_shell *shell);
-void	append(char *redirection, t_shell *shell);
+void	append(char *redirection, t_shell *shell, int j, int count_redirection, int count_delete_str);
 void	here_doc(char *redirection, t_shell *shell);
 void	here_doc_cat(char *redirection, t_shell *shell);
 /*utils.c*/

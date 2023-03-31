@@ -100,8 +100,7 @@ typedef struct s_shell
 	int		out_pipe;
 	int		single_quote;
 	int		here_pipe;
-	int		*redirection_id;
-	int		red_pos;
+	int		redirection_id;
 }				t_shell;
 
 #endif

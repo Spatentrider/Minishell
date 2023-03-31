@@ -19,7 +19,7 @@ void	red_out(char *redirection, int count_redirection, t_shell *shell, int count
 
 	if (j != count_redirection)
 	{
-		k = open(redirection, O_CREAT | O_TRUNC,
+		k = open(redirection, O_CREAT |
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
 		//ft_sarprint(shell->lst.delete_str);
@@ -46,14 +46,28 @@ void	red_inp(char	*redirection, t_shell *shell)
 	shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
-void	append(char *redirection, t_shell *shell)
+void	append(char *redirection, t_shell *shell, int j, int count_redirection, int count_delete_str)
 {
 	int	i;
+	int k;
 
-	i = open(redirection, O_WRONLY | O_CREAT | O_APPEND,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	shell->lst.delete_str[0] = ft_strdup(redirection);
-	dup2(i, STDOUT_FILENO);
+	if (j != count_redirection)
+	{
+		k = open(redirection, O_CREAT |
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		//ft_sarprint(shell->lst.delete_str);
+		return ;
+	}
+	else
+	{
+		i = open(redirection, O_WRONLY | O_CREAT | O_APPEND,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		shell->lst.delete_str[0] = ft_strdup(redirection);
+		dup2(i, STDOUT_FILENO);
+		(void)k;
+		return ;
+	}
 }
 
 void	here_doc(char *redirection, t_shell *shell)
