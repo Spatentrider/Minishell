@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 17:41:47 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/03 17:04:44 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,27 +84,44 @@ void	redirection(t_shell *shell)
 
 int	check_red(char *input, t_shell *shell, int i)
 {
+	int check_mix_red;
 	i = -1;
 	shell->redirection_id = 0;
+	check_mix_red = 0;
+	
 	while (input[++i])
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
+			if(shell->redirection_id != 0 && shell->redirection_id != 4) 
+				check_mix_red = 1;
 			shell->redirection_id = 4;
-			break ;
+			i++;
 		}
 		else if (input[i] == '>' && input[i + 1] == '>')
 		{
+			if(shell->redirection_id != 0 && shell->redirection_id != 3) 
+				check_mix_red = 1;
 			shell->redirection_id = 3;
-			break ;
+			i++;
 		}
 		else if (input[i] == '<')
+		{
+			if(shell->redirection_id != 0 && shell->redirection_id != 2) 
+				check_mix_red = 1;
 			shell->redirection_id = 2;
+		}
 		else if (input[i] == '>')
+		{
+			if(shell->redirection_id != 0 && shell->redirection_id != 1)
+				check_mix_red = 1;
 			shell->redirection_id = 1;
+		}
 	}
-	if (shell->redirection_id > 0)
+	if (shell->redirection_id > 0 && check_mix_red != 0)
 		redirection(shell);
+	else
+		mix_redirection(shell);
 	return (shell->redirection_id);
 }
 

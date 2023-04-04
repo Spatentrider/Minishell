@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/30 16:12:42 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/03 17:01:32 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_shell
 	t_echo	echo;
 	t_exp	exp;
 	t_unset	unset;
+	char	*save_redirection;
 	int		old_g_exit;
 	int		stdin;
 	int		stdout;

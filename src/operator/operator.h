@@ -6,7 +6,7 @@
 /*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 16:54:30 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/03 16:56:16 by lorenzodima      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	here_doc_cat(char *redirection, t_shell *shell);
 int		double_count(char *string, int i, int count_quote);
 int		single_count(char *string, int i, int count_single);
 void	change_word(t_shell *shell, int i, int pos);
+void	mix_redirection(t_shell *shell);
 
 #endif

@@ -32,7 +32,8 @@ SRC_OPERATOR			=	src/operator/check_op.c \
 								src/operator/clean_quote.c \
 								src/operator/delete.c \
 								src/operator/redirection.c \
-								src/operator/utils.c
+								src/operator/utils.c \
+								src/operator/mix_redirection.c
 
 SRC_PARSE				=	src/parse/parse_utils.c \
 							src/parse/parse.c
