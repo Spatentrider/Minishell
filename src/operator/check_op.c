@@ -118,7 +118,7 @@ int	check_red(char *input, t_shell *shell, int i)
 			shell->redirection_id = 1;
 		}
 	}
-	if (shell->redirection_id > 0 && check_mix_red != 0)
+	if (shell->redirection_id > 0 && check_mix_red != 1)
 		redirection(shell);
 	else
 		mix_redirection(shell);
