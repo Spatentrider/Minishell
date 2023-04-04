@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/21 15:38:36 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/04 17:15:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	get_env(char **envp, t_shell *env_list)
 	str = "SHELL=minishell";
 	while (envp[++i])
 		;
-	env_list->env.current = (char **)malloc(sizeof(char *) * (i + 1));
+	env_list->env.current = (char **)malloc(sizeof(char *) * i);
 	while (envp[++c])
 	{
-		env_list->env.current[c] = ft_strdup(envp[c]);
-		if (ft_strncmp("SHLVL=", envp[c], 6) == 0)
-			change_shlvl(env_list);
 		if (ft_strncmp("SHELL", envp[c], 5) == 0)
-		{
-			free(env_list->env.current[c]);
 			env_list->env.current[c] = ft_strdup(str);
+		else
+		{
+			env_list->env.current[c] = ft_strdup(envp[c]);
+			if (ft_strncmp("SHLVL=", envp[c], 6) == 0)
+				change_shlvl(env_list);
 		}
 	}
 	env_list->env.current[c] = NULL;

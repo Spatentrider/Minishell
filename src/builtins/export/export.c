@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/04/04 14:48:35 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/04 17:31:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,13 @@ void	add_var(t_shell *shell, int c)
 
 	i = -1;
 	j = ft_sarsize(shell->env.current);
-	shell->env.save = (char **)malloc(sizeof(char *) * j + 1);
+	shell->env.save = (char **)malloc(sizeof(char *) * j + 10);
 	while (shell->env.current[++i])
 		shell->env.save[i] = ft_strdup(shell->env.current[i]);
 	shell->env.save[i] = NULL;
-	ft_sarfree(shell->env.current, j);
-	shell->env.current = (char **)malloc(sizeof(char *) * j + 2);
+	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
+	shell->env.current = (char **)malloc(sizeof(char *) * \
+		ft_sarsize(shell->env.save) + 10);
 	i = -1;
 	while (shell->env.save[++i])
 		shell->env.current[i] = ft_strdup(shell->env.save[i]);
