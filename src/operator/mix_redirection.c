@@ -78,7 +78,17 @@ void	mix_redirection(t_shell *shell)
             dup2(fd, STDOUT_FILENO);
             close(fd);
     	}
-		token = ft_strtok(NULL, " ");
+        else if (strcmp(token, "<<") == 0) 
+        {
+            token = ft_strtok(NULL, " ");
+            char delimiter[1024];
+            strcpy(delimiter, token);
+            token = ft_strtok(NULL, "\n");
+            FILE *stream = fmemopen(token, strlen(token), "r");
+            dup2(fileno(stream), STDIN_FILENO);
+            fclose(stream);
 		}
+        token = ft_strtok(NULL, " ");
+    }
 	executor(shell);
 }
