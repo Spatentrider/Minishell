@@ -70,7 +70,7 @@ void	mix_redirection(t_shell *shell)
 		else if (strcmp(token, ">>") == 0) 
 		{
             token = ft_strtok(NULL, " ");
-            int fd = open(token, O_WRONLY | O_CREAT | O_APPEND, 0644);
+            fd = open(token, O_WRONLY | O_CREAT | O_APPEND, 0644);
             if (fd < 0) 
 			{
                 perror("Errore nell'apertura del file");
