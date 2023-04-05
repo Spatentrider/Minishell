@@ -73,7 +73,6 @@ void	mix_redirection(t_shell *shell)
         	if (strcmp(token, "<") == 0) 
 			{
             token = ft_strtok(NULL, " ");
-            printf("%s\n", token);
             shell->lst.delete_str[i] = ft_strdup(token);
             // Apre il file in input e lo associa allo stdin
             fd = open(token, O_RDONLY);
@@ -86,7 +85,6 @@ void	mix_redirection(t_shell *shell)
 		else if (strcmp(token, ">") == 0) 
 		{
             token = ft_strtok(NULL, " ");
-            printf("%s\n", token);
             shell->lst.delete_str[i] = ft_strdup(token);
             fd = open(token, O_WRONLY | O_CREAT | O_TRUNC, 0644);
             if (fd < 0) 
