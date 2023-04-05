@@ -47,7 +47,9 @@ void	delete_file(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
-	if(shell->lst.redirection == NULL || (shell->redirection_id != 1 && shell->redirection_id != 3 && shell->redirection_id != 4))
+	if(shell->check_mix_red == 1)
+		delete_file(shell);
+	if(shell->lst.redirection == NULL || shell->redirection_id == 2)
 	{
 		return (1);
 	}

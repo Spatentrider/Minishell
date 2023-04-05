@@ -102,6 +102,8 @@ typedef struct s_shell
 	int		single_quote;
 	int		here_pipe;
 	int		redirection_id;
+	int		check_mix_red;
+	int		redirection_out;
 }				t_shell;
 
 #endif

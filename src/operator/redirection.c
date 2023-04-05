@@ -74,7 +74,7 @@ void	here_doc(char *redirection, t_shell *shell)
 {
 	int		i;
 
-	if (shell->here_pipe == 1)
+	if (shell->here_pipe == 1 || shell->check_mix_red == 1)
 		dup2(shell->stdout, STDOUT_FILENO);
 	while (1)
 	{
@@ -91,7 +91,12 @@ void	here_doc(char *redirection, t_shell *shell)
 	shell->lst.doc = NULL;
 	if (shell->here_pipe == 1)
 		dup2(shell->out_pipe, STDOUT_FILENO);
-	shell->lst.delete_str[0] = ft_strdup(redirection);
+	if (shell->check_mix_red == 1)
+	{
+		dup2(shell->redirection_out, STDOUT_FILENO);
+		return ;
+	}
+	//shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
 void	here_doc_cat(char *redirection, t_shell *shell)

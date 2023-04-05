@@ -52,6 +52,7 @@ void	init_all(t_shell *shell)
 	shell->cd.i = 0;
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
+	shell->check_mix_red = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -72,4 +73,5 @@ void	reset_var(t_shell *shell)
 	shell->cd.i = 0;
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
+	shell->check_mix_red = 0;
 }

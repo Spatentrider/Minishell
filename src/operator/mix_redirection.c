@@ -1,6 +1,28 @@
 #include "operator.h"
-
 #include <string.h>
+
+void redirect_heredoc(char *delimiter, char *filename) {
+    char *line = NULL;
+    size_t len = 0;
+    FILE *fp = fopen(filename, "w");
+    if (!fp) {
+        perror("fopen");
+        exit(EXIT_FAILURE);
+    }
+    while (1) {
+        printf("> ");
+        if (getline(&line, &len, stdin) < 0) {
+            perror("getline");
+            exit(EXIT_FAILURE);
+        }
+        if (strcmp(line, delimiter) == 0) {
+            break;
+        }
+        fputs(line, fp);
+    }
+    free(line);
+    fclose(fp);
+}
 
 char *ft_strtok(char *str, const char *delim) 
 {
@@ -39,56 +61,65 @@ void	mix_redirection(t_shell *shell)
 {
 	char *token;
 	int fd;
+    char *input;
+    int i;
 
-	token = ft_strtok(shell->lst.input, " ");
+    input = ft_strdup(shell->lst.input);
+	token = ft_strtok(input, " ");
+    shell->lst.delete_str = (char **)malloc(sizeof(char *) * 40000);
+    i = 0;
 	while (token != NULL) 
 		{
         	if (strcmp(token, "<") == 0) 
 			{
             token = ft_strtok(NULL, " ");
+            printf("%s\n", token);
+            shell->lst.delete_str[i] = ft_strdup(token);
             // Apre il file in input e lo associa allo stdin
-            int fd = open(token, O_RDONLY);
+            fd = open(token, O_RDONLY);
             if (fd < 0) 
-			{
                 perror("Errore nell'apertura del file");
-            }
             dup2(fd, STDIN_FILENO);
             close(fd);
+            i++;
         } 
 		else if (strcmp(token, ">") == 0) 
 		{
             token = ft_strtok(NULL, " ");
-            // Apre il file in output e lo associa allo stdout
+            printf("%s\n", token);
+            shell->lst.delete_str[i] = ft_strdup(token);
             fd = open(token, O_WRONLY | O_CREAT | O_TRUNC, 0644);
             if (fd < 0) 
-			{
                 perror("Errore nell'apertura del file");
-            }
             dup2(fd, STDOUT_FILENO);
+            shell->redirection_out = dup(STDOUT_FILENO);
             close(fd);
+            i++;
         }
 		else if (strcmp(token, ">>") == 0) 
 		{
             token = ft_strtok(NULL, " ");
+            shell->lst.delete_str[i] = ft_strdup(token);
             fd = open(token, O_WRONLY | O_CREAT | O_APPEND, 0644);
             if (fd < 0) 
 			{
                 perror("Errore nell'apertura del file");
             }
             dup2(fd, STDOUT_FILENO);
+            shell->redirection_out = dup(STDOUT_FILENO);
             close(fd);
+            i++;
     	}
         else if (strcmp(token, "<<") == 0) 
         {
             token = ft_strtok(NULL, " ");
-            char delimiter[1024];
-            strcpy(delimiter, token);
-            token = ft_strtok(NULL, "\n");
-            FILE *stream = fmemopen(token, strlen(token), "r");
-            dup2(fileno(stream), STDIN_FILENO);
-            fclose(stream);
+            shell->lst.delete_str[i] = ft_strdup(token);
+            here_doc(token, shell);
+            i++;
 		}
         token = ft_strtok(NULL, " ");
     }
+    shell->lst.delete_str[i] = NULL;
+    delete_op(shell);
 	executor(shell);
 }

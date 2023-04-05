@@ -58,9 +58,8 @@ void	redirection(t_shell *shell)
 		}
 		shell->lst.delete_str[count_delete_str] = NULL;
 	}
-	else if (shell->lst.here_doc[1] == NULL)
+	else if (shell->lst.here_doc[1] == NULL && ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
 	{
-		shell->lst.delete_str = (char **)malloc(sizeof(char *) * (count_redirection + 1));
 		shell->lst.file = ft_split(shell->lst.redirection[count_redirection], ' ');
 		here_doc_cat(shell->lst.file[0], shell);
 		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
@@ -84,43 +83,42 @@ void	redirection(t_shell *shell)
 
 int	check_red(char *input, t_shell *shell, int i)
 {
-	int check_mix_red;
 	i = -1;
 	shell->redirection_id = 0;
-	check_mix_red = 0;
+	shell->check_mix_red = 0;
 	
 	while (input[++i])
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
 			if(shell->redirection_id != 0 && shell->redirection_id != 4) 
-				check_mix_red = 1;
+				shell->check_mix_red = 1;
 			shell->redirection_id = 4;
 			i++;
 		}
 		else if (input[i] == '>' && input[i + 1] == '>')
 		{
 			if(shell->redirection_id != 0 && shell->redirection_id != 3) 
-				check_mix_red = 1;
+				shell->check_mix_red = 1;
 			shell->redirection_id = 3;
 			i++;
 		}
 		else if (input[i] == '<')
 		{
 			if(shell->redirection_id != 0 && shell->redirection_id != 2) 
-				check_mix_red = 1;
+				shell->check_mix_red = 1;
 			shell->redirection_id = 2;
 		}
 		else if (input[i] == '>')
 		{
 			if(shell->redirection_id != 0 && shell->redirection_id != 1)
-				check_mix_red = 1;
+				shell->check_mix_red = 1;
 			shell->redirection_id = 1;
 		}
 	}
-	if (shell->redirection_id > 0 && check_mix_red != 1)
+	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 		redirection(shell);
-	if(check_mix_red == 1)
+	if(shell->check_mix_red == 1)
 		mix_redirection(shell);
 	return (shell->redirection_id);
 }
