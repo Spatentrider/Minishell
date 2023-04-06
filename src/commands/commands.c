@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 15:15:00 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:27:25 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	ab_path(t_shell	*shell)
 		{
 			waitpid(pid, &status, 0);
 			if (WIFEXITED(status))
-				return (0);
+				return (1);
 		}
 		else
 			exit(EXIT_FAILURE);
@@ -148,6 +148,8 @@ int	commands(t_shell *shell)
 	if (control_cmd(shell))
 		return (1);
 	else if (control_path(shell))
+		return (1);
+	else if (ab_path(shell))
 		return (1);
 	g_exit = 127;
 	dup2(shell->stdout, STDOUT_FILENO);

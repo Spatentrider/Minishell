@@ -6,7 +6,7 @@
 /*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:12:05 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 11:24:16 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:19:18 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ int	ft_sarsize(char **tocount)
 
 void	free_struct(t_shell *shell)
 {
-	printf("qui\n");
-	// if (shell->env.current)
-	// 	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
 	if (shell->lst.input)
 		free(shell->lst.input);
-// (void)shell;
- }
+}
