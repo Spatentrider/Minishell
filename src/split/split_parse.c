@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:02:27 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/06 15:04:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:09:17 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ char	**split_cmd(char const *s)
 	if (!(write_split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn + ++w)
+		while (rtn[++w])
 			free(rtn + w);
 		free(rtn);
 	}

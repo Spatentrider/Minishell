@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 15:58:10 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:36:55 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	list_expansion(t_shell *shell, int i)
 				ft_strlen(curr) + 1) == 0)
 			{
 				change_expansion(shell, j, curr, c);
+				free(curr);
 				break ;
 			}
 			free(curr);
@@ -73,6 +74,7 @@ void	list_expansion(t_shell *shell, int i)
 		}
 	}
 	join_executor(shell, i);
+	ft_sarfree(shell->lst.expansion, ft_sarsize(shell->lst.expansion));
 }
 
 void	expansion(t_shell *shell)

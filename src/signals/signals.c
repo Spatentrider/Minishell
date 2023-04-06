@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 16:49:00 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:18:58 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ctrl_d(t_shell *shell)
 {
 	if (!shell->lst.input)
 	{
+		shell->lst.input = NULL;
 		free_struct(shell);
 		printf("Exiting...\n");
 		exit(0);

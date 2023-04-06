@@ -20,7 +20,6 @@ int		separator(char c);
 int		how_much_words(char *str);
 void	word(char *dest, char *src);
 int		split(char **split, char *str);
-char	**split_executor(char const *s);
 /*split_parse_quote.c*/
 int		count_str(char *str, int i);
 int		count_quote(char *str, int c);

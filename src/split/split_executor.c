@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:20:12 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/13 16:49:48 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:08:52 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	word(char *dest, char *src)
  * 
  * @param split the string array where we saves the splitted string
  * @param str the string that needs to be split
- * @return int return 1
+ * @returnc
  */
 int	split(char **split, char *str)
 {
@@ -114,7 +114,7 @@ int	split(char **split, char *str)
 			while (separator(str[i + j]) == 0)
 				j++;
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!(split + w))
+			if (!(split[w]))
 				return (0);
 			word(split[w], str + i);
 			i += j;
@@ -133,24 +133,3 @@ int	split(char **split, char *str)
  * @param s the string that needs to be split
  * @return char** the string array with split string
  */
-char	**split_executor(char const *s)
-{
-	int		w;
-	char	**rtn;
-
-	if (!s)
-		return (NULL);
-	w = how_much_words((char *)s);
-	rtn = (char **)malloc(sizeof(char *) * (w + 1));
-	if (!rtn)
-		return (NULL);
-	if (!(split(rtn, (char *) s)))
-	{
-		w = -1;
-		while (rtn + ++w)
-			free(rtn + w);
-		free(rtn);
-	}
-	rtn[w] = 0;
-	return (rtn);
-}

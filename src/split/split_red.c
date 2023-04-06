@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/02/06 15:38:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:10:15 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	stamp_split(char **split, char *str)
 			while (is_red(str[i + j]) == 0)
 				j++;
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!(split + w))
+			if (!(split[w]))
 				return (0);
 			stamp_word(split[w], str + i);
 			i += j;
@@ -137,7 +137,7 @@ char	**split_redirection(char const *s)
 	if (!(stamp_split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn + ++w)
+		while (rtn[++w])
 			free(rtn + w);
 		free(rtn);
 	}

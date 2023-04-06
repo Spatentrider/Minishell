@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:44:30 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/13 14:59:55 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 11:10:59 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_write_split(char **split, char *str, char c)
 			while (ft_is_separator(str[i + j], c) == 0)
 				j++;
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!(split + w))
+			if (!(split[w]))
 				return (0);
 			ft_write_word(split[w], str + i, c);
 			i += j;
@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c)
 	if (!(ft_write_split(rtn, (char *) s, c)))
 	{
 		w = -1;
-		while (rtn + ++w)
+		while (rtn[++w])
 			free(rtn + w);
 		free(rtn);
 	}
