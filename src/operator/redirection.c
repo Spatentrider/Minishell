@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 15:22:26 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/06 17:45:43 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,13 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 	j = -1;
 	if (shell->here_pipe == 1)
 		dup2(shell->out_pipe, STDOUT_FILENO);
+	if (shell->check_mix_red == 1)
+	{
+		free(shell->lst.doc);
+		shell->lst.doc = NULL;
+		shell->here_cat = 1;
+		return ;
+	}
 	while (shell->lst.cat_array[++j])
 		printf("%s\n", shell->lst.cat_array[j]);
 	free(shell->lst.doc);

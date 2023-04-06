@@ -63,18 +63,21 @@ void	mix_redirection(t_shell *shell)
 	int fd;
     char *input;
     int i;
+    int flag;
 
     input = ft_strdup(shell->lst.input);
+    flag = 0;
 	token = ft_strtok(input, " ");
+    if (ft_strncmp(token, "cat", 4) == 0)
+        flag = 1;
     shell->lst.delete_str = (char **)malloc(sizeof(char *) * 40000);
     i = 0;
 	while (token != NULL) 
-		{
-        	if (strcmp(token, "<") == 0) 
-			{
+	{
+        if (strcmp(token, "<") == 0) 
+        {
             token = ft_strtok(NULL, " ");
             shell->lst.delete_str[i] = ft_strdup(token);
-            // Apre il file in input e lo associa allo stdin
             fd = open(token, O_RDONLY);
             if (fd < 0) 
                 perror("Errore nell'apertura del file");
@@ -90,6 +93,12 @@ void	mix_redirection(t_shell *shell)
             if (fd < 0) 
                 perror("Errore nell'apertura del file");
             dup2(fd, STDOUT_FILENO);
+            if (shell->here_cat == 1)
+            {
+                shell->echo.i = -1;
+                while (shell->lst.cat_array[++shell->echo.i])
+                    printf("%s\n", shell->lst.cat_array[shell->echo.i]);
+            }
             shell->redirection_out = dup(STDOUT_FILENO);
             close(fd);
             i++;
@@ -112,12 +121,37 @@ void	mix_redirection(t_shell *shell)
         {
             token = ft_strtok(NULL, " ");
             shell->lst.delete_str[i] = ft_strdup(token);
-            here_doc(token, shell);
+            if (flag == 2)
+            {
+                printf("%d ao ao\n", flag);
+                here_doc(token, shell);
+            }
+            else
+            {
+                printf("%d cat cat\n", flag);
+                here_doc_cat(token, shell);
+                flag = 3;
+            }
             i++;
 		}
         token = ft_strtok(NULL, " ");
+        if (token != NULL)
+        {
+            if (ft_strncmp(token, ">", 1) != 0 && \
+                ft_strncmp(token, "<", 1) != 0 && \
+                ft_strncmp(token, ">>", 2) != 0 && \
+                ft_strncmp(token, "<< ", 2) != 0)
+                {
+                    printf("token = %s\n", token);
+                    flag = 2;
+                }
+        }
     }
     shell->lst.delete_str[i] = NULL;
     delete_op(shell);
-	executor(shell);
+    if (flag != 3)
+    {
+        printf("%d sdasds\n", flag);
+	    executor(shell);
+    }
 }

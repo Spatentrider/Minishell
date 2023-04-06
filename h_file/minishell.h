@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/03 17:01:32 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/06 17:45:09 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_shell
 	int		redirection_id;
 	int		check_mix_red;
 	int		redirection_out;
+	int		here_cat;
 }				t_shell;
 
 #endif

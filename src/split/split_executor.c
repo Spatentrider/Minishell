@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_executor.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:20:12 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/13 16:49:48 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 16:59:45 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	split(char **split, char *str)
 			while (separator(str[i + j]) == 0)
 				j++;
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!(split + w))
+			if (!(split[w]))
 				return (0);
 			word(split[w], str + i);
 			i += j;
@@ -147,8 +147,8 @@ char	**split_executor(char const *s)
 	if (!(split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn + ++w)
-			free(rtn + w);
+		while (rtn[w])
+			free(rtn[w]);
 		free(rtn);
 	}
 	rtn[w] = 0;

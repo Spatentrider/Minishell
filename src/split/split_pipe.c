@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/01/23 11:47:00 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/06 16:58:53 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	save_split(char **split, char *str)
 			while (is_pipe(str[i + j]) == 0)
 				j++;
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!(split + w))
+			if (!(split[w]))
 				return (0);
 			save_word(split[w], str + i);
 			i += j;
@@ -137,8 +137,8 @@ char	**split_pipe(char const *s)
 	if (!(save_split(rtn, (char *) s)))
 	{
 		w = -1;
-		while (rtn + ++w)
-			free(rtn + w);
+		while (rtn[w])
+			free(rtn[w]);
 		free(rtn);
 	}
 	rtn[w] = 0;
