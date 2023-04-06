@@ -98,6 +98,7 @@ void	mix_redirection(t_shell *shell)
                 shell->echo.i = -1;
                 while (shell->lst.cat_array[++shell->echo.i])
                     printf("%s\n", shell->lst.cat_array[shell->echo.i]);
+                ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
             }
             shell->redirection_out = dup(STDOUT_FILENO);
             close(fd);
@@ -148,6 +149,7 @@ void	mix_redirection(t_shell *shell)
         }
     }
     shell->lst.delete_str[i] = NULL;
+    free(input);
     delete_op(shell);
     if (flag != 3)
     {
