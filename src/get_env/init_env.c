@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:20:28 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/04 17:15:39 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:48:48 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_env(char **envp, t_shell *env_list)
 	str = "SHELL=minishell";
 	while (envp[++i])
 		;
-	env_list->env.current = (char **)malloc(sizeof(char *) * i);
+	env_list->env.current = (char **)malloc(sizeof(char *) * i + 1);
 	while (envp[++c])
 	{
 		if (ft_strncmp("SHELL", envp[c], 5) == 0)

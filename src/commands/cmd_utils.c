@@ -6,7 +6,7 @@
 /*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:12:50 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 13:16:42 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/06 14:46:33 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	control_path(t_shell *shell)
 				}
 				free(str);
 			}
+			ft_sarfree(path, ft_sarsize(path));
 		}
 	}
-	ft_sarfree(path, ft_sarsize(path));
 	return (0);
 }

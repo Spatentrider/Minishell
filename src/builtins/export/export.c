@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/04/04 17:31:17 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 15:16:29 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,53 @@ char	**sort(char **sorting)
 
 int	change_var(t_shell *shell, int c)
 {
+	char	*curr;
+	char	*str;
+	int		i;
+	int		j;
+	int		pos;
+
 	if (ft_strncmp(shell->lst.executor[c], "=", 1) == 0)
 		printf("minishell: export: '=': not a valid identifier\n");
 	shell->echo.j = 0;
-	while (shell->env.current[++shell->exp.i])
+	i = -1;
+	while (shell->env.current[++i])
 	{
-		shell->exp.pos = ft_strchrp(shell->env.current[shell->exp.i], '=');
-		if (shell->exp.pos == 0)
+		pos = ft_strchrp(shell->env.current[i], '=');
+		if (pos > 0)
+			curr = strdup_exp(shell->env.current[i], pos);
+		else
+			curr = ft_strdup(shell->env.current[i]);
+		pos = ft_strchrp(shell->lst.executor[c], '=');
+		if (pos > 0)
+			str = strdup_exp(shell->lst.executor[c], pos);
+		else
+			str = ft_strdup(shell->lst.executor[c]);
+		if (ft_strncmp(curr, str, ft_strlen(curr)) == 0)
 		{
-			while (shell->env.current[shell->exp.i][++shell->echo.j])
-				;
-			if (ft_strncmp(shell->env.current[shell->exp.i], \
-						shell->lst.executor[c], shell->echo.j) == 0)
+			if (pos > 0)
 			{
-				free(shell->env.current[shell->exp.i]);
-				shell->env.current[shell->exp.i] = \
-					ft_strdup(shell->lst.executor[c]);
+				free(shell->env.current[i]);
+				shell->env.current[i] = ft_strdup(shell->lst.executor[c]);
+				j = -1;
+				while (shell->env.current[i][++j])
+				{
+					if (shell->env.current[i][j] == '\a')
+						shell->env.current[i][j] = ' ';
+				}
+				free(curr);
+				free(str);
 				return (1);
 			}
-		}
-		else if (ft_strncmp(shell->env.current[shell->exp.i], \
-							shell->lst.executor[c], shell->exp.pos + 1) == 0)
-		{
-			free(shell->env.current[shell->exp.i]);
-			shell->env.current[shell->exp.i] = \
-				ft_strdup(shell->lst.executor[c]);
+			free(curr);
+			free(str);
 			return (1);
 		}
+		free(curr);
+		free(str);
 	}
+	// free(curr);
+	// free(str);
 	return (0);
 }
 
@@ -101,12 +120,18 @@ void	add_var(t_shell *shell, int c)
 		shell->env.save[i] = ft_strdup(shell->env.current[i]);
 	shell->env.save[i] = NULL;
 	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
-	shell->env.current = (char **)malloc(sizeof(char *) * \
+	shell->env.current = (char **)malloc(sizeof(char *) *
 		ft_sarsize(shell->env.save) + 10);
 	i = -1;
 	while (shell->env.save[++i])
 		shell->env.current[i] = ft_strdup(shell->env.save[i]);
 	shell->env.current[i] = ft_strdup(shell->lst.executor[c]);
+	j = -1;
+	while (shell->env.current[i][++j])
+	{
+		if (shell->env.current[i][j] == '\a')
+			shell->env.current[i][j] = ' ';
+	}
 	shell->env.current[i + 1] = NULL;
 	ft_sarfree(shell->env.save, ft_sarsize(shell->env.save));
 }

@@ -6,7 +6,7 @@
 /*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 11:36:55 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/06 14:54:38 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ void	change_expansion(t_shell *shell, int i, char *curr, int c)
 void	list_expansion(t_shell *shell, int i)
 {
 	char	*curr;
+	int		pos;
 	int		j;
 	int		c;
 
 	if (shell->lst.executor[i][0] == '$')
 		shell->dollar = 1;
 	j = -1;
+	pos = 0;
 	shell->lst.expansion = ft_split(shell->lst.executor[i], '$');
 	if (shell->dollar == 1)
 		j = -1;
@@ -57,15 +59,21 @@ void	list_expansion(t_shell *shell, int i)
 		c = -1;
 		while (shell->env.current[++c])
 		{
-			curr = strdup_curr(shell->env.current[c]);
+			pos = ft_strchrp(shell->env.current[i], '=');
+			if (pos > 0)
+				curr = strdup_exp(shell->env.current[i], pos);
+			else
+				curr = ft_strdup(shell->env.current[i]);
 			if (ft_strncmp(shell->lst.expansion[j], curr, \
 				ft_strlen(curr) + 1) == 0)
 			{
 				change_expansion(shell, j, curr, c);
-				free(curr);
+				if(curr)
+					free(curr);
 				break ;
 			}
-			free(curr);
+			if(curr)
+				free(curr);
 		}
 		if (shell->env.current[c] == NULL)
 		{

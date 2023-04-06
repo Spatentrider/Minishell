@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/29 17:03:48 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:41:29 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
-		exit(printf("Error, there are too many argument!!"));
+		exit(printf("Error, there are too many argument!!!\n"));
 	get_env(envp, &shell);
 	shell.stdout = dup(STDOUT_FILENO);
 	shell.stdin = dup(STDIN_FILENO);

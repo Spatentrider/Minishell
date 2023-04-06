@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/03/03 15:52:42 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:34:43 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	control_pipe(t_shell *shell)
 			c++;
 		}
 		last_process(shell, c, pid, j);
+		ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 		return (1);
 	}
 	return (0);

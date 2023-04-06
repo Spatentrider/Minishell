@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 10:43:29 by kzak              #+#    #+#             */
-/*   Updated: 2023/03/29 17:02:54 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 14:26:35 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ char	*strdup_curr(const char *s1);
 int		ft_sarprint(char **sar);
 char	*ft_strjoinfree(char *s1, char *s2);
 int		ft_sarprint(char **sar);
+char	*strdup_exp(const char *s1, int n);
 #endif
