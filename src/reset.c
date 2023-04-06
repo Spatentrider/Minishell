@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:25:43 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 15:00:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 15:47:17 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	init_all(t_shell *shell)
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
 	shell->dollar = 0;
+	shell->flag = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -74,4 +75,5 @@ void	reset_var(t_shell *shell)
 	shell->cd.s = 0;
 	shell->here_pipe = 0;
 	shell->dollar = 0;
+	shell->flag = 0;
 }

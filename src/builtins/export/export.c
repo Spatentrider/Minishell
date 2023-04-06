@@ -6,7 +6,7 @@
 /*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:21:13 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 15:16:29 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/06 15:21:56 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int	change_var(t_shell *shell, int c)
 		free(curr);
 		free(str);
 	}
-	// free(curr);
-	// free(str);
 	return (0);
 }
 
