@@ -82,6 +82,7 @@ int	control_pipe(t_shell *shell)
 			c++;
 		}
 		last_process(shell, c, pid, j);
+		ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 		return (1);
 	}
 	return (0);

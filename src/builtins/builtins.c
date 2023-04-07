@@ -43,6 +43,7 @@ void	delete_file(t_shell *shell)
 			}
 		}
 	}
+	ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 }
 
 int	check_file(t_shell *shell)
