@@ -90,7 +90,8 @@ int	parse(char **string, t_shell *shell)
 				|| string[i][0] == '>')
 			{
 				g_exit = check_parameter(string[i], string[i][0]);
-				return (g_exit);
+				if(g_exit != 0)
+					return (g_exit);
 			}
 		}
 		g_exit = check_quote(shell->lst.input);

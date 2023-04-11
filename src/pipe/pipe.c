@@ -72,6 +72,7 @@ int	control_pipe(t_shell *shell)
 	pipe_counter = count_pipe(shell, i);
 	if (pipe_counter > 0)
 	{
+		clean_parse(shell);
 		shell->lst.pipe = split_pipe(shell->lst.input);
 		pid = (int *) malloc(sizeof(int) * pipe_counter);
 		while (c < pipe_counter || j == 0)
