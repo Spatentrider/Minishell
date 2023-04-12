@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:28:50 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 11:36:41 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int		control_qt(int q, int d, int s);
 int		cont_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
-void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j);
+void	red_out(char *redirection, int count_redirection, t_shell *shell, \
+	int count_delete_str, int j);
 void	red_inp(char	*redirection, t_shell *shell);
-void	append(char *redirection, t_shell *shell, int j, int count_redirection, int count_delete_str);
+void	append(char *redirection, t_shell *shell, int j, int count_redirection, \
+	int count_delete_str);
 void	here_doc(char *redirection, t_shell *shell);
 void	here_doc_cat(char *redirection, t_shell *shell);
 /*utils.c*/
