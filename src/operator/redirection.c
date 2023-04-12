@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 17:45:43 by kzak             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "operator.h"
 
 void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j)
