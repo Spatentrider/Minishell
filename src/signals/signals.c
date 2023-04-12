@@ -43,6 +43,7 @@ void	signal_handler3(int sig)
 
 void	ctrl_d(t_shell *shell)
 {
+
 	if (!shell->lst.input)
 	{
 		shell->lst.input = NULL;
@@ -50,4 +51,6 @@ void	ctrl_d(t_shell *shell)
 		printf("Exiting...\n");
 		exit(0);
 	}
+	if(!shell->lst.doc)
+		shell->check_signal_d = 1;
 }

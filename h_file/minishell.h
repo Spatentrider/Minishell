@@ -107,6 +107,7 @@ typedef struct s_shell
 	int		here_cat;
 	int		flag;
 	int		dollar;
+	int		check_signal_d;
 }				t_shell;
 
 #endif

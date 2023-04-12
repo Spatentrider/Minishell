@@ -55,6 +55,7 @@ void	init_all(t_shell *shell)
 	shell->check_mix_red = 0;
 	shell->dollar = 0;
 	shell->flag = 0;
+	shell->check_signal_d = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -78,4 +79,5 @@ void	reset_var(t_shell *shell)
 	shell->check_mix_red = 0;
 	shell->dollar = 0;
 	shell->flag = 0;
+	shell->check_signal_d = 0;
 }
