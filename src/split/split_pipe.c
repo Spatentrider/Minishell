@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/12 11:30:24 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 17:42:57 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,28 @@ int	count_words(char *str)
 void	save_word(char *dest, char *src)
 {
 	int	i;
+	int check_pipe;
 
 	i = 0;
-	while (is_pipe(src[i]) == 0)
+	while (is_pipe(src[i]) == 0 || check_pipe == 1)
 	{
-		dest[i] = src[i];
-		i++;
+		if (src[i] == 34)
+		{
+			dest[i] = src[i];
+			if (check_pipe == 0)
+				check_pipe = 1;
+			else
+				check_pipe = 0;
+			i++;
+		}
+		else
+		{
+			dest[i] = src[i];
+			i++;
+		}
 	}
 	dest[i] = '\0';
+	// return (check_pipe);
 }
 
 /**
@@ -91,9 +105,11 @@ int	save_split(char **split, char *str)
 	int	i;
 	int	j;
 	int	w;
+	int	check_pipe;
 
 	i = 0;
 	w = 0;
+	check_pipe = 0;
 	while (str[i] != '\0')
 	{
 		if (is_pipe(str[i]) == 1 || str[i] == ' ')
@@ -101,8 +117,17 @@ int	save_split(char **split, char *str)
 		else
 		{
 			j = 0;
-			while (is_pipe(str[i + j]) == 0)
+			while (is_pipe(str[i + j]) == 0 || check_pipe == 1)
+			{
+				if (str[i + j] == 34)
+				{
+					if (check_pipe == 1)
+						check_pipe = 0;
+					else
+						check_pipe = 1;
+				}
 				j++;
+			}
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!(split[w]))
 				return (0);
@@ -111,6 +136,7 @@ int	save_split(char **split, char *str)
 			w++;
 		}
 	}
+	split[w] = NULL;
 	return (1);
 }
 

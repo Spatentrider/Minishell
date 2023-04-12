@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:55:58 by mich              #+#    #+#             */
-/*   Updated: 2023/03/14 16:03:39 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/12 18:10:37 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	process_child(int *fd, int c, t_shell *shell, int i)
 	close(fd[1]);
 	d = check_red(shell->lst.input, shell, i);
 	if (d == 0)
+	{
+		clean_parse(shell);
 		executor(shell);
+	}
 	return (1);
 }

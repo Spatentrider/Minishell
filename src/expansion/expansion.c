@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 14:27:46 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:11:55 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,6 @@ void	list_expansion(t_shell *shell, int i)
 	j = -1;
 	pos = 0;
 	flag = 0;
-	while (shell->lst.executor[++j])
-	{
-		while (shell->lst.executor[j][pos])
-		{
-			if (shell->lst.executor[j][pos] == '\a')
-			{
-				if (shell->lst.executor[j][pos + 1] =='$')
-					pos++;
-				else
-				{
-					shell->lst.executor[j][pos] = 32;
-					pos++;
-				}
-			}
-		}
-	}
 	shell->lst.expansion = ft_split(shell->lst.executor[i], '$');
 	if (shell->dollar == 1)
 		j = -1;
@@ -87,14 +71,17 @@ void	list_expansion(t_shell *shell, int i)
 				while (shell->lst.expansion[j][++pos])
 					;
 				if (shell->lst.expansion[j][pos - 1] == '\a')
+				{
+					shell->lst.expansion[j][pos - 1] = '\0';
 					flag = 1;
+				}
 				pos = ft_strchrp(shell->env.current[c], '=');
 				if (pos > 0)
 					curr = strdup_exp(shell->env.current[c], pos);
 				else
 					curr = ft_strdup(shell->env.current[c]);
 				if (ft_strncmp(shell->lst.expansion[j], curr, \
-					ft_strlen(curr)) == 0)
+					ft_strlen(shell->lst.expansion[j])) == 0)
 				{
 					change_expansion(shell, j, curr, c);
 					if (curr)

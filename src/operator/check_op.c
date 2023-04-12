@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:28:14 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:11:41 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,27 +124,17 @@ int	check_red(char *input, t_shell *shell, int i)
 
 int	check_operator(t_shell *shell)
 {
-	int	q;
 	int	i;
 	int	c;
 
 	i = -1;
-	q = cont_quote(shell, i);
 	c = -1;
-	if (q == 0 || q == 3)
+	if (!control_pipe(shell))
+		c = check_red(shell->lst.input, shell, i);
+	if (c == 0)
 	{
 		clean_parse(shell);
 		executor(shell);
-	}
-	else if (q == 1 || q == 4 || q == -1)
-	{
-		if (!control_pipe(shell))
-			c = check_red(shell->lst.input, shell, i);
-		if (c == 0)
-		{
-			clean_parse(shell);
-			executor(shell);
-		}
 	}
 	return (0);
 }

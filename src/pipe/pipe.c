@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 13:34:43 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 18:10:26 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,21 @@ int	process_pipe(t_shell *shell, int *pid, int c, int j)
 
 int	control_pipe(t_shell *shell)
 {
-	int	i;
 	int	j;
 	int	pipe_counter;
 	int	*pid;
 	int	c;
 
-	i = -1;
 	c = 0;
 	j = 0;
-	pipe_counter = count_pipe(shell, i);
-	if (pipe_counter > 0)
+	shell->lst.pipe = split_pipe(shell->lst.input);
+	pipe_counter = ft_sarsize(shell->lst.pipe);
+	if (pipe_counter > 1)
 	{
-		clean_parse(shell);
-		shell->lst.pipe = split_pipe(shell->lst.input);
 		pid = (int *) malloc(sizeof(int) * pipe_counter);
-		while (c < pipe_counter || j == 0)
+		while (c < pipe_counter)
 		{
-			if (c == pipe_counter)
+			if (c == pipe_counter - 1)
 				j = 1;
 			process_pipe(shell, pid, c, j);
 			c++;
@@ -86,5 +83,6 @@ int	control_pipe(t_shell *shell)
 		ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 		return (1);
 	}
+	ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 	return (0);
 }
