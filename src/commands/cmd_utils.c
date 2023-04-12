@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:12:50 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 13:59:33 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 14:46:33 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ int	control_cmd(t_shell *shell)
 	if (ft_strncmp("./minishell", shell->lst.executor[0], 12) == 0)
 	{
 		minishell_case(shell);
-		return (1);
-	}
-	if (ft_strncmp("/bin/", shell->lst.executor[0], 5) == 0)
-	{
-		ab_path(shell);
 		return (1);
 	}
 	return (0);
@@ -54,8 +49,8 @@ int	control_path(t_shell *shell)
 				}
 				free(str);
 			}
+			ft_sarfree(path, ft_sarsize(path));
 		}
 	}
-	ft_sarfree(path, ft_sarsize(path));
 	return (0);
 }

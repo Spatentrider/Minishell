@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/03/03 15:52:42 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:34:43 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	control_pipe(t_shell *shell)
 	pipe_counter = count_pipe(shell, i);
 	if (pipe_counter > 0)
 	{
+		clean_parse(shell);
 		shell->lst.pipe = split_pipe(shell->lst.input);
 		pid = (int *) malloc(sizeof(int) * pipe_counter);
 		while (c < pipe_counter || j == 0)

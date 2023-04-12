@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 14:59:18 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:27:25 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	minishell_case(t_shell *shell)
 		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
 		free(shell->lst.input);
 		shell->lst.input = NULL;
-		if (loop(shell, shell->stdout, shell->stdin) == -1)
+		if (loop(shell) == -1)
 		{
 			perror("execve failed");
 			exit(EXIT_FAILURE);
@@ -103,7 +103,7 @@ int	ab_path(t_shell	*shell)
 		{
 			waitpid(pid, &status, 0);
 			if (WIFEXITED(status))
-				return (0);
+				return (1);
 		}
 		else
 			exit(EXIT_FAILURE);
@@ -149,7 +149,10 @@ int	commands(t_shell *shell)
 		return (1);
 	else if (control_path(shell))
 		return (1);
+	else if (ab_path(shell))
+		return (1);
 	g_exit = 127;
+	dup2(shell->stdout, STDOUT_FILENO);
 	printf("%s: command not found\n", shell->lst.executor[0]);
 	return (1);
 }

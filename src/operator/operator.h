@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operator.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
+/*   Updated: 2023/04/12 11:28:50 by mvolpi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OPERATOR_H
 # define OPERATOR_H
 
@@ -17,7 +29,7 @@ void	clean_double(t_shell *shell);
 int		is_sep(char c);
 int		control_q(int q, int d);
 int		control_qt(int q, int d, int s);
-int		clean_quote(t_shell *shell, int i);
+int		cont_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
 /*redirection.c*/
 void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j);

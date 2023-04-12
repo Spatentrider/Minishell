@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenzodimascia <lorenzodimascia@studen    +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/29 16:55:46 by lorenzodima      ###   ########.fr       */
+/*   Updated: 2023/04/12 11:22:45 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,22 @@ int	check_error_cod(t_shell *shell)
 	return (g_exit);
 }
 
-void	ctrl_d(t_shell *shell)
+void	loop2(t_shell *shell, int p)
 {
-	if (!shell->lst.input)
+	if (p == 0)
 	{
-		free_struct(shell);
-		printf("Exiting...\n");
-		exit(0);
+		shell->lst.redirection = NULL;
+		if (ft_strncmp(shell->lst.input, "", 1))
+			add_history(shell->lst.input);
+		g_exit = check_error_cod(shell);
+		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+			check_operator(shell);
+		dup2(shell->stdout, STDOUT_FILENO);
+		dup2(shell->stdin, STDIN_FILENO);
 	}
 }
 
-int	loop(t_shell *shell, int i, int j)
+int	loop(t_shell *shell)
 {
 	int	k;
 	int	p;
@@ -96,17 +101,7 @@ int	loop(t_shell *shell, int i, int j)
 			shell->old_g_exit = g_exit;
 		reset_var(shell);
 		p = control_space(shell, k);
-		if (p == 0)
-		{
-			shell->lst.redirection = NULL;
-			if (ft_strncmp(shell->lst.input, "", 1))
-				add_history(shell->lst.input);
-			g_exit = check_error_cod(shell);
-			if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
-				check_operator(shell);
-			dup2(i, STDOUT_FILENO);
-			dup2(j, STDIN_FILENO);
-		}
+		loop2(shell, p);
 		free(shell->lst.input);
 		shell->lst.input = NULL;
 	}
@@ -134,11 +129,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	g_exit = 0;
 	if (argc > 1)
-		exit(printf("Error, there are too many argument!!"));
+		exit(printf("Error, there are too many argument!!!\n"));
 	get_env(envp, &shell);
 	shell.stdout = dup(STDOUT_FILENO);
 	shell.stdin = dup(STDIN_FILENO);
 	init_all(&shell);
-	loop(&shell, shell.stdout, shell.stdin);
+	loop(&shell);
 	return (0);
 }

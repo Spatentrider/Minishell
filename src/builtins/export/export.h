@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:19:54 by mich              #+#    #+#             */
-/*   Updated: 2023/02/02 14:48:41 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/03/31 11:17:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "../builtins.h"
 
-/*export.c*/
+/*export_urils.c*/
 int		ft_strchrp(const char *s, int c);
+/*export.c*/
 char	**sort(char **sorting);
 void	ft_export(t_shell *shell);
 

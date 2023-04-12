@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:12:05 by mich              #+#    #+#             */
-/*   Updated: 2023/03/22 16:29:06 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 13:53:07 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int	ft_sarsize(char **tocount)
 
 void	free_struct(t_shell *shell)
 {
-	if (shell->env.current)
-		ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
+	ft_sarfree(shell->env.current, ft_sarsize(shell->env.current));
 	if (shell->lst.input)
 		free(shell->lst.input);
 }

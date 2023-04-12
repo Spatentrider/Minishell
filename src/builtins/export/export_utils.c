@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 16:09:29 by mich              #+#    #+#             */
-/*   Updated: 2023/03/29 17:01:04 by mich             ###   ########.fr       */
+/*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
+/*   Updated: 2023/03/31 11:17:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include "export.h"
 
-# include "../src.h"
+int	ft_strchrp(const char *s, int c)
+{
+	char	find;
+	int		i;
 
-void	signal_handler(int sig);
-void	signal_handler2(int sig);
-void	signal_handler3(int sig);
-void	ctrl_d(t_shell *shell);
-#endif
+	find = (unsigned char)c;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == find)
+			return (i);
+		i++;
+	}
+	if (s[i] == find)
+		return (i);
+	return (0);
+}

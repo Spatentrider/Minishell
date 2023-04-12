@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_op.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
+/*   Updated: 2023/04/12 11:28:14 by mvolpi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "operator.h"
 
 void	redirection(t_shell *shell)
 {
-	int count_redirection;
-	int count_delete_str;
-	int j;
+	int	count_redirection;
+	int	count_delete_str;
+	int	j;
 
 	count_delete_str = 0;
 	shell->lst.redirection = split_redirection(shell->lst.input);
@@ -117,7 +129,7 @@ int	check_operator(t_shell *shell)
 	int	c;
 
 	i = -1;
-	q = clean_quote(shell, i);
+	q = cont_quote(shell, i);
 	c = -1;
 	if (q == 0 || q == 3)
 	{

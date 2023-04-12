@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/23 13:58:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/12 10:18:39 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	parse(char **string, t_shell *shell)
 				|| string[i][0] == '>')
 			{
 				g_exit = check_parameter(string[i], string[i][0]);
-				return (g_exit);
+				if (g_exit != 0)
+					return (g_exit);
 			}
 		}
 		g_exit = check_quote(shell->lst.input);

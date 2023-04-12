@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/06 17:45:09 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:21:23 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_unset
 typedef struct s_env
 {
 	char	**current;
-	char	*save;
+	char	**save;
 	int		i;
 }			t_env;
 

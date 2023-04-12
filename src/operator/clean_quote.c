@@ -1,17 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_quote.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
+/*   Updated: 2023/04/12 11:28:26 by mvolpi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "operator.h"
 
 void	clean_double(t_shell *shell)
 {
 	int		i;
 	int		j;
+	int		flag;
 	char	*str;
 
 	i = -1;
 	j = 0;
+	flag = 0;
 	while (shell->lst.input[++i])
 	{
 		if (shell->lst.input[i] == 34)
+		{
+			if (shell->lst.input[i - 1] == '=')
+				flag = 1;
 			j++;
+		}
+	}
+	if (flag == 1)
+	{
+		i = -1;
+		while (shell->lst.input[++i])
+		{
+			if (shell->lst.input[i] == 34)
+			{
+				i++;
+				while (shell->lst.input[i] != 34)
+				{
+					if (shell->lst.input[i] == ' ')
+						shell->lst.input[i] = '\a';
+					i++;
+				}
+			}
+		}
 	}
 	str = malloc(sizeof(char *) * (i - j));
 	j = 0;

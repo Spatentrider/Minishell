@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:57:40 by mich              #+#    #+#             */
-/*   Updated: 2023/03/23 13:56:56 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/06 16:53:40 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ void	cd_home(t_shell *shell)
 	while (shell->env.current[++i])
 	{
 		if (ft_strncmp(shell->env.current[i], "HOME=", 5) == 0)
+		{
 			str = ft_strdup(shell->env.current[i] + 5);
+			chdir(str);
+			free(str);
+			return ;
+		}
 	}
-	chdir(str);
-	free(str);
+	printf("minishell: cd: HOME not set\n");
+	g_exit = 1;
 }
 
 void	change_pwd(t_shell *shell)
