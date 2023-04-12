@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:30:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:31:03 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,25 @@ int	how_words(char *str)
 void	stamp_word(char *dest, char *src)
 {
 	int	i;
+	int check_pipe;
 
 	i = 0;
-	while (is_red(src[i]) == 0)
+	while (is_red(src[i]) == 0 || check_pipe == 1)
 	{
-		dest[i] = src[i];
-		i++;
+		if (src[i] == 34)
+		{
+			dest[i] = src[i];
+			if (check_pipe == 0)
+				check_pipe = 1;
+			else
+				check_pipe = 0;
+			i++;
+		}
+		else
+		{
+			dest[i] = src[i];
+			i++;
+		}
 	}
 	dest[i] = '\0';
 }
@@ -91,9 +104,11 @@ int	stamp_split(char **split, char *str)
 	int	i;
 	int	j;
 	int	w;
+	int	check_pipe;
 
 	i = 0;
 	w = 0;
+	check_pipe = 0;
 	while (str[i] != '\0')
 	{
 		if (is_red(str[i]) == 1 || str[i] == ' ')
@@ -101,16 +116,26 @@ int	stamp_split(char **split, char *str)
 		else
 		{
 			j = 0;
-			while (is_red(str[i + j]) == 0)
+			while (is_red(str[i + j]) == 0 || check_pipe == 1)
+			{
+				if (str[i + j] == 34)
+				{
+					if (check_pipe == 1)
+						check_pipe = 0;
+					else
+						check_pipe = 1;
+				}
 				j++;
+			}
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!(split[w]))
 				return (0);
-			stamp_word(split[w], str + i);
+			save_word(split[w], str + i);
 			i += j;
 			w++;
 		}
 	}
+	split[w] = NULL;
 	return (1);
 }
 

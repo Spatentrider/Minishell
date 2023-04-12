@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 18:11:41 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:34:57 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ void	redirection(t_shell *shell)
 		ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 		shell->lst.delete_str[1] = NULL;
 	}
-	delete_op(shell);
+	if (count_redirection > 0)
+		delete_op(shell);
+	clean_parse(shell);
 	executor(shell);
 	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
