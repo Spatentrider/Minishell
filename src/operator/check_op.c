@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/03/30 15:20:01 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:05:31 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ void	redirection(int c, t_shell *shell)
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (c == 1)
 	{
-		shell->lst.delete_str = (char **)malloc(sizeof(char *) * (count_redirection + 1));
+		shell->lst.delete_str = (char **)malloc(sizeof(char *) * \
+			(count_redirection + 1));
 		while (count_redirection > 0)
 		{
-			shell->lst.file = ft_split(shell->lst.redirection[count_redirection], ' ');
-			red_out(shell->lst.file[0], count_redirection, shell, count_delete_str, j);
+			shell->lst.file = ft_split(shell->lst.redirection \
+				[count_redirection], ' ');
+			red_out(shell->lst.file[0], count_redirection, shell, \
+				count_delete_str, j);
 			count_redirection--;
 			count_delete_str++;
 			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
@@ -85,18 +88,27 @@ int	check_red(char *input, t_shell *shell, int i)
 
 int	check_operator(t_shell *shell)
 {
+	int	q;
 	int	i;
 	int	c;
 
 	i = -1;
-	//q = clean_quote(shell, i);
+	q = cont_quote(shell, i);
 	c = -1;
-	if (!control_pipe(shell))
-		c = check_red(shell->lst.input, shell, i);
-	if (c == 0)
+	if (q == 0 || q == 3)
 	{
 		clean_parse(shell);
 		executor(shell);
+	}
+	else if (q == 1 || q == 4 || q == -1)
+	{
+		if (!control_pipe(shell))
+			c = check_red(shell->lst.input, shell, i);
+		if (c == 0)
+		{
+			clean_parse(shell);
+			executor(shell);
+		}
 	}
 	return (0);
 }

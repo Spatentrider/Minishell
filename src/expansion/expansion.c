@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 16:04:15 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/12 10:06:04 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	join_executor(t_shell *shell, int i)
 	free(shell->lst.executor[i]);
 	if (shell->lst.expansion[1])
 	{
-		shell->lst.executor[i] = ft_strjoin(shell->lst.expansion[0], shell->lst.expansion[1]);
+		shell->lst.executor[i] = ft_strjoin(shell->lst.expansion[0], \
+			shell->lst.expansion[1]);
 		j = 1;
 		while (shell->lst.expansion[++j])
-			shell->lst.executor[i] = ft_strjoin(shell->lst.executor[i], shell->lst.expansion[j]);
+			shell->lst.executor[i] = ft_strjoin(shell->lst.executor[i], \
+			shell->lst.expansion[j]);
 	}
 	else
 		shell->lst.executor[i] = ft_strdup(shell->lst.expansion[0]);
@@ -61,7 +63,6 @@ void	list_expansion(t_shell *shell, int i)
 	while (shell->lst.expansion[++j])
 	{
 		c = -1;
-		printf("flag = %d\n shell->flag = %d\n", flag, shell->flag);
 		if ((flag == 0) && (shell->flag == 0))
 		{
 			while (shell->env.current[++c])
@@ -80,11 +81,11 @@ void	list_expansion(t_shell *shell, int i)
 					ft_strlen(curr)) == 0)
 				{
 					change_expansion(shell, j, curr, c);
-					if(curr)
+					if (curr)
 						free(curr);
 					break ;
 				}
-				if(curr)
+				if (curr)
 					free(curr);
 			}
 		}

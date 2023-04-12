@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 14:28:13 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/02/15 10:30:20 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/12 11:05:25 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	control_qt(int q, int d, int s)
 	return (q);
 }
 
-int	clean_quote(t_shell *shell, int i)
+int	cont_quote(t_shell *shell, int i)
 {
 	int	q;
 	int	d;
