@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/12 11:21:23 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:22:54 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_shell
 	int		check_mix_red;
 	int		redirection_out;
 	int		here_cat;
+	int		flag;
+	int		dollar;
 }				t_shell;
 
 #endif

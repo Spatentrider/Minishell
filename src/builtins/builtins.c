@@ -6,13 +6,13 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:23:37 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:33:06 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	delete_file2(t_shell *shell, int j)
+void	delete_file2(t_shell *shell)
 {
 	int i;
 	int k;
@@ -49,14 +49,14 @@ void	delete_file2(t_shell *shell, int j)
 int	check_file(t_shell *shell)
 {
 	if(shell->check_mix_red == 1)
-		delete_file(shell);
+		delete_file2(shell);
 	if(shell->lst.redirection == NULL || shell->redirection_id == 2)
 	{
 		return (1);
 	}
 	else
 	{
-		delete_file(shell);
+		delete_file2(shell);
 		return (0);
 	}
 }

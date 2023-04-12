@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:26:51 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:27:46 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,22 @@ void	list_expansion(t_shell *shell, int i)
 	j = -1;
 	pos = 0;
 	flag = 0;
+	while (shell->lst.executor[++j])
+	{
+		while (shell->lst.executor[j][pos])
+		{
+			if (shell->lst.executor[j][pos] == '\a')
+			{
+				if (shell->lst.executor[j][pos + 1] =='$')
+					pos++;
+				else
+				{
+					shell->lst.executor[j][pos] = 32;
+					pos++;
+				}
+			}
+		}
+	}
 	shell->lst.expansion = ft_split(shell->lst.executor[i], '$');
 	if (shell->dollar == 1)
 		j = -1;
