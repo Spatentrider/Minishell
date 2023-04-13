@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/12 11:22:45 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:45:41 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,13 @@ int	control_space(t_shell *shell, int k)
 
 int	check_error_cod(t_shell *shell)
 {
-	int	i;
-
-	i = -1;
 	shell->lst.error = ft_split(shell->lst.input, ' ');
-	while (shell->lst.error[++i])
+	g_exit = parse(shell->lst.error, shell);
+	if (g_exit != 0)
 	{
-		g_exit = parse(shell->lst.error, shell);
-		if (g_exit != 0)
-		{
-			shell->old_g_exit = g_exit;
-			break ;
-		}
+		shell->old_g_exit = g_exit;
+		ft_sarfree(shell->lst.error, ft_sarsize(shell->lst.error));
+		return (g_exit);
 	}
 	ft_sarfree(shell->lst.error, ft_sarsize(shell->lst.error));
 	return (g_exit);

@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 12:05:43 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:47:21 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	redirection(t_shell *shell)
 		}
 		shell->lst.delete_str[count_delete_str] = NULL;
 	}
-	else if (shell->lst.here_doc[1] == NULL && ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
+	if (ft_strncmp(shell->lst.here_doc[1], "<<", 2) == 0 && ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
 	{
 		shell->lst.file = ft_split(shell->lst.redirection[count_redirection], ' ');
 		here_doc_cat(shell->lst.file[0], shell);
