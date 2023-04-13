@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 11:54:44 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:56:56 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,12 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 	j = -1;
 	if (shell->here_pipe == 1)
 		dup2(shell->out_pipe, STDOUT_FILENO);
+	if (shell->check_mix_red == 1)
+	{
+		free(shell->lst.doc);
+		shell->lst.doc = NULL;
+		return ;
+	}
 	while (shell->lst.cat_array[++j])
 		printf("%s\n", shell->lst.cat_array[j]);
 	if (shell->check_signal_d == 1)

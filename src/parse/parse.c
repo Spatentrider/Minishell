@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/13 12:31:06 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:52:34 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int	parse(char **string, t_shell *shell)
 				if (g_exit != 0)
 					return (g_exit);
 			}
+			else
+				shell->check_redirection = 0;
 		}
 		g_exit = check_quote(shell->lst.input);
 	}
