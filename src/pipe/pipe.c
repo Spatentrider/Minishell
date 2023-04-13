@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 18:10:26 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 10:32:40 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	control_pipe(t_shell *shell)
 		ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 		return (1);
 	}
-	ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
+	if (shell->lst.pipe)
+		ft_sarfree(shell->lst.pipe, ft_sarsize(shell->lst.pipe));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/12 17:42:57 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 10:44:09 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	save_word(char *dest, char *src)
 	int check_pipe;
 
 	i = 0;
-	while (is_pipe(src[i]) == 0 || check_pipe == 1)
+	while ((is_pipe(src[i]) == 0 || check_pipe == 1) && src[i] != '\0')
 	{
 		if (src[i] == 34)
 		{
@@ -84,7 +84,6 @@ void	save_word(char *dest, char *src)
 		}
 	}
 	dest[i] = '\0';
-	// return (check_pipe);
 }
 
 /**
@@ -128,7 +127,7 @@ int	save_split(char **split, char *str)
 				}
 				j++;
 			}
-			split[w] = (char *)malloc(sizeof(char) * (j + 1));
+			split[w] = (char *)malloc(sizeof(char) * (j + 10));
 			if (!(split[w]))
 				return (0);
 			save_word(split[w], str + i);
