@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 11:19:53 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 11:54:44 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 	int	j;
 
 	shell->lst.cat_array = (char **)malloc(sizeof(char *) * 40000);
+	shell->here_cat = 1;
 	j = 0;
 	if (shell->here_pipe == 1)
 		dup2(shell->stdout, STDOUT_FILENO);
