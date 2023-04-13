@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:10:40 by mich              #+#    #+#             */
-/*   Updated: 2023/02/20 15:16:24 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/13 14:30:07 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 void	short_echo(t_shell *shell)
 {
+	shell->exp.i = -1;
 	while (shell->lst.executor[shell->echo.i])
 	{
+		while (shell->lst.executor[shell->echo.i][++shell->exp.i])
+		{
+			if (shell->lst.executor[shell->echo.i][shell->exp.i] == '\a')
+			{
+				if (shell->lst.executor[shell->echo.i][shell->exp.i + 1] != '$')
+					shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
+			}
+		}
 		printf("%s", shell->lst.executor[shell->echo.i]);
 		if (shell->lst.executor[shell->echo.i + 1] != NULL)
 			printf(" ");
