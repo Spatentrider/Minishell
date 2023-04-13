@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:25:43 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 14:24:15 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/13 12:04:49 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_all(t_shell *shell)
 	shell->dollar = 0;
 	shell->flag = 0;
 	shell->check_signal_d = 0;
+	shell->here_cat = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -80,4 +81,5 @@ void	reset_var(t_shell *shell)
 	shell->dollar = 0;
 	shell->flag = 0;
 	shell->check_signal_d = 0;
+	shell->here_cat = 0;
 }
