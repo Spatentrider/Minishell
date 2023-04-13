@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 13:27:25 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/13 12:41:10 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	minishell_case(t_shell *shell)
 int	ft_fork(t_shell *shell, char *str)
 {
 	int	pid;
-	int	status;
 
 	pid = fork();
 	signal(SIGINT, signal_handler2);
@@ -67,11 +66,11 @@ int	ft_fork(t_shell *shell, char *str)
 	}
 	else if (pid > 0)
 	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
+		waitpid(pid, &g_exit, 0);
+		if (WIFEXITED(g_exit))
 		{
 			free(str);
-			return (0);
+			return (g_exit = WEXITSTATUS(g_exit));
 		}
 	}
 	else
@@ -86,8 +85,6 @@ int	ft_fork(t_shell *shell, char *str)
 int	ab_path(t_shell	*shell)
 {
 	int	pid;
-	int	status;
-
 	if (!access(shell->lst.executor[0], F_OK))
 	{
 		signal(SIGINT, signal_handler2);
@@ -101,9 +98,9 @@ int	ab_path(t_shell	*shell)
 		}
 		else if (pid > 0)
 		{
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				return (1);
+			waitpid(pid, &g_exit, 0);
+			if (WIFEXITED(g_exit))
+				return (g_exit = WEXITSTATUS(g_exit));
 		}
 		else
 			exit(EXIT_FAILURE);

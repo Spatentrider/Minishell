@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:35:28 by mich              #+#    #+#             */
-/*   Updated: 2023/03/16 14:49:47 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/13 12:13:39 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 int	control(char *string);
 /*parse.c*/
 int	check_pipe(char *string);
-int	check_redirection(char *string);
+int	check_redirection(char *string, t_shell *shell);
 int	check_quote(char *string);
-int	check_parameter(char *string, char c);
+int	check_parameter(char *string, char c, t_shell *shell);
 int	parse(char **string, t_shell *shell);
 
 #endif

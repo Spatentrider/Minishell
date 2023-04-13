@@ -124,12 +124,10 @@ void	mix_redirection(t_shell *shell)
             shell->lst.delete_str[i] = ft_strdup(token);
             if (flag == 2)
             {
-                printf("%d ao ao\n", flag);
                 here_doc(token, shell);
             }
             else
             {
-                printf("%d cat cat\n", flag);
                 here_doc_cat(token, shell);
                 flag = 3;
             }
@@ -142,18 +140,12 @@ void	mix_redirection(t_shell *shell)
                 ft_strncmp(token, "<", 1) != 0 && \
                 ft_strncmp(token, ">>", 2) != 0 && \
                 ft_strncmp(token, "<< ", 2) != 0)
-                {
-                    printf("token = %s\n", token);
                     flag = 2;
-                }
         }
     }
     shell->lst.delete_str[i] = NULL;
     free(input);
     delete_op(shell);
     if (flag != 3)
-    {
-        printf("%d sdasds\n", flag);
-	    executor(shell);
-    }
+        executor(shell);
 }
