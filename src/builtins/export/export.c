@@ -68,7 +68,7 @@ int	change_var(t_shell *shell, int c)
 			str = strdup_exp(shell->lst.executor[c], pos);
 		else
 			str = ft_strdup(shell->lst.executor[c]);
-		if (ft_strncmp(curr, str, ft_strlen(curr)) == 0)
+		if (ft_strncmp(curr, str, ft_strlen(str)) == 0)
 		{
 			if (pos > 0)
 			{
