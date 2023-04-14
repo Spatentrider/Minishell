@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 14:33:06 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/14 17:32:27 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_file(t_shell *shell)
 {
 	if(shell->check_mix_red == 1)
 		delete_file2(shell);
-	if(shell->lst.redirection == NULL || shell->redirection_id == 2)
+	if(shell->lst.redirection == NULL || shell->redirection_id == 2 || shell->do_redirection != 1)
 	{
 		return (1);
 	}
