@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 12:41:10 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/14 17:06:25 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,15 @@ void	change_shlvl(t_shell *shell)
 
 int	commands(t_shell *shell)
 {
+	char	*str;
+
+	if (shell->lst.executor[1] == NULL)
+	{
+		str = ft_strdup(shell->lst.executor[0]);
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+		shell->lst.executor = ft_split(str, ' ');
+		free(str);
+	}
 	if (control_cmd(shell))
 		return (1);
 	else if (control_path(shell))

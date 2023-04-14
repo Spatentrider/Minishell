@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 15:56:56 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/14 17:07:08 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	append(char *redirection, t_shell *shell, int j, int count_redirection, int
 		k = open(redirection, O_CREAT |
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
-		//ft_sarprint(shell->lst.delete_str);
 		return ;
 	}
 	else
