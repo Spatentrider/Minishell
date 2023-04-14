@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/13 15:52:34 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/14 17:18:51 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,22 @@ int	check_redirection(char *string, t_shell *shell)
 	size_t	i;
 
 	if (shell->check_redirection == 0)
+	{
 		shell->check_redirection = 1;
+		if (is_red(string[1]) == 0 || is_red(string[2]) == 0)
+			shell->check_redirection = 0;
+	}
 	else
 	{
 		printf("minishell: syntax error near unexpected token redirection\n");
+		printf("qui\n");
 		return (g_exit = 2);
 	}
 	i = ft_strlenr(string);
 	if (i > 2)
 	{
 		printf("minishell: syntax error near unexpected token redirection\n");
+		printf("quo\n");
 		return (g_exit = 258);
 	}
 	if (i > 1 && (string[0] == '>' && string[0] != string[1]))
