@@ -97,7 +97,11 @@ void	list_expansion(t_shell *shell, int i)
 			shell->flag = 0;
 			flag = 0;
 			if (shell->lst.expansion[j][0] == '\a')
+			{
+				shell->lst.expansion[j][0] = '$';
+				printf("%s\n", shell->lst.expansion[j]);
 				flag = 1;
+			}
 		}
 		if (shell->env.current[c] == NULL)
 		{

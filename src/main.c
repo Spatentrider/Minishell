@@ -69,9 +69,11 @@ void	loop2(t_shell *shell, int p)
 		shell->lst.redirection = NULL;
 		if (ft_strncmp(shell->lst.input, "", 1))
 			add_history(shell->lst.input);
-		g_exit = check_error_cod(shell);
 		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+		{
+			g_exit = check_error_cod(shell);
 			check_operator(shell);
+		}
 		dup2(shell->stdout, STDOUT_FILENO);
 		dup2(shell->stdin, STDIN_FILENO);
 	}
