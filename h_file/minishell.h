@@ -86,6 +86,14 @@ typedef struct s_exp
 	int		pos;
 }	t_exp;
 
+typedef struct s_strtok
+{
+    size_t delim_len;
+    char *result;
+    int match;
+    size_t i;
+}	t_strtok;
+
 typedef struct s_shell
 {
 	t_cd	cd;
@@ -94,6 +102,7 @@ typedef struct s_shell
 	t_echo	echo;
 	t_exp	exp;
 	t_unset	unset;
+	t_strtok strtok;
 	char	*save_redirection;
 	int		old_g_exit;
 	int		stdin;
