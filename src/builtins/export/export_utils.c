@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:58:13 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:59:51 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	change_a(int i, int c, int pos, t_shell *shell)
 {
 	int	j;
 
-	printf("%d\n", pos);
 	if (pos >= 0)
 	{
 		free(shell->env.current[i]);
@@ -51,7 +50,6 @@ int	change_a(int i, int c, int pos, t_shell *shell)
 			if (shell->env.current[i][j] == '\a')
 				shell->env.current[i][j] = ' ';
 		}
-		printf("%s\n", shell->lst.executor[c]);
 		return (1);
 	}
 	return (0);
