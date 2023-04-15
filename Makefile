@@ -25,6 +25,8 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 SRC_CMD					=	src/commands/commands.c \
 							src/commands/cmd_utils.c
 
+SRC_EXP_RED			=	src/exp_redirection/exp_red.c
+
 SRC_EXPANSION			=	src/expansion/expansion.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
@@ -66,6 +68,7 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_PWD:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_UNSET:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_CMD:.c=.o}) \
+						$(addprefix $(OBJS_DIR)/, ${SRC_EXP_RED:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_EXPANSION:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_GET_ENV:.c=.o}) \
 						$(addprefix $(OBJS_DIR)/, ${SRC_OPERATOR:.c=.o}) \
