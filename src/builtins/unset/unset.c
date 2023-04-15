@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 11:14:15 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 12:18:14 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	unset_loop(t_shell *shell, char **current)
 	}
 }
 
+int	cont_unset(t_shell *shell, char *curr, char *str, char **current)
+{
+	if (shell->unset.position > 0)
+		str = strdup_exp(shell->lst.executor[shell->unset.k], \
+		shell->unset.position);
+	else
+		str = ft_strdup(shell->lst.executor[shell->unset.k]);
+	if (ft_strncmp(curr, str, ft_strlen(str)) == 0)
+	{
+		shell->unset.j = shell->unset.i - 1;
+		unset_loop(shell, current);
+		return(1);
+	}
+	return (0);
+}
+
 void	ft_unset(t_shell *shell, char **current)
 {
 	char	*curr;
@@ -44,20 +60,14 @@ void	ft_unset(t_shell *shell, char **current)
 		{
 			shell->unset.position = ft_strchrp(current[shell->unset.i], '=');
 			if (shell->unset.position > 0)
-				curr = strdup_exp(current[shell->unset.i], shell->unset.position);
+				curr = strdup_exp(current[shell->unset.i], \
+					shell->unset.position);
 			else
 				curr = ft_strdup(current[shell->unset.i]);
-			shell->unset.position = ft_strchrp(shell->lst.executor[shell->unset.k], '=');
-			if (shell->unset.position > 0)
-				str = strdup_exp(shell->lst.executor[shell->unset.k], shell->unset.position);
-			else
-				str = ft_strdup(shell->lst.executor[shell->unset.k]);
-			if (ft_strncmp(curr, str, ft_strlen(str)) == 0)
-			{
-				shell->unset.j = shell->unset.i - 1;
-				unset_loop(shell, current);
+			shell->unset.position = \
+				ft_strchrp(shell->lst.executor[shell->unset.k], '=');
+			if (cont_unset(shell, curr, str, current))
 				break ;
-			}
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/14 17:18:51 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 12:08:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,12 @@ int	check_redirection(char *string, t_shell *shell)
 	else
 	{
 		printf("minishell: syntax error near unexpected token redirection\n");
-		printf("qui\n");
 		return (g_exit = 2);
 	}
 	i = ft_strlenr(string);
 	if (i > 2)
 	{
 		printf("minishell: syntax error near unexpected token redirection\n");
-		printf("quo\n");
 		return (g_exit = 258);
 	}
 	if (i > 1 && (string[0] == '>' && string[0] != string[1]))
