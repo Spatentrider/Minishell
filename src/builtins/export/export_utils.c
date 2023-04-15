@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:49:34 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:50:57 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_str(char *str, char *curr)
 	free(str);
 }
 
-int	change_a(int i, int pos, t_shell *shell)
+int	change_a(int i, int c, int pos, t_shell *shell)
 {
 	int	j;
 
