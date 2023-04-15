@@ -6,13 +6,14 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:12:59 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:25:22 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
 
-void	red_out(char *redirection, int count_redirection, t_shell *shell, int count_delete_str, int j)
+void	red_out(char *redirection, int count_redirection, \
+	t_shell *shell, int count_delete_str, int j)
 {
 	int	i;
 	int	k;
@@ -44,7 +45,8 @@ void	red_inp(char	*redirection, t_shell *shell)
 	shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
-void	append(char *redirection, t_shell *shell, int j, int count_redirection, int count_delete_str)
+void	append(char *redirection, t_shell *shell, \
+	int j, int count_redirection, int count_delete_str)
 {
 	int	i;
 	int	k;

@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:08:47 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:05:47 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:24:37 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	ctrl_d(t_shell *shell)
 		printf("Exiting...\n");
 		exit(0);
 	}
-	if( !shell->lst.doc)
+	if (!shell->lst.doc)
 		shell->check_signal_d = 1;
 }

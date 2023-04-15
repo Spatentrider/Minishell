@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:20:51 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:26:31 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void	redirection(t_shell *shell)
 		}
 		shell->lst.file = \
 			ft_split(shell->lst.redirection[count_redirection], ' ');
-		if ((ft_strncmp(shell->lst.here_doc[1], "<<", 2) == 0 || ft_strncmp(shell->lst.here_doc[1], shell->lst.file[0], ft_strlen(shell->lst.file[0])) == 0) && \
+		if ((ft_strncmp(shell->lst.here_doc[1], "<<", 2) == 0 \
+			|| ft_strncmp(shell->lst.here_doc[1], shell->lst.file[0], \
+			ft_strlen(shell->lst.file[0])) == 0) && \
 			ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
 		{
 			shell->lst.file = \
@@ -114,21 +116,21 @@ int	check_red(char *input, t_shell *shell, int i)
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 4) 
+			if (shell->redirection_id != 0 && shell->redirection_id != 4)
 				shell->check_mix_red = 1;
 			shell->redirection_id = 4;
 			i++;
 		}
 		else if (input[i] == '>' && input[i + 1] == '>')
 		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 3) 
+			if (shell->redirection_id != 0 && shell->redirection_id != 3)
 				shell->check_mix_red = 1;
 			shell->redirection_id = 3;
 			i++;
 		}
 		else if (input[i] == '<')
 		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 2) 
+			if (shell->redirection_id != 0 && shell->redirection_id != 2)
 				shell->check_mix_red = 1;
 			shell->redirection_id = 2;
 		}

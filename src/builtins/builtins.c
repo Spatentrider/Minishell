@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:23:13 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:27:11 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	delete_file2(t_shell *shell)
 		i = -1;
 		while (shell->lst.executor[++i])
 		{
-			if(ft_strncmp(shell->lst.executor[i], \
+			if (ft_strncmp(shell->lst.executor[i], \
 				shell->lst.delete_str[k], \
 				ft_strlen(shell->lst.executor[i])) == 0)
 			{
@@ -53,7 +53,7 @@ int	check_file(t_shell *shell)
 {
 	if (shell->check_mix_red == 1)
 		delete_file2(shell);
-	if(shell->lst.redirection == NULL || \
+	if (shell->lst.redirection == NULL || \
 		shell->redirection_id == 2 || shell->do_redirection != 1)
 	{
 		return (1);
