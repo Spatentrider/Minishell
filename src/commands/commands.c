@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/14 17:06:25 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 16:28:28 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	ft_fork(t_shell *shell, char *str)
 int	ab_path(t_shell	*shell)
 {
 	int	pid;
+
 	if (!access(shell->lst.executor[0], F_OK))
 	{
 		signal(SIGINT, signal_handler2);

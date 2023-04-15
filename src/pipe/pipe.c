@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:06:58 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 10:32:40 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 16:27:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,19 @@ int	process_pipe(t_shell *shell, int *pid, int c, int j)
 int	control_pipe(t_shell *shell)
 {
 	int	j;
-	int	pipe_counter;
 	int	*pid;
 	int	c;
 
 	c = 0;
 	j = 0;
 	shell->lst.pipe = split_pipe(shell->lst.input);
-	pipe_counter = ft_sarsize(shell->lst.pipe);
-	if (pipe_counter > 1)
+	shell->pipe_counter = ft_sarsize(shell->lst.pipe);
+	if (shell->pipe_counter > 1)
 	{
-		pid = (int *) malloc(sizeof(int) * pipe_counter);
-		while (c < pipe_counter)
+		pid = (int *) malloc(sizeof(int) * shell->pipe_counter);
+		while (c < shell->pipe_counter)
 		{
-			if (c == pipe_counter - 1)
+			if (c == shell->pipe_counter - 1)
 				j = 1;
 			process_pipe(shell, pid, c, j);
 			c++;

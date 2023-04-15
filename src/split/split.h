@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 16:17:12 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:25:08 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ char	**split_redirection(char const *s);
 int		control_check(int n);
 int		check_str(char *str, int check_pipe, int i);
 int		check_string(char *str, int check_red, int i);
-
 
 #endif
