@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/12 19:31:03 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 12:05:20 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char	**split_redirection(char const *s)
 	if (!s)
 		return (NULL);
 	w = how_words((char *)s);
-	rtn = (char **)malloc(sizeof(char *) * (w + 1));
+	rtn = (char **)malloc(sizeof(char *) * (w + 10));
 	if (!rtn)
 		return (NULL);
 	if (!(stamp_split(rtn, (char *) s)))

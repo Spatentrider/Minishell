@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 11:30:47 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:04:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	redirection(t_shell *shell)
 	count_redirection = ft_sarsize(shell->lst.redirection) - 1;
 	j = count_redirection;
 	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
-	if (count_redirection > 1)
+	if (count_redirection >= 1)
 	{
 		shell->do_redirection = 1;
 		clean_parse(shell);
@@ -90,14 +90,13 @@ void	redirection(t_shell *shell)
 	}
 	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
-	}
+ }
 
-	int	check_red(char *input, t_shell *shell, int i)
-	{
+int	check_red(char *input, t_shell *shell, int i)
+{
 	i = -1;
 	shell->redirection_id = 0;
 	shell->check_mix_red = 0;
-	
 	while (input[++i])
 	{
 		if (input[i] == '<' && input[i + 1] == '<')
