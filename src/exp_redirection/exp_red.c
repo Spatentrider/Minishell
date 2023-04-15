@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
+/*   exp_red.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 11:34:22 by mich             ###   ########.fr       */
+/*   Created: 2023/04/15 11:24:08 by mich              #+#    #+#             */
+/*   Updated: 2023/04/15 11:34:14 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "expansion.h"
+#include "exp_red.h"
 
-void	join_executor(t_shell *shell, int i)
+void	join_redirection(t_shell *shell, int i)
 {
 	int	j;
 
-	free(shell->lst.executor[i]);
+	free(shell->lst.redirection[i]);
 	if (shell->lst.expansion[1])
 	{
-		shell->lst.executor[i] = ft_strjoin(shell->lst.expansion[0], \
+		shell->lst.redirection[i] = ft_strjoin(shell->lst.expansion[0], \
 			shell->lst.expansion[1]);
 		j = 1;
 		while (shell->lst.expansion[++j])
-			shell->lst.executor[i] = ft_strjoin(shell->lst.executor[i], \
+			shell->lst.redirection[i] = ft_strjoin(shell->lst.redirection[i], \
 			shell->lst.expansion[j]);
 	}
 	else
-		shell->lst.executor[i] = ft_strdup(shell->lst.expansion[0]);
+		shell->lst.redirection[i] = ft_strdup(shell->lst.expansion[0]);
 }
 
-void	change_expansion(t_shell *shell, int i, char *curr, int c)
+void	change_exp_red(t_shell *shell, int i, char *curr, int c)
 {
 	char	*str;
 
@@ -40,7 +40,7 @@ void	change_expansion(t_shell *shell, int i, char *curr, int c)
 	free(str);
 }
 
-void	list_expansion(t_shell *shell, int i)
+void	list_exp_red(t_shell *shell, int i)
 {
 	char	*curr;
 	int		pos;
@@ -48,14 +48,14 @@ void	list_expansion(t_shell *shell, int i)
 	int		c;
 	int		flag;
 
-	if (shell->lst.executor[i][0] == '$')
+	if (shell->lst.redirection[i][0] == '$')
 		shell->dollar = 1;
-	if (shell->lst.executor[i][0] == '\a')
+	if (shell->lst.redirection[i][0] == '\a')
 		shell->flag = 1;
 	j = -1;
 	pos = 0;
 	flag = 0;
-	shell->lst.expansion = ft_split(shell->lst.executor[i], '$');
+	shell->lst.expansion = ft_split(shell->lst.redirection[i], '$');
 	if (shell->dollar == 1)
 		j = -1;
 	else
@@ -83,7 +83,7 @@ void	list_expansion(t_shell *shell, int i)
 				if (ft_strncmp(shell->lst.expansion[j], curr, \
 					ft_strlen(shell->lst.expansion[j])) == 0)
 				{
-					change_expansion(shell, j, curr, c);
+					change_exp_red(shell, j, curr, c);
 					if (curr)
 						free(curr);
 					break ;
@@ -106,30 +106,22 @@ void	list_expansion(t_shell *shell, int i)
 			shell->lst.expansion[j] = ft_strdup("\a");
 		}
 	}
-	join_executor(shell, i);
+	join_redirection(shell, i);
 	ft_sarfree(shell->lst.expansion, ft_sarsize(shell->lst.expansion));
 }
 
-void	expansion(t_shell *shell)
+void	exp_red(t_shell *shell)
 {
 	int		j;
 
 	shell->exp.i = -1;
-	while (shell->lst.executor[++shell->exp.i])
+	while (shell->lst.redirection[++shell->exp.i])
 	{
-		if (ft_strncmp(shell->lst.executor[shell->exp.i], "$?", 2) == 0)
+		j = -1;
+		while (shell->lst.redirection[shell->exp.i][++j])
 		{
-			free(shell->lst.executor[shell->exp.i]);
-			shell->lst.executor[shell->exp.i] = ft_itoa(shell->old_g_exit);
-		}
-		else
-		{
-			j = -1;
-			while (shell->lst.executor[shell->exp.i][++j])
-			{
-				if (shell->lst.executor[shell->exp.i][j] == '$')
-					list_expansion(shell, shell->exp.i);
-			}
+			if (shell->lst.redirection[shell->exp.i][j] == '$')
+				list_exp_red(shell, shell->exp.i);
 		}
 	}
 }

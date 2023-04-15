@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:47 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/03/29 17:00:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 11:26:04 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "pipe/pipe.h"
 # include "commands/commands.h"
 # include "expansion/expansion.h"
+# include "exp_redirection/exp_red.h"
 # include "free/free.h"
 
 int		loop(t_shell *shell);

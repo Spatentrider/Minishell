@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/14 17:33:12 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 11:30:47 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	redirection(t_shell *shell)
 	if (count_redirection > 1)
 	{
 		shell->do_redirection = 1;
+		clean_parse(shell);
+		exp_red(shell);
 		if (shell->redirection_id == 1)
 		{
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) * (count_redirection + 1));
@@ -84,7 +86,6 @@ void	redirection(t_shell *shell)
 	if (shell->here_cat == 0)
 	{
 		delete_op(shell);
-		clean_parse(shell);
 		executor(shell);
 	}
 	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
