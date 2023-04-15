@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:20:53 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:21:45 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	cont_unset(t_shell *shell, char *curr, char *str, char **current)
 		unset_loop(shell, current);
 		return (1);
 	}
+	(void)str;
 	return (0);
 }
 
@@ -68,7 +69,6 @@ void	ft_unset(t_shell *shell, char **current)
 				ft_strchrp(shell->lst.executor[shell->unset.k], '=');
 			if (cont_unset(shell, curr, str, current))
 				break ;
-			(void)str;
 		}
 	}
 }
