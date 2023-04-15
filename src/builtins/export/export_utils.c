@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:45:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:48:09 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	free_str(char *str, char *curr)
 
 int	change_a(int i, int j, int pos, t_shell *shell)
 {
+	int	j;
+
 	if (pos > 0)
 	{
 		free(shell->env.current[i]);

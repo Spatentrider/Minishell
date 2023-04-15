@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:25:14 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:46:54 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:48:45 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**sort(char **sorting)
 int	change_var(t_shell *shell, int c)
 {
 	int		i;
-	int		j;
 	int		pos;
 
 	if (ft_strncmp(shell->lst.executor[c], "=", 1) == 0)
@@ -72,7 +71,7 @@ int	change_var(t_shell *shell, int c)
 		pos = ft_strchrp(shell->env.current[i], '=');
 		if (ft_strncmp(shell->curr, shell->str, ft_strlen(shell->str)) == 0)
 		{
-				if (change_a(i, j, pos, shell))
+				if (change_a(i, pos, shell))
 				{
 					free_str(shell->str, shell->curr);
 					return (1);
