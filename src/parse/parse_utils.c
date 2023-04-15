@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:44:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 15:08:02 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:20:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ int	check_2_red(t_shell *shell, char *string)
 		printf("minishell: syntax error near unexpected token redirection\n");
 		return (g_exit = 2);
 	}
+	return (0);
 }
