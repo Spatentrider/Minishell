@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 13:23:35 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:50:52 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_error_cod(t_shell *shell)
 {
 	shell->lst.error = ft_split(shell->lst.input, ' ');
 	g_exit = parse(shell->lst.error, shell);
-	if (g_exit != 0)
+	if (g_exit > 0)
 	{
 		shell->old_g_exit = g_exit;
 		ft_sarfree(shell->lst.error, ft_sarsize(shell->lst.error));
@@ -51,10 +51,11 @@ void	loop2(t_shell *shell, int p)
 		shell->lst.redirection = NULL;
 		if (ft_strncmp(shell->lst.input, "", 1))
 			add_history(shell->lst.input);
-		if (g_exit == 0 && ft_strncmp(shell->lst.input, "", 1) != 0)
+		if (ft_strncmp(shell->lst.input, "", 1) != 0)
 		{
 			g_exit = check_error_cod(shell);
-			check_operator(shell);
+			if (g_exit == 0)
+				check_operator(shell);
 		}
 		dup2(shell->stdout, STDOUT_FILENO);
 		dup2(shell->stdin, STDIN_FILENO);

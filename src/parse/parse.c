@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 15:19:11 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:56:57 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,19 @@ int	check_redirection(char *string, t_shell *shell)
 	size_t	i;
 
 	g_exit = check_2_red(shell, string);
-	i = ft_strlenr(string);
-	if (i > 2)
+	if (g_exit == 0)
 	{
-		printf("minishell: syntax error near unexpected token redirection\n");
-		return (g_exit = 258);
-	}
-	if (i > 1 && (string[0] == '>' && string[0] != string[1]))
-	{
-		printf("minishell: redirection >< is not allowed\n");
-		return (g_exit = 2);
+		i = ft_strlenr(string);
+		if (i > 2)
+		{
+			printf("minishell: syntax error near unexpected token redirection\n");
+			return (g_exit = 258);
+		}
+		if (i > 1 && (string[0] == '>' && string[0] != string[1]))
+		{
+			printf("minishell: redirection >< is not allowed\n");
+			return (g_exit = 2);
+		}
 	}
 	return (g_exit);
 }
@@ -79,12 +82,8 @@ int	parse(char **string, t_shell *shell)
 	int	i;
 
 	g_exit = control(string[0]);
-	if (string[0][0] == '|')
-	{
-		printf("minishell: syntax error near unexpected token `|'\n");
-		g_exit = 258;
-	}
-	else
+	g_exit = control_string(string[0]);
+	if (g_exit == 0)
 	{
 		i = -1;
 		while (string[++i])
