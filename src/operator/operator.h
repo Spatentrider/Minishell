@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:18:05 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:30:03 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "../src.h"
 
+/*check_op_utils.c*/
+void	check_double_red(t_shell *shell, char *input, int i);
+void	check_single_red(t_shell *shell, char *input, int i);
 /*check_op.c*/
 void	redirection(t_shell *shell);
 int		check_red(char *input, t_shell *shell, int i);

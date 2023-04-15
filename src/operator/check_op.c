@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:26:31 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:30:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,32 +114,9 @@ int	check_red(char *input, t_shell *shell, int i)
 	shell->check_mix_red = 0;
 	while (input[++i])
 	{
-		if (input[i] == '<' && input[i + 1] == '<')
-		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 4)
-				shell->check_mix_red = 1;
-			shell->redirection_id = 4;
-			i++;
-		}
-		else if (input[i] == '>' && input[i + 1] == '>')
-		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 3)
-				shell->check_mix_red = 1;
-			shell->redirection_id = 3;
-			i++;
-		}
-		else if (input[i] == '<')
-		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 2)
-				shell->check_mix_red = 1;
-			shell->redirection_id = 2;
-		}
-		else if (input[i] == '>')
-		{
-			if (shell->redirection_id != 0 && shell->redirection_id != 1)
-				shell->check_mix_red = 1;
-			shell->redirection_id = 1;
-		}
+		check_double_red(shell, input, i);
+		if (shell->redirection_id == 0)
+			check_single_red(shell, input, i);
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 		redirection(shell);
