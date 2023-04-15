@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:12:50 by mich              #+#    #+#             */
-/*   Updated: 2023/04/06 14:46:33 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:35:35 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,14 @@ int	control_path(t_shell *shell)
 		}
 	}
 	return (0);
+}
+
+int	fork_process(int pid, char *str)
+{
+	waitpid(pid, &g_exit, 0);
+	if (WIFEXITED(g_exit))
+	{
+		free(str);
+		return (g_exit = WEXITSTATUS(g_exit));
+	}
 }

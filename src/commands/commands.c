@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:28:28 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:35:44 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,9 @@ int	minishell_case(t_shell *shell)
 			exit(EXIT_FAILURE);
 		}
 	}
-	else if (pid > 0)
-	{	
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			return (0);
-	}
-	else
-	{
-		perror("fork failed");
-		exit(EXIT_FAILURE);
-	}
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		return (0);
 	return (1);
 }
 
@@ -64,22 +56,9 @@ int	ft_fork(t_shell *shell, char *str)
 			exit(0);
 		}
 	}
-	else if (pid > 0)
-	{
-		waitpid(pid, &g_exit, 0);
-		if (WIFEXITED(g_exit))
-		{
-			free(str);
-			return (g_exit = WEXITSTATUS(g_exit));
-		}
-	}
-	else
-	{
-		free(str);
-		exit(EXIT_FAILURE);
-	}
-	free(str);
-	return (0);
+	return (fork_process(pid, str));
+	// free(str);
+	// return (0);
 }
 
 int	ab_path(t_shell	*shell)
@@ -97,14 +76,9 @@ int	ab_path(t_shell	*shell)
 			if (g_exit == 130)
 				exit(0);
 		}
-		else if (pid > 0)
-		{
-			waitpid(pid, &g_exit, 0);
-			if (WIFEXITED(g_exit))
-				return (g_exit = WEXITSTATUS(g_exit));
-		}
-		else
-			exit(EXIT_FAILURE);
+		waitpid(pid, &g_exit, 0);
+		if (WIFEXITED(g_exit))
+			return (g_exit = WEXITSTATUS(g_exit));
 	}
 	return (0);
 }
