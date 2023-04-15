@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 13:09:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:19:11 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_redirection(char *string, t_shell *shell)
 {
 	size_t	i;
 
-	check_2_red(shell, string);
+	g_exit = check_2_red(shell, string);
 	i = ft_strlenr(string);
 	if (i > 2)
 	{
