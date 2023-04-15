@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:35:28 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:09:01 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:05:41 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*parse_utils.c*/
 int		control(char *string);
 int		check_pipe(char *string);
-void	check_2_red(shell, string);
+void	check_2_red(t_shell *shell, char *string);
 /*parse.c*/
 int		check_pipe(char *string);
 int		check_redirection(char *string, t_shell *shell);
