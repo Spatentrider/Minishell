@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 11:34:22 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:03:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ void	list_expansion(t_shell *shell, int i)
 			flag = 0;
 			if (shell->lst.expansion[j][0] == '\a')
 				flag = 1;
-			shell->lst.expansion[j][0] = '$';
+			curr = ft_strdup(shell->lst.expansion[j]);
+			free(shell->lst.expansion[j]);
+			shell->lst.expansion[j] = ft_strjoin("$", curr);
+			free(curr);
 		}
 		if (shell->env.current[c] == NULL)
 		{
