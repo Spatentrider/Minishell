@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:07:01 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:09:27 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ int	stamp_split(char **split, char *str)
 	int	i;
 	int	j;
 	int	w;
-	int	check_pipe;
+	int	check_red;
 
 	i = 0;
 	w = 0;
-	check_pipe = 0;
+	check_red = 0;
 	while (str[i] != '\0')
 	{
 		if (is_red(str[i]) == 1 || str[i] == ' ')
@@ -113,15 +113,10 @@ int	stamp_split(char **split, char *str)
 		else
 		{
 			j = 0;
-			while (is_red(str[i + j]) == 0 || check_pipe == 1)
+			while (is_red(str[i + j]) == 0 || check_red == 1)
 			{
 				if (str[i + j] == 34)
-				{
-					if (check_pipe == 1)
-						check_pipe = 0;
-					else
-						check_pipe = 1;
-				}
+					check_red = control_check(check_red);
 				j++;
 			}
 			split[w] = (char *)malloc(sizeof(char) * (j + 1));

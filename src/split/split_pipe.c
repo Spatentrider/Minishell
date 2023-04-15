@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 16:05:46 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:10:19 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,7 @@ int	save_split(char **split, char *str)
 			while (is_pipe(str[i + j]) == 0 || check_pipe == 1)
 			{
 				if (str[i + j] == 34)
-				{
-					if (check_pipe == 1)
-						check_pipe = 0;
-					else
-						check_pipe = 1;
-				}
+					check_pipe = control_check(check_pipe);
 				j++;
 			}
 			split[w] = (char *)malloc(sizeof(char) * (j + 10));
