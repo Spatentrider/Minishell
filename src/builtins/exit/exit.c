@@ -6,13 +6,13 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:17:02 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 15:02:43 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 15:07:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-void	printf_error(t_shell *shell)
+void	printf_error(t_shell *shell, int k)
 {
 	if (isdigit(shell->lst.executor[1][k]) == 0)
 	{
@@ -40,7 +40,7 @@ void	ft_exit(t_shell *shell)
 	if (shell->lst.executor[1] != NULL)
 	{
 		while (shell->lst.executor[1][++k])
-			printf_error(shell);
+			printf_error(shell, k);
 		printf("exit\n");
 		k = ft_atoi(shell->lst.executor[1]);
 		free_struct(shell);
