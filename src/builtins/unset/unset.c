@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:21:45 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:23:24 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	unset_loop(t_shell *shell, char **current)
 	}
 }
 
-int	cont_unset(t_shell *shell, char *curr, char *str, char **current)
+int	cont_unset(t_shell *shell, char *curr, char **current)
 {
+	char *str;
+
 	if (shell->unset.position > 0)
 		str = strdup_exp(shell->lst.executor[shell->unset.k], \
 		shell->unset.position);
@@ -50,7 +52,6 @@ int	cont_unset(t_shell *shell, char *curr, char *str, char **current)
 void	ft_unset(t_shell *shell, char **current)
 {
 	char	*curr;
-	char	*str;
 
 	shell->unset.k = 0;
 	shell->unset.j = 0;
@@ -67,7 +68,7 @@ void	ft_unset(t_shell *shell, char **current)
 				curr = ft_strdup(current[shell->unset.i]);
 			shell->unset.position = \
 				ft_strchrp(shell->lst.executor[shell->unset.k], '=');
-			if (cont_unset(shell, curr, str, current))
+			if (cont_unset(shell, curr, current))
 				break ;
 		}
 	}
