@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/13 10:44:09 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 13:05:13 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	count_words(char *str)
 void	save_word(char *dest, char *src)
 {
 	int	i;
-	int check_pipe;
+	int	check_pipe;
 
 	i = 0;
 	while ((is_pipe(src[i]) == 0 || check_pipe == 1) && src[i] != '\0')

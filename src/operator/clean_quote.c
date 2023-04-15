@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/13 14:25:50 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 13:16:39 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,10 @@ void	clean_double(t_shell *shell)
 {
 	int		i;
 	int		j;
-	// int		flag;
 	char	*str;
 
 	i = -1;
 	j = 0;
-	// flag = 0;
-	// while (shell->lst.input[++i])
-	// {
-	// 	if (shell->lst.input[i] == 34)
-	// 	{
-	// 		if (shell->lst.input[i - 1] == '=')
-	// 			flag = 1;
-	// 		j++;
-	// 	}
-	// }
 	i = -1;
 	while (shell->lst.input[++i])
 	{

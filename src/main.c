@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/13 15:45:41 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 13:23:35 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src.h"
-
-int	ft_sarprint(char **sar)
-{
-	int	i;
-	int	ret;
-
-	i = -1;
-	ret = 0;
-	if (!sar || !sar[0])
-		return (0);
-	ft_printf("---SPLITTED ARGS---\n");
-	while (sar[++i] && sar[i] != 0)
-	{
-		ret += ft_printf("\"%s\"\n", sar[i]);
-	}
-	ft_printf("-----########-----\n");
-	return (ret);
-}
 
 int	control_space(t_shell *shell, int k)
 {

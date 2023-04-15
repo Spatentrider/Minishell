@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/14 17:32:27 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 13:23:13 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 void	delete_file2(t_shell *shell)
 {
-	int i;
-	int k;
-	int j;
-	
+	int	i;
+	int	k;
+	int	j;
+
 	k = -1;
-	while(shell->lst.delete_str[++k])
+	while (shell->lst.delete_str[++k])
 	{
 		i = -1;
-		while(shell->lst.executor[++i])
+		while (shell->lst.executor[++i])
 		{
-			if(ft_strncmp(shell->lst.executor[i], shell->lst.delete_str[k], ft_strlen(shell->lst.executor[i])) == 0)
+			if(ft_strncmp(shell->lst.executor[i], \
+				shell->lst.delete_str[k], \
+				ft_strlen(shell->lst.executor[i])) == 0)
 			{
 				j = i ;
-				while(shell->lst.executor[j])
+				while (shell->lst.executor[j])
 				{
 					free(shell->lst.executor[j]);
-					if(shell->lst.executor[j + 1] != NULL)
+					if (shell->lst.executor[j + 1] != NULL)
 					{
-						shell->lst.executor[j] = ft_strdup(shell->lst.executor[j + 1]);
+						shell->lst.executor[j] = \
+							ft_strdup(shell->lst.executor[j + 1]);
 						j++;
 					}
 					else
@@ -48,9 +51,10 @@ void	delete_file2(t_shell *shell)
 
 int	check_file(t_shell *shell)
 {
-	if(shell->check_mix_red == 1)
+	if (shell->check_mix_red == 1)
 		delete_file2(shell);
-	if(shell->lst.redirection == NULL || shell->redirection_id == 2 || shell->do_redirection != 1)
+	if(shell->lst.redirection == NULL || \
+		shell->redirection_id == 2 || shell->do_redirection != 1)
 	{
 		return (1);
 	}

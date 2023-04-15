@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mix_redirection.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/15 13:16:13 by mich              #+#    #+#             */
+/*   Updated: 2023/04/15 13:16:14 by mich             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "operator.h"
 #include <string.h>
 
@@ -16,10 +28,12 @@ int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
     return(match);
 }
 
-void redirect_heredoc(char *delimiter, char *filename) {
+void redirect_heredoc(char *delimiter, char *filename) 
+{
     char *line = NULL;
     size_t len = 0;
     FILE *fp = fopen(filename, "w");
+
     if (!fp) {
         perror("fopen");
         exit(EXIT_FAILURE);

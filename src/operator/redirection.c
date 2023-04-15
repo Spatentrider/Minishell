@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:04:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 13:12:59 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	red_out(char *redirection, int count_redirection, t_shell *shell, int count
 
 	if (j != count_redirection)
 	{
-		k = open(redirection, O_CREAT |
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		k = open(redirection, O_CREAT | \
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
 		return ;
 	}
@@ -47,12 +47,12 @@ void	red_inp(char	*redirection, t_shell *shell)
 void	append(char *redirection, t_shell *shell, int j, int count_redirection, int count_delete_str)
 {
 	int	i;
-	int k;
+	int	k;
 
 	if (j != count_redirection)
 	{
-		k = open(redirection, O_CREAT |
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		k = open(redirection, O_CREAT | \
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
 		return ;
 	}
@@ -80,7 +80,7 @@ void	here_doc(char *redirection, t_shell *shell)
 		while (redirection[++i])
 			;
 		ctrl_d(shell);
-		if(shell->check_signal_d == 1)
+		if (shell->check_signal_d == 1)
 			break ;
 		if (ft_strncmp(redirection, shell->lst.doc, i + 1) == 0)
 			break ;
@@ -123,7 +123,7 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 		while (redirection[++i])
 			;
 		ctrl_d(shell);
-		if(shell->check_signal_d == 1)
+		if (shell->check_signal_d == 1)
 			break ;
 		if (ft_strncmp(redirection, shell->lst.doc, i + 1) == 0)
 			break ;
