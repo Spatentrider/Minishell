@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 13:16:13 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:16:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:35:57 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
     int match;
     match = 1;
     while(++shell->strtok.i < shell->strtok.delim_len) 
-		{
-            if (*next_token == delim[shell->strtok.i]) 
-			{
-                match = 0;
-                break;
-            }
+    {
+        if (*next_token == delim[shell->strtok.i]) 
+        {
+            match = 0;
+            break ;
         }
+    }
     return(match);
 }
 
