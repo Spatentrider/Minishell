@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:50:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:54:31 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	change_a(int i, int c, int pos, t_shell *shell)
 			if (shell->env.current[i][j] == '\a')
 				shell->env.current[i][j] = ' ';
 		}
+		printf("%s\n", shell->lst.executor[c]);
 		return (1);
 	}
 	return (0);
