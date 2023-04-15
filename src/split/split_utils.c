@@ -6,12 +6,11 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:03:21 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:16:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:22:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "split.h"
-
 
 int	control_check(int n)
 {
@@ -47,5 +46,5 @@ int	check_string(char *str, int check_red, int i)
 			check_red = control_check(check_red);
 		j++;
 	}
-	return(j);
+	return (j);
 }

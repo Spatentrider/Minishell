@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 15:56:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:24:16 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	check_redirection(char *string, t_shell *shell)
 		i = ft_strlenr(string);
 		if (i > 2)
 		{
-			printf("minishell: syntax error near unexpected token redirection\n");
+			printf("minishell: syntax error near \
+				unexpected token redirection\n");
 			return (g_exit = 258);
 		}
 		if (i > 1 && (string[0] == '>' && string[0] != string[1]))

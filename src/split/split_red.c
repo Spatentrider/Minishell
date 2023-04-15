@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:17:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:23:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	stamp_word(char *dest, char *src)
 	int	check_red;
 
 	i = 0;
-	while (is_red(src[i]) == 0 || check_red== 1)
+	while (is_red(src[i]) == 0 || check_red == 1)
 	{
 		if (src[i] == 34)
 		{
