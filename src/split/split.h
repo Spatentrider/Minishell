@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:33:59 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/13 12:21:32 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 16:05:15 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ char	**split_pipe(char const *s);
 /*split_red.c*/
 int		is_red(char c);
 char	**split_redirection(char const *s);
+/*spòit_urils.c*/
+int		control_check(int n);
 
 #endif

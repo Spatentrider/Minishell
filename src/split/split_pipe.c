@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 13:05:13 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:05:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ void	save_word(char *dest, char *src)
 		if (src[i] == 34)
 		{
 			dest[i] = src[i];
-			if (check_pipe == 0)
-				check_pipe = 1;
-			else
-				check_pipe = 0;
+			check_pipe = control_check(check_pipe);
 			i++;
 		}
 		else

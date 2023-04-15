@@ -51,7 +51,8 @@ SRC_SPLIT				=	src/split/split_executor.c \
 								src/split/split_parse_utils.c \
 								src/split/split_parse.c \
 								src/split/split_pipe.c \
-								src/split/split_red.c
+								src/split/split_red.c \
+								src/split/split_utils.c
 
 SRC_FREE				=	src/free/free.c
 

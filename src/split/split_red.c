@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:05:00 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:07:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,15 @@ int	how_words(char *str)
 void	stamp_word(char *dest, char *src)
 {
 	int	i;
-	int	check_pipe;
+	int	check_red;
 
 	i = 0;
-	while (is_red(src[i]) == 0 || check_pipe == 1)
+	while (is_red(src[i]) == 0 || check_red== 1)
 	{
 		if (src[i] == 34)
 		{
 			dest[i] = src[i];
-			if (check_pipe == 0)
-				check_pipe = 1;
-			else
-				check_pipe = 0;
+			check_red = control_check(check_red);
 			i++;
 		}
 		else
