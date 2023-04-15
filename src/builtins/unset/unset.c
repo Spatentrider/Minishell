@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:23:24 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:24:43 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	unset_loop(t_shell *shell, char **current)
 
 int	cont_unset(t_shell *shell, char *curr, char **current)
 {
-	char *str;
+	char	*str;
 
 	if (shell->unset.position > 0)
 		str = strdup_exp(shell->lst.executor[shell->unset.k], \

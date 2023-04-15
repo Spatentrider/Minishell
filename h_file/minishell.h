@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/14 17:31:34 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/15 12:40:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_shell
 	t_unset	unset;
 	t_strtok strtok;
 	char	*save_redirection;
+	char	*str;
+	char	*curr;
 	int		old_g_exit;
 	int		stdin;
 	int		stdout;

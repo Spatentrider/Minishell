@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/15 12:25:14 by mich              #+#    #+#             */
+/*   Updated: 2023/04/15 12:45:23 by mich             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "export.h"
 
 void	print_export(t_shell *shell, char **str_save)
@@ -46,8 +58,6 @@ char	**sort(char **sorting)
 
 int	change_var(t_shell *shell, int c)
 {
-	char	*curr;
-	char	*str;
 	int		i;
 	int		j;
 	int		pos;
@@ -58,38 +68,19 @@ int	change_var(t_shell *shell, int c)
 	i = -1;
 	while (shell->env.current[++i])
 	{
+		pos = save_str(shell, pos, i, c);
 		pos = ft_strchrp(shell->env.current[i], '=');
-		if (pos > 0)
-			curr = strdup_exp(shell->env.current[i], pos);
-		else
-			curr = ft_strdup(shell->env.current[i]);
-		pos = ft_strchrp(shell->lst.executor[c], '=');
-		if (pos > 0)
-			str = strdup_exp(shell->lst.executor[c], pos);
-		else
-			str = ft_strdup(shell->lst.executor[c]);
-		if (ft_strncmp(curr, str, ft_strlen(str)) == 0)
+		if (ft_strncmp(shell->curr, shell->str, ft_strlen(shell->str)) == 0)
 		{
-			if (pos > 0)
-			{
-				free(shell->env.current[i]);
-				shell->env.current[i] = ft_strdup(shell->lst.executor[c]);
-				j = -1;
-				while (shell->env.current[i][++j])
+				if (change_a(i, j, shell))
 				{
-					if (shell->env.current[i][j] == '\a')
-						shell->env.current[i][j] = ' ';
+					free_str(shell->str, shell->curr);
+					return (1);
 				}
-				free(curr);
-				free(str);
-				return (1);
-			}
-			free(curr);
-			free(str);
+			free_str(shell->str, shell->curr);
 			return (1);
 		}
-		free(curr);
-		free(str);
+		free_str(shell->str, shell->curr);
 	}
 	return (0);
 }
