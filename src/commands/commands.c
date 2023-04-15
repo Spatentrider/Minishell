@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:35:44 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 16:44:01 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	ft_fork(t_shell *shell, char *str)
 		}
 	}
 	return (fork_process(pid, str));
-	// free(str);
-	// return (0);
 }
 
 int	ab_path(t_shell	*shell)
@@ -85,32 +83,27 @@ int	ab_path(t_shell	*shell)
 
 void	change_shlvl(t_shell *shell)
 {
-	int		i;
-	int		j;
-	int		k;
 	char	*save;
 
-	i = -1;
-	j = 0;
-	k = 5;
+	shell->exp.i = -1;
+	shell->exp.j = -1;
+	shell->exp.pos = 5;
 	save = (char *)malloc(sizeof(char) * 10);
-	while (shell->env.current[++i])
+	while (shell->env.current[++shell->exp.i])
 	{
-		if (ft_strncmp("SHLVL=", shell->env.current[i], 6) == 0)
+		if (ft_strncmp("SHLVL=", shell->env.current[shell->exp.i], 6) == 0)
 		{
-			while (shell->env.current[i][++k])
-			{
-				save[j] = shell->env.current[i][k];
-				j++;
-			}
-			save[j] = '\0';
+			while (shell->env.current[shell->exp.i][++shell->exp.pos])
+				save[++shell->exp.j] = \
+					shell->env.current[shell->exp.i][shell->exp.pos];
+			save[++shell->exp.j] = '\0';
 			break ;
 		}
 	}
 	if (save[1] == '\0')
 		save[0]++;
-	free(shell->env.current[i]);
-	shell->env.current[i] = ft_strjoin("SHLVL=", save);
+	free(shell->env.current[shell->exp.i]);
+	shell->env.current[shell->exp.i] = ft_strjoin("SHLVL=", save);
 	free(save);
 	save = NULL;
 }
