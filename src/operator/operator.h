@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:12:11 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:18:05 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clean_all_quote(t_shell *shell);
 void	clean_single(t_shell *shell);
 void	clean_double(t_shell *shell);
 /*cln_quote_utils.c*/
-void	loop_quote(t_shell *shell, int i);
+int		loop_quote(t_shell *shell, int i);
 void	change_input(t_shell *shell, char *str, int j);
 /*delete.c*/
 int		is_sep(char c);

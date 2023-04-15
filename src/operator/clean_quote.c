@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:11:13 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:17:27 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	clean_double(t_shell *shell)
 	i = -1;
 	j = 0;
 	i = -1;
-	loop_quote(shell, i);
-	str = malloc(sizeof(char *) * (i - j));
+	i = loop_quote(shell, i);
+	str = malloc(sizeof(char *) * i + 4);
 	j = 0;
 	i = -1;
 	while (shell->lst.input[++i])
@@ -33,7 +33,7 @@ void	clean_double(t_shell *shell)
 			j++;
 		}		
 	}
-	chenge_input(shell, str, j);
+	change_input(shell, str, j);
 	free(str);
 }
 
