@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:25:14 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:51:12 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:55:17 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	change_var(t_shell *shell, int c)
 		pos = ft_strchrp(shell->env.current[i], '=');
 		if (ft_strncmp(shell->curr, shell->str, ft_strlen(shell->str)) == 0)
 		{
-				if (change_a(i, c, pos, shell))
-				{
-					free_str(shell->str, shell->curr);
-					return (1);
-				}
+			if (change_a(i, c, pos, shell))
+			{
+				free_str(shell->str, shell->curr);
+				return (1);
+			}
 			free_str(shell->str, shell->curr);
 			return (1);
 		}
