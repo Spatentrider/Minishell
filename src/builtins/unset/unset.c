@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:27:19 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:18:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 12:19:50 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	cont_unset(t_shell *shell, char *curr, char *str, char **current)
 	{
 		shell->unset.j = shell->unset.i - 1;
 		unset_loop(shell, current);
-		return(1);
+		return (1);
 	}
 	return (0);
 }
@@ -70,6 +70,7 @@ void	ft_unset(t_shell *shell, char **current)
 				break ;
 		}
 	}
+	(void)str;
 }
 
 void	ft_unset2(t_shell *shell, char **current)
