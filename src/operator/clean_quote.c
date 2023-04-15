@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:16:39 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:11:13 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,7 @@ void	clean_double(t_shell *shell)
 	i = -1;
 	j = 0;
 	i = -1;
-	while (shell->lst.input[++i])
-	{
-		if (shell->lst.input[i] == 34)
-		{
-			i++;
-			while (shell->lst.input[i] != 34)
-			{
-				if (shell->lst.input[i] == ' ')
-					shell->lst.input[i] = '\a';
-				i++;
-			}
-		}
-	}
+	loop_quote(shell, i);
 	str = malloc(sizeof(char *) * (i - j));
 	j = 0;
 	i = -1;
@@ -45,10 +33,7 @@ void	clean_double(t_shell *shell)
 			j++;
 		}		
 	}
-	free(shell->lst.input);
-	shell->lst.input = NULL;
-	shell->lst.input = ft_strdup(str);
-	shell->lst.input[j] = '\0';
+	chenge_input(shell, str, j);
 	free(str);
 }
 

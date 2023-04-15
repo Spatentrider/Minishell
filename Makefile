@@ -33,6 +33,7 @@ SRC_GET_ENV				=	src/get_env/init_env.c
 
 SRC_OPERATOR			=	src/operator/check_op.c \
 								src/operator/clean_quote.c \
+								src/operator/cln_quote_utils.c \
 								src/operator/delete.c \
 								src/operator/redirection.c \
 								src/operator/utils.c \
