@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 10:26:49 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 10:44:29 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ void	control_redirection(t_shell *shell)
 		close(shell->redirection.fd);
 		shell->redirection.i++;
 	}
+	else if (strcmp(shell->redirection.token, ">") == 0)
+	{
+		shell->redirection.token = ft_strtok(NULL, " ", shell);
+		shell->lst.delete_str[shell->redirection.i] = \
+			ft_strdup(shell->redirection.token);
+		shell->redirection.fd = open(shell->redirection.token, O_RDONLY);
+		if (shell->redirection.fd < 0)
+			printf("Error during open file\n");
+		dup2(shell->redirection.fd, STDOUT_FILENO);
+		print_cat_array(shell);
+	}
+	control_double_redirection(shell);
 }
 
 void	mix_redirection(t_shell *shell)
