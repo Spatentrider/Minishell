@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_red.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 11:24:08 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 11:34:14 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 12:17:23 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,70 +40,54 @@ void	change_exp_red(t_shell *shell, int i, char *curr, int c)
 	free(str);
 }
 
+void	change_curr(t_shell *shell)
+{
+	while (shell->env.current[++shell->expn.c])
+	{
+		shell->expn.pos = -1;
+		while (shell->lst.expansion[shell->expn.j][++shell->expn.pos])
+			;
+		control_a(shell);
+		shell->expn.pos = ft_strchrp(shell->env.current[shell->expn.c], '=');
+		if (shell->expn.pos > 0)
+			shell->expn.curr = strdup_exp(shell->env.current[shell->expn.c], \
+				shell->expn.pos);
+		else
+			shell->expn.curr = ft_strdup(shell->env.current[shell->expn.c]);
+		if (ft_strncmp(shell->lst.expansion[shell->expn.j], shell->expn.curr, \
+			ft_strlen(shell->lst.expansion[shell->expn.j])) == 0)
+		{
+			change_exp_red(shell, shell->expn.j, shell->expn.curr, \
+				shell->expn.c);
+			if (shell->expn.curr)
+				free(shell->expn.curr);
+			break ;
+		}
+		if (shell->expn.curr)
+			free(shell->expn.curr);
+	}
+}
+
 void	list_exp_red(t_shell *shell, int i)
 {
-	char	*curr;
-	int		pos;
-	int		j;
-	int		c;
-	int		flag;
-
-	if (shell->lst.redirection[i][0] == '$')
-		shell->dollar = 1;
-	if (shell->lst.redirection[i][0] == '\a')
-		shell->flag = 1;
-	j = -1;
-	pos = 0;
-	flag = 0;
-	shell->lst.expansion = ft_split(shell->lst.redirection[i], '$');
-	if (shell->dollar == 1)
-		j = -1;
-	else
-		j = 0;
-	while (shell->lst.expansion[++j])
+	init_var(shell, i);
+	while (shell->lst.expansion[++shell->expn.j])
 	{
-		c = -1;
-		if ((flag == 0) && (shell->flag == 0))
-		{
-			while (shell->env.current[++c])
-			{
-				pos = -1;
-				while (shell->lst.expansion[j][++pos])
-					;
-				if (shell->lst.expansion[j][pos - 1] == '\a')
-				{
-					shell->lst.expansion[j][pos - 1] = '\0';
-					flag = 1;
-				}
-				pos = ft_strchrp(shell->env.current[c], '=');
-				if (pos > 0)
-					curr = strdup_exp(shell->env.current[c], pos);
-				else
-					curr = ft_strdup(shell->env.current[c]);
-				if (ft_strncmp(shell->lst.expansion[j], curr, \
-					ft_strlen(shell->lst.expansion[j])) == 0)
-				{
-					change_exp_red(shell, j, curr, c);
-					if (curr)
-						free(curr);
-					break ;
-				}
-				if (curr)
-					free(curr);
-			}
-		}
+		shell->expn.c = -1;
+		if ((shell->expn.flag == 0) && (shell->flag == 0))
+			change_curr(shell);
 		else
 		{
 			shell->flag = 0;
-			flag = 0;
-			if (shell->lst.expansion[j][0] == '\a')
-				flag = 1;
-			shell->lst.expansion[j][0] = '$';
+			shell->expn.flag = 0;
+			if (shell->lst.expansion[shell->expn.j][0] == '\a')
+				shell->expn.flag = 1;
+			shell->lst.expansion[shell->expn.j][0] = '$';
 		}
-		if (shell->env.current[c] == NULL)
+		if (shell->env.current[shell->expn.c] == NULL)
 		{
-			free(shell->lst.expansion[j]);
-			shell->lst.expansion[j] = ft_strdup("\a");
+			free(shell->lst.expansion[shell->expn.j]);
+			shell->lst.expansion[shell->expn.j] = ft_strdup("\a");
 		}
 	}
 	join_redirection(shell, i);

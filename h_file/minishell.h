@@ -6,7 +6,7 @@
 /*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/17 11:47:22 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/17 12:05:50 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,15 @@ typedef struct s_count
 	int	k;
 }	t_count;
 
+typedef struct s_expn
+{
+	char	*curr;
+	int		pos;
+	int		j;
+	int		c;
+	int		flag;
+}	t_expn;
+
 typedef struct s_shell
 {
 	t_cd			cd;
@@ -121,6 +130,7 @@ typedef struct s_shell
 	t_strtok		strtok;
 	t_redirection	redirection;
 	t_count			count;
+	t_expn			expn;
 	char			*save_redirection;
 	char			**path;
 	char			*str;

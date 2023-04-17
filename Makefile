@@ -25,9 +25,11 @@ SRC_UNSET				=	src/builtins/unset/unset.c
 SRC_CMD					=	src/commands/commands.c \
 							src/commands/cmd_utils.c
 
-SRC_EXP_RED			=	src/exp_redirection/exp_red.c
+SRC_EXP_RED			=		src/exp_redirection/exp_red_utils.c \
+							src/exp_redirection/exp_red.c
 
-SRC_EXPANSION			=	src/expansion/expansion.c
+SRC_EXPANSION			=	src/expansion/expansion_utils.c \
+							src/expansion/expansion.c
 
 SRC_GET_ENV				=	src/get_env/init_env.c
 
@@ -37,9 +39,10 @@ SRC_OPERATOR			=	src/operator/check_op_utils.c \
 								src/operator/cln_quote_utils.c \
 								src/operator/delete.c \
 								src/operator/redirection.c \
+								src/operator/redirection_utils.c \
 								src/operator/utils.c \
 								src/operator/mix_redirection_utils.c \
-								src/operator/mix_redirection.c
+								src/operator/mix_redirection.c 
 
 SRC_PARSE				=	src/parse/parse_utils.c \
 							src/parse/parse.c
