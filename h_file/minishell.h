@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/17 10:11:10 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:47:22 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ typedef struct s_redirection
 	int		flag;
 }	t_redirection;
 
+typedef struct s_count
+{
+	int	i;
+	int	j;
+	int	k;
+}	t_count;
+
 typedef struct s_shell
 {
 	t_cd			cd;
@@ -113,6 +120,7 @@ typedef struct s_shell
 	t_unset			unset;
 	t_strtok		strtok;
 	t_redirection	redirection;
+	t_count			count;
 	char			*save_redirection;
 	char			**path;
 	char			*str;

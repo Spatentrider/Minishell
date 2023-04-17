@@ -3,56 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:27:11 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:57:38 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+void	init_count(t_shell *shell)
+{
+	shell->count.i = -1;
+	shell->count.k = -1;
+}
+
 void	delete_file2(t_shell *shell)
 {
-	int	i;
-	int	k;
-	int	j;
-
-	k = -1;
-	while (shell->lst.delete_str[++k])
+	init_count(shell);
+	while (shell->lst.delete_str[++shell->count.k])
 	{
-		i = -1;
-		while (shell->lst.executor[++i])
+		while (shell->lst.executor[++shell->count.i])
 		{
-			if (ft_strncmp(shell->lst.executor[i], \
-				shell->lst.delete_str[k], \
-				ft_strlen(shell->lst.executor[i])) == 0)
+			if (ft_strncmp(shell->lst.executor[shell->count.i], \
+				shell->lst.delete_str[shell->count.k], \
+				ft_strlen(shell->lst.executor[shell->count.i])) == 0)
 			{
-				j = i ;
-				while (shell->lst.executor[j])
+				shell->count.j = shell->count.i;
+				while (shell->lst.executor[shell->count.j])
 				{
-					free(shell->lst.executor[j]);
-					if (shell->lst.executor[j + 1] != NULL)
+					free(shell->lst.executor[shell->count.j]);
+					if (shell->lst.executor[shell->count.j + 1] != NULL)
 					{
-						shell->lst.executor[j] = \
-							ft_strdup(shell->lst.executor[j + 1]);
-						j++;
+						shell->lst.executor[shell->count.j] = \
+							ft_strdup(shell->lst.executor[shell->count.j + 1]);
+						shell->count.j++;
 					}
 					else
-					{
-						shell->lst.executor[j] = NULL;
-					}
+						shell->lst.executor[shell->count.j] = NULL;
 				}
 			}
 		}
 	}
-	ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 }
 
 int	check_file(t_shell *shell)
 {
 	if (shell->check_mix_red == 1)
+	{
 		delete_file2(shell);
+		ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
+	}
 	if (shell->lst.redirection == NULL || \
 		shell->redirection_id == 2 || shell->do_redirection != 1)
 	{
@@ -61,11 +62,12 @@ int	check_file(t_shell *shell)
 	else
 	{
 		delete_file2(shell);
+		ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 		return (0);
 	}
 }
 
-int	executor(t_shell *shell)
+int	control_g_exit(t_shell *shell)
 {
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
@@ -73,6 +75,13 @@ int	executor(t_shell *shell)
 		shell->old_g_exit = 127;
 		return (g_exit);
 	}
+	return (0);
+}
+
+int	executor(t_shell *shell)
+{
+	if (control_g_exit(shell))
+		return (g_exit);
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
 	expansion(shell);
