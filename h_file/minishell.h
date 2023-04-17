@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:55:02 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 16:52:58 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 10:11:10 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,35 +94,45 @@ typedef struct s_strtok
 	size_t	i;
 }	t_strtok;
 
+typedef struct s_redirection
+{
+	char	*token;
+	char	*input;
+	int		fd;
+	int		i;
+	int		flag;
+}	t_redirection;
+
 typedef struct s_shell
 {
-	t_cd		cd;
-	t_lst		lst;
-	t_env		env;
-	t_echo		echo;
-	t_exp		exp;
-	t_unset		unset;
-	t_strtok	strtok;
-	char		*save_redirection;
-	char		**path;
-	char		*str;
-	char		*curr;
-	int			old_g_exit;
-	int			stdin;
-	int			stdout;
-	int			out_pipe;
-	int			single_quote;
-	int			here_pipe;
-	int			redirection_id;
-	int			check_mix_red;
-	int			redirection_out;
-	int			here_cat;
-	int			flag;
-	int			dollar;
-	int			check_signal_d;
-	int			check_redirection;
-	int			do_redirection;
-	int			pipe_counter;
+	t_cd			cd;
+	t_lst			lst;
+	t_env			env;
+	t_echo			echo;
+	t_exp			exp;
+	t_unset			unset;
+	t_strtok		strtok;
+	t_redirection	redirection;
+	char			*save_redirection;
+	char			**path;
+	char			*str;
+	char			*curr;
+	int				old_g_exit;
+	int				stdin;
+	int				stdout;
+	int				out_pipe;
+	int				single_quote;
+	int				here_pipe;
+	int				redirection_id;
+	int				check_mix_red;
+	int				redirection_out;
+	int				here_cat;
+	int				flag;
+	int				dollar;
+	int				check_signal_d;
+	int				check_redirection;
+	int				do_redirection;
+	int				pipe_counter;
 }				t_shell;
 
 #endif
