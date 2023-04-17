@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mix_redirection_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 10:45:20 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 11:05:51 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:00:51 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,12 @@ void	print_cat_array(t_shell *shell)
 	shell->redirection.i++;
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	i = 0;
-	while (str1[i] == str2[i])
+	while (*s1 && (*s1 == *s2))
 	{
-		if (str1[i] == '\0')
-			return (0);
-		i++;
+		s1++;
+		s2++;
 	}
-	return (i);
+	return *(const unsigned char*)s1 - *(const unsigned char*)s2;
 }

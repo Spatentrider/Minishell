@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 12:44:01 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:23:57 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	red_out(int count_redirection, t_shell *shell, \
 
 	if (j != count_redirection)
 	{
-		k = open(shell->lst.file[0], O_CREAT | \
+		k = open(shell->lst.file[0], O_WRONLY | O_CREAT | O_TRUNC | \
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 11:35:08 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:22:53 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	redirection(t_shell *shell)
 	int	count_delete_str;
 	int	j;
 
-	count_delete_str = 0;
 	shell->lst.redirection = split_redirection(shell->lst.input);
 	count_redirection = ft_sarsize(shell->lst.redirection) - 1;
-	j = count_redirection;
-	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	if (count_redirection >= 1)
 	{
+		count_delete_str = 0;
+		j = count_redirection;
+		shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 		shell->do_redirection = 1;
 		clean_parse(shell);
 		exp_red(shell);

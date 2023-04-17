@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 15:43:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 12:21:18 by vbellucc         ###   ########.fr       */
+/*   Created: 2023/04/17 14:40:08 by mich              #+#    #+#             */
+/*   Updated: 2023/04/17 15:16:46 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	change_string(t_shell *shell)
 
 void	list_expansion(t_shell *shell, int i)
 {
-	init_var(shell, i);
+	init_variable(shell, i);
 	while (shell->lst.expansion[++shell->expn.j])
 	{
 		shell->expn.c = -1;
@@ -102,10 +102,18 @@ void	expansion(t_shell *shell)
 	while (shell->lst.executor[++shell->exp.i])
 	{
 		j = -1;
-		while (shell->lst.executor[shell->exp.i][++j])
+		if (ft_strncmp(shell->lst.executor[shell->exp.i], "$?", 2) == 0)
 		{
-			if (shell->lst.executor[shell->exp.i][j] == '$')
-				list_expansion(shell, shell->exp.i);
+			free(shell->lst.executor[shell->exp.i]);
+			shell->lst.executor[shell->exp.i] = ft_itoa(shell->old_g_exit);
+		}
+		else
+		{
+			while (shell->lst.executor[shell->exp.i][++j])
+			{
+				if (shell->lst.executor[shell->exp.i][j] == '$')
+					list_expansion(shell, shell->exp.i);
+			}
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 11:57:38 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:14:40 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	control_g_exit(t_shell *shell)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
 		shell->old_g_exit = 127;
-		return (g_exit);
+		return (1);
 	}
 	return (0);
 }

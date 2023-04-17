@@ -6,7 +6,7 @@
 /*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:53:12 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:44:01 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 15:21:12 by mich             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	ab_path(t_shell	*shell)
 		}
 		waitpid(pid, &g_exit, 0);
 		if (WIFEXITED(g_exit))
-			return (g_exit = WEXITSTATUS(g_exit));
+			g_exit = WEXITSTATUS(g_exit);
+		return (1);
 	}
 	return (0);
 }
