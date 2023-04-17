@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:30:03 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:33:45 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,16 @@ int		control_q(int q, int d);
 int		control_qt(int q, int d, int s);
 int		cont_quote(t_shell *shell, int i);
 void	delete_op(t_shell *shell);
+/*mix_redirection_urils.c*/
+void	print_cat_array(t_shell *shell);
+int		ft_strcmp(const char *str1, const char *str2);
+/*mix_redirection.c*/
+void	mix_redirection(t_shell *shell);
 /*redirection.c*/
-void	red_out(char *redirection, int count_redirection, t_shell *shell, \
+void	red_out(int count_redirection, t_shell *shell, \
 	int count_delete_str, int j);
 void	red_inp(char	*redirection, t_shell *shell);
-void	append(char *redirection, t_shell *shell, int j, int count_redirection, \
+void	append(t_shell *shell, int j, int count_redirection, \
 	int count_delete_str);
 void	here_doc(char *redirection, t_shell *shell);
 void	here_doc_cat(char *redirection, t_shell *shell);
@@ -49,6 +54,5 @@ void	here_doc_cat(char *redirection, t_shell *shell);
 int		double_count(char *string, int i, int count_quote);
 int		single_count(char *string, int i, int count_single);
 void	change_word(t_shell *shell, int i, int pos);
-void	mix_redirection(t_shell *shell);
 
 #endif

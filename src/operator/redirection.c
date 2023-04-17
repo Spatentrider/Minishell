@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 13:25:22 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:34:32 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
 
-void	red_out(char *redirection, int count_redirection, \
-	t_shell *shell, int count_delete_str, int j)
+void	red_out(int count_redirection, t_shell *shell, \
+	int count_delete_str, int j)
 {
 	int	i;
 	int	k;
 
 	if (j != count_redirection)
 	{
-		k = open(redirection, O_CREAT | \
+		k = open(shell->lst.file[0], O_CREAT | \
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		return ;
 	}
 	else
 	{
-		i = open(redirection, O_WRONLY | O_CREAT | O_TRUNC,
+		i = open(shell->lst.file[0], O_WRONLY | O_CREAT | O_TRUNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		dup2(i, STDOUT_FILENO);
 		(void)k;
 		return ;
@@ -45,24 +45,24 @@ void	red_inp(char	*redirection, t_shell *shell)
 	shell->lst.delete_str[0] = ft_strdup(redirection);
 }
 
-void	append(char *redirection, t_shell *shell, \
-	int j, int count_redirection, int count_delete_str)
+void	append(t_shell *shell, int j, \
+	int count_redirection, int count_delete_str)
 {
 	int	i;
 	int	k;
 
 	if (j != count_redirection)
 	{
-		k = open(redirection, O_CREAT | \
+		k = open(shell->lst.file[0], O_CREAT | \
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		shell->lst.delete_str[count_delete_str] = ft_strdup(redirection);
+		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		return ;
 	}
 	else
 	{
-		i = open(redirection, O_WRONLY | O_CREAT | O_APPEND,
+		i = open(shell->lst.file[0], O_WRONLY | O_CREAT | O_APPEND,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-		shell->lst.delete_str[0] = ft_strdup(redirection);
+		shell->lst.delete_str[0] = ft_strdup(shell->lst.file[0]);
 		dup2(i, STDOUT_FILENO);
 		(void)k;
 		return ;

@@ -38,6 +38,7 @@ SRC_OPERATOR			=	src/operator/check_op_utils.c \
 								src/operator/delete.c \
 								src/operator/redirection.c \
 								src/operator/utils.c \
+								src/operator/mix_redirection_utils.c \
 								src/operator/mix_redirection.c
 
 SRC_PARSE				=	src/parse/parse_utils.c \
@@ -83,8 +84,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 
 OBJS_DIR			= objs
 
-# READLINE_FLAG	:= -lreadline -lcurses
-READLINE_FLAG	:= -lreadline -ltinfo
+READLINE_FLAG	:= -lreadline -lcurses
+# READLINE_FLAG	:= -lreadline -ltinfo
 READLINE_DIR		:= readline/
 READLINE_A			= readline/libhistory.a readline/libreadline.a
 READLINE_MAKEFILE 	:= readline/Makefile

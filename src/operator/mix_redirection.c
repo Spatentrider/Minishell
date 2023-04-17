@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   mix_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 10:44:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:39:45 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "operator.h"
+#include "operator.h"
 
 int	ft_strtok_loop(char *next_token, const char *delim, t_shell *shell)
 {
-	int	match,
+	int	match;
 
 	match = 1;
 	while (++shell->strtok.i < shell->strtok.delim_len)
@@ -56,28 +56,58 @@ void	*ft_strtok(char *str, const char *delim, t_shell *shell)
 	return (shell->strtok.result);
 }
 
+void	control_double_redirection(t_shell *shell)
+{
+	if (ft_strcmp(shell->redirection.token, ">>") == 0)
+	{
+		shell->lst.redirection = ft_strtok(NULL, " ", shell);
+		shell->lst.delete_str[shell->redirection.i] = \
+			ft_strdup(shell->redirection.token);
+		shell->redirection.fd = open(shell->redirection.token, \
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (shell->redirection.fd < 0)
+			printf("Error opening file\n");
+		dup2(shell->redirection.fd, STDOUT_FILENO);
+		shell->redirection_out = dup(STDOUT_FILENO);
+		close(shell->redirection.fd);
+		shell->redirection.i++;
+	}
+	else if (ft_strcmp(shell->redirection.token, "<<") == 0)
+	{
+		shell->redirection.token = ft_strtok(NULL, " ", shell);
+		shell->lst.delete_str[shell->redirection.i] = \
+			ft_strdup(shell->redirection.token);
+		if (shell->redirection.flag == 2)
+			here_doc(shell->redirection.token, shell);
+		else
+			here_doc_cat(shell->redirection.token, shell);
+		shell->redirection.i++;
+	}
+}
+
 void	control_redirection(t_shell *shell)
 {
-	if (strcmp(shell->redirection.token, "<") == 0)
+	if (ft_strcmp(shell->redirection.token, "<") == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
 		shell->redirection.fd = open(shell->redirection.token, O_RDONLY);
 		if (shell->redirection.fd < 0)
-			printf("Error during open file\n");
+			printf("Error opening file\n");
 		dup2(shell->redirection.fd, STDIN_FILENO);
 		close(shell->redirection.fd);
 		shell->redirection.i++;
 	}
-	else if (strcmp(shell->redirection.token, ">") == 0)
+	else if (ft_strcmp(shell->redirection.token, ">") == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
-		shell->redirection.fd = open(shell->redirection.token, O_RDONLY);
+		shell->redirection.fd = open(shell->redirection.token, \
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (shell->redirection.fd < 0)
-			printf("Error during open file\n");
+			printf("Error opening file\n");
 		dup2(shell->redirection.fd, STDOUT_FILENO);
 		print_cat_array(shell);
 	}
@@ -109,6 +139,6 @@ void	mix_redirection(t_shell *shell)
 	shell->lst.delete_str[shell->redirection.i] = NULL;
 	free(shell->redirection.input);
 	delete_op(shell);
-	if (shell->redirection.flag!= 3)
+	if (shell->redirection.flag != 3)
 		executor(shell);
 }

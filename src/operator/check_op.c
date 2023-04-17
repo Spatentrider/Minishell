@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:30:24 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/17 11:35:08 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	redirection(t_shell *shell)
 			{
 				shell->lst.file = \
 					ft_split(shell->lst.redirection[count_redirection], ' ');
-				red_out(shell->lst.file[0], count_redirection, \
-					shell, count_delete_str, j);
+				red_out(count_redirection, shell, count_delete_str, j);
 				count_redirection--;
 				count_delete_str++;
 				ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
@@ -62,8 +61,7 @@ void	redirection(t_shell *shell)
 			{
 				shell->lst.file = \
 					ft_split(shell->lst.redirection[count_redirection], ' ');
-				append(shell->lst.file[0], shell, \
-					j, count_redirection, count_delete_str);
+				append(shell, j, count_redirection, count_delete_str);
 				count_redirection--;
 				count_delete_str++;
 				ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
