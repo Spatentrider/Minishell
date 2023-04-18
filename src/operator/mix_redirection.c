@@ -56,9 +56,10 @@ char *ft_strtok(char *str, const char *delim, t_shell *shell)
 
 void	control_double_redirection(t_shell *shell)
 {
+	printf("token2 %s\n", shell->redirection.token);
 	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
 	{
-		printf("quo\n");
+		printf("ciao\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
