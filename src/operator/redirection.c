@@ -43,7 +43,7 @@ void	red_inp(char	*redirection, t_shell *shell)
 	i = open(redirection, O_RDONLY);
 	if (i == -1)
 	{
-		printf("errore\n");
+		printf("minishell: %s: No such file or directory\n", redirection);
 		shell->check_flag = 1;
 	}
 	dup2(i, STDIN_FILENO);
