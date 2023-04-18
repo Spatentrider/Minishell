@@ -41,6 +41,11 @@ void	red_inp(char	*redirection, t_shell *shell)
 	int	i;
 
 	i = open(redirection, O_RDONLY);
+	if (i == -1)
+	{
+		printf("errore\n");
+		shell->check_flag = 1;
+	}
 	dup2(i, STDIN_FILENO);
 	shell->lst.delete_str[0] = ft_strdup(redirection);
 }

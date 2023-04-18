@@ -96,7 +96,7 @@ void	redirection(t_shell *shell)
 			shell->lst.delete_str[1] = NULL;
 		}
 	}
-	if (shell->here_cat == 0)
+	if (shell->here_cat == 0 && shell->check_flag == 0)
 	{
 		delete_op(shell);
 		executor(shell);
@@ -113,8 +113,7 @@ int	check_red(char *input, t_shell *shell, int i)
 	while (input[++i])
 	{
 		check_double_red(shell, input, i);
-		if (shell->redirection_id == 0)
-			check_single_red(shell, input, i);
+		check_single_red(shell, input, i);
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 		redirection(shell);

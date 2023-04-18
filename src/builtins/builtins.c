@@ -12,17 +12,11 @@
 
 #include "builtins.h"
 
-void	init_count(t_shell *shell)
-{
-	shell->count.i = -1;
-	shell->count.k = -1;
-}
-
 void	delete_file2(t_shell *shell)
 {
-	init_count(shell);
 	while (shell->lst.delete_str[++shell->count.k])
 	{
+		shell->count.i = -1;
 		while (shell->lst.executor[++shell->count.i])
 		{
 			if (ft_strncmp(shell->lst.executor[shell->count.i], \
@@ -45,22 +39,24 @@ void	delete_file2(t_shell *shell)
 			}
 		}
 	}
+	ft_sarprint(shell->lst.delete_str);
 }
 
 int	check_file(t_shell *shell)
 {
 	if (shell->check_mix_red == 1)
 	{
+		shell->count.k = -1;
 		delete_file2(shell);
 		ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 	}
-	if (shell->lst.redirection == NULL || \
-		shell->redirection_id == 2 || shell->do_redirection != 1)
+	if (shell->lst.redirection == NULL || shell->do_redirection != 1)
 	{
 		return (1);
 	}
 	else
 	{
+		shell->count.k = -1;
 		delete_file2(shell);
 		ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 		return (0);

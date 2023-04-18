@@ -59,6 +59,7 @@ void	init_all(t_shell *shell)
 	shell->here_cat = 0;
 	shell->check_redirection = 0;
 	shell->do_redirection = 0;
+	shell->check_flag = 0;
 }
 
 void	reset_var(t_shell *shell)
@@ -86,4 +87,5 @@ void	reset_var(t_shell *shell)
 	shell->here_cat = 0;
 	shell->check_redirection = 0;
 	shell->do_redirection = 0;
+	shell->check_flag = 0;
 }

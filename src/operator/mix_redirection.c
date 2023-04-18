@@ -30,9 +30,7 @@ int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
 
 char *ft_strtok(char *str, const char *delim, t_shell *shell) 
 {
-	static char *next_token;
-
-	next_token = NULL;
+	static char *next_token = NULL;
 	if (str != NULL) 
 		next_token = str;
 	else if (next_token == NULL) 

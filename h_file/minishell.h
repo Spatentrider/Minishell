@@ -151,6 +151,7 @@ typedef struct s_shell
 	int				check_redirection;
 	int				do_redirection;
 	int				pipe_counter;
+	int				check_flag;
 }				t_shell;
 
 #endif
