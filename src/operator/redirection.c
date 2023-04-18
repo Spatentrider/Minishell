@@ -18,6 +18,7 @@ void	red_out(int count_redirection, t_shell *shell, \
 	int	i;
 	int	k;
 
+	printf("ao\n");
 	if (j != count_redirection)
 	{
 		k = open(shell->lst.file[0], O_WRONLY | O_CREAT | O_TRUNC | \
@@ -58,7 +59,7 @@ void	append(t_shell *shell, int j, \
 
 	if (j != count_redirection)
 	{
-		k = open(shell->lst.file[0], O_CREAT | \
+		k = open(shell->lst.file[0], O_CREAT | 
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		return ;

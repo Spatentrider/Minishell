@@ -39,7 +39,6 @@ void	delete_file2(t_shell *shell)
 			}
 		}
 	}
-	ft_sarprint(shell->lst.delete_str);
 }
 
 int	check_file(t_shell *shell)

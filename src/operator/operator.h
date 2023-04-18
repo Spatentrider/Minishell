@@ -16,7 +16,7 @@
 # include "../src.h"
 
 /*check_op_utils.c*/
-void	check_double_red(t_shell *shell, char *input, int i);
+int		check_double_red(t_shell *shell, char *input, int i);
 void	check_single_red(t_shell *shell, char *input, int i);
 /*check_op.c*/
 void	redirection(t_shell *shell);

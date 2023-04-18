@@ -119,6 +119,13 @@ typedef struct s_expn
 	int		flag;
 }	t_expn;
 
+typedef struct s_red
+{
+	int	count_redirection;
+	int	count_delete_str;
+	int	j;
+}	t_red;
+
 typedef struct s_shell
 {
 	t_cd			cd;
@@ -131,6 +138,7 @@ typedef struct s_shell
 	t_redirection	redirection;
 	t_count			count;
 	t_expn			expn;
+	t_red			red;
 	char			*save_redirection;
 	char			**path;
 	char			*str;

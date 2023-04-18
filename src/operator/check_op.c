@@ -12,18 +12,34 @@
 
 #include "operator.h"
 
+void	go_input(t_shell *shell)
+{
+	if (shell->redirection_id == 1)
+	{
+		shell->lst.delete_str = (char **)malloc(sizeof(char *) \
+			* (shell->red.count_redirection + 1));
+		while (shell->red.count_redirection > 0)
+		{
+			shell->lst.file = \
+				ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
+			red_out(shell->red.count_redirection, shell, shell->red.count_delete_str, shell->red.j);
+			shell->red.count_redirection--;
+			shell->red.count_delete_str++;
+			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
+		}
+		shell->lst.delete_str[shell->red.count_delete_str] = NULL;
+	}
+}
+
 void	redirection(t_shell *shell)
 {
-	int	count_redirection;
-	int	count_delete_str;
-	int	j;
-
 	shell->lst.redirection = split_redirection(shell->lst.input);
-	count_redirection = ft_sarsize(shell->lst.redirection) - 1;
-	if (count_redirection >= 1)
+	shell->red.count_redirection = ft_sarsize(shell->lst.redirection) - 1;
+	printf("id red e %d\n", shell->redirection_id);
+	if (shell->red.count_redirection >= 1)
 	{
-		count_delete_str = 0;
-		j = count_redirection;
+		shell->red.count_delete_str = 0;
+		shell->red.j = shell->red.count_redirection;
 		shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 		shell->do_redirection = 1;
 		clean_parse(shell);
@@ -31,52 +47,53 @@ void	redirection(t_shell *shell)
 		if (shell->redirection_id == 1)
 		{
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) \
-				* (count_redirection + 1));
-			while (count_redirection > 0)
+				* (shell->red.count_redirection + 1));
+			while (shell->red.count_redirection > 0)
 			{
 				shell->lst.file = \
-					ft_split(shell->lst.redirection[count_redirection], ' ');
-				red_out(count_redirection, shell, count_delete_str, j);
-				count_redirection--;
-				count_delete_str++;
+					ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
+				red_out(shell->red.count_redirection, shell, shell->red.count_delete_str, shell->red.j);
+				shell->red.count_redirection--;
+				shell->red.count_delete_str++;
 				ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 			}
-			shell->lst.delete_str[count_delete_str] = NULL;
+			shell->lst.delete_str[shell->red.count_delete_str] = NULL;
 		}
 		else if (shell->redirection_id == 2)
 		{
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) \
-				* (count_redirection + 1));
+				* (shell->red.count_redirection + 1));
 			shell->lst.file = \
-				ft_split(shell->lst.redirection[count_redirection], ' ');
+				ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
 			red_inp(shell->lst.file[0], shell);
 			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 			shell->lst.delete_str[1] = NULL;
 		}
 		else if (shell->redirection_id == 3)
 		{
+			printf("ci sei?\n");
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) \
-				* (count_redirection + 1));
-			while (count_redirection > 0)
+				* (shell->red.count_redirection + 1));
+			while (shell->red.count_redirection > 0)
 			{
 				shell->lst.file = \
-					ft_split(shell->lst.redirection[count_redirection], ' ');
-				append(shell, j, count_redirection, count_delete_str);
-				count_redirection--;
-				count_delete_str++;
+					ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
+				append(shell, shell->red.j, shell->red.count_redirection, shell->red.count_delete_str);
+				shell->red.count_redirection--;
+				shell->red.count_delete_str++;
 				ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 			}
-			shell->lst.delete_str[count_delete_str] = NULL;
+			shell->lst.delete_str[shell->red.count_delete_str] = NULL;
 		}
 		shell->lst.file = \
-			ft_split(shell->lst.redirection[count_redirection], ' ');
+			ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
 		if ((ft_strncmp(shell->lst.here_doc[1], "<<", 2) == 0 \
 			|| ft_strncmp(shell->lst.here_doc[1], shell->lst.file[0], \
 			ft_strlen(shell->lst.file[0])) == 0) && \
 			ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
 		{
 			shell->lst.file = \
-				ft_split(shell->lst.redirection[count_redirection], ' ');
+				ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
 			here_doc_cat(shell->lst.file[0], shell);
 			ft_sarfree(shell->lst.redirection, \
 				ft_sarsize(shell->lst.redirection));
@@ -88,9 +105,9 @@ void	redirection(t_shell *shell)
 		if (shell->redirection_id == 4)
 		{
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) \
-				* (count_redirection + 1));
+				* (shell->red.count_redirection + 1));
 			shell->lst.file = \
-				ft_split(shell->lst.redirection[count_redirection], ' ');
+				ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
 			here_doc(shell->lst.file[0], shell);
 			ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 			shell->lst.delete_str[1] = NULL;
@@ -112,7 +129,7 @@ int	check_red(char *input, t_shell *shell, int i)
 	shell->check_mix_red = 0;
 	while (input[++i])
 	{
-		check_double_red(shell, input, i);
+		i = check_double_red(shell, input, i);
 		check_single_red(shell, input, i);
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
