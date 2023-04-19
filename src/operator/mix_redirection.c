@@ -85,6 +85,7 @@ void	control_double_redirection(t_shell *shell)
 	}
 }
 
+// ciao
 void	control_redirection(t_shell *shell)
 {
 	printf("token e %s\n", shell->redirection.token);
