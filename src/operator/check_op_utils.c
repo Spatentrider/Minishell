@@ -23,7 +23,6 @@ int	check_double_red(t_shell *shell, char *input, int i)
 	}
 	else if (input[i] == '>' && input[i + 1] == '>')
 	{
-		printf("hello\n");
 		if (shell->redirection_id != 0 && shell->redirection_id != 3)
 			shell->check_mix_red = 1;
 		shell->redirection_id = 3;
@@ -42,7 +41,6 @@ void	check_single_red(t_shell *shell, char *input, int i)
 	}
 	else if (input[i] == '>')
 	{
-		printf("ciao2\n");
 		if (shell->redirection_id != 0 && shell->redirection_id != 1)
 			shell->check_mix_red = 1;
 		shell->redirection_id = 1;

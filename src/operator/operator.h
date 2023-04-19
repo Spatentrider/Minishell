@@ -6,7 +6,7 @@
 /*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 12:42:27 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/19 14:18:06 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,10 @@ void	change_word(t_shell *shell, int i, int pos);
 void	here_doc(char *redirection, t_shell *shell);
 int		print_here_doc(t_shell *shell, char *redirection);
 int		print_heredoc_cat(t_shell *shell, int j);
+/*execute_redirection.c*/
+void	go_here_doc(t_shell *shell);
+void	go_here_doc_cat(t_shell *shell);
+void	go_output(t_shell *shell);
+void	go_input(t_shell *shell);
+void	go_append(t_shell *shell);
 #endif

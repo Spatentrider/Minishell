@@ -42,7 +42,8 @@ SRC_OPERATOR			=	src/operator/check_op_utils.c \
 								src/operator/redirection_utils.c \
 								src/operator/utils.c \
 								src/operator/mix_redirection_utils.c \
-								src/operator/mix_redirection.c 
+								src/operator/mix_redirection.c \
+								src/operator/execute_redirection.c
 
 SRC_PARSE				=	src/parse/parse_utils.c \
 							src/parse/parse.c

@@ -18,7 +18,6 @@ void	red_out(int count_redirection, t_shell *shell, \
 	int	i;
 	int	k;
 
-	printf("ao\n");
 	if (j != count_redirection)
 	{
 		k = open(shell->lst.file[0], O_WRONLY | O_CREAT | O_TRUNC | \
