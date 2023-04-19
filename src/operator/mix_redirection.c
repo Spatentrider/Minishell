@@ -57,13 +57,14 @@ char	*ft_strtok(char *str, const char *delim, t_shell *shell)
 
 void	control_double_redirection(t_shell *shell)
 {
-	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
+	printf("token e %s\n", shell->redirection.token);
+	if (ft_strncmp(shell->redirection.token, ">>", 3) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
 		shell->redirection.fd = open(shell->redirection.token, \
-			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (shell->redirection.fd < 0)
 			printf("Error opening file\n");
 		dup2(shell->redirection.fd, STDOUT_FILENO);
@@ -71,7 +72,7 @@ void	control_double_redirection(t_shell *shell)
 		close(shell->redirection.fd);
 		shell->redirection.i++;
 	}
-	else if (ft_strncmp(shell->redirection.token, "<<", 2) == 0)
+	else if (ft_strncmp(shell->redirection.token, "<<", 3) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
@@ -86,7 +87,8 @@ void	control_double_redirection(t_shell *shell)
 
 void	control_redirection(t_shell *shell)
 {
-	if (ft_strncmp(shell->redirection.token, "<", 1) == 0)
+	printf("token e %s\n", shell->redirection.token);
+	if (ft_strncmp(shell->redirection.token, "<", 2) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
@@ -98,7 +100,7 @@ void	control_redirection(t_shell *shell)
 		close(shell->redirection.fd);
 		shell->redirection.i++;
 	}
-	else if (ft_strncmp(shell->redirection.token, ">", 1) == 0)
+	else if (ft_strncmp(shell->redirection.token, ">", 2) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \

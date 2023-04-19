@@ -71,7 +71,6 @@ void	redirection(t_shell *shell)
 		}
 		else if (shell->redirection_id == 3)
 		{
-			printf("ci sei?\n");
 			shell->lst.delete_str = (char **)malloc(sizeof(char *) \
 				* (shell->red.count_redirection + 1));
 			while (shell->red.count_redirection > 0)
