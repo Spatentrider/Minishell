@@ -80,19 +80,19 @@ int	executor(t_shell *shell)
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
 	check_file(shell);
 	expansion(shell);
-	if (strncmp(shell->lst.executor[0], "pwd", 4) == 0)
+	if (ft_strncmp(shell->lst.executor[0], "pwd", 4) == 0)
 		pwd();
-	else if (strncmp(shell->lst.executor[0], "echo", 5) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "echo", 5) == 0)
 		ft_echo(shell);
-	else if (strncmp(shell->lst.executor[0], "cd", 3) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "cd", 3) == 0)
 		ft_cd(shell);
-	else if (strncmp(shell->lst.executor[0], "env", 4) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "env", 4) == 0)
 		ft_env(shell, shell->env.current);
-	else if (strncmp(shell->lst.executor[0], "exit", 5) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "exit", 5) == 0)
 		ft_exit(shell);
-	else if (strncmp(shell->lst.executor[0], "export", 7) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "export", 7) == 0)
 		ft_export(shell);
-	else if (strncmp(shell->lst.executor[0], "unset", 6) == 0)
+	else if (ft_strncmp(shell->lst.executor[0], "unset", 6) == 0)
 		ft_unset (shell, shell->env.current);
 	else
 		commands(shell);

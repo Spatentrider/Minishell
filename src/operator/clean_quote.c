@@ -20,7 +20,6 @@ void	clean_double(t_shell *shell)
 
 	i = -1;
 	j = 0;
-	i = -1;
 	i = loop_quote(shell, i);
 	str = malloc(sizeof(char *) * i + 4);
 	j = 0;

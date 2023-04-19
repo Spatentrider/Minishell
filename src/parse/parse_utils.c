@@ -92,5 +92,5 @@ int	control_string(char *string)
 		printf("minishell: syntax error near unexpected token `>'\n");
 		return (g_exit = 2);
 	}
-	return (0);
+	return (g_exit);
 }

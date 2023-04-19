@@ -82,7 +82,9 @@ void	list_expansion(t_shell *shell, int i)
 			shell->expn.flag = 0;
 			if (shell->lst.expansion[shell->expn.j][0] == '\a')
 				shell->expn.flag = 1;
-			shell->lst.expansion[shell->expn.j][0] = '$';
+			shell->str = ft_strdup(shell->lst.expansion[shell->expn.j]);
+			free(shell->lst.expansion[shell->expn.j]);
+			shell->lst.expansion[shell->expn.j] = ft_strjoin("$", shell->str);
 		}
 		if (shell->env.current[shell->expn.c] == NULL)
 		{
