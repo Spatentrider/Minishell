@@ -3,63 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   mix_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:28:56 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/19 10:46:41 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
 
-int ft_strtok_loop(char *next_token,const char *delim, t_shell *shell)
+int	ft_strtok_loop(char *next_token, const char *delim, t_shell *shell)
 {
-	int match;
+	int	match;
 
 	match = 1;
-	while(++shell->strtok.i < shell->strtok.delim_len) 
+	while (++shell->strtok.i < shell->strtok.delim_len)
+	{
+		if (*next_token == delim[shell->strtok.i])
 		{
-			if (*next_token == delim[shell->strtok.i]) 
-			{
-				match = 0;
-				break;
-			}
+			match = 0;
+			break ;
 		}
-	return(match);
+	}
+	return (match);
 }
 
-char *ft_strtok(char *str, const char *delim, t_shell *shell) 
+char	*ft_strtok(char *str, const char *delim, t_shell *shell)
 {
-	static char *next_token = NULL;
-	if (str != NULL) 
+	static char	*next_token = NULL;
+
+	if (str != NULL)
 		next_token = str;
-	else if (next_token == NULL) 
-		return NULL;
-	shell->strtok.result = next_token; 
+	else if (next_token == NULL)
+		return (NULL);
+	shell->strtok.result = next_token;
 	shell->strtok.delim_len = strlen(delim);
-	while (*next_token != '\0') 
+	while (*next_token != '\0')
 	{
 		shell->strtok.i = -1;
 		shell->strtok.match = ft_strtok_loop(next_token, delim, shell);
-		if (shell->strtok.match) 
+		if (shell->strtok.match)
 			next_token++;
-		else 
+		else
 		{
 			*next_token = '\0';
 			next_token++;
-			return shell->strtok.result;
+			return (shell->strtok.result);
 		}
 	}
 	next_token = NULL;
-	return shell->strtok.result;
+	return (shell->strtok.result);
 }
 
 void	control_double_redirection(t_shell *shell)
 {
-	printf("token2 %s\n", shell->redirection.token);
 	if (ft_strncmp(shell->redirection.token, ">>", 2) == 0)
 	{
-		printf("ciao\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -89,7 +88,6 @@ void	control_redirection(t_shell *shell)
 {
 	if (ft_strncmp(shell->redirection.token, "<", 1) == 0)
 	{
-		printf("qui\n");
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
 		shell->lst.delete_str[shell->redirection.i] = \
 			ft_strdup(shell->redirection.token);
@@ -128,7 +126,6 @@ void	mix_redirection(t_shell *shell)
 	{
 		control_redirection(shell);
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
-		// printf("%s\n", shell->redirection.token);
 		if (shell->redirection.token != NULL)
 		{
 			if (ft_strncmp(shell->redirection.token, ">", 1) != 0 && \

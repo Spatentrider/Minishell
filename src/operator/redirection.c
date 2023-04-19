@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:23:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/19 10:47:29 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	append(t_shell *shell, int j, \
 
 	if (j != count_redirection)
 	{
-		k = open(shell->lst.file[0], O_CREAT | 
+		k = open(shell->lst.file[0], O_CREAT | \
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		shell->lst.delete_str[count_delete_str] = ft_strdup(shell->lst.file[0]);
 		return ;
