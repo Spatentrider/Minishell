@@ -78,6 +78,13 @@ int	executor(t_shell *shell)
 	if (control_g_exit(shell))
 		return (g_exit);
 	shell->lst.executor = ft_split(shell->lst.input, ' ');
+	if (!shell->lst.executor[0])
+	{
+		printf("minishell:  : command not found\n");
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+		g_exit = 127;
+		return(g_exit);
+	}
 	check_file(shell);
 	expansion(shell);
 	if (ft_strncmp(shell->lst.executor[0], "pwd", 4) == 0)
