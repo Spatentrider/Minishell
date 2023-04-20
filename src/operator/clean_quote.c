@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 10:05:06 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/20 10:32:24 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	clean_double(t_shell *shell)
 
 	i = ft_strlen(shell->lst.input);
 	j = 0;
-	// i = loop_quote(shell, i);
 	str = malloc(sizeof(char *) * i + 4);
 	j = 0;
 	i = -1;
@@ -58,7 +57,6 @@ void	clean_single(t_shell *shell)
 
 	shell->exp.i = ft_strlen(shell->lst.input);
 	j = 6;
-	// j = cnt_quote(shell, j);
 	str = malloc(sizeof(char *) * (shell->exp.i - j));
 	j = 0;
 	shell->exp.i = -1;

@@ -6,7 +6,7 @@
 /*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:15:50 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/19 14:16:47 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:29:41 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	go_append(t_shell *shell)
 	{
 		shell->lst.file = \
 			ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
-		append(shell, shell->red.j, shell->red.count_redirection, shell->red.count_delete_str);
+		append(shell, shell->red.j, shell->red.count_redirection, \
+			shell->red.count_delete_str);
 		shell->red.count_redirection--;
 		shell->red.count_delete_str++;
 		ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
@@ -69,7 +70,8 @@ void	go_input(t_shell *shell)
 	{
 		shell->lst.file = \
 			ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
-		red_out(shell->red.count_redirection, shell, shell->red.count_delete_str, shell->red.j);
+		red_out(shell->red.count_redirection, shell, \
+			shell->red.count_delete_str, shell->red.j);
 		shell->red.count_redirection--;
 		shell->red.count_delete_str++;
 		ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));

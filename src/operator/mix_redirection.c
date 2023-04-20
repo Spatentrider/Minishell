@@ -6,7 +6,7 @@
 /*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:26:49 by mich              #+#    #+#             */
-/*   Updated: 2023/04/19 10:46:41 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:29:03 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*ft_strtok(char *str, const char *delim, t_shell *shell)
 
 void	control_double_redirection(t_shell *shell)
 {
-	printf("token e %s\n", shell->redirection.token);
 	if (ft_strncmp(shell->redirection.token, ">>", 3) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);
@@ -85,10 +84,8 @@ void	control_double_redirection(t_shell *shell)
 	}
 }
 
-// ciao
 void	control_redirection(t_shell *shell)
 {
-	printf("token e %s\n", shell->redirection.token);
 	if (ft_strncmp(shell->redirection.token, "<", 2) == 0)
 	{
 		shell->redirection.token = ft_strtok(NULL, " ", shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/17 15:14:40 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 10:31:59 by vbellucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ int	check_file(t_shell *shell)
 
 int	control_g_exit(t_shell *shell)
 {
+	shell->lst.executor = ft_split(shell->lst.input, ' ');
+	if (!shell->lst.executor[0])
+	{
+		printf("minishell:  : command not found\n");
+		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
+		g_exit = 127;
+		return (g_exit);
+	}
 	if (ft_strncmp(shell->lst.input, "$?", 3) == 0)
 	{
 		printf("%d: command not found\n", shell->old_g_exit);
@@ -77,14 +85,6 @@ int	executor(t_shell *shell)
 {
 	if (control_g_exit(shell))
 		return (g_exit);
-	shell->lst.executor = ft_split(shell->lst.input, ' ');
-	if (!shell->lst.executor[0])
-	{
-		printf("minishell:  : command not found\n");
-		ft_sarfree(shell->lst.executor, ft_sarsize(shell->lst.executor));
-		g_exit = 127;
-		return(g_exit);
-	}
 	check_file(shell);
 	expansion(shell);
 	if (ft_strncmp(shell->lst.executor[0], "pwd", 4) == 0)
