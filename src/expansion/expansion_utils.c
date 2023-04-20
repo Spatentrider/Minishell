@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:18:36 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/17 14:26:26 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 10:13:08 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	init_variable(t_shell *shell, int i)
 	shell->expn.pos = 0;
 	shell->expn.flag = 0;
 	shell->lst.expansion = ft_split(shell->lst.executor[i], '$');
+	shell->expn.j = ft_strlen(shell->lst.expansion[0]);
+	if (shell->lst.expansion[0][shell->expn.j - 1] == '\a')
+		shell->expn.flag = 1;
 	if (shell->dollar == 1)
 		shell->expn.j = -1;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:02:46 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 17:17:27 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 10:05:06 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	clean_double(t_shell *shell)
 	int		j;
 	char	*str;
 
-	i = -1;
+	i = ft_strlen(shell->lst.input);
 	j = 0;
-	i = loop_quote(shell, i);
+	// i = loop_quote(shell, i);
 	str = malloc(sizeof(char *) * i + 4);
 	j = 0;
 	i = -1;
@@ -56,9 +56,9 @@ void	clean_single(t_shell *shell)
 	int		j;
 	char	*str;
 
-	shell->exp.i = -1;
-	j = 0;
-	j = cnt_quote(shell, j);
+	shell->exp.i = ft_strlen(shell->lst.input);
+	j = 6;
+	// j = cnt_quote(shell, j);
 	str = malloc(sizeof(char *) * (shell->exp.i - j));
 	j = 0;
 	shell->exp.i = -1;
@@ -109,6 +109,7 @@ void	clean_parse(t_shell *shell)
 		if (shell->lst.input[i] == 34)
 			count_double = 1;
 	}
+	loop_quote(shell, i);
 	if (count_single == 0 && count_double == 1)
 		clean_double(shell);
 	else if (count_single == 1 && count_double == 0)
