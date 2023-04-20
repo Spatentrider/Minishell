@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/19 14:16:27 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 10:21:04 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	redirection(t_shell *shell)
 		delete_op(shell);
 		executor(shell);
 	}
-	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
-	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 }
 
 int	check_red(char *input, t_shell *shell, int i)
@@ -69,7 +67,11 @@ int	check_red(char *input, t_shell *shell, int i)
 		check_single_red(shell, input, i);
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
+	{
 		redirection(shell);
+		ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
+		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+	}
 	if (shell->check_mix_red == 1)
 		mix_redirection(shell);
 	return (shell->redirection_id);
