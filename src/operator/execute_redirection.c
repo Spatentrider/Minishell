@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:15:50 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/20 10:29:41 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:30:53 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	go_here_doc_cat(t_shell *shell)
 {
-	shell->lst.file = \
-		ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
 	here_doc_cat(shell->lst.file[0], shell);
-	ft_sarfree(shell->lst.redirection, \
-		ft_sarsize(shell->lst.redirection));
 	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 	ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
+	if (shell->lst.cat_array[0] != NULL)
+	{
+		print_heredoc_cat(shell);
+		ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
+	}
 }
 
 void	go_here_doc(t_shell *shell)

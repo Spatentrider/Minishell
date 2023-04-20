@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 10:32:54 by mich              #+#    #+#             */
-/*   Updated: 2023/04/19 10:47:29 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:22:38 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 	int	j;
 
 	shell->lst.cat_array = (char **)malloc(sizeof(char *) * 40000);
+	shell->lst.cat_array[0] = NULL;
 	shell->here_cat = 1;
 	j = 0;
 	if (shell->here_pipe == 1)
@@ -119,6 +120,5 @@ void	here_doc_cat(char *redirection, t_shell *shell)
 		free(shell->lst.doc);
 		shell->lst.doc = NULL;
 	}
-	print_heredoc_cat(shell, j);
-	ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
+	shell->lst.cat_array[j] = NULL;
 }

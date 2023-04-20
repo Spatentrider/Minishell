@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 10:21:04 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/20 12:38:32 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	execute_redirection(t_shell *shell)
 {
 	shell->red.count_delete_str = 0;
 	shell->red.j = shell->red.count_redirection;
-	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
+	shell->lst.here_doc = split_cmd(shell->lst.redirection[0]);
+	shell->lst.here_doc[0] = NULL;
 	shell->do_redirection = 1;
 	clean_parse(shell);
 	exp_red(shell);
@@ -52,8 +53,10 @@ void	redirection(t_shell *shell)
 	if (shell->here_cat == 0 && shell->check_flag == 0)
 	{
 		delete_op(shell);
+		clean_parse(shell);
 		executor(shell);
 	}
+	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 }
 
 int	check_red(char *input, t_shell *shell, int i)
@@ -69,7 +72,6 @@ int	check_red(char *input, t_shell *shell, int i)
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 	{
 		redirection(shell);
-		ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 	}
 	if (shell->check_mix_red == 1)

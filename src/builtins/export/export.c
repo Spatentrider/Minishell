@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:25:14 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:55:17 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 11:46:42 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	change_var(t_shell *shell, int c)
 	{
 		pos = save_str(shell, pos, i, c);
 		pos = ft_strchrp(shell->env.current[i], '=');
-		if (ft_strncmp(shell->curr, shell->str, ft_strlen(shell->str)) == 0)
+		if (ft_strncmp(shell->curr, shell->str, ft_strlen(shell->str) + 1) == 0)
 		{
 			if (change_a(i, c, pos, shell))
 			{
@@ -105,7 +105,7 @@ void	add_var(t_shell *shell, int c)
 	j = -1;
 	while (shell->env.current[i][++j])
 	{
-		if (shell->env.current[i][j] == '\a')
+		if (shell->env.current[i][j] == '\a' || shell->env.current[i][j] == '~')
 			shell->env.current[i][j] = ' ';
 	}
 	shell->env.current[i + 1] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 16:03:21 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:22:16 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 11:59:43 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_string(char *str, int check_red, int i)
 	j = 0;
 	while (is_red(str[i + j]) == 0 || check_red == 1)
 	{
-		if (str[i + j] == 34)
+		if (str[i + j] == 34 || str[i + j] == 39)
 			check_red = control_check(check_red);
 		j++;
 	}

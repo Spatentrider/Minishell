@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:35:15 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 16:23:29 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 11:57:37 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	stamp_word(char *dest, char *src)
 	i = 0;
 	while (is_red(src[i]) == 0 || check_red == 1)
 	{
-		if (src[i] == 34)
+		if (src[i] == 34 || src[i] == 39)
 		{
 			dest[i] = src[i];
 			check_red = control_check(check_red);

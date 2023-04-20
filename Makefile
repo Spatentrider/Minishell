@@ -88,8 +88,8 @@ OBJS				= $(addprefix $(OBJS_DIR)/, ${SRC:.c=.o}) \
 
 OBJS_DIR			= objs
 
-READLINE_FLAG	:= -lreadline -lcurses
-# READLINE_FLAG	:= -lreadline -ltinfo
+# READLINE_FLAG	:= -lreadline -lcurses
+READLINE_FLAG	:= -lreadline -ltinfo
 READLINE_DIR		:= readline/
 READLINE_A			= readline/libhistory.a readline/libreadline.a
 READLINE_MAKEFILE 	:= readline/Makefile

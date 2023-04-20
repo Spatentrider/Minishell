@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:34 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/17 12:46:40 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:14:53 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int	print_here_doc(t_shell *shell, char *redirection)
 	return (0);
 }
 
-int	print_heredoc_cat(t_shell *shell, int j)
+int	print_heredoc_cat(t_shell *shell)
 {
-	shell->lst.cat_array[j] = NULL;
-	j = -1;
+	shell->echo.j = -1;
 	if (shell->here_pipe == 1)
 		dup2(shell->out_pipe, STDOUT_FILENO);
 	if (shell->check_mix_red == 1)
@@ -46,11 +45,12 @@ int	print_heredoc_cat(t_shell *shell, int j)
 		shell->lst.doc = NULL;
 		return (1);
 	}
-	while (shell->lst.cat_array[++j])
-		printf("%s\n", shell->lst.cat_array[j]);
+	while (shell->lst.cat_array[++shell->echo.j])
+		printf("%s\n", shell->lst.cat_array[shell->echo.j]);
 	if (shell->check_signal_d == 1)
 	{
-		ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
+		if (shell->lst.cat_array)
+			ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
 		free(shell->lst.doc);
 		shell->lst.doc = NULL;
 		shell->here_cat = 1;

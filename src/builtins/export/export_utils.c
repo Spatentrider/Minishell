@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 11:16:52 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 12:59:51 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 11:45:13 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	change_a(int i, int c, int pos, t_shell *shell)
 		while (shell->env.current[i][++j])
 		{
 			if (shell->env.current[i][j] == '\a')
+				shell->env.current[i][j] = ' ';
+			if (shell->env.current[i][j] == '~')
 				shell->env.current[i][j] = ' ';
 		}
 		return (1);

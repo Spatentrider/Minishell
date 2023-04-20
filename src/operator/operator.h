@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:18:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/19 14:18:06 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:10:27 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		single_count(char *string, int i, int count_single);
 void	change_word(t_shell *shell, int i, int pos);
 void	here_doc(char *redirection, t_shell *shell);
 int		print_here_doc(t_shell *shell, char *redirection);
-int		print_heredoc_cat(t_shell *shell, int j);
+int		print_heredoc_cat(t_shell *shell);
 /*execute_redirection.c*/
 void	go_here_doc(t_shell *shell);
 void	go_here_doc_cat(t_shell *shell);
