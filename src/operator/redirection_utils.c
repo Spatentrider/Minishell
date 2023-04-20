@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:34 by vbellucc          #+#    #+#             */
-/*   Updated: 2023/04/20 12:14:53 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/20 14:02:16 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	print_heredoc_cat(t_shell *shell)
 		printf("%s\n", shell->lst.cat_array[shell->echo.j]);
 	if (shell->check_signal_d == 1)
 	{
-		if (shell->lst.cat_array)
-			ft_sarfree(shell->lst.cat_array, ft_sarsize(shell->lst.cat_array));
 		free(shell->lst.doc);
 		shell->lst.doc = NULL;
 		shell->here_cat = 1;

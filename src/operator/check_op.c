@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 12:38:32 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/20 13:59:01 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	execute_redirection(t_shell *shell)
 {
 	shell->red.count_delete_str = 0;
 	shell->red.j = shell->red.count_redirection;
-	shell->lst.here_doc = split_cmd(shell->lst.redirection[0]);
-	shell->lst.here_doc[0] = NULL;
+	shell->lst.here_doc = ft_split(shell->lst.redirection[0], ' ');
 	shell->do_redirection = 1;
 	clean_parse(shell);
 	exp_red(shell);
@@ -38,10 +37,7 @@ void	redirection(t_shell *shell)
 		execute_redirection(shell);
 		shell->lst.file = \
 			ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
-		if ((ft_strncmp(shell->lst.here_doc[1], "<<", 2) == 0 \
-			|| ft_strncmp(shell->lst.here_doc[1], shell->lst.file[0], \
-			ft_strlen(shell->lst.file[0])) == 0) && \
-			ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
+		if (ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
 		{
 			go_here_doc_cat(shell);
 			return ;
