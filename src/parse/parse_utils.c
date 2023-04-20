@@ -36,7 +36,7 @@ int	check_pipe(char *string, t_shell *shell)
 	k = 0;
 	shell->pipe = 1;
 	g_exit = check_2_red(shell, string);
-	if(string[k] == string[k +1])
+	if (string[k] == string[k +1])
 	{
 		printf("minishell: double pipe is not allowed\n");
 		g_exit = 2;
@@ -74,7 +74,8 @@ int	check_2_red(t_shell *shell, char *string)
 		if (shell->pipe == 1)
 			printf("minishell: syntax error near unexpected token pipe\n");
 		else
-			printf("minishell: syntax error near unexpected token redirection\n");
+			printf("minishell: syntax error near \
+				unexpected token redirection\n");
 		return (g_exit = 2);
 	}
 	return (0);

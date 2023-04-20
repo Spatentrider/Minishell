@@ -19,7 +19,6 @@ int	check_double_red(t_shell *shell, char *input, int i)
 		if (shell->redirection_id != 0 && shell->redirection_id != 4)
 			shell->check_mix_red = 1;
 		shell->redirection_id = 4;
-		
 		return (i += 2);
 	}
 	else if (input[i] == '>' && input[i + 1] == '>')

@@ -14,7 +14,6 @@
 
 int	loop_quote(t_shell *shell, int i)
 {
-	i = -1;
 	while (shell->lst.input[++i])
 	{
 		if (shell->lst.input[i] == 34)

@@ -107,7 +107,7 @@ void	clean_parse(t_shell *shell)
 		if (shell->lst.input[i] == 34)
 			count_double = 1;
 	}
-	loop_quote(shell, i);
+	loop_quote(shell, -1);
 	if (count_single == 0 && count_double == 1)
 		clean_double(shell);
 	else if (count_single == 1 && count_double == 0)

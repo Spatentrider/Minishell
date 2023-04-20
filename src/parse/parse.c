@@ -78,15 +78,12 @@ int	check_parameter(char *string, char c, t_shell *shell)
 	return (g_exit);
 }
 
-int	parse(char **string, t_shell *shell)
+int	parse(char **string, t_shell *shell, int i)
 {
-	int	i;
-
 	g_exit = control(string[0]);
 	g_exit = control_string(string[0]);
 	if (g_exit == 0)
 	{
-		i = -1;
 		while (string[++i])
 		{
 			if (string[i][0] == '|' || string[i][0] == '<'
@@ -95,7 +92,8 @@ int	parse(char **string, t_shell *shell)
 				g_exit = check_parameter(string[i], string[i][0], shell);
 				if (string[i + 1] == NULL)
 				{
-					printf("minishell: syntax error near unexpected token `newline'\n");
+					printf("minishell: syntax error near \
+						unexpected token `newline'\n");
 					g_exit = 127;
 				}
 				if (g_exit != 0)

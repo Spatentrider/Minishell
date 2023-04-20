@@ -33,7 +33,7 @@ int	control_space(t_shell *shell, int k)
 int	check_error_cod(t_shell *shell)
 {
 	shell->lst.error = split_cmd(shell->lst.input);
-	g_exit = parse(shell->lst.error, shell);
+	g_exit = parse(shell->lst.error, shell, -1);
 	if (g_exit > 0)
 	{
 		shell->old_g_exit = g_exit;

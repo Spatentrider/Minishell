@@ -85,8 +85,8 @@ void	write_word(char *dest, char *src, int j)
 	while (j > 0)
 	{
 		dest[i] = src[i];
-			i++;
-			j--;
+		i++;
+		j--;
 	}
 	dest[i] = '\0';
 }

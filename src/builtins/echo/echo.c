@@ -43,9 +43,9 @@ void	print(t_shell *shell)
 		while (shell->lst.executor[shell->echo.i][++shell->exp.i])
 		{
 			if (shell->lst.executor[shell->echo.i][shell->exp.i] == '~')
-					shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
+				shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
 			if (shell->lst.executor[shell->echo.i][shell->exp.i] == '\a')
-					shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
+				shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
 		}
 		printf("%s", shell->lst.executor[shell->echo.i]);
 		if (shell->lst.executor[shell->echo.i + 1] == NULL)

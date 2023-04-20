@@ -25,6 +25,6 @@ int		control_string(char *string);
 int		check_redirection(char *string, t_shell *shell);
 int		check_quote(char *string);
 int		check_parameter(char *string, char c, t_shell *shell);
-int		parse(char **string, t_shell *shell);
+int		parse(char **string, t_shell *shell, int i);
 
 #endif

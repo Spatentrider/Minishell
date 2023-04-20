@@ -75,13 +75,10 @@ int	check_red(char *input, t_shell *shell, int i)
 		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 		return (shell->redirection_id);
 	}
-	else
-	{
-		shell->do_redirection = 0;
-		shell->check_mix_red = 0;
-		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
-		return (0);
-	}
+	shell->do_redirection = 0;
+	shell->check_mix_red = 0;
+	ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+	return (0);
 }
 
 int	check_operator(t_shell *shell)

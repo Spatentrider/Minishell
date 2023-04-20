@@ -12,6 +12,35 @@
 
 #include "unset.h"
 
+void	ft_unset2(t_shell *shell, char **current)
+{
+	shell->unset.i = -1;
+	ft_sarprint(current);
+	while (current[++shell->unset.i])
+	{
+		if (ft_strncmp(current[shell->unset.i], \
+			shell->lst.executor[1], shell->unset.position) == 0)
+		{
+			shell->unset.j = shell->unset.i - 1;
+			while (current[++shell->unset.j])
+			{
+				if (current[shell->unset.j + 1] != NULL)
+				{
+					free(current[shell->unset.j]);
+					current[shell->unset.j] = ft_strdup \
+						(current[shell->unset.j + 1]);
+				}
+				else
+				{
+					free(current[shell->unset.j]);
+					current[shell->unset.j] = NULL;
+				}
+			}
+			break ;
+		}
+	}
+}
+
 void	unset_loop(t_shell *shell, char **current)
 {
 	while (current[++shell->unset.j])
@@ -70,34 +99,6 @@ void	ft_unset(t_shell *shell, char **current)
 				ft_strchrp(shell->lst.executor[shell->unset.k], '=');
 			if (cont_unset(shell, curr, current))
 				break ;
-		}
-	}
-}
-
-void	ft_unset2(t_shell *shell, char **current)
-{
-	shell->unset.i = -1;
-	while (current[++shell->unset.i])
-	{
-		if (ft_strncmp(current[shell->unset.i], \
-			shell->lst.executor[1], shell->unset.position) == 0)
-		{
-			shell->unset.j = shell->unset.i - 1;
-			while (current[++shell->unset.j])
-			{
-				if (current[shell->unset.j + 1] != NULL)
-				{
-					free(current[shell->unset.j]);
-					current[shell->unset.j] = ft_strdup \
-						(current[shell->unset.j + 1]);
-				}
-				else
-				{
-					free(current[shell->unset.j]);
-					current[shell->unset.j] = NULL;
-				}
-			}
-			break ;
 		}
 	}
 }
