@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:44:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 15:40:18 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:05:38 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	control(char *string)
 
 int	check_pipe(char *string, t_shell *shell)
 {
-	// size_t	i;
 	int		k;
 
 	k = 0;

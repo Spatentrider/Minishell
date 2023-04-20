@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:12:05 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 12:40:24 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:01:03 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_sarfree(char **sar, int y)
 	x = -1;
 	if (!sar)
 		return ;
-	while (++x < y)
+	while (sar[++x])
 	{
 		if (sar[x])
 		{
@@ -32,6 +32,7 @@ void	ft_sarfree(char **sar, int y)
 		free(sar);
 		sar = NULL;
 	}
+	(void)y;
 }
 
 int	ft_sarsize(char **tocount)
