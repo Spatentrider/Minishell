@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:01:25 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 16:13:57 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:04:09 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	save_word(char *dest, char *src)
 	i = 0;
 	while ((is_pipe(src[i]) == 0 || check_pipe == 1) && src[i] != '\0')
 	{
-		if (src[i] == 34)
+		if (src[i] == 34 || src[i] == 39)
 		{
 			dest[i] = src[i];
 			check_pipe = control_check(check_pipe);

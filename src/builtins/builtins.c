@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:31:00 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 10:31:59 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:18:17 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_file(t_shell *shell)
 		delete_file2(shell);
 		ft_sarfree(shell->lst.delete_str, ft_sarsize(shell->lst.delete_str));
 	}
-	if (shell->lst.redirection == NULL || shell->do_redirection != 1)
+	if (shell->lst.redirection == NULL || shell->do_redirection == 0)
 	{
 		return (1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:02:56 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 16:24:16 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:34:56 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_quote(char *string)
 int	check_parameter(char *string, char c, t_shell *shell)
 {
 	if (c == '|')
-		return (g_exit = check_pipe(string));
+		return (g_exit = check_pipe(string, shell));
 	if (c == '<' || c == '>')
 		return (g_exit = check_redirection(string, shell));
 	return (g_exit);
@@ -93,6 +93,11 @@ int	parse(char **string, t_shell *shell)
 				|| string[i][0] == '>')
 			{
 				g_exit = check_parameter(string[i], string[i][0], shell);
+				if (string[i + 1] == NULL)
+				{
+					printf("minishell: syntax error near unexpected token `newline'\n");
+					g_exit = 127;
+				}
 				if (g_exit != 0)
 					return (g_exit);
 			}

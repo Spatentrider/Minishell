@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:44:24 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 15:56:42 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:40:18 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,19 @@ int	control(char *string)
 	return (g_exit);
 }
 
-int	check_pipe(char *string)
+int	check_pipe(char *string, t_shell *shell)
 {
-	size_t	i;
+	// size_t	i;
+	int		k;
 
-	i = ft_strlen(string);
-	if (i > 1)
+	k = 0;
+	shell->pipe = 1;
+	g_exit = check_2_red(shell, string);
+	if(string[k] == string[k +1])
 	{
 		printf("minishell: double pipe is not allowed\n");
 		g_exit = 2;
-	}
+	}	
 	return (g_exit);
 }
 
@@ -69,7 +72,10 @@ int	check_2_red(t_shell *shell, char *string)
 	}
 	else
 	{
-		printf("minishell: syntax error near unexpected token redirection\n");
+		if (shell->pipe == 1)
+			printf("minishell: syntax error near unexpected token pipe\n");
+		else
+			printf("minishell: syntax error near unexpected token redirection\n");
 		return (g_exit = 2);
 	}
 	return (0);

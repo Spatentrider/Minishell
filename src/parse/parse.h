@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:35:28 by mich              #+#    #+#             */
-/*   Updated: 2023/04/15 15:57:35 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:36:57 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include "../src.h"
 
 /*parse_utils.c*/
+size_t	ft_strlenr(const char *s);
 int		control(char *string);
-int		check_pipe(char *string);
+int		check_pipe(char *string, t_shell *shell);
 int		check_2_red(t_shell *shell, char *string);
 int		control_string(char *string);
 /*parse.c*/
-int		check_pipe(char *string);
 int		check_redirection(char *string, t_shell *shell);
 int		check_quote(char *string);
 int		check_parameter(char *string, char c, t_shell *shell);

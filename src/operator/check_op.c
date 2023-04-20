@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 14:35:09 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/20 15:21:16 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	redirection(t_shell *shell)
 		ft_sarfree(shell->lst.file, ft_sarsize(shell->lst.file));
 		if (shell->redirection_id == 4)
 			go_here_doc(shell);
+		ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 	}
 	if (shell->here_cat == 0 && shell->check_flag == 0)
 	{
@@ -51,7 +52,6 @@ void	redirection(t_shell *shell)
 		clean_parse(shell);
 		executor(shell);
 	}
-	ft_sarfree(shell->lst.here_doc, ft_sarsize(shell->lst.here_doc));
 }
 
 int	check_red(char *input, t_shell *shell, int i)
@@ -64,21 +64,24 @@ int	check_red(char *input, t_shell *shell, int i)
 		i = check_double_red(shell, input, i);
 		check_single_red(shell, input, i);
 	}
-	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
+	shell->lst.redirection = split_redirection(shell->lst.input);
+	shell->red.count_redirection = ft_sarsize(shell->lst.redirection) - 1;
+	if (shell->red.count_redirection >= 1)
 	{
-		shell->lst.redirection = split_redirection(shell->lst.input);
-		shell->red.count_redirection = ft_sarsize(shell->lst.redirection) - 1;
-		if(shell->lst.redirection[1] == NULL)
-		{
-			printf("minishell: syntax error near unexpected token `newline'\n");
-			return (g_exit = 127);
-		}
-		redirection(shell);
+		if (shell->redirection_id > 0 && shell->check_mix_red != 1)
+			redirection(shell);
+		if (shell->check_mix_red == 1)
+			mix_redirection(shell);
 		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+		return (shell->redirection_id);
 	}
-	if (shell->check_mix_red == 1)
-		mix_redirection(shell);
-	return (shell->redirection_id);
+	else
+	{
+		shell->do_redirection = 0;
+		shell->check_mix_red = 0;
+		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
+		return (0);
+	}
 }
 
 int	check_operator(t_shell *shell)

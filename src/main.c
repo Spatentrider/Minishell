@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mich <mich@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:15:53 by mvolpi            #+#    #+#             */
-/*   Updated: 2023/04/15 15:50:52 by mich             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:32:10 by kzak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	control_space(t_shell *shell, int k)
 
 int	check_error_cod(t_shell *shell)
 {
-	shell->lst.error = ft_split(shell->lst.input, ' ');
+	shell->lst.error = split_cmd(shell->lst.input);
 	g_exit = parse(shell->lst.error, shell);
 	if (g_exit > 0)
 	{
