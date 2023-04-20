@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kzak <kzak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:10:40 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 11:24:51 by kzak             ###   ########.fr       */
+/*   Updated: 2023/04/20 15:49:35 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void	short_echo(t_shell *shell)
 		while (shell->lst.executor[shell->echo.i][++shell->exp.i])
 		{
 			if (shell->lst.executor[shell->echo.i][shell->exp.i] == '~')
+			{
+				if (shell->lst.executor[shell->echo.i][shell->exp.i] == '\a')
 					shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
-			if (shell->lst.executor[shell->echo.i][shell->exp.i] == '\a')
+				else
 					shell->lst.executor[shell->echo.i][shell->exp.i] = ' ';
+			}
 		}
 		printf("%s", shell->lst.executor[shell->echo.i]);
 		if (shell->lst.executor[shell->echo.i + 1] != NULL)

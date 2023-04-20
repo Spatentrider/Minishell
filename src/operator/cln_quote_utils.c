@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cln_quote_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbellucc <vbellucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:08:37 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 10:30:10 by vbellucc         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:46:29 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	loop_quote(t_shell *shell, int i)
 				if (shell->lst.input[i] == ' ' && \
 					shell->lst.input[i + 1] == '$')
 					shell->lst.input[i] = '\a';
+				if (shell->lst.input[i] == '$')
+					shell->lst.input[i - 1] = '\a';
 				else if (shell->lst.input[i] == ' ')
 					shell->lst.input[i] = '~';
 			}
