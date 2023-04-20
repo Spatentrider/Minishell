@@ -6,7 +6,7 @@
 /*   By: mvolpi <mvolpi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:17:48 by mich              #+#    #+#             */
-/*   Updated: 2023/04/20 13:59:01 by mvolpi           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:35:09 by mvolpi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ void	execute_redirection(t_shell *shell)
 
 void	redirection(t_shell *shell)
 {
-	shell->lst.redirection = split_redirection(shell->lst.input);
-	shell->red.count_redirection = ft_sarsize(shell->lst.redirection) - 1;
 	if (shell->red.count_redirection >= 1)
 	{
 		execute_redirection(shell);
 		shell->lst.file = \
 			ft_split(shell->lst.redirection[shell->red.count_redirection], ' ');
-		if (ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0)
+		if (ft_strncmp(shell->lst.here_doc[0], "cat", 3) == 0
+			&& shell->redirection_id == 4)
 		{
 			go_here_doc_cat(shell);
 			return ;
@@ -67,6 +66,13 @@ int	check_red(char *input, t_shell *shell, int i)
 	}
 	if (shell->redirection_id > 0 && shell->check_mix_red != 1)
 	{
+		shell->lst.redirection = split_redirection(shell->lst.input);
+		shell->red.count_redirection = ft_sarsize(shell->lst.redirection) - 1;
+		if(shell->lst.redirection[1] == NULL)
+		{
+			printf("minishell: syntax error near unexpected token `newline'\n");
+			return (g_exit = 127);
+		}
 		redirection(shell);
 		ft_sarfree(shell->lst.redirection, ft_sarsize(shell->lst.redirection));
 	}
