@@ -1,0 +1,1 @@
+A simple command-line shell implemented in C, aiming to replicate essential behaviors of the Bash shell. It supports command execution, built-ins, environment variable management, signal handling, and advanced features like pipes and redirections.
